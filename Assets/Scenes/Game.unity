@@ -294,7 +294,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -939,7 +939,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 36, y: 15, z: 1}
+    m_Scale: {x: 36, y: 12.5, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -1262,8 +1262,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.3132863
         - serializedVersion: 3
-          time: 0.5200087
-          value: 0.23563969
+          time: 0.50267714
+          value: 0.35725844
           inSlope: -0.05964005
           outSlope: -0.05964005
           tangentMode: 0
@@ -1765,11 +1765,11 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1822,7 +1822,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5027,7 +5027,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108620248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 1}
+  m_LocalPosition: {x: -2.23, y: 1.36, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5044,7 +5044,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 408919053
   m_SortingLayer: -2
-  m_SortingOrder: 2
+  m_SortingOrder: 4
 --- !u!1 &164317690
 GameObject:
   m_ObjectHideFlags: 0
