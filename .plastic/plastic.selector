@@ -1,0 +1,4 @@
+repository "True Warrior@jpw918@cloud"
+  path "/"
+    br "/main"
+    co "/main"
