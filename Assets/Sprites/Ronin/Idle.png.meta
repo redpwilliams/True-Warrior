@@ -129,85 +129,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IDLE_0
+      name: Idle_0
       rect:
         serializedVersion: 2
         x: 33
         y: 3
         width: 31
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5fd33b5ce9577c42a0cdd3b9931e37b
-      internalID: 1668867693
+      spriteID: 211a8dd4e4952d143a15e82fdd1b3b56
+      internalID: -1107939114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_1
+      name: Idle_1
       rect:
         serializedVersion: 2
         x: 139
         y: 3
         width: 31
         height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf42a29fa4db4454a94d4223ace971b1
-      internalID: 1535540133
+      spriteID: d8f7f02b30b8ee54fabbdb4f7cfba2d7
+      internalID: -1197484562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_2
+      name: Idle_2
       rect:
         serializedVersion: 2
         x: 245
         y: 3
         width: 31
         height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac22ab547c2ad9647a0804418e33a9d5
-      internalID: -2058887098
+      spriteID: 79b9a6b9e1f24af45987d0557f843e05
+      internalID: 238476963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IDLE_3
+      name: Idle_3
       rect:
         serializedVersion: 2
         x: 351
         y: 3
         width: 31
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99a2b0187baf1d14ab89f48c5958dc72
-      internalID: -1733156443
+      spriteID: 9c1a3f7b9aee7784bb783d0035f218d3
+      internalID: -1164361672
       vertices: []
       indices: 
       edges: []
@@ -223,10 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IDLE_2: -2058887098
-      IDLE_0: 1668867693
-      IDLE_3: -1733156443
-      IDLE_1: 1535540133
+      Idle_1: -1197484562
+      Idle_3: -1164361672
+      Idle_0: -1107939114
+      Idle_2: 238476963
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
