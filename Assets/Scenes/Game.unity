@@ -5659,7 +5659,6 @@ GameObject:
   - component: {fileID: 515809141}
   - component: {fileID: 515809140}
   - component: {fileID: 515809139}
-  - component: {fileID: 515809143}
   - component: {fileID: 515809144}
   m_Layer: 0
   m_Name: Ronin
@@ -5833,18 +5832,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &515809143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515809135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 182f380d91ad83d43904ba86b9fff0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &515809144
 MonoBehaviour:
   m_ObjectHideFlags: 0
