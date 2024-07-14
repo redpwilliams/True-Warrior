@@ -1,23 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
     private Rigidbody2D _rb2d;
+    private Animator _animator;
     [SerializeField] private float _finalPosition = 0f;
     [SerializeField] private float _speed = 1f;
-    private bool isMoving = true;
+    private bool _isRunning = true;
+
+    private static readonly int Running = Animator.StringToHash("ShouldRun");
 
     private void Awake()
     {
         _rb2d = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        // Start Character movement
+        _animator.SetBool(Running, _isRunning);
     }
 
     private void FixedUpdate()
     {
-        if (!isMoving) return;
+        // Disregard if not moving
+        if (!_isRunning) return;
+        
         // Move the character towards the final position
         Vector2 currentPosition = _rb2d.position;
         Vector2 targetPosition = new Vector2(_finalPosition, currentPosition.y);
@@ -29,6 +38,7 @@ public class Character : MonoBehaviour
         
         // Stop the movement (set velocity to zero)
         _rb2d.velocity = Vector2.zero;
-        isMoving = false;
+        _isRunning = false;
+        _animator.SetBool(Running, _isRunning);
     }
 }
