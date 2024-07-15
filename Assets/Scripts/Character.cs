@@ -3,7 +3,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     // Components
-    private Rigidbody2D _rb2d;
+    protected Rigidbody2D Rb2d;
     private Animator _animator;
     
     // Animation
@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
+        Rb2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
     
@@ -31,16 +31,16 @@ public class Character : MonoBehaviour
         if (!_isRunning) return;
         
         // Move the character towards the final position
-        Vector2 currentPosition = _rb2d.position;
+        Vector2 currentPosition = Rb2d.position;
         Vector2 targetPosition = new Vector2(_finalPosition, currentPosition.y);
-        _rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
+        Rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
             _speed * Time.fixedDeltaTime));
 
         // Check if the character has reached or passed the final position
-        if (_rb2d.position.x < _finalPosition) return;
+        if (Rb2d.position.x < _finalPosition) return;
         
         // Stop the movement (set velocity to zero)
-        _rb2d.velocity = Vector2.zero;
+        Rb2d.velocity = Vector2.zero;
         _isRunning = false;
         _animator.SetBool(Running, _isRunning);
     }
