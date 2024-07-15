@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,26 +5,25 @@ public class JsonReader : MonoBehaviour
 {
     private void Start()
     {
-        // var file = Resources.Load<TextAsset>("haikus").ToString().Replace("\n", "").Replace("\t", "").Replace("\\", "");
         var file = Resources.Load<TextAsset>("haikus").ToString();
-        Haikus h = Haikus.LoadFromJSON(file);
-        
+        Haikus h = LoadFromJSON(file);
+        Debug.Log(h.haikus[0].lines[0]);
     }
-}
-
-[System.Serializable]
-public class Haikus
-{
-    public List<Interior> haikus;
-
-    public static Haikus LoadFromJSON(string ta)
+    private Haikus LoadFromJSON(string ta)
     {
         return JsonUtility.FromJson<Haikus>(ta);
     }
 }
 
 [System.Serializable]
-public class Interior
+public struct Haikus
+{
+    public List<Interior> haikus;
+
+}
+
+[System.Serializable]
+public struct Interior
 {
     public string author;
     public List<string> lines;
