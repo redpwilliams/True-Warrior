@@ -2,6 +2,7 @@ using UnityEngine;
 
 // Referenced from:
 // https://github.com/wmjoers/CameraScaler/blob/main/Assets/Scripts/CameraScaler.cs
+
 [RequireComponent(typeof(Camera))]
 public class CameraScaler : MonoBehaviour
 {
