@@ -1,0 +1,287 @@
+fileFormatVersion: 2
+guid: daf45712e32156542b19311e5160536b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6278813793219596387
+    second: STRONG ATTACK_0
+  - first:
+      213: 926434518652792222
+    second: STRONG ATTACK_1
+  - first:
+      213: 7687682036275399094
+    second: STRONG ATTACK_2
+  - first:
+      213: -1731658629139943341
+    second: STRONG ATTACK_3
+  - first:
+      213: 6419254410973875043
+    second: STRONG ATTACK_4
+  - first:
+      213: 7794672330686532840
+    second: STRONG ATTACK_5
+  - first:
+      213: -3685536708286785436
+    second: STRONG ATTACK_6
+  - first:
+      213: -4481524792300958230
+    second: STRONG ATTACK_7
+  - first:
+      213: 1897757172398923856
+    second: STRONG ATTACK_8
+  - first:
+      213: -1774968955418530829
+    second: STRONG ATTACK_9
+  - first:
+      213: 7911352264571178850
+    second: STRONG ATTACK_10
+  - first:
+      213: 6265857937536357954
+    second: STRONG ATTACK_11
+  - first:
+      213: -2065764858375390421
+    second: STRONG ATTACK_12
+  - first:
+      213: -5650112346802428376
+    second: STRONG ATTACK_13
+  - first:
+      213: -4371237444763380243
+    second: STRONG ATTACK_14
+  - first:
+      213: -6677902521625500229
+    second: STRONG ATTACK_15
+  - first:
+      213: 5967778131564452581
+    second: STRONG ATTACK_16
+  - first:
+      213: -5203844642380444664
+    second: STRONG ATTACK_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: STRONG ATTACK_FALL_0
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 69
+        height: 82
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe52caa0b37fe1a448cc8aaf0ead7df2
+      internalID: 250441452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_FALL_1
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 0
+        width: 73
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0c432c3a4c0f6b47827919b6096888d
+      internalID: 1872151046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_FALL_2
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 2
+        width: 87
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9808b73e7b04e5143822f0030a9fc734
+      internalID: -1229222491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_FALL_3
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 3
+        width: 92
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4da7b88b1422d7f4c973619423e01e8f
+      internalID: -1347248757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_FALL_4
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 3
+        width: 31
+        height: 34
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 708cf095a8193654eb70aeffebf73b1f
+      internalID: 939156217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: fd6ad9a161a3b3e478449aa80082e887
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      STRONG ATTACK_FALL_0: 250441452
+      STRONG ATTACK_FALL_1: 1872151046
+      STRONG ATTACK_FALL_10: -1759758724
+      STRONG ATTACK_FALL_12: -167715658
+      STRONG ATTACK_FALL_14: -2078891836
+      STRONG ATTACK_FALL_15: -1302169363
+      STRONG ATTACK_FALL_16: -421441187
+      STRONG ATTACK_FALL_17: 353922530
+      STRONG ATTACK_FALL_2: -1229222491
+      STRONG ATTACK_FALL_3: -1347248757
+      STRONG ATTACK_FALL_4: 939156217
+      STRONG ATTACK_FALL_5: -1210270409
+      STRONG ATTACK_FALL_7: 394593033
+      STRONG ATTACK_FALL_9: 1136380540
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

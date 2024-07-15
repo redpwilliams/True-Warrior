@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Ronin : Character
 {
     [SerializeField] private float _gravityScale = 5f;
+    private static readonly int Falling = Animator.StringToHash("ShouldFall");
+
         
     protected override void Start()
     {
@@ -25,17 +28,25 @@ public class Ronin : Character
         Rb2d.AddForce(Vector2.up*400, ForceMode2D.Impulse);
     }
 
+    private void Update()
+    {
+        if (Rb2d.velocity.y < 0f)
+        { 
+            Anim.SetTrigger(Falling);
+        }
+    }
+
     public void OnStrikeDown()
     {
-        Rb2d.velocity = Vector2.zero;
-        Rb2d.AddForce(Vector2.down*100, ForceMode2D.Impulse);
-        
+        // Rb2d.velocity = Vector2.zero;
+        // Rb2d.AddForce(Vector2.down*100, ForceMode2D.Impulse);
+       Debug.Log(Falling);
     }
 
     public void OnAttackFinish()
     {
-        
        Anim.SetBool(Attacking, false);
+       Anim.ResetTrigger(Falling);
     }
     
 }
