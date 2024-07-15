@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Ronin : Character
 {
-    [SerializeField] private float _gravityScale = 5f;
+    [SerializeField] private float _risingGravityScale = 5f;
+    [SerializeField] private float _fallingGravityScale = 10f;
     private static readonly int Falling = Animator.StringToHash("ShouldFall");
 
         
@@ -11,7 +13,7 @@ public class Ronin : Character
     {
         base.Start();
         EventManager.Events.OnBeginAttack += BeginAttack;
-        Rb2d.gravityScale = _gravityScale;
+        Rb2d.gravityScale = _risingGravityScale;
     }
 
     private void BeginAttack()
@@ -30,16 +32,13 @@ public class Ronin : Character
 
     private void Update()
     {
-        if (Rb2d.velocity.y < 0f)
-        { 
-            Anim.SetTrigger(Falling);
-        }
+        if (!(Rb2d.velocity.y < 0f)) return;
+        Anim.SetTrigger(Falling);
+        Rb2d.gravityScale = _fallingGravityScale;
     }
 
     public void OnStrikeDown()
     {
-        // Rb2d.velocity = Vector2.zero;
-        // Rb2d.AddForce(Vector2.down*100, ForceMode2D.Impulse);
        Debug.Log(Falling);
     }
 
@@ -47,6 +46,7 @@ public class Ronin : Character
     {
        Anim.SetBool(Attacking, false);
        Anim.ResetTrigger(Falling);
+       Rb2d.gravityScale = _risingGravityScale;
     }
     
 }
