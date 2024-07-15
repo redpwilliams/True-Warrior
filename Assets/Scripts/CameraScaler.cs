@@ -1,5 +1,6 @@
 using UnityEngine;
-
+// Referenced from:
+// https://github.com/wmjoers/CameraScaler/blob/main/Assets/Scripts/CameraScaler.cs
 [RequireComponent(typeof(Camera))]
 public class CameraScaler : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class CameraScaler : MonoBehaviour
     [SerializeField] protected bool useDynamicWidth = false;
     [SerializeField] protected bool useDynamicHeight = false;
 
-    private Camera camera;
+    private Camera cam;
     private int lastWidth = 0;
     private int lastHeight = 0;
 
@@ -20,8 +21,8 @@ public class CameraScaler : MonoBehaviour
 
     protected void Awake()
     {
-        camera = GetComponent<Camera>();
-        orthoSize = camera.orthographicSize;
+        cam = GetComponent<Camera>();
+        orthoSize = cam.orthographicSize;
     }
 
     protected void Update()
@@ -36,37 +37,56 @@ public class CameraScaler : MonoBehaviour
 
     private void UpdateCamSize()
     {
-        float targetaspect = 16.0f / 9.0f;
- 
-        float windowaspect = (float)Screen.width / (float)Screen.height;
- 
-        float scaleheight = windowaspect / targetaspect;
- 
- 
-        if (scaleheight < 1.0f)
+        float targetAspect;
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+        float ortoScale = 1f;
+
+        if (useDynamicWidth)
         {
-            Rect rect = camera.rect;
- 
-            rect.width = 1.0f;
-            rect.height = scaleheight;
-            rect.x = 0;
-            rect.y = (1.0f - scaleheight) / 2.0f;
- 
-            camera.rect = rect;
+            float minTargetAspect = (float)targetWidth / (float)targetHeight;
+            float maxTargetAspect = (float)dynamicMaxWidth / (float)targetHeight;
+            targetAspect = Mathf.Clamp(screenAspect, minTargetAspect, maxTargetAspect);
         }
         else
         {
-            float scalewidth = 1.0f / scaleheight;
- 
-            Rect rect = camera.rect;
- 
-            rect.width = scalewidth;
-            rect.height = 1.0f;
-            rect.x = (1.0f - scalewidth) / 2.0f;
-            rect.y = 0;
- 
-            camera.rect = rect;
+            targetAspect = (float)targetWidth / (float)targetHeight;
         }
 
+        float scaleValue = screenAspect / targetAspect;
+
+        Rect rect = new();
+        if (scaleValue < 1f)
+        {
+            if (useDynamicHeight)
+            {
+                float minTargetAspect = (float)targetWidth / (float)dynamicMaxHeight;
+                if (screenAspect < minTargetAspect)
+                {
+                    scaleValue = screenAspect / minTargetAspect;
+                    ortoScale = minTargetAspect / targetAspect;
+                }
+                else
+                {
+                    ortoScale = scaleValue;
+                    scaleValue = 1f;
+                }
+            }
+
+            rect.width = 1;
+            rect.height = scaleValue;
+            rect.x = 0;
+            rect.y = (1 - scaleValue) / 2;
+        }
+        else
+        {
+            scaleValue = 1 / scaleValue;
+            rect.width = scaleValue;
+            rect.height = 1;
+            rect.x = (1 - scaleValue) / 2;
+            rect.y = 0;
+        }
+
+        cam.orthographicSize = orthoSize / ortoScale;
+        cam.rect = rect;
     }
 }
