@@ -88,7 +88,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,7 +102,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,7 +126,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -158,8 +158,8 @@ TextureImporter:
         y: 2
         width: 33
         height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -179,8 +179,8 @@ TextureImporter:
         y: 34
         width: 27
         height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -200,8 +200,8 @@ TextureImporter:
         y: 37
         width: 27
         height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -221,8 +221,8 @@ TextureImporter:
         y: 38
         width: 27
         height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -242,8 +242,8 @@ TextureImporter:
         y: 0
         width: 71
         height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -264,7 +264,7 @@ TextureImporter:
         width: 33
         height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -277,36 +277,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: STRONG ATTACK_6
-      rect:
-        serializedVersion: 2
-        x: 553
-        y: 2
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 46857eff3e75adcc0800000000000000
-      internalID: -3685536708286785436
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: STRONG ATTACK_7
       rect:
         serializedVersion: 2
-        x: 572
+        x: 553
         y: 0
-        width: 56
+        width: 75
         height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -319,27 +298,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: STRONG ATTACK_8
-      rect:
-        serializedVersion: 2
-        x: 650
-        y: 10
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 050a9c2f710365a10800000000000000
-      internalID: 1897757172398923856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: STRONG ATTACK_9
       rect:
         serializedVersion: 2
@@ -347,8 +305,8 @@ TextureImporter:
         y: 1
         width: 35
         height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -361,69 +319,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: STRONG ATTACK_10
-      rect:
-        serializedVersion: 2
-        x: 726
-        y: 10
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 26f4fbee7f4cacd60800000000000000
-      internalID: 7911352264571178850
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_11
-      rect:
-        serializedVersion: 2
-        x: 753
-        y: 16
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2469ae3a89cc4f650800000000000000
-      internalID: 6265857937536357954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_12
-      rect:
-        serializedVersion: 2
-        x: 758
-        y: 11
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b2bbc036ecde453e0800000000000000
-      internalID: -2065764858375390421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: STRONG ATTACK_13
       rect:
         serializedVersion: 2
@@ -431,8 +326,8 @@ TextureImporter:
         y: 2
         width: 54
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -444,101 +339,35 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_14
-      rect:
-        serializedVersion: 2
-        x: 826
-        y: 2
-        width: 16
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de51efb24be3653c0800000000000000
-      internalID: -4371237444763380243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_15
-      rect:
-        serializedVersion: 2
-        x: 840
-        y: 16
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb5a3d1a9035353a0800000000000000
-      internalID: -6677902521625500229
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_16
-      rect:
-        serializedVersion: 2
-        x: 659
-        y: 1
-        width: 13
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5ea5e3e879ec1d250800000000000000
-      internalID: 5967778131564452581
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_17
-      rect:
-        serializedVersion: 2
-        x: 717
-        y: 1
-        width: 13
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 80c08907eda38c7b0800000000000000
-      internalID: -5203844642380444664
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fd6ad9a161a3b3e478449aa80082e887
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      STRONG ATTACK_0: -6278813793219596387
+      STRONG ATTACK_1: 926434518652792222
+      STRONG ATTACK_10: 7911352264571178850
+      STRONG ATTACK_11: 6265857937536357954
+      STRONG ATTACK_12: -2065764858375390421
+      STRONG ATTACK_13: -5650112346802428376
+      STRONG ATTACK_14: -4371237444763380243
+      STRONG ATTACK_15: -6677902521625500229
+      STRONG ATTACK_16: 5967778131564452581
+      STRONG ATTACK_17: -5203844642380444664
+      STRONG ATTACK_2: 7687682036275399094
+      STRONG ATTACK_3: -1731658629139943341
+      STRONG ATTACK_4: 6419254410973875043
+      STRONG ATTACK_5: 7794672330686532840
+      STRONG ATTACK_6: -3685536708286785436
+      STRONG ATTACK_7: -4481524792300958230
+      STRONG ATTACK_8: 1897757172398923856
+      STRONG ATTACK_9: -1774968955418530829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

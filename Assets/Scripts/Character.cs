@@ -8,12 +8,9 @@ public class Character : MonoBehaviour
     
     // Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
-    [SerializeField] private float _finalPosition = 0f;
+    [SerializeField] private float _finalPosition;
     [SerializeField] private float _speed = 1f;
     private bool _isRunning = true;
-    
-    // Initialization
-    private readonly float _offscreenXPosition = -25f;
 
     private void Awake()
     {
