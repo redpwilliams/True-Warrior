@@ -1,55 +1,54 @@
 using UnityEngine;
+
 // Referenced from:
 // https://github.com/wmjoers/CameraScaler/blob/main/Assets/Scripts/CameraScaler.cs
 [RequireComponent(typeof(Camera))]
 public class CameraScaler : MonoBehaviour
 {
-    [SerializeField] protected int targetWidth = 1920;
-    [SerializeField] protected int targetHeight = 1080;
+    [SerializeField] protected int _targetWidth = 1920;
+    [SerializeField] protected int _targetHeight = 1080;
 
-    [SerializeField] protected int dynamicMaxWidth = 2560;
-    [SerializeField] protected int dynamicMaxHeight = 1440;
+    [SerializeField] protected int _dynamicMaxWidth = 2560;
+    [SerializeField] protected int _dynamicMaxHeight = 1440;
 
-    [SerializeField] protected bool useDynamicWidth = false;
-    [SerializeField] protected bool useDynamicHeight = false;
+    [SerializeField] protected bool _useDynamicWidth;
+    [SerializeField] protected bool _useDynamicHeight;
 
-    private Camera cam;
-    private int lastWidth = 0;
-    private int lastHeight = 0;
+    private Camera _cam;
+    private int _lastWidth;
+    private int _lastHeight;
 
-    private float orthoSize;
+    private float _orthoSize;
 
     protected void Awake()
     {
-        cam = GetComponent<Camera>();
-        orthoSize = cam.orthographicSize;
+        _cam = GetComponent<Camera>();
+        _orthoSize = _cam.orthographicSize;
     }
 
     protected void Update()
     {
-        if (Screen.width != lastWidth || Screen.height != lastHeight)
-        {
-            UpdateCamSize();
-            lastWidth = Screen.width;
-            lastHeight = Screen.height;
-        }
+        if (Screen.width == _lastWidth && Screen.height == _lastHeight) return;
+        UpdateCamSize();
+        _lastWidth = Screen.width;
+        _lastHeight = Screen.height;
     }
 
     private void UpdateCamSize()
     {
         float targetAspect;
-        float screenAspect = (float)Screen.width / (float)Screen.height;
-        float ortoScale = 1f;
+        float screenAspect = Screen.width / (float)Screen.height;
+        float orthoScale = 1f;
 
-        if (useDynamicWidth)
+        if (_useDynamicWidth)
         {
-            float minTargetAspect = (float)targetWidth / (float)targetHeight;
-            float maxTargetAspect = (float)dynamicMaxWidth / (float)targetHeight;
+            float minTargetAspect = _targetWidth / (float)_targetHeight;
+            float maxTargetAspect = _dynamicMaxWidth / (float)_targetHeight;
             targetAspect = Mathf.Clamp(screenAspect, minTargetAspect, maxTargetAspect);
         }
         else
         {
-            targetAspect = (float)targetWidth / (float)targetHeight;
+            targetAspect = _targetWidth / (float)_targetHeight;
         }
 
         float scaleValue = screenAspect / targetAspect;
@@ -57,17 +56,17 @@ public class CameraScaler : MonoBehaviour
         Rect rect = new();
         if (scaleValue < 1f)
         {
-            if (useDynamicHeight)
+            if (_useDynamicHeight)
             {
-                float minTargetAspect = (float)targetWidth / (float)dynamicMaxHeight;
+                float minTargetAspect = _targetWidth / (float)_dynamicMaxHeight;
                 if (screenAspect < minTargetAspect)
                 {
                     scaleValue = screenAspect / minTargetAspect;
-                    ortoScale = minTargetAspect / targetAspect;
+                    orthoScale = minTargetAspect / targetAspect;
                 }
                 else
                 {
-                    ortoScale = scaleValue;
+                    orthoScale = scaleValue;
                     scaleValue = 1f;
                 }
             }
@@ -86,7 +85,7 @@ public class CameraScaler : MonoBehaviour
             rect.y = 0;
         }
 
-        cam.orthographicSize = orthoSize / ortoScale;
-        cam.rect = rect;
+        _cam.orthographicSize = _orthoSize / orthoScale;
+        _cam.rect = rect;
     }
 }
