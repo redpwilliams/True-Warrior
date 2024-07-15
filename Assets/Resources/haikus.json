@@ -1,10 +1,12 @@
 {
-  "haikus": {
-    "author": "Jane Rechhold",
-    "lines": [
-      "A camera's flash",
-      "long after the eyes close",
-      "in old photographs"
-    ]
-  }
+  "haikus": [
+    {
+      "author": "Jane Rechhold",
+      "lines": [
+        "A camera's flash",
+        "long after the eyes close",
+        "in old photographs"
+      ]
+    }
+  ]
 }
