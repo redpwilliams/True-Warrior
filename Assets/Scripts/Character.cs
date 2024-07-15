@@ -27,12 +27,22 @@ public class Character : MonoBehaviour
     {
         // Start Character movement
         _animator.SetBool(Running, _isRunning);
+            EventManager.Events.OnBeginAttack += Test;
+    }
+
+    private static void Test()
+    {
+        Debug.Log(("test"));
     }
 
     private void FixedUpdate()
     {
         // Disregard if not moving
-        if (!_isRunning) return;
+        if (!_isRunning)
+        {
+            EventManager.Events.BeginAttack();
+            return;
+        }
         
         // Move the character towards the final position
         Vector2 currentPosition = Rb2d.position;
