@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     // Running Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
     [SerializeField] private float _finalPosition;
-    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _speed = 2f;
     private bool _isRunning = true;
     
     // Attacking Animation
