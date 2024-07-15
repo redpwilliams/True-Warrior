@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class Ronin : Character
 {
+    [SerializeField] private float _gravityScale = 5f;
+        
     protected override void Start()
     {
         base.Start();
         EventManager.Events.OnBeginAttack += BeginAttack;
+        Rb2d.gravityScale = _gravityScale;
     }
 
     private void BeginAttack()
@@ -19,7 +22,7 @@ public class Ronin : Character
     {
         Rb2d.velocity = Vector2.zero;
         Rb2d.bodyType = RigidbodyType2D.Dynamic; 
-        Rb2d.AddForce(Vector2.up*100, ForceMode2D.Impulse);
+        Rb2d.AddForce(Vector2.up*400, ForceMode2D.Impulse);
     }
 
     public void OnStrikeDown()
@@ -32,9 +35,7 @@ public class Ronin : Character
     public void OnAttackFinish()
     {
         
-       Anim.SetBool(Attacking, true);
-        Rb2d.velocity = Vector2.zero;
-        Rb2d.bodyType = RigidbodyType2D.Kinematic; 
+       Anim.SetBool(Attacking, false);
     }
     
 }
