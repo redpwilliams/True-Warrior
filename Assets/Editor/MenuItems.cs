@@ -13,12 +13,5 @@ public class MenuItems : Editor
         EventManager.Events.BeginAttack();
     }
 
-    // [MenuItem(TutorialPath, true)]
-    // private static bool IsFirstTimeValidate()
-    // {
-    //     Menu.SetChecked(TutorialPath, _prefs.IsFirstTime);
-    //     return true;
-    // }
-
     #endregion
 }

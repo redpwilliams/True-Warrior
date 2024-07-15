@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     }
     
 
-    private void Start()
+    protected virtual void Start()
     {
         // Start Character movement
         _animator.SetBool(Running, _isRunning);

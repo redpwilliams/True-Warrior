@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class Ronin : Character
 {
+    protected override void Start()
+    {
+        base.Start();
+        EventManager.Events.OnBeginAttack += BeginAttack;
+    }
+
+    private static void BeginAttack()
+    {
+       Debug.Log("Beginning attack"); 
+    }
     
     // TODO - Must turn off _isRunning temporarily for this to work
     public void OnStrongAttackJumpUp()
