@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    // Components
     private Rigidbody2D _rb2d;
     private Animator _animator;
+    
+    // Animation
+    private static readonly int Running = Animator.StringToHash("ShouldRun");
     [SerializeField] private float _finalPosition = 0f;
     [SerializeField] private float _speed = 1f;
     private bool _isRunning = true;
-
-    private static readonly int Running = Animator.StringToHash("ShouldRun");
+    
+    // Initialization
+    private readonly float _offscreenXPosition = -25f;
 
     private void Awake()
     {
         _rb2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
+    
 
     private void Start()
     {
