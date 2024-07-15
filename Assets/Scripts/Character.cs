@@ -6,11 +6,15 @@ public class Character : MonoBehaviour
     protected Rigidbody2D Rb2d;
     private Animator _animator;
     
-    // Animation
+    // Running Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
     [SerializeField] private float _finalPosition;
     [SerializeField] private float _speed = 1f;
     private bool _isRunning = true;
+    
+    // Attacking Animation
+    protected static readonly int Attacking = Animator.StringToHash
+    ("ShouldAttack");
 
     private void Awake()
     {
