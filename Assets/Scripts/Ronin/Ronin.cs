@@ -1,6 +1,5 @@
-using System;
+using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Ronin : Character
 {
@@ -23,6 +22,7 @@ public class Ronin : Character
     }
 
     // TODO - Must turn off _isRunning temporarily for this to work
+    [UsedImplicitly]
     public void OnStrongAttackJumpUp()
     {
         Rb2d.velocity = Vector2.zero;
@@ -37,11 +37,7 @@ public class Ronin : Character
         Rb2d.gravityScale = _fallingGravityScale;
     }
 
-    public void OnStrikeDown()
-    {
-       Debug.Log(Falling);
-    }
-
+    [UsedImplicitly]
     public void OnAttackFinish()
     {
        Anim.SetBool(Attacking, false);
