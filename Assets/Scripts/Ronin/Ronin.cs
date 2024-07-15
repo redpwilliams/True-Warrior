@@ -8,11 +8,12 @@ public class Ronin : Character
         EventManager.Events.OnBeginAttack += BeginAttack;
     }
 
-    private static void BeginAttack()
+    private void BeginAttack()
     {
        Debug.Log("Beginning attack"); 
+       Anim.SetBool(Attacking, true);
     }
-    
+
     // TODO - Must turn off _isRunning temporarily for this to work
     public void OnStrongAttackJumpUp()
     {
@@ -25,7 +26,15 @@ public class Ronin : Character
     {
         Rb2d.velocity = Vector2.zero;
         Rb2d.AddForce(Vector2.down*100, ForceMode2D.Impulse);
-        Rb2d.bodyType = RigidbodyType2D.Kinematic; 
         
     }
+
+    public void OnAttackFinish()
+    {
+        
+       Anim.SetBool(Attacking, true);
+        Rb2d.velocity = Vector2.zero;
+        Rb2d.bodyType = RigidbodyType2D.Kinematic; 
+    }
+    
 }

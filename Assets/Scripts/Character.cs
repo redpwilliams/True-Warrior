@@ -4,7 +4,7 @@ public class Character : MonoBehaviour
 {
     // Components
     protected Rigidbody2D Rb2d;
-    private Animator _animator;
+    protected Animator Anim;
     
     // Running Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
@@ -19,14 +19,14 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         Rb2d = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
     }
     
 
     protected virtual void Start()
     {
         // Start Character movement
-        _animator.SetBool(Running, _isRunning);
+        Anim.SetBool(Running, _isRunning);
     }
 
     private void FixedUpdate()
@@ -46,6 +46,6 @@ public class Character : MonoBehaviour
         // Stop the movement (set velocity to zero)
         Rb2d.velocity = Vector2.zero;
         _isRunning = false;
-        _animator.SetBool(Running, _isRunning);
+        Anim.SetBool(Running, _isRunning);
     }
 }

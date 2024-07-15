@@ -154,9 +154,9 @@ TextureImporter:
       name: STRONG ATTACK_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 2
-        width: 33
+        x: 147
+        y: 35
+        width: 25
         height: 36
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -175,10 +175,10 @@ TextureImporter:
       name: STRONG ATTACK_1
       rect:
         serializedVersion: 2
-        x: 146
-        y: 34
-        width: 27
-        height: 38
+        x: 253
+        y: 38
+        width: 25
+        height: 36
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,10 +196,10 @@ TextureImporter:
       name: STRONG ATTACK_2
       rect:
         serializedVersion: 2
-        x: 252
-        y: 37
-        width: 27
-        height: 38
+        x: 359
+        y: 39
+        width: 25
+        height: 36
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,13 +214,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: STRONG ATTACK_3
+      name: STRONG ATTACK_4
       rect:
         serializedVersion: 2
-        x: 358
-        y: 38
-        width: 27
-        height: 38
+        x: 448
+        y: 0
+        width: 69
+        height: 82
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,13 +235,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: STRONG ATTACK_4
+      name: STRONG ATTACK_
       rect:
         serializedVersion: 2
-        x: 447
-        y: 0
-        width: 71
-        height: 83
+        x: 34
+        y: 3
+        width: 31
+        height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,75 +256,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: STRONG ATTACK_5
-      rect:
-        serializedVersion: 2
-        x: 880
-        y: 2
-        width: 33
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ec0323df2d3c2c60800000000000000
-      internalID: 7794672330686532840
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_7
-      rect:
-        serializedVersion: 2
-        x: 553
-        y: 0
-        width: 75
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aed8bce02fc6ec1c0800000000000000
-      internalID: -4481524792300958230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: STRONG ATTACK_9
-      rect:
-        serializedVersion: 2
-        x: 678
-        y: 1
-        width: 35
-        height: 30
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3fbaee4a32b0e57e0800000000000000
-      internalID: -1774968955418530829
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: STRONG ATTACK_13
       rect:
         serializedVersion: 2
-        x: 765
-        y: 2
-        width: 54
+        x: 881
+        y: 3
+        width: 31
         height: 34
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -335,6 +272,69 @@ TextureImporter:
       bones: []
       spriteID: 826eac391c4c691b0800000000000000
       internalID: -5650112346802428376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_6
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 0
+        width: 54
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b8772f5ef73c4e4aab9dfd0e2d6e366
+      internalID: -3685536708286785436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_7
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 2
+        width: 33
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 253871a42c0f77e4d850d815362acb84
+      internalID: 1897757172398923856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STRONG ATTACK_8
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 3
+        width: 52
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bbd34a206ca69044a9401de750daa81
+      internalID: 6265857937536357954
       vertices: []
       indices: 
       edges: []
@@ -350,10 +350,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      STRONG ATTACK_: 6419254410973875043
       STRONG ATTACK_0: -6278813793219596387
       STRONG ATTACK_1: 926434518652792222
       STRONG ATTACK_10: 7911352264571178850
-      STRONG ATTACK_11: 6265857937536357954
       STRONG ATTACK_12: -2065764858375390421
       STRONG ATTACK_13: -5650112346802428376
       STRONG ATTACK_14: -4371237444763380243
@@ -361,12 +361,11 @@ TextureImporter:
       STRONG ATTACK_16: 5967778131564452581
       STRONG ATTACK_17: -5203844642380444664
       STRONG ATTACK_2: 7687682036275399094
-      STRONG ATTACK_3: -1731658629139943341
-      STRONG ATTACK_4: 6419254410973875043
+      STRONG ATTACK_4: -1731658629139943341
       STRONG ATTACK_5: 7794672330686532840
       STRONG ATTACK_6: -3685536708286785436
-      STRONG ATTACK_7: -4481524792300958230
-      STRONG ATTACK_8: 1897757172398923856
+      STRONG ATTACK_7: 1897757172398923856
+      STRONG ATTACK_8: 6265857937536357954
       STRONG ATTACK_9: -1774968955418530829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

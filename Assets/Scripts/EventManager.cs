@@ -36,7 +36,6 @@ public sealed class EventManager : MonoBehaviour
 
     public void BeginAttack()
     {
-        Debug.Log("Test");
         OnBeginAttack?.Invoke();
     }
 }
