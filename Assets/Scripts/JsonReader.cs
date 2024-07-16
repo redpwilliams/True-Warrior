@@ -5,26 +5,21 @@ public class JsonReader : MonoBehaviour
 {
     private void Start()
     {
-        var file = Resources.Load<TextAsset>("haikus").ToString();
-        Haikus h = LoadFromJSON(file);
+        var jsonString = Resources.Load<TextAsset>("haikus").ToString();
+        Haikus h = JsonUtility.FromJson<Haikus>(jsonString);
         Debug.Log(h.haikus[0].lines[0]);
     }
-    private Haikus LoadFromJSON(string ta)
+
+    [System.Serializable]
+    public struct Haikus
     {
-        return JsonUtility.FromJson<Haikus>(ta);
+        public List<Interior> haikus;
     }
-}
 
-[System.Serializable]
-public struct Haikus
-{
-    public List<Interior> haikus;
-
-}
-
-[System.Serializable]
-public struct Interior
-{
-    public string author;
-    public List<string> lines;
+    [System.Serializable]
+    public struct Interior
+    {
+        public string author;
+        public List<string> lines;
+    }
 }
