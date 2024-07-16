@@ -21,39 +21,36 @@ public class HaikuText : MonoBehaviour
         StartCoroutine(HaikuCountdown(haikus, 3));
     }
 
-    private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus, int stage)
+    private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus, int stages)
     {
         JsonReader.Haiku haiku = haikus[Random.Range(0, haikus.Count)];
-        for (int i = 0; i < haikus.Count; i++)
+        foreach (var line in haiku.lines)
         {
-            foreach (var line in haikus[i].lines)
-            { 
-                Debug.Log("Stage: " + stage);
-                _tmp.text = line; 
-                yield return new WaitForSeconds(5);
-            }
+            Debug.Log("Stage: " + stages);
+            _tmp.text = line;
+            stages--;
+            yield return new WaitForSeconds(5);
         }
-
     }
-    
-    
+
+
     private class JsonReader
     {
-        public List<Haiku> Haikus { get; } 
-        
+        public List<Haiku> Haikus { get; }
+
         public JsonReader()
         {
             string jsonString = Resources.Load<TextAsset>("haikus").ToString();
             Haikus = JsonUtility.FromJson<JsonData>(jsonString).haikus;
             Debug.Log(Haikus[0].lines[0]);
         }
-    
+
         [System.Serializable]
         internal struct JsonData
         {
             public List<Haiku> haikus;
         }
-    
+
         [System.Serializable]
         internal struct Haiku
         {
