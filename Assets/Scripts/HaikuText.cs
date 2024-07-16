@@ -19,7 +19,8 @@ public class HaikuText : MonoBehaviour
     private void Awake()
     {
         _tmp = GetComponent<TextMeshProUGUI>();
-        _tmp.text = null;
+        _tmp.text = "";
+        _tmp.alpha = 0;
     }
 
     private void Start()
@@ -58,10 +59,10 @@ public class HaikuText : MonoBehaviour
     
     private IEnumerator FadeInText(float timeSpeed, TextMeshProUGUI text)
     {
-        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
-        while (text.color.a < 1.0f)
+        text.alpha = 0;
+        while (text.alpha < 1.0f)
         {
-            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + (Time.deltaTime * timeSpeed));
+            text.alpha += Time.deltaTime * timeSpeed;
             yield return null;
         }
     }
