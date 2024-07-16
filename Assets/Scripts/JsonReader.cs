@@ -6,12 +6,12 @@ public class JsonReader : MonoBehaviour
     private void Start()
     {
         var jsonString = Resources.Load<TextAsset>("haikus").ToString();
-        Haikus h = JsonUtility.FromJson<Haikus>(jsonString);
+        JsonData h = JsonUtility.FromJson<JsonData>(jsonString);
         Debug.Log(h.haikus[0].lines[0]);
     }
 
     [System.Serializable]
-    public struct Haikus
+    public struct JsonData
     {
         public List<Interior> haikus;
     }
