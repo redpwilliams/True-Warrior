@@ -29,16 +29,7 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         EventManager.Events.OnStageX += StartRunning;
-    }
-
-    private void StartRunning(int stage)
-    {
-        if (stage != AssignedStage) return;
-        
-        // Start Character movement
-        _isRunning = true;
-        Anim.SetBool(Running, _isRunning);
-        EventManager.Events.OnStageX -= StartRunning;
+        EventManager.Events.OnBeginAttack += Attack;
     }
 
     private void FixedUpdate()
@@ -60,4 +51,21 @@ public class Character : MonoBehaviour
         _isRunning = false;
         Anim.SetBool(Running, _isRunning);
     }
+    
+    private void StartRunning(int stage)
+    {
+        if (stage != AssignedStage) return;
+        
+        // Start Character movement
+        _isRunning = true;
+        Anim.SetBool(Running, _isRunning);
+        EventManager.Events.OnStageX -= StartRunning;
+    }
+
+    private void Attack()
+    {
+       Debug.Log("Beginning attack"); 
+       Anim.SetBool(Attacking, true);
+    }
+
 }

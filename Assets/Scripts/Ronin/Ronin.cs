@@ -11,14 +11,7 @@ public class Ronin : Character
     protected override void Start()
     {
         base.Start();
-        EventManager.Events.OnBeginAttack += BeginAttack;
         Rb2d.gravityScale = _risingGravityScale;
-    }
-
-    private void BeginAttack()
-    {
-       Debug.Log("Beginning attack"); 
-       Anim.SetBool(Attacking, true);
     }
 
     // TODO - Must turn off _isRunning temporarily for this to work
