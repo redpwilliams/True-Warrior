@@ -42,7 +42,7 @@ public class HaikuText : MonoBehaviour
         // Line 1
         yield return new WaitForSeconds(timeUntilStage1);
         _tmp.text = haiku.lines[stage++];
-        yield return StartCoroutine(FadeInText(1f, _tmp));
+        yield return StartCoroutine(FadeText(1f, true));
         
         // Line 2
         yield return new WaitForSeconds(timeUntilStage2);
@@ -57,20 +57,21 @@ public class HaikuText : MonoBehaviour
         // TODO - Change text to different formatted text object?
     }
     
-    private IEnumerator FadeInText(float timeSpeed, TextMeshProUGUI text)
+    private IEnumerator FadeText(float fadeDuration, bool fadeIn)
     {
-        float startAlpha = 0f;
-        float endAlpha = 1f;
+        float startAlpha = fadeIn ? 0f : 1f;
+        float endAlpha = fadeIn ? 1f : 0f;
         float elapsedTime = 0f;
 
-        while (elapsedTime < timeSpeed)
+        while (elapsedTime < fadeDuration)
         {
-            text.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / timeSpeed);
+            _tmp.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / 
+            fadeDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        text.alpha = endAlpha;
+        _tmp.alpha = endAlpha;
     }
 
     private class JsonReader
