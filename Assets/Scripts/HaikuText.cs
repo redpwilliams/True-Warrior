@@ -41,6 +41,7 @@ public class HaikuText : MonoBehaviour
         // Line 1
         yield return new WaitForSeconds(timeUntilStage1);
         _tmp.text = haiku.lines[stage++];
+        yield return StartCoroutine(FadeInText(1f, _tmp));
         
         // Line 2
         yield return new WaitForSeconds(timeUntilStage2);
@@ -54,7 +55,16 @@ public class HaikuText : MonoBehaviour
         yield return new WaitForSeconds(timeUntilBattleStart);
         // TODO - Change text to different formatted text object?
     }
-
+    
+    private IEnumerator FadeInText(float timeSpeed, TextMeshProUGUI text)
+    {
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+        while (text.color.a < 1.0f)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + (Time.deltaTime * timeSpeed));
+            yield return null;
+        }
+    }
 
     private class JsonReader
     {
