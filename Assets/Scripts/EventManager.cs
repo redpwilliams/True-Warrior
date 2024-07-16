@@ -33,9 +33,14 @@ public sealed class EventManager : MonoBehaviour
     }
 
     public event Action OnBeginAttack;
-
     public void BeginAttack()
     {
         OnBeginAttack?.Invoke();
+    }
+
+    public event Action<int> OnStageX;
+    public void StageX(int stage)
+    {
+        OnStageX?.Invoke(stage);
     }
 }

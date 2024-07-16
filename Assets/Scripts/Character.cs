@@ -10,7 +10,10 @@ public class Character : MonoBehaviour
     private static readonly int Running = Animator.StringToHash("ShouldRun");
     [SerializeField] private float _finalPosition;
     [SerializeField] private float _speed = 2f;
-    private bool _isRunning = true;
+    private bool _isRunning;
+    
+    // Assigned stage
+    protected readonly int AssignedStage = 0; // Defaults to 0
     
     // Attacking Animation
     protected static readonly int Attacking = Animator.StringToHash
@@ -25,8 +28,17 @@ public class Character : MonoBehaviour
 
     protected virtual void Start()
     {
+        EventManager.Events.OnStageX += StartRunning;
+    }
+
+    private void StartRunning(int stage)
+    {
+        if (stage != AssignedStage) return;
+        
         // Start Character movement
+        _isRunning = true;
         Anim.SetBool(Running, _isRunning);
+        EventManager.Events.OnStageX -= StartRunning;
     }
 
     private void FixedUpdate()

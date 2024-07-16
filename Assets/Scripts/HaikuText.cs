@@ -42,21 +42,24 @@ public class HaikuText : MonoBehaviour
         int stage = 0;
 
         // Line 1
-        _tmp.text = SetText(haiku.lines[stage++]);
+        _tmp.text = SetText(haiku.lines[stage]);
         yield return new WaitForSeconds(timeUntilStage1);
+        EventManager.Events.StageX(stage++);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
         yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Line 2
-        _tmp.text = SetText(haiku.lines[stage++]);
+        _tmp.text = SetText(haiku.lines[stage]);
         yield return new WaitForSeconds(timeUntilStage2);
+        EventManager.Events.StageX(stage++);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
         yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Line 3
         _tmp.text = SetText(haiku.lines[stage]);
+        EventManager.Events.StageX(stage);
         yield return new WaitForSeconds(timeUntilStage3);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
