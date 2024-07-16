@@ -42,21 +42,21 @@ public class HaikuText : MonoBehaviour
         int stage = 0;
 
         // Line 1
-        _tmp.text = haiku.lines[stage++];
+        _tmp.text = SetText(haiku.lines[stage++]);
         yield return new WaitForSeconds(timeUntilStage1);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
         yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Line 2
-        _tmp.text = haiku.lines[stage++];
+        _tmp.text = SetText(haiku.lines[stage++]);
         yield return new WaitForSeconds(timeUntilStage2);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
         yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Line 3
-        _tmp.text = haiku.lines[stage];
+        _tmp.text = SetText(haiku.lines[stage]);
         yield return new WaitForSeconds(timeUntilStage3);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
@@ -85,6 +85,11 @@ public class HaikuText : MonoBehaviour
         _tmp.alpha = endAlpha;
     }
 
+    private string SetText(JsonReader.LinePair lp)
+    {
+        return $"{lp.en}\n{lp.jp}";
+    }
+
     private class JsonReader
     {
         public List<Haiku> Haikus { get; }
@@ -105,7 +110,14 @@ public class HaikuText : MonoBehaviour
         internal struct Haiku
         {
             public string author;
-            public List<string> lines;
+            public List<LinePair> lines;
+        }
+
+        [System.Serializable]
+        internal struct LinePair
+        {
+            public string en;
+            public string jp;
         }
     }
 }

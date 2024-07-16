@@ -1,11 +1,20 @@
 {
   "haikus": [
     {
-      "author": "Jane Rechhold",
+      "author": "",
       "lines": [
-        "Steel birds fill the sky\nこんにちは",
-        "Scorching breath paints earth to ash",
-        "Silence follows screams."
+        {
+          "en": "Steel birds fill the sky",
+          "jp": "こんにちは"
+        },
+        {
+          "en": "Scorching breath paints earth to ash",
+          "jp": ""
+        },
+        {
+          "en": "Silence follows screams.",
+          "jp": ""
+        }
       ]
     }
   ]
