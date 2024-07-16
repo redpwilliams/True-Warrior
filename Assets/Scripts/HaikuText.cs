@@ -13,22 +13,25 @@ public class HaikuText : MonoBehaviour
     private void Awake()
     {
         _tmp = GetComponent<TextMeshProUGUI>();
+        _tmp.text = null;
     }
 
     private void Start()
     {
         var haikus = new JsonReader().Haikus;
-        StartCoroutine(HaikuCountdown(haikus, 3));
+        StartCoroutine(HaikuCountdown(haikus));
     }
 
-    private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus, int stages)
+    private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus)
     {
+        // Initial startup buffer
+        yield return new WaitForSeconds(2.5f);
+        
+        // Display lines
         JsonReader.Haiku haiku = haikus[Random.Range(0, haikus.Count)];
-        foreach (var line in haiku.lines)
+        for (int i = 0; i < 3; i++)
         {
-            Debug.Log("Stage: " + stages);
-            _tmp.text = line;
-            stages--;
+            _tmp.text = haiku.lines[i];
             yield return new WaitForSeconds(5);
         }
     }
@@ -42,7 +45,6 @@ public class HaikuText : MonoBehaviour
         {
             string jsonString = Resources.Load<TextAsset>("haikus").ToString();
             Haikus = JsonUtility.FromJson<JsonData>(jsonString).haikus;
-            Debug.Log(Haikus[0].lines[0]);
         }
 
         [System.Serializable]
