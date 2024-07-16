@@ -15,6 +15,8 @@ public class HaikuText : MonoBehaviour
     [SerializeField] private float timeUntilStage3 = 5f;
     // TODO - Make range?
     [SerializeField] private float timeUntilBattleStart = 5f;
+    [SerializeField] private float fadeInDuration = 1f;
+    [SerializeField] private float fadeOutDuration = 0.5f;
 
     private void Awake()
     {
@@ -40,20 +42,29 @@ public class HaikuText : MonoBehaviour
         int stage = 0;
 
         // Line 1
-        yield return new WaitForSeconds(timeUntilStage1);
         _tmp.text = haiku.lines[stage++];
-        yield return StartCoroutine(FadeText(1f, true));
+        yield return new WaitForSeconds(timeUntilStage1);
+        yield return StartCoroutine(FadeText(fadeInDuration, true));
+        yield return new WaitForSeconds(3f); // TODO - Time to hold text
+        yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Line 2
-        yield return new WaitForSeconds(timeUntilStage2);
         _tmp.text = haiku.lines[stage++];
+        yield return new WaitForSeconds(timeUntilStage2);
+        yield return StartCoroutine(FadeText(fadeInDuration, true));
+        yield return new WaitForSeconds(3f); // TODO - Time to hold text
+        yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Line 3
-        yield return new WaitForSeconds(timeUntilStage3);
         _tmp.text = haiku.lines[stage];
+        yield return new WaitForSeconds(timeUntilStage3);
+        yield return StartCoroutine(FadeText(fadeInDuration, true));
+        yield return new WaitForSeconds(3f); // TODO - Time to hold text
+        yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Battle Start
         yield return new WaitForSeconds(timeUntilBattleStart);
+        Debug.Log("Start!");
         // TODO - Change text to different formatted text object?
     }
     
