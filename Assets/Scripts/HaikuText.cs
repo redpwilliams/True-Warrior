@@ -59,12 +59,18 @@ public class HaikuText : MonoBehaviour
     
     private IEnumerator FadeInText(float timeSpeed, TextMeshProUGUI text)
     {
-        text.alpha = 0;
-        while (text.alpha < 1.0f)
+        float startAlpha = 0f;
+        float endAlpha = 1f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timeSpeed)
         {
-            text.alpha += Time.deltaTime * timeSpeed;
+            text.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / timeSpeed);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        text.alpha = endAlpha;
     }
 
     private class JsonReader
