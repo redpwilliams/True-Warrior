@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,8 +12,9 @@ public abstract class Character : MonoBehaviour
     // Components
     protected Rigidbody2D Rb2d;
     protected Animator Anim;
-    private SpriteRenderer _sr;
     private Light2D _l2d;
+    private InputAction _ia;
+    private Controls _controls;
     
     // Running Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
@@ -21,24 +23,41 @@ public abstract class Character : MonoBehaviour
     private bool _isRunning;
     
     // Assigned stage
+    private enum Player { One, Two, CPU }
     [SerializeField] private Player _player;
+    
     
     // Attacking Animation
     protected static readonly int Attacking = Animator.StringToHash
-    ("ShouldAttack");
+        ("ShouldAttack");
 
     private void Awake()
     {
         Rb2d = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
-        _sr = GetComponent<SpriteRenderer>();
+        _controls = new Controls();
     }
-    
+
+    private void OnEnable()
+    {
+        // Enable controls
+        _ia = _controls.Player1.Attack;
+         _ia.performed += OnActionTriggered;
+        _ia.Enable();
+
+    }
+
+    private void OnDisable()
+    {
+        _ia.Disable();
+        _controls.Disable();
+    }
 
     protected virtual void Start()
     {
         EventManager.Events.OnStageX += StartRunning;
         EventManager.Events.OnBeginAttack += Attack;
+        
         
         // Correct final position
         _finalPosition = (_player == Player.One)
@@ -74,6 +93,8 @@ public abstract class Character : MonoBehaviour
         _isRunning = false;
         Anim.SetBool(Running, _isRunning);
     }
+
+    #region ApproachingMovement
     
     private void StartRunning(int stage)
     {
@@ -84,6 +105,10 @@ public abstract class Character : MonoBehaviour
         Anim.SetBool(Running, _isRunning);
         EventManager.Events.OnStageX -= StartRunning;
     }
+
+    #endregion
+
+    #region Battle
 
     // wins
     protected virtual void Attack()
@@ -99,13 +124,16 @@ public abstract class Character : MonoBehaviour
         Debug.Log("Lost to attack");
     }
 
-    private enum Player
+    #endregion
+
+    #region Input
+
+    private void OnActionTriggered(InputAction.CallbackContext context)
     {
-        One,
-        Two,
-        CPU
+        Debug.Log("Triggered");
     }
 
+    #endregion
 }
 public interface IReactive
 { 
