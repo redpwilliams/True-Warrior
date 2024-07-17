@@ -1,11 +1,15 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public abstract class Character : MonoBehaviour
 {
     // Components
     protected Rigidbody2D Rb2d;
     protected Animator Anim;
+    private SpriteRenderer _sr;
     
     // Running Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
@@ -14,7 +18,7 @@ public abstract class Character : MonoBehaviour
     private bool _isRunning;
     
     // Assigned stage
-    protected readonly int AssignedStage = 0; // Defaults to 0
+    [SerializeField] private Player _player;
     
     // Attacking Animation
     protected static readonly int Attacking = Animator.StringToHash
@@ -24,6 +28,7 @@ public abstract class Character : MonoBehaviour
     {
         Rb2d = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
     }
     
 
@@ -31,6 +36,14 @@ public abstract class Character : MonoBehaviour
     {
         EventManager.Events.OnStageX += StartRunning;
         EventManager.Events.OnBeginAttack += Attack;
+        
+        // Correct final position
+        _finalPosition = (_player == Player.One)
+            ? -Mathf.Abs(_finalPosition)
+            : Mathf.Abs(_finalPosition);
+        
+        // Flip sprite
+        if (_player != Player.One) _sr.flipX = true;
     }
 
     private void FixedUpdate()
@@ -45,7 +58,8 @@ public abstract class Character : MonoBehaviour
             _speed * Time.fixedDeltaTime));
 
         // Check if the character has reached or passed the final position
-        if (Rb2d.position.x < _finalPosition) return;
+        if ((_player == Player.One && Rb2d.position.x < _finalPosition) || 
+        _player != Player.One && Rb2d.position.x > _finalPosition) return;
         
         // Stop the movement (set velocity to zero)
         Rb2d.velocity = Vector2.zero;
@@ -55,7 +69,7 @@ public abstract class Character : MonoBehaviour
     
     private void StartRunning(int stage)
     {
-        if (stage != AssignedStage) return;
+        if (stage != (_player == Player.One ? 0 : 1)) return;
         
         // Start Character movement
         _isRunning = true;
@@ -75,6 +89,13 @@ public abstract class Character : MonoBehaviour
     protected virtual void LostToAttack()
     {
         Debug.Log("Lost to attack");
+    }
+
+    private enum Player
+    {
+        One,
+        Two,
+        CPU
     }
 
 }
