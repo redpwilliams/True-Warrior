@@ -25,9 +25,6 @@ public abstract class Character : MonoBehaviour
     private enum Player { One, Two, CPU }
     [SerializeField] private Player _player;
     
-    // Winner/Loser
-    private bool _isWinner;
-    
     // Attacking Animation
     protected static readonly int Attacking = Animator.StringToHash
         ("ShouldAttack");
@@ -37,7 +34,6 @@ public abstract class Character : MonoBehaviour
         Rb2d = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         _controls = new Controls();
-        _isWinner = false;
     }
 
     private void OnEnable()
@@ -50,6 +46,7 @@ public abstract class Character : MonoBehaviour
     private void OnDisable()
     {
         _controls.Disable();
+        _controls.Player1.Attack.performed -= OnCharacterInput;
     }
 
     protected virtual void Start()
@@ -127,10 +124,19 @@ public abstract class Character : MonoBehaviour
 
     #region Input
 
+    // this character has inputted the attack button
     private void OnCharacterInput(InputAction.CallbackContext context)
     {
         // Send info to game manager with timestamp
-        Debug.Log("Triggered: " + _player);
+        // Debug.Log("Triggered: " + _player);
+        Character winner = EventManager.Events.PlayerInput(this, context.time); 
+        // asks EM if its the winner
+        if (this == winner)
+        {
+            Debug.Log("I won");
+            return;
+        }
+        Debug.Log("I lost");
     }
 
     #endregion

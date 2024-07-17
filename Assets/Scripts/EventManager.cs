@@ -50,4 +50,20 @@ public sealed class EventManager : MonoBehaviour
         Debug.Log("A character has attacked");
         OnCharacterAttacks?.Invoke();
     }
+
+    // Relays who hit first?
+    private Character _winner = null;
+    // public event Action<Character, double> OnPlayerInput;
+
+    public Character PlayerInput(Character c, double time)
+    {
+        Debug.Log("Character " + c.name + " has input.");
+        if (_winner == null)
+        {
+            _winner = c;
+            
+        }
+
+        return _winner;
+    }
 }
