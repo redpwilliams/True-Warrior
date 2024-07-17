@@ -66,9 +66,10 @@ public class HaikuText : MonoBehaviour
         yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
         // Battle Start
+        _tmp.text = "Strike!\n攻撃！";
         yield return new WaitForSeconds(timeUntilBattleStart);
         EventManager.Events.StageX(stage);
-        Debug.Log("Start!");
+        yield return StartCoroutine(FadeText(0.05f, true));
         // TODO - Change text to different formatted text object?
     }
     

@@ -61,8 +61,6 @@ public sealed class EventManager : MonoBehaviour
 
     // Relays who hit first?
     private Character _winner;
-    // public event Action<Character, double> OnPlayerInput;
-
     public Character PlayerInput(Character c, double time)
     {
         double reactionTime = time - _battleStartTime;
