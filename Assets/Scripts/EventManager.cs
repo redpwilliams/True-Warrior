@@ -40,9 +40,11 @@ public sealed class EventManager : MonoBehaviour
 
     #region Staging Logic
 
+    private double _battleStartTime;
     public event Action<int> OnStageX;
     public void StageX(int stage)
     {
+        if (stage == 3) _battleStartTime = Time.realtimeSinceStartupAsDouble;
         OnStageX?.Invoke(stage);
     }
 
@@ -63,7 +65,9 @@ public sealed class EventManager : MonoBehaviour
 
     public Character PlayerInput(Character c, double time)
     {
-        Debug.Log("Character " + c.name + " has input.");
+        double reactionTime = time - _battleStartTime;
+        string formattedReactionTime = $"{reactionTime:F3}";
+        Debug.Log("Character " + c.name + " has input in " + formattedReactionTime + " ms.");
         c.DisableControls();
         if (_winner == null) _winner = c;
         return _winner;

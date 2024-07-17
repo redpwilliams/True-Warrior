@@ -29,6 +29,8 @@ public abstract class Character : MonoBehaviour
     protected static readonly int Attacking = Animator.StringToHash
         ("ShouldAttack");
 
+    // private AnimationHandler _ah;
+
     private void Awake()
     {
         Rb2d = GetComponent<Rigidbody2D>();
