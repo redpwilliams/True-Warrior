@@ -7,7 +7,7 @@ public class Samurai : Character, IReactive
         base.Attack();
     }
 
-    public void FinishAttack()
+    public void OnFinishAttack()
     {
         throw new System.NotImplementedException();
     }

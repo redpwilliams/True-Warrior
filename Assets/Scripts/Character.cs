@@ -1,15 +1,18 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Light2D))]
 public abstract class Character : MonoBehaviour
 {
     // Components
     protected Rigidbody2D Rb2d;
     protected Animator Anim;
     private SpriteRenderer _sr;
+    private Light2D _l2d;
     
     // Running Animation
     private static readonly int Running = Animator.StringToHash("ShouldRun");
@@ -43,7 +46,12 @@ public abstract class Character : MonoBehaviour
             : Mathf.Abs(_finalPosition);
         
         // Flip sprite
-        if (_player != Player.One) _sr.flipX = true;
+        if (_player == Player.One) return;
+        
+        var transform1 = transform;
+        var localScale = transform1.localScale;
+        localScale = new Vector2(-1 * localScale.x, localScale.y);
+        transform1.localScale = localScale;
     }
 
     private void FixedUpdate()
@@ -81,7 +89,7 @@ public abstract class Character : MonoBehaviour
     protected virtual void Attack()
     {
        Debug.Log("Beginning attack");
-       EventManager.Events.CharacterAttacks();
+       // EventManager.Events.CharacterAttacks();
        Anim.SetBool(Attacking, true);
     }
     
@@ -103,7 +111,7 @@ public interface IReactive
 { 
     
     [UsedImplicitly]
-    public void FinishAttack();
+    public void OnFinishAttack();
 
 }
 

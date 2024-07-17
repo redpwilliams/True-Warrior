@@ -33,7 +33,7 @@ public class Ronin : Character, IReactive
     }
 
     [UsedImplicitly]
-    public void FinishAttack()
+    public void OnFinishAttack()
     {
        Anim.SetBool(Attacking, false);
        Anim.ResetTrigger(Falling);
