@@ -59,7 +59,7 @@ public class HaikuText : MonoBehaviour
         
         // Line 3
         _tmp.text = SetText(haiku.lines[stage]);
-        EventManager.Events.StageX(stage);
+        EventManager.Events.StageX(stage++);
         yield return new WaitForSeconds(timeUntilStage3);
         yield return StartCoroutine(FadeText(fadeInDuration, true));
         yield return new WaitForSeconds(3f); // TODO - Time to hold text
@@ -67,6 +67,7 @@ public class HaikuText : MonoBehaviour
         
         // Battle Start
         yield return new WaitForSeconds(timeUntilBattleStart);
+        EventManager.Events.StageX(stage);
         Debug.Log("Start!");
         // TODO - Change text to different formatted text object?
     }

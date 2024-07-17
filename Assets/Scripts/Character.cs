@@ -38,20 +38,19 @@ public abstract class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        // Enable controls
-        _controls.Player1.Enable();
         _controls.Player1.Attack.performed += OnCharacterInput;
     }
 
     private void OnDisable()
     {
-        _controls.Disable();
+        _controls.Disable(); // maybe redundant but maybe necessary
         _controls.Player1.Attack.performed -= OnCharacterInput;
     }
 
     protected virtual void Start()
     {
         EventManager.Events.OnStageX += StartRunning;
+        EventManager.Events.OnStageX += EnableControls;
         EventManager.Events.OnBeginAttack += Attack;
         
         
@@ -137,6 +136,21 @@ public abstract class Character : MonoBehaviour
             return;
         }
         Debug.Log("I lost");
+    }
+
+    // Disabling logic happens in EventManager, after a winner is determined
+    private void EnableControls(int stage)
+    {
+        // Disregard if battle start hasn't been called
+        if (stage != 3) return;
+        
+        // Enable controls
+        _controls.Player1.Enable();
+    }
+
+    public void DisableControls()
+    {
+        _controls.Player1.Disable();
     }
 
     #endregion

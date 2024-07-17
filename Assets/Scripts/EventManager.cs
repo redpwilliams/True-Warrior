@@ -38,11 +38,15 @@ public sealed class EventManager : MonoBehaviour
         OnBeginAttack?.Invoke();
     }
 
+    #region Staging Logic
+
     public event Action<int> OnStageX;
     public void StageX(int stage)
     {
         OnStageX?.Invoke(stage);
     }
+
+    #endregion
 
     public event Action OnCharacterAttacks;
     public void CharacterAttacks()
@@ -51,19 +55,19 @@ public sealed class EventManager : MonoBehaviour
         OnCharacterAttacks?.Invoke();
     }
 
+    #region Input
+
     // Relays who hit first?
-    private Character _winner = null;
+    private Character _winner;
     // public event Action<Character, double> OnPlayerInput;
 
     public Character PlayerInput(Character c, double time)
     {
         Debug.Log("Character " + c.name + " has input.");
-        if (_winner == null)
-        {
-            _winner = c;
-            
-        }
-
+        c.DisableControls();
+        if (_winner == null) _winner = c;
         return _winner;
     }
+
+    #endregion
 }
