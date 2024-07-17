@@ -13,7 +13,6 @@ public abstract class Character : MonoBehaviour
     protected Rigidbody2D Rb2d;
     protected Animator Anim;
     private Light2D _l2d;
-    private InputAction _ia;
     private Controls _controls;
     
     // Running Animation
@@ -26,6 +25,8 @@ public abstract class Character : MonoBehaviour
     private enum Player { One, Two, CPU }
     [SerializeField] private Player _player;
     
+    // Winner/Loser
+    private bool _isWinner;
     
     // Attacking Animation
     protected static readonly int Attacking = Animator.StringToHash
@@ -36,20 +37,18 @@ public abstract class Character : MonoBehaviour
         Rb2d = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         _controls = new Controls();
+        _isWinner = false;
     }
 
     private void OnEnable()
     {
         // Enable controls
-        _ia = _controls.Player1.Attack;
-         _ia.performed += OnActionTriggered;
-        _ia.Enable();
-
+        _controls.Player1.Enable();
+        _controls.Player1.Attack.performed += OnCharacterInput;
     }
 
     private void OnDisable()
     {
-        _ia.Disable();
         _controls.Disable();
     }
 
@@ -128,9 +127,10 @@ public abstract class Character : MonoBehaviour
 
     #region Input
 
-    private void OnActionTriggered(InputAction.CallbackContext context)
+    private void OnCharacterInput(InputAction.CallbackContext context)
     {
-        Debug.Log("Triggered");
+        // Send info to game manager with timestamp
+        Debug.Log("Triggered: " + _player);
     }
 
     #endregion
