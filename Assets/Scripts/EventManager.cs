@@ -43,4 +43,11 @@ public sealed class EventManager : MonoBehaviour
     {
         OnStageX?.Invoke(stage);
     }
+
+    public event Action OnCharacterAttacks;
+    public void CharacterAttacks()
+    {
+        Debug.Log("A character has attacked");
+        OnCharacterAttacks?.Invoke();
+    }
 }

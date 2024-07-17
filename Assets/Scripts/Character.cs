@@ -1,6 +1,7 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     // Components
     protected Rigidbody2D Rb2d;
@@ -62,10 +63,26 @@ public class Character : MonoBehaviour
         EventManager.Events.OnStageX -= StartRunning;
     }
 
-    private void Attack()
+    // wins
+    protected virtual void Attack()
     {
-       Debug.Log("Beginning attack"); 
+       Debug.Log("Beginning attack");
+       EventManager.Events.CharacterAttacks();
        Anim.SetBool(Attacking, true);
+    }
+    
+    // Immediately losing toss-up
+    protected virtual void LostToAttack()
+    {
+        Debug.Log("Lost to attack");
     }
 
 }
+public interface IReactive
+{ 
+    
+    [UsedImplicitly]
+    public void FinishAttack();
+
+}
+
