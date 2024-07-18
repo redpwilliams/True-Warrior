@@ -162,7 +162,7 @@ public abstract class Character : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.5f);
         // Send info to game manager with timestamp
-        Character winner = EventManager.Events.CPUInput(this, Time.realtimeSinceStartupAsDouble); 
+        Character winner = EventManager.Events.PlayerInput(this, Time.realtimeSinceStartupAsDouble); 
         // asks EM if its the winner
         if (this == winner)
         {
