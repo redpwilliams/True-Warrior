@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -129,7 +130,6 @@ public abstract class Character : MonoBehaviour
     private void OnCharacterInput(InputAction.CallbackContext context)
     {
         // Send info to game manager with timestamp
-        // Debug.Log("Triggered: " + _player);
         Character winner = EventManager.Events.PlayerInput(this, context.time); 
         // asks EM if its the winner
         if (this == winner)
@@ -145,9 +145,27 @@ public abstract class Character : MonoBehaviour
     {
         // Disregard if battle start hasn't been called
         if (stage != 3) return;
-        
+
         // Enable controls
         _controls.Player1.Enable();
+        
+        if (_player != Player.CPU) return;
+        StartCoroutine(DelayCPUAttack());
+    }
+
+    private IEnumerator DelayCPUAttack()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        // Send info to game manager with timestamp
+        Character winner = EventManager.Events.CPUInput(this, Time.realtimeSinceStartupAsDouble); 
+        // asks EM if its the winner
+        if (this == winner)
+        {
+            Debug.Log("I won");
+            yield break;
+        }
+        Debug.Log("I lost");
+
     }
 
     public void DisableControls()

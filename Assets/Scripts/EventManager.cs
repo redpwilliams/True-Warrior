@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>Handles all events in the game</summary>
@@ -33,6 +34,7 @@ public sealed class EventManager : MonoBehaviour
     }
 
     public event Action OnBeginAttack;
+
     public void BeginAttack()
     {
         OnBeginAttack?.Invoke();
@@ -42,6 +44,7 @@ public sealed class EventManager : MonoBehaviour
 
     private double _battleStartTime;
     public event Action<int> OnStageX;
+
     public void StageX(int stage)
     {
         if (stage == 3) _battleStartTime = Time.realtimeSinceStartupAsDouble;
@@ -51,6 +54,7 @@ public sealed class EventManager : MonoBehaviour
     #endregion
 
     public event Action OnCharacterAttacks;
+
     public void CharacterAttacks()
     {
         Debug.Log("A character has attacked");
@@ -60,14 +64,36 @@ public sealed class EventManager : MonoBehaviour
     #region Input
 
     // Relays who hit first?
+    // Log winner attack timestamp. If it's less than X seconds later, any incoming (?) inputs are marked as late
     private Character _winner;
+    private bool _winnerDeclared;
+
     public Character PlayerInput(Character c, double time)
     {
         double reactionTime = time - _battleStartTime;
         string formattedReactionTime = $"{reactionTime:F3}";
-        Debug.Log("Character " + c.name + " has input in " + formattedReactionTime + " ms.");
+        Debug.Log("Character " + c.name + " has input in " +
+                  formattedReactionTime + " ms.");
         c.DisableControls();
-        if (_winner == null) _winner = c;
+        
+        if (_winnerDeclared) return _winner;
+        
+        _winnerDeclared = true;
+        _winner = c;
+        return _winner;
+    }
+
+    public Character CPUInput(Character c, double time)
+    {
+        double reactionTime = time - _battleStartTime;
+        string formattedReactionTime = $"{reactionTime:F3}";
+        Debug.Log("CPU has input in " + formattedReactionTime + " ms.");
+        
+        if (_winnerDeclared) return _winner;
+        
+        _winnerDeclared = true;
+        _winner = c;
+
         return _winner;
     }
 
