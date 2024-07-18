@@ -41,11 +41,13 @@ public abstract class Character : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_player == Player.CPU) return;
         _controls.Player1.Attack.performed += OnCharacterInput;
     }
 
     private void OnDisable()
     {
+        if (_player == Player.CPU) return;
         _controls.Disable(); // maybe redundant but maybe necessary
         _controls.Player1.Attack.performed -= OnCharacterInput;
     }
@@ -144,12 +146,15 @@ public abstract class Character : MonoBehaviour
     private void EnableControls(int stage)
     {
         // Disregard if battle start hasn't been called
-        if (stage != 3) return;
-
-        // Enable controls
-        _controls.Player1.Enable();
+        if (stage != 3) return; 
         
-        if (_player != Player.CPU) return;
+        // Enable controls
+        if (_player != Player.CPU)
+        {
+            _controls.Player1.Enable();
+            return;
+        }
+        
         StartCoroutine(DelayCPUAttack());
     }
 
