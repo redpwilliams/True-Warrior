@@ -68,32 +68,17 @@ public sealed class EventManager : MonoBehaviour
     private Character _winner;
     private bool _winnerDeclared;
 
-    public Character PlayerInput(Character c, double time)
+    public Character CharacterInputsAttack(Character c, double time)
     {
         double reactionTime = time - _battleStartTime;
         string formattedReactionTime = $"{reactionTime:F3}";
         Debug.Log("Character " + c.name + " has input in " +
                   formattedReactionTime + " ms.");
-        c.DisableControls();
         
         if (_winnerDeclared) return _winner;
         
         _winnerDeclared = true;
         _winner = c;
-        return _winner;
-    }
-
-    public Character CPUInput(Character c, double time)
-    {
-        double reactionTime = time - _battleStartTime;
-        string formattedReactionTime = $"{reactionTime:F3}";
-        Debug.Log("CPU has input in " + formattedReactionTime + " ms.");
-        
-        if (_winnerDeclared) return _winner;
-        
-        _winnerDeclared = true;
-        _winner = c;
-
         return _winner;
     }
 

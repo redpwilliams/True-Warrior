@@ -42,20 +42,20 @@ public abstract class Character : MonoBehaviour
     private void OnEnable()
     {
         if (_player == Player.CPU) return;
-        _controls.Player1.Attack.performed += OnCharacterInput;
+        _controls.Player1.Attack.performed += OnControllerInput;
     }
 
     private void OnDisable()
     {
         if (_player == Player.CPU) return;
         _controls.Disable(); // maybe redundant but maybe necessary
-        _controls.Player1.Attack.performed -= OnCharacterInput;
+        _controls.Player1.Attack.performed -= OnControllerInput;
     }
 
     protected virtual void Start()
     {
         EventManager.Events.OnStageX += StartRunning;
-        EventManager.Events.OnStageX += EnableControls;
+        EventManager.Events.OnStageX += AllowControls;
         EventManager.Events.OnBeginAttack += Attack;
         
         
@@ -113,7 +113,6 @@ public abstract class Character : MonoBehaviour
     // wins
     protected virtual void Attack()
     {
-       Debug.Log("Beginning attack");
        // EventManager.Events.CharacterAttacks();
        Anim.SetBool(Attacking, true);
     }
@@ -121,29 +120,14 @@ public abstract class Character : MonoBehaviour
     // Immediately losing toss-up
     protected virtual void LostToAttack()
     {
-        Debug.Log("Lost to attack");
     }
 
     #endregion
 
     #region Input
 
-    // this character has inputted the attack button
-    private void OnCharacterInput(InputAction.CallbackContext context)
-    {
-        // Send info to game manager with timestamp
-        Character winner = EventManager.Events.PlayerInput(this, context.time); 
-        // asks EM if its the winner
-        if (this == winner)
-        {
-            Debug.Log("I won");
-            return;
-        }
-        Debug.Log("I lost");
-    }
-
     // Disabling logic happens in EventManager, after a winner is determined
-    private void EnableControls(int stage)
+    private void AllowControls(int stage)
     {
         // Disregard if battle start hasn't been called
         if (stage != 3) return; 
@@ -157,26 +141,36 @@ public abstract class Character : MonoBehaviour
         
         StartCoroutine(DelayCPUAttack());
     }
+    
+    // this character has inputted the attack button
+    private void OnControllerInput(InputAction.CallbackContext context)
+    {
+        // Send info to game manager with timestamp
+        Character winner = EventManager.Events.CharacterInputsAttack(this, context.time); 
+        _controls.Player1.Disable();
+        // asks EM if its the winner
+        DetermineReactionAnimation(winner);
+    }
 
     private IEnumerator DelayCPUAttack()
     {
         yield return new WaitForSecondsRealtime(0.5f);
         // Send info to game manager with timestamp
-        Character winner = EventManager.Events.PlayerInput(this, Time.realtimeSinceStartupAsDouble); 
+        Character winner = EventManager.Events.CharacterInputsAttack(this, Time.realtimeSinceStartupAsDouble); 
         // asks EM if its the winner
+        
+        DetermineReactionAnimation(winner);
+
+    }
+
+    private void DetermineReactionAnimation(Character winner)
+    {
         if (this == winner)
         {
-            Debug.Log("I won");
-            yield break;
-        }
-        Debug.Log("I lost");
-
-    }
-
-    public void DisableControls()
-    {
-        _controls.Player1.Disable();
-    }
+            Attack();
+            return;
+        }  
+        LostToAttack();}
 
     #endregion
 }
