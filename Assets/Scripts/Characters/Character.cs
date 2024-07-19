@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -26,6 +27,9 @@ namespace Characters
         // Assigned stage
         private enum PlayerType { One, Two, CPU }
         [SerializeField] private PlayerType _playerType;
+        
+        // Set Animation
+        protected static readonly int Set = Animator.StringToHash("ShouldSet");
     
         // Attacking Animation
         protected static readonly int Attacking = Animator.StringToHash
@@ -57,6 +61,7 @@ namespace Characters
         {
             EventManager.Events.OnStageX += StartRunning;
             EventManager.Events.OnStageX += AllowControls;
+            EventManager.Events.OnStageX += GetSet;
             EventManager.Events.OnBeginAttack += Attack;
         
         
@@ -110,6 +115,14 @@ namespace Characters
         #endregion
 
         #region Battle
+
+        private void GetSet(int stage)
+        {
+            if (stage != 2) return;
+            Anim.SetTrigger(Set);
+            Debug.Log(gameObject.name + " set");
+            EventManager.Events.OnStageX -= GetSet;
+        }
 
         // wins
         protected abstract void Attack();
