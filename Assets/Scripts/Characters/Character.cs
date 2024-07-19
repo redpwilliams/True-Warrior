@@ -3,7 +3,6 @@ using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-using GameObject = UnityEngine.GameObject;
 using Random = UnityEngine.Random;
 
 namespace Characters
@@ -39,6 +38,9 @@ namespace Characters
         
         // Hurt Animation
         private static readonly int Hurt = Animator.StringToHash("ShouldHurt");
+        
+        // Death Animation
+        private static readonly int Death = Animator.StringToHash("ShouldDie");
 
         protected Character Opponent;
 
@@ -195,12 +197,11 @@ namespace Characters
         public void DoHurtAnimation()
         {
             Anim.SetTrigger(Hurt);
-            //Anim.ResetTrigger(Hurt);
         }
 
         public void DoDeathAnimation()
         {
-            
+            Anim.SetTrigger(Death);
         }
     }
 }

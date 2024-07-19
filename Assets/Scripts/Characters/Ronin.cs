@@ -62,15 +62,8 @@ namespace Characters
         public void OnStrikeTarget(int isFinalHit)
         {
             // AnimationEvent cannot accept booleans
-            if (isFinalHit == 1)
-            {
-                Opponent.DoDeathAnimation();
-            }
-            else
-            {
-                Opponent.DoHurtAnimation();
-                // StartCoroutine(Opponent.DoHurtAnimation());
-            }
+            Opponent.DoHurtAnimation();
+            if (isFinalHit == 1) Opponent.DoDeathAnimation();
         }
 
         #endregion
