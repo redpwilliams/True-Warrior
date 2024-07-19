@@ -11,6 +11,7 @@ namespace Characters
 
         [SerializeField] private float _jumpUpwardForce = 400f;
         [SerializeField] private float _jumpForwardForce = 100f;
+        [SerializeField] private float _strikePushForce = 200f;
 
         
         protected override void Start()
@@ -43,7 +44,6 @@ namespace Characters
         public void OnStrongAttackJumpUp()
         {
             Rb2d.velocity = Vector2.zero;
-            Rb2d.bodyType = RigidbodyType2D.Dynamic;
 
             int direction = _playerType == PlayerType.One ? 1 : -1;
             Rb2d.AddForce(new Vector2(_jumpForwardForce * direction, 
@@ -62,7 +62,8 @@ namespace Characters
         public void OnStrikeTarget(int isFinalHit)
         {
             // AnimationEvent cannot accept booleans
-            Opponent.DoHurtAnimation();
+            int direction = _playerType == PlayerType.One ? 1 : -1;
+            Opponent.DoHurtAnimation(direction * _strikePushForce);
             if (isFinalHit == 1) Opponent.DoDeathAnimation();
         }
 

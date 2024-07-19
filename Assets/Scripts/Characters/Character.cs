@@ -157,6 +157,7 @@ namespace Characters
             if (stage != 3) return; 
         
             // Enable controls
+            Rb2d.bodyType = RigidbodyType2D.Dynamic;
             if (_playerType != PlayerType.CPU)
             {
                 _controls.Player1.Enable();
@@ -194,9 +195,11 @@ namespace Characters
 
         #endregion
 
-        public void DoHurtAnimation()
+        public void DoHurtAnimation(float hurtPushForce)
         {
+            Anim.ResetTrigger(Hurt);
             Anim.SetTrigger(Hurt);
+            Rb2d.AddForce(new Vector2(hurtPushForce, 0f), ForceMode2D.Impulse);
         }
 
         public void DoDeathAnimation()
