@@ -9,6 +9,9 @@ namespace Characters
         [SerializeField] private float _fallingGravityScale = 10f;
         private static readonly int Falling = Animator.StringToHash("ShouldFall");
 
+        [SerializeField] private float _jumpUpwardForce = 400f;
+        [SerializeField] private float _jumpForwardForce = 100f;
+
         
         protected override void Start()
         {
@@ -40,8 +43,11 @@ namespace Characters
         public void OnStrongAttackJumpUp()
         {
             Rb2d.velocity = Vector2.zero;
-            Rb2d.bodyType = RigidbodyType2D.Dynamic; 
-            Rb2d.AddForce(Vector2.up*400, ForceMode2D.Impulse);
+            Rb2d.bodyType = RigidbodyType2D.Dynamic;
+
+            int direction = _playerType == PlayerType.One ? 1 : -1;
+            Rb2d.AddForce(new Vector2(_jumpForwardForce * direction, 
+            _jumpUpwardForce), ForceMode2D.Impulse);
         }
         
         [UsedImplicitly]

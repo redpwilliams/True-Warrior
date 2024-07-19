@@ -26,8 +26,8 @@ namespace Characters
         private bool _isRunning;
     
         // Assigned stage
-        private enum PlayerType { One, Two, CPU }
-        [SerializeField] private PlayerType _playerType;
+        protected enum PlayerType { One, Two, CPU }
+        [SerializeField] protected PlayerType _playerType;
         
         // Set Animation
         private static readonly int Set = Animator.StringToHash("ShouldSet");
