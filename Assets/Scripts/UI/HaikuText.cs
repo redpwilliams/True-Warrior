@@ -62,8 +62,8 @@ namespace UI
         
             // Line 3
             _tmp.text = SetText(haiku.lines[stage]);
-            EventManager.Events.StageX(stage++);
             yield return new WaitForSeconds(timeUntilStage3);
+            EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
             yield return new WaitForSeconds(3f); // TODO - Time to hold text
             yield return StartCoroutine(FadeText(fadeOutDuration, false));

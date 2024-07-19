@@ -29,7 +29,7 @@ namespace Characters
         [SerializeField] private PlayerType _playerType;
         
         // Set Animation
-        protected static readonly int Set = Animator.StringToHash("ShouldSet");
+        private static readonly int Set = Animator.StringToHash("ShouldSet");
     
         // Attacking Animation
         protected static readonly int Attacking = Animator.StringToHash
