@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Characters
 {
-    public class Ronin : Character, IReactive
+    public class Ronin : Character
     {
         [SerializeField] private float _risingGravityScale = 5f;
         [SerializeField] private float _fallingGravityScale = 10f;
@@ -14,7 +14,7 @@ namespace Characters
         protected override void Start()
         {
             base.Start();
-            EventManager.Events.OnCharacterAttacks += ReactToAttack;
+            // EventManager.Events.OnCharacterAttacks += ReactToAttack;
             Rb2d.gravityScale = _risingGravityScale;
         }
 
@@ -34,6 +34,15 @@ namespace Characters
             Rb2d.gravityScale = _fallingGravityScale;
         }
 
+        protected override void Attack()
+        {
+            Anim.SetBool(Attacking, true);
+        }
+
+        protected override void LostToAttack()
+        {
+        }
+
         [UsedImplicitly]
         public void OnFinishAttack()
         {
@@ -42,10 +51,5 @@ namespace Characters
             Rb2d.gravityScale = _risingGravityScale;
         }
 
-        public void ReactToAttack()
-        {
-            throw new NotImplementedException();
-        }
-    
     }
 }

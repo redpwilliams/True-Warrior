@@ -1,5 +1,4 @@
 using System.Collections;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -113,16 +112,10 @@ namespace Characters
         #region Battle
 
         // wins
-        protected virtual void Attack()
-        {
-            // EventManager.Events.CharacterAttacks();
-            Anim.SetBool(Attacking, true);
-        }
+        protected abstract void Attack();
     
         // Immediately losing toss-up
-        protected virtual void LostToAttack()
-        {
-        }
+        protected abstract void LostToAttack();
 
         #endregion
 
@@ -162,7 +155,6 @@ namespace Characters
             // asks EM if its the winner
         
             DetermineReactionAnimation(winner);
-
         }
 
         private void DetermineReactionAnimation(Character winner)
@@ -175,12 +167,5 @@ namespace Characters
             LostToAttack();}
 
         #endregion
-    }
-    public interface IReactive
-    { 
-    
-        [UsedImplicitly]
-        public void OnFinishAttack();
-
     }
 }
