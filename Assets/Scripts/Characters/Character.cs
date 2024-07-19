@@ -119,9 +119,14 @@ namespace Characters
         private void GetSet(int stage)
         {
             if (stage != 2) return;
-            Anim.SetTrigger(Set);
-            Debug.Log(gameObject.name + " set");
+            StartCoroutine(DelayIdleToSet());
             EventManager.Events.OnStageX -= GetSet;
+        }
+
+        private IEnumerator DelayIdleToSet()
+        {
+            yield return new WaitForSeconds(Random.Range(0f, 0.75f));
+            Anim.SetTrigger(Set);
         }
 
         // wins
