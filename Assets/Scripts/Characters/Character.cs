@@ -195,6 +195,7 @@ namespace Characters
         public void DoHurtAnimation()
         {
             Anim.SetTrigger(Hurt);
+            //Anim.ResetTrigger(Hurt);
         }
 
         public void DoDeathAnimation()
