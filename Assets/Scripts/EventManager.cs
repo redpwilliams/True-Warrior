@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Characters;
 
 /// <summary>Handles all events in the game</summary>
 /// <remarks>
