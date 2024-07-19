@@ -3,6 +3,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using GameObject = UnityEngine.GameObject;
 using Random = UnityEngine.Random;
 
 namespace Characters
@@ -35,8 +36,11 @@ namespace Characters
         // Attacking Animation
         protected static readonly int Attacking = Animator.StringToHash
             ("ShouldAttack");
+        
+        // Hurt Animation
+        private static readonly int Hurt = Animator.StringToHash("ShouldHurt");
 
-        // private AnimationHandler _ah;
+        protected Character Opponent;
 
         private void Awake()
         {
@@ -64,7 +68,11 @@ namespace Characters
             EventManager.Events.OnStageX += AllowControls;
             EventManager.Events.OnStageX += GetSet;
             EventManager.Events.OnBeginAttack += Attack;
-        
+            
+            // Find opponent
+            Character[] players =
+                FindObjectsByType<Character>(FindObjectsSortMode.None);
+            Opponent = (players[0] == this) ? players[1] : players[0];
         
             // Correct final position
             _finalPosition = (_playerType == PlayerType.One)
@@ -159,20 +167,15 @@ namespace Characters
         // this character has inputted the attack button
         private void OnControllerInput(InputAction.CallbackContext context)
         {
-            // Send info to game manager with timestamp
             Character winner = EventManager.Events.CharacterInputsAttack(this, context.time); 
             _controls.Player1.Disable();
-            // asks EM if its the winner
             DetermineReactionAnimation(winner);
         }
 
         private IEnumerator DelayCPUAttack()
         {
             yield return new WaitForSecondsRealtime(0.5f);
-            // Send info to game manager with timestamp
             Character winner = EventManager.Events.CharacterInputsAttack(this, Time.realtimeSinceStartupAsDouble); 
-            // asks EM if its the winner
-        
             DetermineReactionAnimation(winner);
         }
 
@@ -183,8 +186,20 @@ namespace Characters
                 Attack();
                 return;
             }  
-            LostToAttack();}
+            LostToAttack();
+        }
+
 
         #endregion
+
+        public void DoHurtAnimation()
+        {
+            Anim.SetTrigger(Hurt);
+        }
+
+        public void DoDeathAnimation()
+        {
+            
+        }
     }
 }

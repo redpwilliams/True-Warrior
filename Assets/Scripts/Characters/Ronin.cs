@@ -58,6 +58,12 @@ namespace Characters
             Rb2d.gravityScale = _risingGravityScale;
         }
 
+        [UsedImplicitly]
+        public void OnStrikeTarget()
+        {
+            Opponent.DoHurtAnimation();
+        }
+
         #endregion
 
     }
