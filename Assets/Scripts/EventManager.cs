@@ -1,5 +1,4 @@
 using System;
-using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>Handles all events in the game</summary>
@@ -72,8 +71,6 @@ public sealed class EventManager : MonoBehaviour
     {
         double reactionTime = time - _battleStartTime;
         string formattedReactionTime = $"{reactionTime:F3}";
-        Debug.Log("Character " + c.name + " has input in " +
-                  formattedReactionTime + " ms.");
         
         if (_winnerDeclared) return _winner;
         

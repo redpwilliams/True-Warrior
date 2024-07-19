@@ -23,8 +23,8 @@ public abstract class Character : MonoBehaviour
     private bool _isRunning;
     
     // Assigned stage
-    private enum Player { One, Two, CPU }
-    [SerializeField] private Player _player;
+    private enum PlayerType { One, Two, CPU }
+    [SerializeField] private PlayerType _playerType;
     
     // Attacking Animation
     protected static readonly int Attacking = Animator.StringToHash
@@ -41,13 +41,13 @@ public abstract class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_player == Player.CPU) return;
+        if (_playerType == PlayerType.CPU) return;
         _controls.Player1.Attack.performed += OnControllerInput;
     }
 
     private void OnDisable()
     {
-        if (_player == Player.CPU) return;
+        if (_playerType == PlayerType.CPU) return;
         _controls.Disable(); // maybe redundant but maybe necessary
         _controls.Player1.Attack.performed -= OnControllerInput;
     }
@@ -60,12 +60,12 @@ public abstract class Character : MonoBehaviour
         
         
         // Correct final position
-        _finalPosition = (_player == Player.One)
+        _finalPosition = (_playerType == PlayerType.One)
             ? -Mathf.Abs(_finalPosition)
             : Mathf.Abs(_finalPosition);
         
         // Flip sprite
-        if (_player == Player.One) return;
+        if (_playerType == PlayerType.One) return;
         
         var transform1 = transform;
         var localScale = transform1.localScale;
@@ -85,8 +85,8 @@ public abstract class Character : MonoBehaviour
             _speed * Time.fixedDeltaTime));
 
         // Check if the character has reached or passed the final position
-        if ((_player == Player.One && Rb2d.position.x < _finalPosition) || 
-        _player != Player.One && Rb2d.position.x > _finalPosition) return;
+        if ((_playerType == PlayerType.One && Rb2d.position.x < _finalPosition) || 
+        _playerType != PlayerType.One && Rb2d.position.x > _finalPosition) return;
         
         // Stop the movement (set velocity to zero)
         Rb2d.velocity = Vector2.zero;
@@ -98,7 +98,7 @@ public abstract class Character : MonoBehaviour
     
     private void StartRunning(int stage)
     {
-        if (stage != (_player == Player.One ? 0 : 1)) return;
+        if (stage != (_playerType == PlayerType.One ? 0 : 1)) return;
         
         // Start Character movement
         _isRunning = true;
@@ -133,7 +133,7 @@ public abstract class Character : MonoBehaviour
         if (stage != 3) return; 
         
         // Enable controls
-        if (_player != Player.CPU)
+        if (_playerType != PlayerType.CPU)
         {
             _controls.Player1.Enable();
             return;
