@@ -117,7 +117,6 @@ namespace UI
             [System.Serializable]
             internal struct Haiku
             {
-                public string author;
                 public List<LinePair> lines;
             }
 
