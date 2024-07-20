@@ -41,6 +41,10 @@ namespace Characters
         
         // Death Animation
         private static readonly int Death = Animator.StringToHash("ShouldDie");
+        
+        // Return to Idle
+        protected static readonly int Return =
+            Animator.StringToHash("ShouldReturn");
 
         protected Character Opponent;
 

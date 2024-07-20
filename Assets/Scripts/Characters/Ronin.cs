@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -64,7 +65,17 @@ namespace Characters
             // AnimationEvent cannot accept booleans
             int direction = _playerType == PlayerType.One ? 1 : -1;
             Opponent.DoHurtAnimation(direction * _strikePushForce);
-            if (isFinalHit == 1) Opponent.DoDeathAnimation();
+            if (isFinalHit == 1)
+            {
+                Opponent.DoDeathAnimation();
+                StartCoroutine(ReturnToIdle(3f));
+            }
+        }
+
+        private IEnumerator ReturnToIdle(float time)
+        {
+            yield return new WaitForSeconds(time);
+            Anim.SetTrigger(Return);
         }
 
         #endregion
