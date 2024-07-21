@@ -30,7 +30,6 @@ namespace Characters
 
         #region AnimationEvent
 
-        // TODO - Must turn off _isRunning temporarily for this to work
         [UsedImplicitly]
         public void OnStrongAttackJumpUp()
         {
@@ -41,32 +40,25 @@ namespace Characters
             _jumpUpwardForce), ForceMode2D.Impulse);
         }
         
-        [UsedImplicitly]
-        public void OnFinishAttack()
+        public override void OnFinishAttack()
         {
             Anim.SetBool(Attacking, false);
             Anim.ResetTrigger(Falling);
             Rb2d.gravityScale = _risingGravityScale;
         }
 
-        [UsedImplicitly]
-        public void OnStrikeTarget(int isFinalHit)
+        public override void OnStrikeTarget(int isFinalHit)
         {
             // AnimationEvent cannot accept booleans
             int direction = _playerType == PlayerType.One ? 1 : -1;
             Opponent.DoHurtAnimation(direction * _strikePushForce);
-            if (isFinalHit == 1)
-            {
-                Opponent.DoDeathAnimation();
-                StartCoroutine(ReturnToIdle(3f));
-            }
+            
+            if (isFinalHit != 1) return;
+            
+            Opponent.DoDeathAnimation();
+            base.OnStrikeTarget(isFinalHit);
         }
 
-        private IEnumerator ReturnToIdle(float time)
-        {
-            yield return new WaitForSeconds(time);
-            Anim.SetTrigger(Return);
-        }
 
         #endregion
 

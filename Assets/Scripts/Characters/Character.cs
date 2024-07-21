@@ -1,4 +1,5 @@
 using System.Collections;
+using JetBrains.Annotations;
 using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -140,7 +141,7 @@ namespace Characters
 
         private IEnumerator DelayIdleToSet()
         {
-            yield return new WaitForSeconds(Random.Range(0f, 0.75f));
+            yield return new WaitForSeconds(Random.Range(0f, 0.25f));
             Anim.SetTrigger(Set);
         }
 
@@ -149,7 +150,23 @@ namespace Characters
         {
             Anim.SetBool(Attacking, true);
         }
-    
+
+        [UsedImplicitly]
+        public virtual void OnStrikeTarget(int isFinalHit)
+        {
+            StartCoroutine(ReturnToIdle(3f));
+        }
+
+        [UsedImplicitly]
+        public abstract void OnFinishAttack();
+        
+        private IEnumerator ReturnToIdle(float time)
+        {
+            yield return new WaitForSeconds(time);
+            Anim.SetTrigger(Return);
+        }
+
+
         #endregion
 
         #region Input
@@ -194,6 +211,8 @@ namespace Characters
 
         #endregion
 
+        #region Hurt/Death
+
         public void DoHurtAnimation(float hurtPushForce)
         {
             Anim.ResetTrigger(Hurt);
@@ -205,5 +224,7 @@ namespace Characters
         {
             Anim.SetTrigger(Death);
         }
+
+        #endregion
     }
 }
