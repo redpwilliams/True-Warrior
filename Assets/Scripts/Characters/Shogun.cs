@@ -5,22 +5,18 @@ namespace Characters
 {
     public class Shogun : Character
     {
-        [SerializeField] private float _strikePushForce = 200f;
         
         [UsedImplicitly]
         public void OnDashAttackStart()
         {
-            Rb2d.velocity = Vector2.zero;
 
             int direction = _playerType == PlayerType.One ? 1 : -1;
-            Rb2d.AddForce(new Vector2(direction * 200f, 0f), ForceMode2D.Impulse);
+            Rb2d.velocity = new Vector2(direction * 50f, 0);
         }
 
         public override void OnStrikeTarget(int isFinalHit)
         {
-            // AnimationEvent cannot accept booleans
-            int direction = _playerType == PlayerType.One ? 1 : -1;
-            Opponent.DoHurtAnimation(direction * _strikePushForce);
+            Opponent.DoHurtAnimation(0);
             
             if (isFinalHit != 1) return;
             
