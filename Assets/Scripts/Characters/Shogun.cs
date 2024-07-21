@@ -1,6 +1,6 @@
 namespace Characters
 {
-    public class Samurai : Character
+    public class Shogun : Character
     {
         protected override void Attack()
         {
