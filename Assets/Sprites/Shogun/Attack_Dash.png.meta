@@ -145,337 +145,232 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DASH ATTACK_0
+      name: Attack_Dash_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 0
-        width: 23
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 70906425cf1763ed0800000000000000
-      internalID: -2434633220021155577
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_1
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 0
-        width: 23
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9abb2687604cee4d0800000000000000
-      internalID: -3103327561143108695
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_2
-      rect:
-        serializedVersion: 2
-        x: 230
-        y: 0
-        width: 23
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1b8fbb5cbca54fa50800000000000000
-      internalID: 6553963188973205681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_3
-      rect:
-        serializedVersion: 2
-        x: 322
-        y: 0
-        width: 25
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 553bd6ed48d7d96a0800000000000000
-      internalID: -6440853882449054891
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_4
-      rect:
-        serializedVersion: 2
-        x: 421
-        y: 0
-        width: 26
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 827cebf4f7cab8d20800000000000000
-      internalID: 3281906416268265256
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_5
-      rect:
-        serializedVersion: 2
-        x: 521
-        y: 0
-        width: 26
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0fe52be826e050a90800000000000000
-      internalID: -7348451400521457936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_6
-      rect:
-        serializedVersion: 2
-        x: 613
+        x: 31
         y: 0
         width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 30
+      alignment: 9
+      pivot: {x: 0.47619048, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 04b17c5c8d82096a0800000000000000
-      internalID: -6444606155270972608
+      spriteID: 7136c3066fa0ea94e88246cd41e64782
+      internalID: -1811431969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DASH ATTACK_7
+      name: Attack_Dash_1
       rect:
         serializedVersion: 2
-        x: 628
+        x: 131
+        y: 0
+        width: 21
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f1dc8aea821b104c80432b9b4a9d9d0
+      internalID: -1368525754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_2
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 0
+        width: 21
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71571e1c20f704e4c88fbca1f31696fc
+      internalID: 1434384250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_3
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 0
+        width: 23
+        height: 29
+      alignment: 9
+      pivot: {x: 0.39130434, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecc0bce2adc82fa4aaf0d5a4e4b69012
+      internalID: 1594670928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_4
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 0
+        width: 24
+        height: 27
+      alignment: 9
+      pivot: {x: 0.41666666, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2e3cdee674f9494288aca1cbeb6261b
+      internalID: -1332200475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_5
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 0
+        width: 24
+        height: 27
+      alignment: 9
+      pivot: {x: 0.41666666, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b209015cd3912f458ba4d52a321b9f7
+      internalID: 1864091465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_7
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 0
+        width: 113
+        height: 23
+      alignment: 9
+      pivot: {x: 0.3539823, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b162d60aecae73843a9ec55e7cad6738
+      internalID: -1369341663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_9
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 0
+        width: 75
+        height: 23
+      alignment: 9
+      pivot: {x: 0.08, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b3bbbbedc8ef4408713db6b71e94e2
+      internalID: 413571051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_Dash_11
+      rect:
+        serializedVersion: 2
+        x: 848
         y: 0
         width: 71
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 23
+      alignment: 9
+      pivot: {x: 0.08450704, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c60b0b7206c0995d0800000000000000
-      internalID: -3055397265071886228
+      spriteID: e9eb90cfcfeb7ea4780c889337687bb0
+      internalID: -1623023550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DASH ATTACK_8
+      name: Attack_Dash_13
       rect:
         serializedVersion: 2
-        x: 709
+        x: 948
         y: 0
-        width: 19
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 52
+        height: 23
+      alignment: 9
+      pivot: {x: 0.115384616, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e7edf9a10b7794ae0800000000000000
-      internalID: -1564587797289902466
+      spriteID: 622b03227a027ee489e7268d512d7e20
+      internalID: 1663146332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DASH ATTACK_9
+      name: Attack_Dash_14
       rect:
         serializedVersion: 2
-        x: 747
+        x: 1046
         y: 0
-        width: 54
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 40
+        height: 27
+      alignment: 9
+      pivot: {x: 0.175, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3934f1d1415312f50800000000000000
-      internalID: 6854818468338811795
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_10
-      rect:
-        serializedVersion: 2
-        x: 802
-        y: 8
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83ef7270e9d293450800000000000000
-      internalID: 6068932129606598200
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_11
-      rect:
-        serializedVersion: 2
-        x: 811
-        y: 0
-        width: 13
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e62e98b432bb07c60800000000000000
-      internalID: 7813951113753387630
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_12
-      rect:
-        serializedVersion: 2
-        x: 847
-        y: 0
-        width: 73
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3c89d8624e019bd20800000000000000
-      internalID: 3294683174483630275
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_13
-      rect:
-        serializedVersion: 2
-        x: 904
-        y: 8
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c4b236cdaf05fab10800000000000000
-      internalID: 1994902198317951820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_14
-      rect:
-        serializedVersion: 2
-        x: 947
-        y: 0
-        width: 54
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cb0f777eb8ff04a00800000000000000
-      internalID: 738871315237695676
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DASH ATTACK_15
-      rect:
-        serializedVersion: 2
-        x: 1045
-        y: 0
-        width: 42
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: da0bf29912fbd1630800000000000000
-      internalID: 3899483003397583021
+      spriteID: 3da17822a5ee17646bb596b0fe6b3fdb
+      internalID: 2028469724
       vertices: []
       indices: 
       edges: []
@@ -483,7 +378,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9bee751464223db44a2bfb2ae4390dfa
     internalID: 0
     vertices: []
     indices: 
@@ -491,22 +386,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DASH ATTACK_0: -2434633220021155577
-      DASH ATTACK_1: -3103327561143108695
-      DASH ATTACK_10: 6068932129606598200
-      DASH ATTACK_11: 7813951113753387630
-      DASH ATTACK_12: 3294683174483630275
-      DASH ATTACK_13: 1994902198317951820
-      DASH ATTACK_14: 738871315237695676
-      DASH ATTACK_15: 3899483003397583021
-      DASH ATTACK_2: 6553963188973205681
-      DASH ATTACK_3: -6440853882449054891
-      DASH ATTACK_4: 3281906416268265256
-      DASH ATTACK_5: -7348451400521457936
-      DASH ATTACK_6: -6444606155270972608
-      DASH ATTACK_7: -3055397265071886228
-      DASH ATTACK_8: -1564587797289902466
-      DASH ATTACK_9: 6854818468338811795
+      Attack_Dash_0: -1811431969
+      Attack_Dash_1: -1368525754
+      Attack_Dash_10: -123321705
+      Attack_Dash_11: -1623023550
+      Attack_Dash_12: -1980247476
+      Attack_Dash_13: 1663146332
+      Attack_Dash_14: 2028469724
+      Attack_Dash_15: 724830298
+      Attack_Dash_2: 1434384250
+      Attack_Dash_3: 1594670928
+      Attack_Dash_4: -1332200475
+      Attack_Dash_5: 1864091465
+      Attack_Dash_6: -1567163908
+      Attack_Dash_7: -1369341663
+      Attack_Dash_8: -1943210469
+      Attack_Dash_9: 413571051
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

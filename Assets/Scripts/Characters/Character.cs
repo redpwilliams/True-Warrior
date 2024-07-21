@@ -145,11 +145,11 @@ namespace Characters
         }
 
         // wins
-        protected abstract void Attack();
+        private void Attack()
+        {
+            Anim.SetBool(Attacking, true);
+        }
     
-        // Immediately losing toss-up
-        protected abstract void LostToAttack();
-
         #endregion
 
         #region Input
@@ -188,12 +188,7 @@ namespace Characters
 
         private void DetermineReactionAnimation(Character winner)
         {
-            if (this == winner)
-            {
-                Attack();
-                return;
-            }  
-            LostToAttack();
+            if (this == winner) Attack();
         }
 
 

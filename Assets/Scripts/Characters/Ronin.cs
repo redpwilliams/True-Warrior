@@ -18,7 +18,6 @@ namespace Characters
         protected override void Start()
         {
             base.Start();
-            // EventManager.Events.OnCharacterAttacks += ReactToAttack;
             Rb2d.gravityScale = _risingGravityScale;
         }
 
@@ -27,15 +26,6 @@ namespace Characters
             if (!(Rb2d.velocity.y < 0f)) return;
             Anim.SetTrigger(Falling);
             Rb2d.gravityScale = _fallingGravityScale;
-        }
-
-        protected override void Attack()
-        {
-            Anim.SetBool(Attacking, true);
-        }
-
-        protected override void LostToAttack()
-        {
         }
 
         #region AnimationEvent

@@ -41,11 +41,11 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -1104075714, guid: d4bd8202613b17b4c962f5d363f6be89, type: 3}
-    - time: 0.26666668
+    - time: 0.25
       value: {fileID: 1228144248, guid: d4bd8202613b17b4c962f5d363f6be89, type: 3}
     - time: 0.5
       value: {fileID: -1827768511, guid: d4bd8202613b17b4c962f5d363f6be89, type: 3}
-    - time: 0.76666665
+    - time: 0.75
       value: {fileID: -1118857310, guid: d4bd8202613b17b4c962f5d363f6be89, type: 3}
     - time: 1
       value: {fileID: -1669758654, guid: d4bd8202613b17b4c962f5d363f6be89, type: 3}
