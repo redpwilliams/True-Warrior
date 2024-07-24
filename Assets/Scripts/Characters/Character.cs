@@ -17,6 +17,7 @@ namespace Characters
         // Components
         protected Rigidbody2D Rb2d;
         protected Animator Anim;
+        private Transform _transform;
         private Light2D _l2d;
         private Controls _controls;
     
@@ -53,6 +54,7 @@ namespace Characters
         {
             Rb2d = GetComponent<Rigidbody2D>();
             Anim = GetComponent<Animator>();
+            _transform = transform;
             _controls = new Controls();
         }
 
@@ -89,10 +91,9 @@ namespace Characters
             // Flip sprite
             if (_playerType == PlayerType.One) return;
         
-            var transform1 = transform;
-            var localScale = transform1.localScale;
+            var localScale = _transform.localScale;
             localScale = new Vector2(-1 * localScale.x, localScale.y);
-            transform1.localScale = localScale;
+            _transform.localScale = localScale;
         }
 
         private void FixedUpdate()
