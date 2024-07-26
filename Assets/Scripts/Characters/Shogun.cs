@@ -7,7 +7,6 @@ namespace Characters
     public class Shogun : Character
     {
         [SerializeField] private float _dashDistance = 13f;
-        // [SerializeField, Min(0f)] private float _dashSpeed = 10f;
         [SerializeField, Min(0f)] private float _dashDuration = 0.3f;
 
 
@@ -30,7 +29,8 @@ namespace Characters
             {
                 float t = elapsedTime / _dashDuration;
 
-                var position = Vector2.Lerp(currentPosition, targetPosition, t);
+                var position = Vector2.Lerp(currentPosition, targetPosition, 
+                1-Mathf.Pow(1-t,4));
                 Rb2d.MovePosition(position);
                 elapsedTime += Time.deltaTime;
                 yield return null;

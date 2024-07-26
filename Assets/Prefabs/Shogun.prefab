@@ -130,7 +130,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 874b0ef34c25b4e47bb096d5553564e8, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -254,6 +254,8 @@ MonoBehaviour:
   _finalPosition: 3.5
   _speed: 15
   _playerType: 2
+  _dashDistance: 16.5
+  _dashDuration: 0.5
 --- !u!114 &1690438229803157989
 MonoBehaviour:
   m_ObjectHideFlags: 0
