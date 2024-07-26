@@ -200,31 +200,40 @@ namespace Characters
 
         #region Hurt/Death
 
+        // Without knockback
         public void DoHurtAnimation()
         {
             Anim.ResetTrigger(Hurt);
             Anim.SetTrigger(Hurt);
-            // Rb2d.AddForce(new Vector2(hurtPushForce, 0f), ForceMode2D.Impulse);
-            StartCoroutine(PushFromHurt(5f, 0.5f));
+        }
+        
+        // With knockback
+        public void DoHurtAnimation(float knockbackDistance, float knockbackDuration)
+        {
+            DoHurtAnimation();
+            StartCoroutine(QuickMove(knockbackDistance, knockbackDuration, true));
         }
 
-        private IEnumerator PushFromHurt(float pushDistance, float pushDuration)
+        protected IEnumerator QuickMove(float moveDistance, float 
+            moveDuration, bool isKnockback = false)
         {
-            // Move the character towards the final position
+            // Push direction
+            int direction = GetDirection();
+            if (isKnockback) direction *= -1;
+            
+            // Determine final position
             Vector2 currentPosition = Rb2d.position;
             Vector2 targetPosition = new Vector2(
-                currentPosition.x - GetDirection() * pushDistance, 
+                currentPosition.x + direction * moveDistance, 
                 currentPosition.y);
 
             float elapsedTime = 0f;
-            
-            while (elapsedTime < pushDuration)
+            while (elapsedTime < moveDuration)
             {
-                float t = elapsedTime / pushDuration;
+                float t = elapsedTime / moveDuration;
 
                 var position = Vector2.Lerp(currentPosition, targetPosition,
                     1-Mathf.Pow(1-t,4));
-                    // t);
                 Rb2d.MovePosition(position);
                 elapsedTime += Time.deltaTime;
                 yield return null;

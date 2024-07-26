@@ -49,8 +49,7 @@ namespace Characters
 
         public override void OnStrikeTarget(int isFinalHit)
         {
-            // AnimationEvent cannot accept booleans
-            Opponent.DoHurtAnimation();
+            Opponent.DoHurtAnimation(5, 0.5f);
             
             if (isFinalHit != 1) return;
             
