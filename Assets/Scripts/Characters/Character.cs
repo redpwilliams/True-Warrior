@@ -16,7 +16,7 @@ namespace Characters
         // Components
         protected Rigidbody2D Rb2d;
         protected Animator Anim;
-        protected Transform Trans;
+        private Transform _transform;
         private Light2D _l2d;
         private Controls _controls;
     
@@ -45,7 +45,7 @@ namespace Characters
         {
             Rb2d = GetComponent<Rigidbody2D>();
             Anim = GetComponent<Animator>();
-            Trans = transform;
+            _transform = transform;
             _controls = new Controls();
         }
 
@@ -82,9 +82,9 @@ namespace Characters
             // Flip sprite
             if (_playerType == PlayerType.One) return;
         
-            var localScale = Trans.localScale;
+            var localScale = _transform.localScale;
             localScale = new Vector2(-1 * localScale.x, localScale.y);
-            Trans.localScale = localScale;
+            _transform.localScale = localScale;
         }
 
         private void FixedUpdate()
@@ -105,6 +105,7 @@ namespace Characters
         
             // Stop the movement (set velocity to zero)
             Rb2d.velocity = Vector2.zero;
+            Rb2d.position = targetPosition;
             _isRunning = false;
             Anim.SetBool(Running, _isRunning);
         }
@@ -121,7 +122,7 @@ namespace Characters
             EventManager.Events.OnStageX -= StartRunning;
         }
         
-        protected int GetDirection() => (int) Mathf.Sign(Trans.localScale.x);
+        protected int GetDirection() => (int) Mathf.Sign(_transform.localScale.x);
 
         #endregion
 

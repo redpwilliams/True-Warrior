@@ -251,10 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1923f672724b9b9152e38313c8170a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _finalPosition: 3.5
   _speed: 15
+  _finalPosition: 3.5
   _playerType: 2
-  _dashDistance: 16.5
+  _dashDistance: 15
   _dashDuration: 0.5
 --- !u!114 &1690438229803157989
 MonoBehaviour:
