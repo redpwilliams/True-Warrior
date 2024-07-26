@@ -10,7 +10,6 @@ namespace Characters
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Light2D))]
     public abstract class Character : MonoBehaviour
     {
@@ -21,30 +20,23 @@ namespace Characters
         private Light2D _l2d;
         private Controls _controls;
     
-        // Running Animation
-        private static readonly int Running = Animator.StringToHash("ShouldRun");
-        [SerializeField] private float _finalPosition; // TODO - distance from center
+        [Header("Game Start Running Parameters")]
         [SerializeField, Min(0)] private float _speed = 2f;
+        [SerializeField] private float _finalPosition; // TODO - distance from center
+        // TODO - Use Scriptable Objects ^^^
         private bool _isRunning;
     
-        // Assigned stage
-        protected enum PlayerType { One, Two, CPU }
+        [Header("Player Designation")]
         [SerializeField] protected PlayerType _playerType;
+        protected enum PlayerType { One, Two, CPU }
         
-        // Set Animation
+        // Animation parameters
+        // TODO - Use Scriptable Objects
+        private static readonly int Running = Animator.StringToHash("ShouldRun");
         private static readonly int Set = Animator.StringToHash("ShouldSet");
-    
-        // Attacking Animation
-        protected static readonly int Attacking = Animator.StringToHash
-            ("ShouldAttack");
-        
-        // Hurt Animation
+        protected static readonly int Attacking = Animator.StringToHash("ShouldAttack");
         private static readonly int Hurt = Animator.StringToHash("ShouldHurt");
-        
-        // Death Animation
         private static readonly int Death = Animator.StringToHash("ShouldDie");
-        
-        // Return to Idle
         private static readonly int Return = Animator.StringToHash("ShouldReturn");
 
         protected Character Opponent;
@@ -107,6 +99,7 @@ namespace Characters
                 _speed * Time.fixedDeltaTime));
 
             // Check if the character has reached or passed the final position
+            // TODO - Revisit
             if ((_playerType == PlayerType.One && Rb2d.position.x < _finalPosition) || 
                 _playerType != PlayerType.One && Rb2d.position.x > _finalPosition) return;
         

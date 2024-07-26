@@ -1,4 +1,3 @@
-using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -6,10 +5,12 @@ namespace Characters
 {
     public class Ronin : Character
     {
+        [Header("Rise/Fall Speeds")]
         [SerializeField] private float _risingGravityScale = 5f;
         [SerializeField] private float _fallingGravityScale = 10f;
         private static readonly int Falling = Animator.StringToHash("ShouldFall");
 
+        [Header("Jump & Strike Forces")]
         [SerializeField] private float _jumpUpwardForce = 400f;
         [SerializeField] private float _jumpForwardForce = 100f;
         [SerializeField] private float _strikePushForce = 200f;

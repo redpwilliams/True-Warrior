@@ -6,15 +6,13 @@ namespace Characters
 {
     public class Shogun : Character
     {
+        [Header("Dash Attack Parameters")]
         [SerializeField] private float _dashDistance = 13f;
-        [SerializeField, Min(0f)] private float _dashDuration = 0.3f;
+        [SerializeField, Min(0f)] private float _dashDuration = 0.5f;
 
 
         [UsedImplicitly]
-        public void OnDashAttackStart()
-        {
-            StartCoroutine(Dash());
-        }
+        public void OnDashAttackStart() => StartCoroutine(Dash());
 
         private IEnumerator Dash()
         {
@@ -49,9 +47,6 @@ namespace Characters
             base.OnStrikeTarget(isFinalHit);
         }
 
-        public override void OnFinishAttack()
-        {
-            Anim.SetBool(Attacking, false);
-        }
+        public override void OnFinishAttack() => Anim.SetBool(Attacking, false);
     }
 }
