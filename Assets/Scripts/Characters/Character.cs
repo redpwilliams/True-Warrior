@@ -140,20 +140,13 @@ namespace Characters
             Anim.SetTrigger(Set);
         }
 
-        // wins
-        private void Attack()
-        {
-            Anim.SetBool(Attacking, true);
-        }
+        private void Attack() => Anim.SetBool(Attacking, true);
 
         [UsedImplicitly]
-        public virtual void OnStrikeTarget(int isFinalHit)
-        {
-            StartCoroutine(ReturnToIdle(3f));
-        }
+        public virtual void OnStrikeTarget(int isFinalHit) => StartCoroutine(ReturnToIdle(3f));
 
         [UsedImplicitly]
-        public abstract void OnFinishAttack();
+        public virtual void OnFinishAttack() => Anim.SetBool(Attacking, false);
         
         private IEnumerator ReturnToIdle(float time)
         {
@@ -202,7 +195,6 @@ namespace Characters
         {
             if (this == winner) Attack();
         }
-
 
         #endregion
 

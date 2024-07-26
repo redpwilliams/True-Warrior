@@ -47,6 +47,5 @@ namespace Characters
             base.OnStrikeTarget(isFinalHit);
         }
 
-        public override void OnFinishAttack() => Anim.SetBool(Attacking, false);
     }
 }

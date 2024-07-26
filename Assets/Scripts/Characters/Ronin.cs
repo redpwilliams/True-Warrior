@@ -13,7 +13,7 @@ namespace Characters
         [Header("Jump & Strike Forces")]
         [SerializeField] private float _jumpUpwardForce = 400f;
         [SerializeField] private float _jumpForwardForce = 100f;
-        [SerializeField] private float _strikePushForce = 200f;
+        [SerializeField] private float _strikePushForce = 2f;
 
         
         protected override void Start()
@@ -43,7 +43,7 @@ namespace Characters
         
         public override void OnFinishAttack()
         {
-            Anim.SetBool(Attacking, false);
+            base.OnFinishAttack();
             Anim.ResetTrigger(Falling);
             Rb2d.gravityScale = _risingGravityScale;
         }
