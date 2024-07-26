@@ -240,7 +240,7 @@ namespace Characters
                 yield return null;
             }
 
-            Rb2d.MovePosition(targetPosition);
+            Rb2d.position = targetPosition;
 
         }
 
