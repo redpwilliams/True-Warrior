@@ -34,7 +34,7 @@ namespace Characters
         // TODO - Use Scriptable Objects
         private static readonly int Running = Animator.StringToHash("ShouldRun");
         private static readonly int Set = Animator.StringToHash("ShouldSet");
-        protected static readonly int Attacking = Animator.StringToHash("ShouldAttack");
+        private static readonly int Attacking = Animator.StringToHash("ShouldAttack");
         private static readonly int Hurt = Animator.StringToHash("ShouldHurt");
         private static readonly int Death = Animator.StringToHash("ShouldDie");
         private static readonly int Return = Animator.StringToHash("ShouldReturn");
@@ -122,7 +122,7 @@ namespace Characters
             EventManager.Events.OnStageX -= StartRunning;
         }
         
-        protected int GetDirection() => (int) Mathf.Sign(_transform.localScale.x);
+        private int GetDirection() => (int) Mathf.Sign(_transform.localScale.x);
 
         #endregion
 
