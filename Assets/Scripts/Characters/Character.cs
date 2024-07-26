@@ -19,11 +19,10 @@ namespace Characters
         private Transform _transform;
         private Light2D _l2d;
         private Controls _controls;
-    
+
         [Header("Game Start Running Parameters")]
-        [SerializeField, Min(0)] private float _speed = 2f;
-        [SerializeField] private float _finalPosition; // TODO - distance from center
-        // TODO - Use Scriptable Objects ^^^
+        private readonly float _runSpeed = InitParams.RunSpeed;
+        private float _endPosition = InitParams.EndPositionX;
         private bool _isRunning;
     
         [Header("Player Designation")]
@@ -74,17 +73,24 @@ namespace Characters
                 FindObjectsByType<Character>(FindObjectsSortMode.None);
             Opponent = (players[0] == this) ? players[1] : players[0];
         
-            // Correct final position
-            _finalPosition = (_playerType == PlayerType.One)
-                ? -Mathf.Abs(_finalPosition)
-                : Mathf.Abs(_finalPosition);
+            // Set position and sprite direction
+            var localScale = _transform.localScale;
+            localScale.x = InitParams.StartPositionX;
+            if (_playerType == PlayerType.One)
+            {
+                _endPosition = -Mathf.Abs(InitParams.EndPositionX);
+            }
+            else
+            {
+                localScale.x = -Mathf.Abs(localScale.x);
+            }
         
             // Flip sprite
-            if (_playerType == PlayerType.One) return;
+            // if (_playerType == PlayerType.One) return;
         
-            var localScale = _transform.localScale;
-            localScale = new Vector2(-1 * localScale.x, localScale.y);
-            _transform.localScale = localScale;
+            // var localScale = _transform.localScale;
+            // localScale = new Vector2(-1 * localScale.x, localScale.y);
+            // _transform.localScale = localScale;
         }
 
         private void FixedUpdate()
@@ -94,14 +100,14 @@ namespace Characters
         
             // Move the character towards the final position
             Vector2 currentPosition = Rb2d.position;
-            Vector2 targetPosition = new Vector2(_finalPosition, currentPosition.y);
+            Vector2 targetPosition = new Vector2(_endPosition, currentPosition.y);
             Rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
-                _speed * Time.fixedDeltaTime));
+                _runSpeed * Time.fixedDeltaTime));
 
             // Check if the character has reached or passed the final position
             // TODO - Revisit
-            if ((_playerType == PlayerType.One && Rb2d.position.x < _finalPosition) || 
-                _playerType != PlayerType.One && Rb2d.position.x > _finalPosition) return;
+            if ((_playerType == PlayerType.One && Rb2d.position.x < _endPosition) || 
+                _playerType != PlayerType.One && Rb2d.position.x > _endPosition) return;
         
             // Stop the movement (set velocity to zero)
             Rb2d.velocity = Vector2.zero;
@@ -241,10 +247,29 @@ namespace Characters
             }
 
             Rb2d.position = targetPosition;
-
         }
 
         public void DoDeathAnimation() => Anim.SetTrigger(Death);
+
+        #endregion
+
+        #region Context Menu Actions
+
+        [ContextMenu("Set Character Starting Position")]
+        private void SetCharacterStartPosition()
+        {
+            int startPositionSign = _playerType == PlayerType.One ? -1 : 1;
+            Transform trans = transform;
+            trans.position = new Vector3(
+                startPositionSign * InitParams.StartPositionX,
+                InitParams.StartPositionY,
+                InitParams.StartPositionZ);
+
+            var localScale = trans.localScale;
+            localScale = new Vector2(-startPositionSign * Mathf.Abs(localScale.x), 
+            localScale.y);
+            trans.localScale = localScale;
+        }
 
         #endregion
     }
