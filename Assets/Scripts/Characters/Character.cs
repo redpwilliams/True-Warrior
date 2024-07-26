@@ -44,6 +44,10 @@ namespace Characters
         {
             Rb2d = GetComponent<Rigidbody2D>();
             Anim = GetComponent<Animator>();
+
+            _l2d = GetComponent<Light2D>();
+            _l2d.intensity = InitParams.Light2DBright;
+            
             _transform = transform;
             _controls = new Controls();
         }
@@ -84,13 +88,6 @@ namespace Characters
             {
                 localScale.x = -Mathf.Abs(localScale.x);
             }
-        
-            // Flip sprite
-            // if (_playerType == PlayerType.One) return;
-        
-            // var localScale = _transform.localScale;
-            // localScale = new Vector2(-1 * localScale.x, localScale.y);
-            // _transform.localScale = localScale;
         }
 
         private void FixedUpdate()
@@ -109,10 +106,9 @@ namespace Characters
             if ((_playerType == PlayerType.One && Rb2d.position.x < _endPosition) || 
                 _playerType != PlayerType.One && Rb2d.position.x > _endPosition) return;
         
-            // Stop the movement (set velocity to zero)
+            _isRunning = false;
             Rb2d.velocity = Vector2.zero;
             Rb2d.position = targetPosition;
-            _isRunning = false;
             Anim.SetBool(Running, _isRunning);
         }
 
@@ -251,6 +247,30 @@ namespace Characters
 
         public void DoDeathAnimation() => Anim.SetTrigger(Death);
 
+        public void OnDeathAnimationFinish()
+        {
+            float startBrightness = _l2d.intensity;
+            float endBrightness = InitParams.Light2DDim;
+
+            StartCoroutine(DimAfterDeath());
+
+            IEnumerator DimAfterDeath()
+            {
+                float elapsedTime = 0f;
+                
+                while (elapsedTime < InitParams.DimDuration)
+                {
+                    float t = elapsedTime / InitParams.DimDuration;
+
+                    _l2d.intensity = Mathf.Lerp(startBrightness, endBrightness, t);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+                
+                yield return null;
+            }
+        }
+        
         #endregion
 
         #region Context Menu Actions
