@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -5,31 +6,45 @@ namespace Characters
 {
     public class Shogun : Character
     {
-        
+        [SerializeField] private float _dashDistance = 13f;
+        // [SerializeField, Min(0f)] private float _dashSpeed = 10f;
+        [SerializeField, Min(0f)] private float _dashDuration = 0.3f;
+
+
         [UsedImplicitly]
         public void OnDashAttackStart()
         {
+            StartCoroutine(Dash());
+        }
 
-            int direction = (int) Mathf.Sign(Trans.localScale.x);
-            Rb2d.velocity = new Vector2(direction * 50f, 0);
-            // // Move the character towards the final position
-            // Vector2 currentPosition = Rb2d.position;
-            // Vector2 targetPosition = new Vector2(_finalPosition, currentPosition.y);
-            // Rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
-            //     _speed * Time.fixedDeltaTime));
-            //
-            // // Check if the character has reached or passed the final position
-            // if ((_playerType == PlayerType.One && Rb2d.position.x < _finalPosition) || 
-            //     _playerType != PlayerType.One && Rb2d.position.x > _finalPosition) return;
-            //
+        private IEnumerator Dash()
+        {
+            // Move the character towards the final position
+            Vector2 currentPosition = Trans.position;
+            Vector2 targetPosition = currentPosition + new Vector2
+                (GetDirection() * _dashDistance, currentPosition.y);
+
+            float elapsedTime = 0f;
+            
+            while (elapsedTime < _dashDuration)
+            {
+                float t = elapsedTime / _dashDuration;
+
+                var position = Vector2.Lerp(currentPosition, targetPosition, t);
+                Rb2d.MovePosition(position);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            Rb2d.MovePosition(targetPosition);
         }
 
         public override void OnStrikeTarget(int isFinalHit)
         {
             Opponent.DoHurtAnimation(0);
-            
+
             if (isFinalHit != 1) return;
-            
+
             Opponent.DoDeathAnimation();
             base.OnStrikeTarget(isFinalHit);
         }

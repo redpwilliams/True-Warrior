@@ -23,8 +23,8 @@ namespace Characters
     
         // Running Animation
         private static readonly int Running = Animator.StringToHash("ShouldRun");
-        [SerializeField] private float _finalPosition;
-        [SerializeField] private float _speed = 2f;
+        [SerializeField] private float _finalPosition; // TODO - distance from center
+        [SerializeField, Min(0)] private float _speed = 2f;
         private bool _isRunning;
     
         // Assigned stage
@@ -45,8 +45,7 @@ namespace Characters
         private static readonly int Death = Animator.StringToHash("ShouldDie");
         
         // Return to Idle
-        protected static readonly int Return =
-            Animator.StringToHash("ShouldReturn");
+        private static readonly int Return = Animator.StringToHash("ShouldReturn");
 
         protected Character Opponent;
 
@@ -117,7 +116,7 @@ namespace Characters
             Anim.SetBool(Running, _isRunning);
         }
 
-        #region ApproachingMovement
+        #region Movement and Positioning
     
         private void StartRunning(int stage)
         {
@@ -128,6 +127,8 @@ namespace Characters
             Anim.SetBool(Running, _isRunning);
             EventManager.Events.OnStageX -= StartRunning;
         }
+        
+        protected int GetDirection() => (int) Mathf.Sign(Trans.localScale.x);
 
         #endregion
 
@@ -221,10 +222,7 @@ namespace Characters
             Rb2d.AddForce(new Vector2(hurtPushForce, 0f), ForceMode2D.Impulse);
         }
 
-        public void DoDeathAnimation()
-        {
-            Anim.SetTrigger(Death);
-        }
+        public void DoDeathAnimation() => Anim.SetTrigger(Death);
 
         #endregion
     }
