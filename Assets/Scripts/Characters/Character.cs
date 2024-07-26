@@ -200,11 +200,38 @@ namespace Characters
 
         #region Hurt/Death
 
-        public void DoHurtAnimation(float hurtPushForce)
+        public void DoHurtAnimation()
         {
             Anim.ResetTrigger(Hurt);
             Anim.SetTrigger(Hurt);
-            Rb2d.AddForce(new Vector2(hurtPushForce, 0f), ForceMode2D.Impulse);
+            // Rb2d.AddForce(new Vector2(hurtPushForce, 0f), ForceMode2D.Impulse);
+            StartCoroutine(PushFromHurt(5f, 0.5f));
+        }
+
+        private IEnumerator PushFromHurt(float pushDistance, float pushDuration)
+        {
+            // Move the character towards the final position
+            Vector2 currentPosition = Rb2d.position;
+            Vector2 targetPosition = new Vector2(
+                currentPosition.x - GetDirection() * pushDistance, 
+                currentPosition.y);
+
+            float elapsedTime = 0f;
+            
+            while (elapsedTime < pushDuration)
+            {
+                float t = elapsedTime / pushDuration;
+
+                var position = Vector2.Lerp(currentPosition, targetPosition,
+                    1-Mathf.Pow(1-t,4));
+                    // t);
+                Rb2d.MovePosition(position);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            Rb2d.MovePosition(targetPosition);
+
         }
 
         public void DoDeathAnimation() => Anim.SetTrigger(Death);

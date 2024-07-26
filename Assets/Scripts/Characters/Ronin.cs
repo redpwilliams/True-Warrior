@@ -13,7 +13,6 @@ namespace Characters
         [Header("Jump & Strike Forces")]
         [SerializeField] private float _jumpUpwardForce = 400f;
         [SerializeField] private float _jumpForwardForce = 100f;
-        [SerializeField] private float _strikePushForce = 2f;
 
         
         protected override void Start()
@@ -51,8 +50,7 @@ namespace Characters
         public override void OnStrikeTarget(int isFinalHit)
         {
             // AnimationEvent cannot accept booleans
-            int direction = _playerType == PlayerType.One ? 1 : -1;
-            Opponent.DoHurtAnimation(direction * _strikePushForce);
+            Opponent.DoHurtAnimation();
             
             if (isFinalHit != 1) return;
             

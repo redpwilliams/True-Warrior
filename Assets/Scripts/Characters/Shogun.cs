@@ -17,9 +17,10 @@ namespace Characters
         private IEnumerator Dash()
         {
             // Move the character towards the final position
-            Vector2 currentPosition = Trans.position;
-            Vector2 targetPosition = currentPosition + new Vector2
-                (GetDirection() * _dashDistance, currentPosition.y);
+            Vector2 currentPosition = Rb2d.position;
+            Vector2 targetPosition = new Vector2(
+                currentPosition.x + GetDirection() * _dashDistance, 
+                currentPosition.y);
 
             float elapsedTime = 0f;
             
@@ -39,7 +40,7 @@ namespace Characters
 
         public override void OnStrikeTarget(int isFinalHit)
         {
-            Opponent.DoHurtAnimation(0);
+            Opponent.DoHurtAnimation();
 
             if (isFinalHit != 1) return;
 
