@@ -234,7 +234,7 @@ namespace Characters
                 float t = elapsedTime / moveDuration;
 
                 var position = Vector2.Lerp(currentPosition, targetPosition,
-                    Lerping2D.EaseOutQuart(t));
+                    Lerp2D.EaseOutQuart(t));
                 Rb2d.MovePosition(position);
                 elapsedTime += Time.deltaTime;
                 yield return null;
