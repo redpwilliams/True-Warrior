@@ -1,7 +1,6 @@
 using System.Collections;
 using JetBrains.Annotations;
 using Managers;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;

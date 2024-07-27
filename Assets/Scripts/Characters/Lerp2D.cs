@@ -6,6 +6,7 @@ namespace Characters
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class Lerp2D
     {
+        // https://easings.net/
         public static float EaseInSine(float t) =>
             1 - Mathf.Cos((t * Mathf.PI) / 2);
 
