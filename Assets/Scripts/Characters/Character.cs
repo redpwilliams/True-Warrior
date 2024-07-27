@@ -1,6 +1,7 @@
 using System.Collections;
 using JetBrains.Annotations;
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -38,6 +39,7 @@ namespace Characters
         private static readonly int Return = Animator.StringToHash("ShouldReturn");
 
         protected Character Opponent;
+        private CharacterText _characterText;
 
         private void Awake()
         {
@@ -46,6 +48,8 @@ namespace Characters
 
             _transform = transform;
             _controls = new Controls();
+
+            _characterText = GetComponentInChildren<CharacterText>();
         }
 
         private void OnEnable()
@@ -186,6 +190,7 @@ namespace Characters
         private IEnumerator DelayCPUAttack()
         {
             yield return new WaitForSecondsRealtime(0.5f);
+            _characterText.SetText("Test");
             Character winner = EventManager.Events.CharacterInputsAttack(this, Time.realtimeSinceStartupAsDouble); 
             DetermineReactionAnimation(winner);
         }
@@ -250,6 +255,7 @@ namespace Characters
         [ContextMenu("Set Character Starting Position")]
         private void SetCharacterStartPosition()
         {
+            // Positioning
             int startPositionSign = _playerType == PlayerType.One ? -1 : 1;
             Transform trans = transform;
             trans.position = new Vector3(
@@ -257,11 +263,22 @@ namespace Characters
                 InitParams.StartPositionY,
                 InitParams.StartPositionZ);
 
+            // Sprite direction
             var localScale = trans.localScale;
             localScale = new Vector2(-startPositionSign * Mathf.Abs(localScale.x), 
             localScale.y);
             trans.localScale = localScale;
+            
+            // Child CharacterText component direction
+            RectTransform rt = GetComponentInChildren<RectTransform>();
+            rt.localScale = new Vector3(Mathf.Sign(localScale.x), 1, 1);
         }
+
+        #endregion
+
+        #region Character Texts
+
+        
 
         #endregion
     }
