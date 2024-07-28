@@ -70,16 +70,18 @@ namespace Managers
         private Character _winner;
         private bool _winnerDeclared;
 
-        public Character CharacterInputsAttack(Character c, double time)
+        public ReactionInfo CharacterInputsAttack(Character c, double time)
         {
             double reactionTime = time - _battleStartTime;
             string formattedReactionTime = $"{reactionTime:F3}";
-        
-            if (_winnerDeclared) return _winner;
-        
-            _winnerDeclared = true;
-            _winner = c;
-            return _winner;
+
+            if (!_winnerDeclared)
+            {
+                _winnerDeclared = true;
+                _winner = c;
+            }
+
+            return new ReactionInfo(_winner, formattedReactionTime);
         }
 
         #endregion

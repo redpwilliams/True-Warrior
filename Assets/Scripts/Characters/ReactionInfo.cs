@@ -4,5 +4,11 @@ namespace Characters
     {
         public Character Winner;
         public string ReactionTime;
+
+        public ReactionInfo(Character winner, string formattedReactionTime)
+        {
+            Winner = winner;
+            ReactionTime = formattedReactionTime;
+        }
     }
 }

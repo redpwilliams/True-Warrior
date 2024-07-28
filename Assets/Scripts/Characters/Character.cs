@@ -181,7 +181,7 @@ namespace Characters
         // this character has inputted the attack button
         private void OnControllerInput(InputAction.CallbackContext context)
         {
-            Character winner = EventManager.Events.CharacterInputsAttack(this, context.time); 
+            Character winner = EventManager.Events.CharacterInputsAttack(this, context.time).Winner; 
             _controls.Player1.Disable();
             DetermineReactionAnimation(winner);
         }
@@ -190,7 +190,7 @@ namespace Characters
         {
             yield return new WaitForSecondsRealtime(0.5f);
             _characterText.SetText("Test");
-            Character winner = EventManager.Events.CharacterInputsAttack(this, Time.realtimeSinceStartupAsDouble); 
+            Character winner = EventManager.Events.CharacterInputsAttack(this, Time.realtimeSinceStartupAsDouble).Winner; 
             DetermineReactionAnimation(winner);
         }
 
