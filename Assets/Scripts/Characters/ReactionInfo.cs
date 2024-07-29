@@ -2,8 +2,8 @@ namespace Characters
 {
     public struct ReactionInfo
     {
-        public Character Winner;
-        public string ReactionTime;
+        public readonly Character Winner;
+        public readonly string ReactionTime;
 
         public ReactionInfo(Character winner, string formattedReactionTime)
         {

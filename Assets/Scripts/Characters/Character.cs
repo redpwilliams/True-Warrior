@@ -181,17 +181,29 @@ namespace Characters
         // this character has inputted the attack button
         private void OnControllerInput(InputAction.CallbackContext context)
         {
-            Character winner = EventManager.Events.CharacterInputsAttack(this, context.time).Winner; 
+            ReactionInfo battleData = EventManager.Events.CharacterInputsAttack(
+                this, context.time); 
             _controls.Player1.Disable();
-            DetermineReactionAnimation(winner);
+            
+            _characterText.SetText(battleData.ReactionTime);
+            DetermineReactionAnimation(battleData.Winner);
         }
 
         private IEnumerator DelayCPUAttack()
         {
+            // CPU Attack Delay
+            // TODO - Make 3 ranges for easy, medium, and hard
             yield return new WaitForSecondsRealtime(0.5f);
-            _characterText.SetText("Test");
-            Character winner = EventManager.Events.CharacterInputsAttack(this, Time.realtimeSinceStartupAsDouble).Winner; 
-            DetermineReactionAnimation(winner);
+            
+            // Attack, and ask EventManager for results
+            ReactionInfo battleData  = EventManager.Events.CharacterInputsAttack(
+                this, Time.realtimeSinceStartupAsDouble); 
+            
+            // Update character text with reaction time
+            _characterText.SetText(battleData.ReactionTime);
+            
+            // Attack if is winner
+            DetermineReactionAnimation(battleData.Winner);
         }
 
         private void DetermineReactionAnimation(Character winner)
