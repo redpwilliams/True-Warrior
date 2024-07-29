@@ -27,6 +27,11 @@ namespace Characters
             Anim.SetTrigger(Falling);
             Rb2d.gravityScale = _fallingGravityScale;
         }
+        
+        protected override string CharacterTitle()
+        {
+            return "Ronin";
+        }
 
         #region AnimationEvent
 
@@ -56,7 +61,6 @@ namespace Characters
             Opponent.DoDeathAnimation();
             base.OnStrikeTarget(isFinalHit);
         }
-
 
         #endregion
 

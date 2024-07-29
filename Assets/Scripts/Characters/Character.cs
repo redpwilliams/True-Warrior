@@ -105,10 +105,17 @@ namespace Characters
             if ((_playerType == PlayerType.One && Rb2d.position.x < _endPosition) || 
                 _playerType != PlayerType.One && Rb2d.position.x > _endPosition) return;
         
+            // Stop movement and animation
             _isRunning = false;
             Rb2d.velocity = Vector2.zero;
             Rb2d.position = targetPosition;
             Anim.SetBool(Running, _isRunning);
+            
+            // Set character title
+            string title = (_playerType == PlayerType.One)
+                ? "You"
+                : CharacterTitle();
+            _characterText.DisplayTitle(title, 1f, 1f);
         }
 
         #region Movement and Positioning
@@ -155,7 +162,6 @@ namespace Characters
             yield return new WaitForSeconds(time);
             Anim.SetTrigger(Return);
         }
-
 
         #endregion
 
@@ -289,7 +295,7 @@ namespace Characters
 
         #region Character Texts
 
-        
+        protected abstract string CharacterTitle();
 
         #endregion
     }

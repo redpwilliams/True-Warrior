@@ -9,6 +9,10 @@ namespace Characters
         [SerializeField] private float _dashDistance = 13f;
         [SerializeField, Min(0f)] private float _dashDuration = 0.5f;
 
+        protected override string CharacterTitle()
+        {
+            return "Shogun";
+        }
 
         [UsedImplicitly]
         public void OnDashAttackStart() =>
