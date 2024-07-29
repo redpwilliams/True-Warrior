@@ -115,7 +115,7 @@ namespace Characters
             string title = (_playerType == PlayerType.One)
                 ? "You"
                 : CharacterTitle();
-            _characterText.DisplayTitle(title, 1f, 1f);
+            _characterText.DisplayTitle(title);
         }
 
         #region Movement and Positioning

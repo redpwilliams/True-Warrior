@@ -9,6 +9,10 @@ namespace Characters
         private TextMeshPro _tmp;
         private RectTransform _rt;
 
+        private readonly float _initialRiseDelay = 0.6f;
+        private readonly float _riseDuration = 0.35f;
+        private readonly float _stayDuration = 1.75f;
+
         private void Awake()
         {
             _tmp = GetComponent<TextMeshPro>();
@@ -23,19 +27,21 @@ namespace Characters
             _tmp.text = text;
         }
 
-        public void DisplayTitle(string title, float aD, float sD)
+        public void DisplayTitle(string title)
         {
             //_tmp.alpha = 0;
             _tmp.enabled = true;
             _tmp.text = title;
 
-            StartCoroutine(RiseAndDisplay(aD, sD));
+            StartCoroutine(RiseAndDisplay());
 
         }
         
-        private IEnumerator RiseAndDisplay(float animationDuration, float 
-        stayDuration)
+        private IEnumerator RiseAndDisplay()
         {
+            // Wait before rising
+            yield return new WaitForSeconds(_initialRiseDelay);
+            
             float elapsedTime = 0f;
 
             Vector2 currentPosition = _rt.anchoredPosition;
@@ -43,11 +49,12 @@ namespace Characters
             Vector2 targetPosition =
                 currentPosition + Vector2.up * riseDistance;
                 
-            while (elapsedTime < animationDuration)
+            while (elapsedTime < _riseDuration)
             {
-                float t = elapsedTime / animationDuration;
+                float t = elapsedTime / _riseDuration;
                 // Set y position of text
-                _rt.anchoredPosition = Vector2.Lerp(currentPosition, targetPosition, t);
+                _rt.anchoredPosition = Vector2.Lerp(currentPosition, 
+                targetPosition, Lerp2D.EaseOutQuad(t));
                     
                 elapsedTime += Time.deltaTime;
                 yield return null;
