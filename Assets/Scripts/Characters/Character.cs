@@ -39,6 +39,8 @@ namespace Characters
 
         protected Character Opponent;
         private CharacterText _characterText;
+        private ReactionInfo _battleData;
+        private bool _firstContact = true;
 
         private void Awake()
         {
@@ -152,7 +154,16 @@ namespace Characters
         private void Attack() => Anim.SetBool(Attacking, true);
 
         [UsedImplicitly]
-        public virtual void OnStrikeTarget(int isFinalHit) => StartCoroutine(ReturnToIdle(3f));
+        public virtual void OnStrikeTarget(int isFinalHit)
+        {
+            if (_firstContact)
+            {
+                // Tell the opponent to show late
+                Opponent.ShowReactionTimeAsLate();
+                _firstContact = false;
+            }
+            StartCoroutine(ReturnToIdle(3f));
+        } 
 
         [UsedImplicitly]
         public virtual void OnFinishAttack() => Anim.SetBool(Attacking, false);
@@ -187,29 +198,26 @@ namespace Characters
         // this character has inputted the attack button
         private void OnControllerInput(InputAction.CallbackContext context)
         {
-            ReactionInfo battleData = EventManager.Events.CharacterInputsAttack(
+            _battleData = EventManager.Events.CharacterInputsAttack(
                 this, context.time); 
             _controls.Player1.Disable();
             
-            _characterText.SetText(battleData.ReactionTime);
-            DetermineReactionAnimation(battleData.Winner);
+            _characterText.ShowReactionTime(_battleData.ReactionTime);
+            DetermineReactionAnimation(_battleData.Winner);
         }
 
         private IEnumerator DelayCPUAttack()
         {
             // CPU Attack Delay
             // TODO - Make 3 ranges for easy, medium, and hard
-            yield return new WaitForSecondsRealtime(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f); // TODO "speed tiers" ?
             
             // Attack, and ask EventManager for results
-            ReactionInfo battleData  = EventManager.Events.CharacterInputsAttack(
+            _battleData  = EventManager.Events.CharacterInputsAttack(
                 this, Time.realtimeSinceStartupAsDouble); 
             
-            // Update character text with reaction time
-            _characterText.SetText(battleData.ReactionTime);
-            
-            // Attack if is winner
-            DetermineReactionAnimation(battleData.Winner);
+            _characterText.ShowReactionTime(_battleData.ReactionTime);
+            DetermineReactionAnimation(_battleData.Winner);
         }
 
         private void DetermineReactionAnimation(Character winner)
@@ -296,6 +304,12 @@ namespace Characters
         #region Character Texts
 
         protected abstract string CharacterTitle();
+
+        private void ShowReactionTimeAsLate()
+        {
+            _characterText.ShowReactionTime("Late");
+            _controls.Disable();
+        }
 
         #endregion
     }

@@ -18,14 +18,13 @@ namespace Characters
         {
             _tmp = GetComponent<TextMeshPro>();
             _rt = GetComponent<RectTransform>();
-            // _tmp.enabled = false; // Use setActive
         }
 
         /// Sets text of TMP asset
-        public void SetText(string text)
+        public void ShowReactionTime(string text)
         {
-            _tmp.enabled = true;
             _tmp.text = text;
+            _tmp.alpha = 1;
         }
 
         public void DisplayTitle(string title)
@@ -83,9 +82,6 @@ namespace Characters
             }
 
             _tmp.alpha = 0;
-            
-            // Deactivate now unneeded game object
-            gameObject.SetActive(false);
         }
 
     }
