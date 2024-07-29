@@ -12,6 +12,7 @@ namespace Characters
         private readonly float _initialRiseDelay = 0.6f;
         private readonly float _riseDuration = 0.35f;
         private readonly float _stayDuration = 1.75f;
+        private readonly float _fadeoutDuration = 0.5f;
 
         private void Awake()
         {
@@ -29,7 +30,7 @@ namespace Characters
 
         public void DisplayTitle(string title)
         {
-            //_tmp.alpha = 0;
+            _tmp.alpha = 0;
             _tmp.enabled = true;
             _tmp.text = title;
 
@@ -51,16 +52,40 @@ namespace Characters
                 
             while (elapsedTime < _riseDuration)
             {
-                float t = elapsedTime / _riseDuration;
+                float lerpTime = Lerp2D.EaseOutQuad(elapsedTime / _riseDuration);
+                
                 // Set y position of text
                 _rt.anchoredPosition = Vector2.Lerp(currentPosition, 
-                targetPosition, Lerp2D.EaseOutQuad(t));
+                targetPosition, lerpTime);
+                
+                // Set alpha
+                _tmp.alpha = Mathf.Lerp(0f, 1f, lerpTime);
                     
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
+            // Snap to target position
             _rt.anchoredPosition = targetPosition;
+            
+            // Initial wait to fade out text
+            yield return new WaitForSeconds(_stayDuration);
+            
+            // Fade out text
+            elapsedTime = 0f;
+
+            while (elapsedTime < _fadeoutDuration)
+            {
+                float t = elapsedTime / _fadeoutDuration;
+                _tmp.alpha = Mathf.Lerp(1, 0, t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            _tmp.alpha = 0;
+            
+            // Deactivate now unneeded game object
+            gameObject.SetActive(false);
         }
 
     }
