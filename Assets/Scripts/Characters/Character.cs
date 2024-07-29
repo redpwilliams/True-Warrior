@@ -264,7 +264,7 @@ namespace Characters
         #region Context Menu Actions
 
         [ContextMenu("Set Character Starting Position")]
-        private void SetCharacterStartPosition()
+        public void SetCharacterStartPosition()
         {
             // Positioning
             int startPositionSign = _playerType == PlayerType.One ? -1 : 1;
