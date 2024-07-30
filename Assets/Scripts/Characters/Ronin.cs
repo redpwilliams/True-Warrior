@@ -30,7 +30,7 @@ namespace Characters
         
         protected override string CharacterTitle()
         {
-            return "Ronin";
+            return "Ronin/浪人";
         }
 
         #region AnimationEvent
