@@ -20,7 +20,7 @@ namespace Characters
         private Controls _controls;
 
         [Header("Game Start Running Parameters")]
-        private readonly float _runSpeed = InitParams.RunSpeed;
+        [SerializeField] private float _runSpeed = InitParams.RunSpeed;
         private float _endPosition = InitParams.EndPositionX;
         private bool _isRunning;
     

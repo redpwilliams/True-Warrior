@@ -28,10 +28,7 @@ namespace Characters
             Rb2d.gravityScale = _fallingGravityScale;
         }
         
-        protected override string CharacterTitle()
-        {
-            return "Ronin/浪人";
-        }
+        protected override string CharacterTitle() => "Ronin/浪人";
 
         #region AnimationEvent
 
