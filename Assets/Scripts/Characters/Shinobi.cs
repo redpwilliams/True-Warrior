@@ -44,10 +44,10 @@ namespace Characters
         protected override void Attack()
         {
             Rb2d.velocity = Vector2.zero;
-            StartCoroutine(SmokeBall(true));
+            StartCoroutine(SneakStrike(true));
         }
 
-        private IEnumerator SmokeBall(bool shouldDisappear)
+        private IEnumerator SneakStrike(bool shouldDisappear)
         {
             // Sprite alpha
             float startAlpha = shouldDisappear ? 1 : 0;
@@ -89,24 +89,29 @@ namespace Characters
             if (!shouldDisappear)
             {
                 // Turn around and attack
-                var transformLocalScale = transform.localScale;
-                transformLocalScale.x *= -1;
+                var cachedTransform = transform;
+                Vector3 localScale = cachedTransform.localScale;
+                
+                cachedTransform.localScale = new Vector3(
+                    localScale.x * -1, localScale.y, localScale.z);
+                
                 base.Attack(); // Init attack and slash animation
                 yield break;
             }
             
             // Wait for QuickMove to finish
             float moveDistance = InitParams.EndPositionX * 2 + 2.25f;
-            float moveDuration = 0.35f;
+            float moveDuration = 0.2f;
             yield return QuickMove(moveDistance, moveDuration);
 
             // Re-run to reappear
-            yield return SmokeBall(false);
+            yield return SneakStrike(false);
         } 
 
         public override void OnStrikeTarget(int isFinalHit)
         {
-            Opponent.DoHurtAnimation(-4, 0.45f);
+            // Negative to push opponent forward instead of standard knockback
+            Opponent.DoHurtAnimation(-4, 0.45f); 
             
             if (isFinalHit != 1) return;
             
