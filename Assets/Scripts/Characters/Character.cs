@@ -151,7 +151,7 @@ namespace Characters
             Anim.SetTrigger(Set);
         }
 
-        private void Attack() => Anim.SetBool(Attacking, true);
+        protected virtual void Attack() => Anim.SetBool(Attacking, true);
 
         [UsedImplicitly]
         public virtual void OnStrikeTarget(int isFinalHit)
