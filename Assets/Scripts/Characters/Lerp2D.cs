@@ -7,6 +7,8 @@ namespace Characters
     public static class Lerp2D
     {
         // https://easings.net/
+        public static float NoEase(float t) => t;
+        
         public static float EaseInSine(float t) =>
             1 - Mathf.Cos((t * Mathf.PI) / 2);
 

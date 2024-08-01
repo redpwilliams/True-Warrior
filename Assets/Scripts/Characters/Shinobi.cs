@@ -92,10 +92,11 @@ namespace Characters
             // Wait for QuickMove to finish
             float moveDistance = InitParams.EndPositionX * 2 + 2.25f;
             float moveDuration = 0.2f;
-            yield return QuickMove(moveDistance, moveDuration, function: Lerp2D.EaseInQuart);
+            yield return QuickMove(moveDistance, moveDuration, function: Lerp2D.NoEase);
 
             // Re-run to reappear
             yield return SneakStrike(false);
+            // TODO - Start Attacking while reappearing
         } 
 
         public override void OnStrikeTarget(int isFinalHit)
