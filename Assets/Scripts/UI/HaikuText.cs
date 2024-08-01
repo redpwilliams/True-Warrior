@@ -31,7 +31,7 @@ namespace UI
         private void Start()
         {
             var haikus = new JsonReader().Haikus;
-            StartCoroutine(HaikuCountdown(haikus));
+            // StartCoroutine(HaikuCountdown(haikus));
         }
 
         private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus)
