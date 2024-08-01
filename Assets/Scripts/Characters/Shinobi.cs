@@ -47,9 +47,18 @@ namespace Characters
             float startIntensity = shouldDisappear ? initialIntensity : targetFadeIntensity;
             float endIntensity = shouldDisappear ? targetFadeIntensity : initialIntensity;
 
-            float animationDuration = 0.5f;
+            float animationDuration = 0.12f;
             float elapsedTime = 0f;
                 
+            // Start QuickMove 
+            if (shouldDisappear)
+            {
+                float moveDistance = InitParams.EndPositionX * 2 + 2.25f;
+                float moveDuration = 0.2f;
+                StartCoroutine(QuickMove(moveDistance, moveDuration,
+                    function: Lerp2D.NoEase));
+            }
+
             while (elapsedTime < animationDuration)
             {
                 float t = elapsedTime / animationDuration;
@@ -89,11 +98,6 @@ namespace Characters
                 yield break;
             }
             
-            // Wait for QuickMove to finish
-            float moveDistance = InitParams.EndPositionX * 2 + 2.25f;
-            float moveDuration = 0.2f;
-            yield return QuickMove(moveDistance, moveDuration, function: Lerp2D.NoEase);
-
             // Re-run to reappear
             yield return SneakStrike(false);
             // TODO - Start Attacking while reappearing
