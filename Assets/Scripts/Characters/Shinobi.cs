@@ -8,34 +8,17 @@ namespace Characters
     public class Shinobi : Character
     {
         [Header("Rise/Fall Speeds")]
-        [SerializeField] private float _risingGravityScale = 5f;
-        [SerializeField] private float _fallingGravityScale = 10f;
-        private static readonly int Falling = Animator.StringToHash("ShouldFall");
-
-        [Header("Jump & Attack Forces")]
-        [SerializeField] private float _jumpUpwardForce = 350f;
-        [SerializeField] private float _jumpForwardForce = 80f;
-        private static readonly int Slashing = Animator.StringToHash("ShouldSlash");
 
         private SpriteRenderer _sr;
         private Light2D _light;
-
         
         protected override void Start()
         {
             base.Start();
-            Rb2d.gravityScale = _risingGravityScale;
             _sr = GetComponent<SpriteRenderer>();
             _light = GetComponent<Light2D>();
         }
 
-        private void Update()
-        {
-            if (!(Rb2d.velocity.y < 0f)) return;
-            Anim.SetTrigger(Falling);
-            Rb2d.gravityScale = _fallingGravityScale;
-        }
-        
         protected override string CharacterTitle() => "Shinobi/忍び";
 
         #region Animation Events
@@ -94,6 +77,9 @@ namespace Characters
                 
                 cachedTransform.localScale = new Vector3(
                     localScale.x * -1, localScale.y, localScale.z);
+
+                // Flip child character text object
+                CharText.Flip();       
                 
                 base.Attack(); // Init attack and slash animation
                 yield break;
@@ -102,7 +88,7 @@ namespace Characters
             // Wait for QuickMove to finish
             float moveDistance = InitParams.EndPositionX * 2 + 2.25f;
             float moveDuration = 0.2f;
-            yield return QuickMove(moveDistance, moveDuration);
+            yield return QuickMove(moveDistance, moveDuration, function: Lerp2D.EaseInQuart);
 
             // Re-run to reappear
             yield return SneakStrike(false);
@@ -119,13 +105,6 @@ namespace Characters
             base.OnStrikeTarget(isFinalHit);
         }
         
-        public override void OnFinishAttack()
-        {
-            base.OnFinishAttack();
-            Anim.ResetTrigger(Falling);
-            Rb2d.gravityScale = _risingGravityScale;
-        }
-
         #endregion
         
     }

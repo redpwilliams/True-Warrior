@@ -84,5 +84,12 @@ namespace Characters
             _tmp.alpha = 0;
         }
 
+        public void Flip()
+        {
+            var cachedLocalScale = _rt.localScale;
+            _rt.localScale = new Vector3(cachedLocalScale.x * -1,
+                cachedLocalScale.y, cachedLocalScale.z);
+        }
+
     }
 }

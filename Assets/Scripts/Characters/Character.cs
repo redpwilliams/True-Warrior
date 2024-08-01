@@ -38,7 +38,7 @@ namespace Characters
         private static readonly int Return = Animator.StringToHash("ShouldReturn");
 
         protected Character Opponent;
-        private CharacterText _characterText;
+        protected CharacterText CharText;
         private ReactionInfo _battleData;
         private bool _firstContact = true;
 
@@ -50,7 +50,7 @@ namespace Characters
             _transform = transform;
             _controls = new Controls();
 
-            _characterText = GetComponentInChildren<CharacterText>();
+            CharText = GetComponentInChildren<CharacterText>();
         }
 
         private void OnEnable()
@@ -117,7 +117,7 @@ namespace Characters
             string title = (_playerType == PlayerType.One)
                 ? "You"
                 : CharacterTitle();
-            _characterText.DisplayTitle(title);
+            CharText.DisplayTitle(title);
         }
 
         #region Movement and Positioning
@@ -202,7 +202,7 @@ namespace Characters
                 this, context.time); 
             _controls.Player1.Disable();
             
-            _characterText.ShowReactionTime(_battleData.ReactionTime);
+            CharText.ShowReactionTime(_battleData.ReactionTime);
             DetermineReactionAnimation(_battleData.Winner);
         }
 
@@ -216,7 +216,7 @@ namespace Characters
             _battleData  = EventManager.Events.CharacterInputsAttack(
                 this, Time.realtimeSinceStartupAsDouble); 
             
-            _characterText.ShowReactionTime(_battleData.ReactionTime);
+            CharText.ShowReactionTime(_battleData.ReactionTime);
             DetermineReactionAnimation(_battleData.Winner);
         }
 
@@ -243,8 +243,9 @@ namespace Characters
             StartCoroutine(QuickMove(knockbackDistance, knockbackDuration, true));
         }
 
-        protected IEnumerator QuickMove(float moveDistance, float 
-            moveDuration, bool isKnockback = false)
+        protected delegate float Lerp2DFunction(float t);
+        protected IEnumerator QuickMove(float moveDistance, float moveDuration, 
+            bool isKnockback = false, Lerp2DFunction function = null)
         {
             // Push direction
             int direction = GetDirection();
@@ -255,14 +256,16 @@ namespace Characters
             Vector2 targetPosition = new Vector2(
                 currentPosition.x + direction * moveDistance, 
                 currentPosition.y);
+            
+            // Determine timing function
+            function ??= Lerp2D.EaseOutQuart; // EaseOutQuart is default
 
             float elapsedTime = 0f;
             while (elapsedTime < moveDuration)
             {
                 float t = elapsedTime / moveDuration;
 
-                var position = Vector2.Lerp(currentPosition, targetPosition,
-                    Lerp2D.EaseOutQuart(t));
+                var position = Vector2.Lerp(currentPosition, targetPosition, function(t));
                 Rb2d.MovePosition(position);
                 elapsedTime += Time.deltaTime;
                 yield return null;
@@ -307,7 +310,7 @@ namespace Characters
 
         private void ShowReactionTimeAsLate()
         {
-            _characterText.ShowReactionTime("Late");
+            CharText.ShowReactionTime("Late");
             _controls.Disable();
         }
 
