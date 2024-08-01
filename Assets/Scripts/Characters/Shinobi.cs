@@ -5,18 +5,22 @@ using UnityEngine.Rendering.Universal;
 
 namespace Characters
 {
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Light2D))]
     public class Shinobi : Character
     {
         [Header("Rise/Fall Speeds")]
 
         private SpriteRenderer _sr;
         private Light2D _light;
+        private CharacterText _ct;
         
         protected override void Start()
         {
             base.Start();
             _sr = GetComponent<SpriteRenderer>();
             _light = GetComponent<Light2D>();
+            _ct = GetComponentInChildren<CharacterText>();
         }
 
         protected override string CharacterTitle() => "Shinobi/忍び";
@@ -79,7 +83,7 @@ namespace Characters
                     localScale.x * -1, localScale.y, localScale.z);
 
                 // Flip child character text object
-                CharText.Flip();       
+                _ct.Flip();       
                 
                 base.Attack(); // Init attack and slash animation
                 yield break;

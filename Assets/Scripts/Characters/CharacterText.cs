@@ -4,6 +4,8 @@ using TMPro;
 
 namespace Characters
 {
+    [RequireComponent(typeof(TextMeshPro))]
+    [RequireComponent(typeof(RectTransform))]
     public class CharacterText : MonoBehaviour
     {
         private TextMeshPro _tmp;
@@ -87,8 +89,7 @@ namespace Characters
         public void Flip()
         {
             var cachedLocalScale = _rt.localScale;
-            _rt.localScale = new Vector3(cachedLocalScale.x * -1,
-                cachedLocalScale.y, cachedLocalScale.z);
+            _rt.localScale = new Vector3(cachedLocalScale.x * -1, cachedLocalScale.y, cachedLocalScale.z);
         }
 
     }

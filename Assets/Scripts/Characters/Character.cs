@@ -38,7 +38,7 @@ namespace Characters
         private static readonly int Return = Animator.StringToHash("ShouldReturn");
 
         protected Character Opponent;
-        protected CharacterText CharText;
+        private CharacterText _characterText;
         private ReactionInfo _battleData;
         private bool _firstContact = true;
 
@@ -50,7 +50,7 @@ namespace Characters
             _transform = transform;
             _controls = new Controls();
 
-            CharText = GetComponentInChildren<CharacterText>();
+            _characterText = GetComponentInChildren<CharacterText>();
         }
 
         private void OnEnable()
@@ -117,7 +117,7 @@ namespace Characters
             string title = (_playerType == PlayerType.One)
                 ? "You"
                 : CharacterTitle();
-            CharText.DisplayTitle(title);
+            _characterText.DisplayTitle(title);
         }
 
         #region Movement and Positioning
@@ -202,7 +202,7 @@ namespace Characters
                 this, context.time); 
             _controls.Player1.Disable();
             
-            CharText.ShowReactionTime(_battleData.ReactionTime);
+            _characterText.ShowReactionTime(_battleData.ReactionTime);
             DetermineReactionAnimation(_battleData.Winner);
         }
 
@@ -216,7 +216,7 @@ namespace Characters
             _battleData  = EventManager.Events.CharacterInputsAttack(
                 this, Time.realtimeSinceStartupAsDouble); 
             
-            CharText.ShowReactionTime(_battleData.ReactionTime);
+            _characterText.ShowReactionTime(_battleData.ReactionTime);
             DetermineReactionAnimation(_battleData.Winner);
         }
 
@@ -310,7 +310,7 @@ namespace Characters
 
         private void ShowReactionTimeAsLate()
         {
-            CharText.ShowReactionTime("Late");
+            _characterText.ShowReactionTime("Late");
             _controls.Disable();
         }
 
