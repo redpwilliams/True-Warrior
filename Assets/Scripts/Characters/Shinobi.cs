@@ -9,11 +9,11 @@ namespace Characters
     [RequireComponent(typeof(Light2D))]
     public class Shinobi : Character
     {
-        [Header("Rise/Fall Speeds")]
-
         private SpriteRenderer _sr;
         private Light2D _light;
         private CharacterText _ct;
+
+        private float _initialIntensity;
         
         protected override void Start()
         {
@@ -21,6 +21,8 @@ namespace Characters
             _sr = GetComponent<SpriteRenderer>();
             _light = GetComponent<Light2D>();
             _ct = GetComponentInChildren<CharacterText>();
+            
+            _initialIntensity = _light.intensity;
         }
 
         protected override string CharacterTitle() => "Shinobi/忍び";
@@ -34,18 +36,21 @@ namespace Characters
             StartCoroutine(SneakStrike(true));
         }
 
-        private IEnumerator SneakStrike(bool shouldDisappear)
+        private IEnumerator SneakStrike(bool shouldDisappear, Lerp2DFunction 
+        function = null)
         {
+            // Handle null easing function
+            function ??= Lerp2D.NoEase;
+            
             // Sprite alpha
             float startAlpha = shouldDisappear ? 1 : 0;
             float endAlpha = shouldDisappear ? 0 : 1;
             Color sc = _sr.material.color;
                 
             // Light2D intensity
-            float initialIntensity = _light.intensity;
             float targetFadeIntensity = 0.3f;
-            float startIntensity = shouldDisappear ? initialIntensity : targetFadeIntensity;
-            float endIntensity = shouldDisappear ? targetFadeIntensity : initialIntensity;
+            float startIntensity = shouldDisappear ? _initialIntensity : targetFadeIntensity;
+            float endIntensity = shouldDisappear ? targetFadeIntensity : _initialIntensity;
 
             float animationDuration = 0.12f;
             float elapsedTime = 0f;
@@ -66,11 +71,11 @@ namespace Characters
                 // Animate sprite alpha
                 _sr.material.color =
                     new Color(sc.r, sc.g, sc.b, Mathf.Lerp(startAlpha, 
-                        endAlpha, Lerp2D.EaseOutExpo(t)));
+                        endAlpha, function(t)));
                     
                 // Animate sprite light intensity
                 _light.intensity = Mathf.Lerp(startIntensity,
-                    endIntensity, Lerp2D.EaseOutExpo(t));
+                    endIntensity, function(t));
 
                 elapsedTime += Time.deltaTime;
                 yield return null;
@@ -99,7 +104,7 @@ namespace Characters
             }
             
             // Re-run to reappear
-            yield return SneakStrike(false);
+            yield return SneakStrike(false, Lerp2D.EaseOutBack);
             // TODO - Start Attacking while reappearing
         } 
 
