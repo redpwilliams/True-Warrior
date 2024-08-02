@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class MenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler
+    public class MenuButton : MonoBehaviour, ISelectHandler, 
+    IDeselectHandler, ISubmitHandler
     {
         private readonly float _moveOffset = 15f;
         [SerializeField] private GameObject _enChild;
@@ -25,6 +26,11 @@ namespace UI
         public void OnDeselect(BaseEventData eventData)
         {
             StartCoroutine(Move(false));
+        }
+
+        public void OnSubmit(BaseEventData eventData)
+        {
+            Debug.Log("Submitted " + this.name);
         }
 
         private IEnumerator Move(bool outWards)
