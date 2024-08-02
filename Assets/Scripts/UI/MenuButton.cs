@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace UI
 {
     public class MenuButton : MonoBehaviour, ISelectHandler, 
-    IDeselectHandler, ISubmitHandler
+    IDeselectHandler, ISubmitHandler, ICancelHandler
     {
         private readonly float _moveOffset = 15f;
         [SerializeField] private GameObject _enChild;
@@ -42,6 +42,11 @@ namespace UI
         public void OnSubmit(BaseEventData eventData)
         {
             EventManager.Events.MenuButtonSubmit(_type);
+        }
+
+        public void OnCancel(BaseEventData eventData)
+        {
+            EventManager.Events.MenuButtonCancel();
         }
 
         private IEnumerator Move(bool outWards)

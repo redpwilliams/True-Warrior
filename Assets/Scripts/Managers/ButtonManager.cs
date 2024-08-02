@@ -8,19 +8,25 @@ namespace Managers
     public class ButtonManager : MonoBehaviour
     {
 
-        private float _moveOffset = -200f;
+        private readonly float _moveOffset = -200f;
         private RectTransform _rt;
 
         private void Start()
         {
             _rt = GetComponent<RectTransform>();
             EventManager.Events.OnMenuButtonSubmit += HandleSubmit;
+            EventManager.Events.OnMenuButtonCancel += HandleCancel;
         }
 
         private void HandleSubmit(MenuButton.ButtonClass type)
         {
             print(type);
             StartCoroutine(MoveMenu(true));
+        }
+
+        private void HandleCancel()
+        {
+            StartCoroutine(MoveMenu(false));
         }
 
         private IEnumerator MoveMenu(bool isSubmit)

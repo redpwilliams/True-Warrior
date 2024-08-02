@@ -65,6 +65,13 @@ namespace Managers
             OnMenuButtonSubmit?.Invoke(type);
         }
 
+        public event Action OnMenuButtonCancel;
+
+        public void MenuButtonCancel()
+        {
+            OnMenuButtonCancel?.Invoke();
+        }
+
         #endregion
 
         #region Input
