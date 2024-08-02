@@ -1,5 +1,6 @@
 using System;
 using Characters;
+using UI;
 using UnityEngine;
 
 namespace Managers
@@ -55,13 +56,16 @@ namespace Managers
 
         #endregion
 
-        public event Action OnCharacterAttacks;
+        #region Menu
 
-        public void CharacterAttacks()
+        public event Action<MenuButton.ButtonClass> OnMenuButtonSubmit;
+
+        public void MenuButtonSubmit(MenuButton.ButtonClass type)
         {
-            Debug.Log("A character has attacked");
-            OnCharacterAttacks?.Invoke();
+            OnMenuButtonSubmit?.Invoke(type);
         }
+
+        #endregion
 
         #region Input
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,16 @@ namespace UI
         [SerializeField] private GameObject _enChild;
         [SerializeField] private GameObject _jpChild;
         private RectTransform _en, _jp;
+
+        public enum ButtonClass
+        {
+            Play,
+            Instructions,
+            Options,
+            Quit
+        };
+
+        [SerializeField] private ButtonClass _type;
 
         private void Start()
         {
@@ -30,7 +41,7 @@ namespace UI
 
         public void OnSubmit(BaseEventData eventData)
         {
-            Debug.Log("Submitted " + this.name);
+            EventManager.Events.MenuButtonSubmit(_type);
         }
 
         private IEnumerator Move(bool outWards)
