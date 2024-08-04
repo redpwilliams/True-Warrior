@@ -58,6 +58,7 @@ namespace Managers
 
         #region Menu
 
+        /// Fires when any MenuButton is logged as "submitted"
         public event Action<MenuButton.ButtonClass> OnMenuButtonSubmit;
 
         public void MenuButtonSubmit(MenuButton.ButtonClass type)
@@ -65,12 +66,17 @@ namespace Managers
             OnMenuButtonSubmit?.Invoke(type);
         }
 
+        /// Fires when any MenuButton is cancels out of its state
         public event Action OnMenuButtonCancel;
 
         public void MenuButtonCancel()
         {
             OnMenuButtonCancel?.Invoke();
         }
+
+        /// Fires when a menu button self-reports it gets deselected
+        public event Action OnMenuButtonDeselect;
+        public void MenuButtonDeselect() => OnMenuButtonDeselect?.Invoke();
 
         #endregion
 

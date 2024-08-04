@@ -10,6 +10,7 @@ namespace Managers
 
         private readonly float _moveOffset = -200f;
         private RectTransform _rt;
+        private bool _buttonIsSelected;
 
         private void Start()
         {
@@ -20,13 +21,17 @@ namespace Managers
 
         private void HandleSubmit(MenuButton.ButtonClass type)
         {
+            if (_buttonIsSelected) return;
             print(type);
+            _buttonIsSelected = true;
             StartCoroutine(MoveMenu(true));
         }
 
         private void HandleCancel()
         {
+            if (!_buttonIsSelected) return;
             StartCoroutine(MoveMenu(false));
+            _buttonIsSelected = false;
         }
 
         private IEnumerator MoveMenu(bool isSubmit)

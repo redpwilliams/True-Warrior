@@ -37,6 +37,17 @@ namespace UI
         public void OnDeselect(BaseEventData eventData)
         {
             StartCoroutine(Move(false));
+            StartCoroutine(WaitAndCheck());
+
+            IEnumerator WaitAndCheck()
+            {
+                // Wait one frame
+                // (to let EventSystem update currentSelectedGameObject
+                yield return null;
+                
+                if (EventSystem.current.currentSelectedGameObject == null)
+                    EventManager.Events.MenuButtonCancel();
+            }
         }
 
         public void OnSubmit(BaseEventData eventData)
