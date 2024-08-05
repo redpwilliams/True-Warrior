@@ -37,9 +37,9 @@ namespace UI
         public void OnDeselect(BaseEventData eventData)
         {
             StartCoroutine(Move(false));
-            StartCoroutine(WaitAndCheck(eventData));
+            StartCoroutine(WaitAndCheck());
 
-            IEnumerator WaitAndCheck(BaseEventData bed)
+            IEnumerator WaitAndCheck()
             {
                 // Wait one frame
                 // (to let EventSystem update currentSelectedGameObject
