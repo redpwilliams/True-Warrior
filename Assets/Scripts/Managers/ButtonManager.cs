@@ -22,7 +22,6 @@ namespace Managers
         private void HandleSubmit(MenuButton.ButtonClass type)
         {
             if (_buttonIsSelected) return;
-            print(type);
             _buttonIsSelected = true;
             StartCoroutine(MoveMenu(true));
         }
