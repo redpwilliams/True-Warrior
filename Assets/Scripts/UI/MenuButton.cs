@@ -35,12 +35,12 @@ namespace UI
 
         public void OnSelect(BaseEventData eventData)
         {
-            StartCoroutine(Move(true));
+            StartCoroutine(MoveButton(true));
         }
 
         public void OnDeselect(BaseEventData eventData)
         {
-            StartCoroutine(Move(false));
+            StartCoroutine(MoveButton(false));
             StartCoroutine(WaitAndCheck());
 
             IEnumerator WaitAndCheck()
@@ -50,23 +50,23 @@ namespace UI
                 yield return null;
                 
                 if (EventSystem.current.currentSelectedGameObject is null)
-                    EventManager.Events.MenuButtonCancel();
+                    EventManager.Events.MenuButtonCancel(_subMenu);
             }
         }
 
         public void OnSubmit(BaseEventData eventData)
         {
-            EventManager.Events.MenuButtonSubmit(_type);
+            EventManager.Events.MenuButtonSubmit(_subMenu);
             
-            if (_subMenu != null) _subMenu.SetActive(true);
+            // if (_subMenu != null) _subMenu.SetActive(true);
         }
 
         public void OnCancel(BaseEventData eventData)
         {
-            EventManager.Events.MenuButtonCancel();
+            EventManager.Events.MenuButtonCancel(_subMenu);
         }
 
-        private IEnumerator Move(bool outWards)
+        private IEnumerator MoveButton(bool outWards)
         {
             // print(this.name + " is moving " + (outWards ? "outwards" : "inwards"));
             float start = outWards ? 0 : _moveOffset;

@@ -1,6 +1,5 @@
 using System.Collections;
 using Characters;
-using UI;
 using UnityEngine;
 
 namespace Managers
@@ -19,22 +18,25 @@ namespace Managers
             EventManager.Events.OnMenuButtonCancel += HandleCancel;
         }
 
-        private void HandleSubmit(MenuButton.ButtonClass type)
+        private void HandleSubmit(GameObject subMenu)
         {
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
-            StartCoroutine(MoveMenu(true));
+            StartCoroutine(MoveMenu(true, subMenu));
         }
 
-        private void HandleCancel()
+        private void HandleCancel(GameObject subMenu)
         {
             if (!_buttonIsSelected) return;
-            StartCoroutine(MoveMenu(false));
+            StartCoroutine(MoveMenu(false, subMenu));
             _buttonIsSelected = false;
         }
 
-        private IEnumerator MoveMenu(bool isSubmit)
+        private IEnumerator MoveMenu(bool isSubmit, GameObject subMenu)
         {
+            // Remove sub menu before animating main menu move in
+            if (!isSubmit) subMenu.SetActive(false);
+            
             float start = isSubmit ?  0 : _moveOffset;
             float end = isSubmit  ? _moveOffset : 0;
 
@@ -57,6 +59,9 @@ namespace Managers
             }
 
             _rt.localPosition = endPosition;
+            
+            // Show sub menu after animating main menu move out
+            if (isSubmit) subMenu.SetActive(true);
         }
     }
 }
