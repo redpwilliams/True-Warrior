@@ -17,26 +17,13 @@ namespace UI
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
 
-        public enum ButtonClass
-        {
-            Play,
-            Instructions,
-            Options,
-            Quit
-        };
-
-        [SerializeField] private ButtonClass _type;
-
         private void Start()
         {
             _en = _enChild.GetComponent<RectTransform>();
             _jp = _jpChild.GetComponent<RectTransform>();
         }
 
-        public void OnSelect(BaseEventData eventData)
-        {
-            StartCoroutine(MoveButton(true));
-        }
+        public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
 
         public void OnDeselect(BaseEventData eventData)
         {
@@ -54,21 +41,12 @@ namespace UI
             }
         }
 
-        public void OnSubmit(BaseEventData eventData)
-        {
-            EventManager.Events.MenuButtonSubmit(_subMenu);
-            
-            // if (_subMenu != null) _subMenu.SetActive(true);
-        }
+        public void OnSubmit(BaseEventData eventData) => EventManager.Events.MenuButtonSubmit(_subMenu);
 
-        public void OnCancel(BaseEventData eventData)
-        {
-            EventManager.Events.MenuButtonCancel(_subMenu);
-        }
+        public void OnCancel(BaseEventData eventData) => EventManager.Events.MenuButtonCancel(_subMenu);
 
         private IEnumerator MoveButton(bool outWards)
         {
-            // print(this.name + " is moving " + (outWards ? "outwards" : "inwards"));
             float start = outWards ? 0 : _moveOffset;
             float end = outWards ? _moveOffset : 0;
             
