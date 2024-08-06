@@ -9,9 +9,13 @@ namespace UI
     IDeselectHandler, ISubmitHandler, ICancelHandler
     {
         private readonly float _moveOffset = 15f;
+        [Header("Child references")]
         [SerializeField] private GameObject _enChild;
         [SerializeField] private GameObject _jpChild;
         private RectTransform _en, _jp;
+
+        [Header("Sub menu reference")] 
+        [SerializeField] private GameObject _subMenu;
 
         public enum ButtonClass
         {
@@ -53,6 +57,8 @@ namespace UI
         public void OnSubmit(BaseEventData eventData)
         {
             EventManager.Events.MenuButtonSubmit(_type);
+            
+            if (_subMenu != null) _subMenu.SetActive(true);
         }
 
         public void OnCancel(BaseEventData eventData)
