@@ -1,28 +1,14 @@
-using System;
-using System.Collections;
-using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class SubMenuButton : MonoBehaviour, ISelectHandler, 
-    IDeselectHandler, ISubmitHandler, ICancelHandler, IAnimatableButton
+    public class SubMenuButton : Button  
     {
-        private readonly float _moveOffset = 15f;
-        [Header("Child references")]
-        [SerializeField] private GameObject _enChild;
-        [SerializeField] private GameObject _jpChild;
-        private RectTransform _en, _jp;
 
-        private void OnEnable()
-        {
-            _en = _enChild.GetComponent<RectTransform>();
-            _jp = _jpChild.GetComponent<RectTransform>();
-        }
-
-        public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
+        public override void OnSelect(BaseEventData eventData) => StartCoroutine
+        (MoveButton(true));
         
-        public void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
+        public void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(false));
 
 
         public void OnSubmit(BaseEventData eventData)
@@ -35,37 +21,5 @@ namespace UI
             throw new System.NotImplementedException();
         }
 
-        public IEnumerator MoveButton(bool outWards)
-        {
-            // Wait one frame - gives time for Start?
-            
-            
-            float start = outWards ? 0 : _moveOffset;
-            float end = outWards ? _moveOffset : 0;
-            
-            var enLocalPosition = _en.localPosition;
-            var jpLocalPosition = _jp.localPosition;
-            Vector3 enStartPosition = new Vector3(start, enLocalPosition.y, enLocalPosition.z);
-            Vector3 jpStartPosition = new Vector3(start, jpLocalPosition.y, jpLocalPosition.z);
-            Vector3 enEndPosition = new Vector3(end, enLocalPosition.y, enLocalPosition.z);
-            Vector3 jpEndPosition = new Vector3(end, jpLocalPosition.y, jpLocalPosition.z);
-
-            float timeElapsed = 0f;
-            float moveDuration = 0.1f;
-
-            while (timeElapsed < moveDuration)
-            {
-                float t = timeElapsed / moveDuration;
-
-                _en.localPosition = Vector3.Lerp(enStartPosition, enEndPosition, t);
-                _jp.localPosition = Vector3.Lerp(jpStartPosition, jpEndPosition, t);
-
-                timeElapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            _en.localPosition = enEndPosition;
-            _jp.localPosition = jpEndPosition;
-        }
     }
 }
