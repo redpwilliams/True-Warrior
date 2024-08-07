@@ -11,6 +11,7 @@ namespace Managers
         private readonly float _moveOffset = -200f;
         private RectTransform _rt;
         private bool _buttonIsSelected;
+        private GameObject _activeSubMenu;
 
         private void Start()
         {

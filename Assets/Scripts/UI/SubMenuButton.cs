@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine.EventSystems;
 
 namespace UI
@@ -6,12 +7,18 @@ namespace UI
     {
         public override void OnSubmit(BaseEventData eventData)
         {
-            throw new System.NotImplementedException();
+            print("submitted this button");
         }
 
         public override void OnCancel(BaseEventData eventData)
         {
-            throw new System.NotImplementedException();
+            print("cancelled this button");
+            if (eventData.selectedObject == null)
+            {
+                EventManager.Events.MenuButtonCancel(null);
+                return;
+            }
+            print(eventData.selectedObject);
         }
 
     }

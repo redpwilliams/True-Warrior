@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -50,11 +51,23 @@ namespace UI
             _jp.localPosition = jpEndPosition;
         }
 
+        protected delegate void RunOnCancel();
+        /// Determines if it was a general deselect or a menu click-off
+        protected IEnumerator WaitAndCheck(RunOnCancel onCancelFunction)
+        {
+            // Wait one frame
+            // (to let EventSystem update currentSelectedGameObject
+            yield return null;
+
+            if (EventSystem.current.currentSelectedGameObject is null)
+                onCancelFunction();
+        }
+
         /// Starts the MoveButton Coroutine, moving the button outwards
         public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
 
         /// Starts the MoveButton Coroutine, returning the button inwards
-        public void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(false));
+        public virtual void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(false));
 
         /// Fires when this button is active and EventSystem captures a "submit" input
         public abstract void OnSubmit(BaseEventData eventData);
