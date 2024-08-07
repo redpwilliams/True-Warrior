@@ -15,7 +15,7 @@ namespace UI
             StartCoroutine(WaitAndCheck(() =>
             {
                 if (EventSystem.current.currentSelectedGameObject is null)
-                    EventManager.Events.SubMenuButtonCancel(null);
+                    EventManager.Events.SubMenuButtonCancel(null); // Button was clicked off
             }));
         }
         
