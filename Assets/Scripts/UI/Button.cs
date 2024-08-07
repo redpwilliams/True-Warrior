@@ -51,23 +51,23 @@ namespace UI
         }
 
         /// Synchronous function to run after waiting
-        protected delegate void CheckFunction();
+        protected delegate void CheckFunctionSync();
 
         /// Determines if it was a general deselect or a menu click-off, synchronously
-        protected static IEnumerator WaitAndCheck(CheckFunction function)
+        protected static IEnumerator WaitAndCheck(CheckFunctionSync functionSync)
         {
             yield return null;
-            function();
+            functionSync();
         }
         
         // Asynchronous function to run after waiting
-        protected delegate IEnumerator FunctionAsync();
+        protected delegate IEnumerator CheckFunctionAsync();
 
         /// Determines if it was a general deselect or a menu click-off, synchronously
-        protected static IEnumerator WaitAndCheck(FunctionAsync function)
+        protected static IEnumerator WaitAndCheck(CheckFunctionAsync checkFunction)
         {
             yield return null;
-            yield return function();
+            yield return checkFunction();
         }
 
         /// Starts the MoveButton Coroutine, moving the button outwards
