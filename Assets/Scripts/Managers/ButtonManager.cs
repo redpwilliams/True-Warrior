@@ -46,6 +46,7 @@ namespace Managers
 
         private void HandleSubMenuCancel(GameObject nowActiveButton)
         {
+            _buttonIsSelected = false;
             StartCoroutine(MoveMenu(false, _activeSubMenu, nowActiveButton));
         }
 
