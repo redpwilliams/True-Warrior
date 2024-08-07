@@ -58,7 +58,7 @@ namespace Managers
             { 
                 _activeSubMenu.SetActive(false);
                 _activeSubMenu = null;
-                // TODO: reset active main menu button
+                EventSystem.current.SetSelectedGameObject(nowActiveButton);
             }
             
             float start = isSubmit ?  0 : _moveOffset;
