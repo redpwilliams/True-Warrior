@@ -18,11 +18,10 @@ namespace UI
             _en = _enChild.GetComponent<RectTransform>();
             _jp = _jpChild.GetComponent<RectTransform>();
         }
+        
+        /// Moves this button both outward/inward by a predetermined offset
         protected IEnumerator MoveButton(bool outWards)
         {
-            // Wait one frame - gives time for Start?
-            
-            
             float start = outWards ? 0 : _moveOffset;
             float end = outWards ? _moveOffset : 0;
             
@@ -51,21 +50,16 @@ namespace UI
             _jp.localPosition = jpEndPosition;
         }
 
-        public abstract void OnSelect(BaseEventData eventData);
+        /// Starts the MoveButton Coroutine, moving the button outwards
+        public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
 
-        public void OnDeselect(BaseEventData eventData)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// Starts the MoveButton Coroutine, returning the button inwards
+        public void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(false));
 
-        public void OnSubmit(BaseEventData eventData)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// Fires when this button is active and EventSystem captures a "submit" input
+        public abstract void OnSubmit(BaseEventData eventData);
 
-        public void OnCancel(BaseEventData eventData)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// Fires when this button is active and EventSystem captures a "cancel" input
+        public abstract void OnCancel(BaseEventData eventData);
     }
 }
