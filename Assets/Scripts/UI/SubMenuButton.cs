@@ -8,6 +8,16 @@ namespace UI
     public class SubMenuButton : Button
     {
         [SerializeField] private GameObject _parentButton;
+
+        public override void OnDeselect(BaseEventData eventData)
+        {
+            base.OnDeselect(eventData);
+            StartCoroutine(WaitAndCheck(() =>
+            {
+                if (EventSystem.current.currentSelectedGameObject is null)
+                    EventManager.Events.SubMenuButtonCancel(null);
+            }));
+        }
         
         public override void OnSubmit(BaseEventData eventData)
         {
@@ -23,17 +33,24 @@ namespace UI
              * Cancel by moving left - remove sub menu but keep active main menu button
              * "inputLeftCancel"
              */
-            StartCoroutine(WaitAndCheck());
+            StartCoroutine(WaitAndCheck(() =>
+            { 
+                EventManager.Events.SubMenuButtonCancel(
+                    EventSystem.current.currentSelectedGameObject is null 
+                        ? null 
+                        : _parentButton);
+                
+            }));
         }
 
-        protected override IEnumerator WaitAndCheck()
-        {
-            yield return null;
-
-            EventManager.Events.SubMenuButtonCancel
-                (EventSystem.current.currentSelectedGameObject is null 
-                    ? null 
-                    : _parentButton);
-        }
+        // protected override IEnumerator WaitAndCheck()
+        // {
+        //     yield return null;
+        //
+        //     EventManager.Events.SubMenuButtonCancel
+        //         (EventSystem.current.currentSelectedGameObject is null 
+        //             ? null 
+        //             : _parentButton);
+        // }
     }
 }

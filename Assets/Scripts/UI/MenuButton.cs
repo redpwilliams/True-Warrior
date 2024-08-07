@@ -13,21 +13,14 @@ namespace UI
 
         public override void OnDeselect(BaseEventData eventData)
         {
-            StartCoroutine(MoveButton(false));
-            StartCoroutine(WaitAndCheck());
+            base.OnDeselect(eventData);
+            StartCoroutine(WaitAndCheck(() =>
+            {
+                if (EventSystem.current.currentSelectedGameObject is null)
+                    EventManager.Events.MenuButtonCancel(_subMenu);
+            }));
         }
         
-        protected override IEnumerator WaitAndCheck()
-        {
-            // Wait one frame
-            // (to let EventSystem update currentSelectedGameObject
-            yield return null;
-
-            if (EventSystem.current.currentSelectedGameObject is null)
-                EventManager.Events.MenuButtonCancel(_subMenu);
-        }
-
-
         public override void OnSubmit(BaseEventData eventData) 
             => EventManager.Events.MenuButtonSubmit(_subMenu, _firstButton);
 

@@ -51,8 +51,15 @@ namespace UI
             _jp.localPosition = jpEndPosition;
         }
 
+        /// Function to run after waiting
+        protected delegate void CheckFunction();
+
         /// Determines if it was a general deselect or a menu click-off
-        protected abstract IEnumerator WaitAndCheck();
+        protected IEnumerator WaitAndCheck(CheckFunction function)
+        {
+            yield return null;
+            function();
+        }
 
         /// Starts the MoveButton Coroutine, moving the button outwards
         public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
