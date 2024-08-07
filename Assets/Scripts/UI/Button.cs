@@ -1,5 +1,4 @@
 using System.Collections;
-using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,7 +20,7 @@ namespace UI
         }
         
         /// Moves this button both outward/inward by a predetermined offset
-        protected IEnumerator MoveButton(bool outWards)
+        private IEnumerator MoveButton(bool outWards)
         {
             float start = outWards ? 0 : _moveOffset;
             float end = outWards ? _moveOffset : 0;
@@ -55,7 +54,7 @@ namespace UI
         protected delegate void CheckFunction();
 
         /// Determines if it was a general deselect or a menu click-off
-        protected IEnumerator WaitAndCheck(CheckFunction function)
+        protected static IEnumerator WaitAndCheck(CheckFunction function)
         {
             yield return null;
             function();
