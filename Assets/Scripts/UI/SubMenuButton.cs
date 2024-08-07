@@ -33,24 +33,16 @@ namespace UI
              * Cancel by moving left - remove sub menu but keep active main menu button
              * "inputLeftCancel"
              */
-            StartCoroutine(WaitAndCheck(() =>
-            { 
+            StartCoroutine(WaitAndCheck(CheckAsync));
+
+            IEnumerator CheckAsync()
+            {
+                yield return MoveButton(false);
                 EventManager.Events.SubMenuButtonCancel(
                     EventSystem.current.currentSelectedGameObject is null 
                         ? null 
                         : _parentButton);
-                
-            }));
+            }
         }
-
-        // protected override IEnumerator WaitAndCheck()
-        // {
-        //     yield return null;
-        //
-        //     EventManager.Events.SubMenuButtonCancel
-        //         (EventSystem.current.currentSelectedGameObject is null 
-        //             ? null 
-        //             : _parentButton);
-        // }
     }
 }

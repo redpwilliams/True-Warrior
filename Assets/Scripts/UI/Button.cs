@@ -20,7 +20,7 @@ namespace UI
         }
         
         /// Moves this button both outward/inward by a predetermined offset
-        private IEnumerator MoveButton(bool outWards)
+        protected IEnumerator MoveButton(bool outWards)
         {
             float start = outWards ? 0 : _moveOffset;
             float end = outWards ? _moveOffset : 0;
@@ -50,14 +50,24 @@ namespace UI
             _jp.localPosition = jpEndPosition;
         }
 
-        /// Function to run after waiting
+        /// Synchronous function to run after waiting
         protected delegate void CheckFunction();
 
-        /// Determines if it was a general deselect or a menu click-off
+        /// Determines if it was a general deselect or a menu click-off, synchronously
         protected static IEnumerator WaitAndCheck(CheckFunction function)
         {
             yield return null;
             function();
+        }
+        
+        // Asynchronous function to run after waiting
+        protected delegate IEnumerator FunctionAsync();
+
+        /// Determines if it was a general deselect or a menu click-off, synchronously
+        protected static IEnumerator WaitAndCheck(FunctionAsync function)
+        {
+            yield return null;
+            yield return function();
         }
 
         /// Starts the MoveButton Coroutine, moving the button outwards
