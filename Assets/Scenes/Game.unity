@@ -9169,7 +9169,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8480131329049708446, guid: f337730bb6ccfdb45b14fa2803252098, type: 3}
   m_PrefabInstance: {fileID: 991571071}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1333091106}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -9852,6 +9852,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1333091106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2914460328940719349, guid: f337730bb6ccfdb45b14fa2803252098, type: 3}
+  m_PrefabInstance: {fileID: 991571071}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1339546058
 GameObject:
   m_ObjectHideFlags: 0
@@ -11704,6 +11709,10 @@ PrefabInstance:
       propertyPath: _subMenu
       value: 
       objectReference: {fileID: 671769149}
+    - target: {fileID: 8687892137026804666, guid: f337730bb6ccfdb45b14fa2803252098, type: 3}
+      propertyPath: _firstButton
+      value: 
+      objectReference: {fileID: 1333091106}
     - target: {fileID: 9199792831672491607, guid: f337730bb6ccfdb45b14fa2803252098, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

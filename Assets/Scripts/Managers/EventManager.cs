@@ -59,11 +59,11 @@ namespace Managers
         #region Menu
 
         /// Fires when any MenuButton is logged as "submitted"
-        public event Action<GameObject> OnMenuButtonSubmit;
+        public event Action<GameObject, GameObject> OnMenuButtonSubmit;
 
-        public void MenuButtonSubmit(GameObject subMenu)
+        public void MenuButtonSubmit(GameObject subMenu, GameObject nowActiveButton)
         {
-            OnMenuButtonSubmit?.Invoke(subMenu);
+            OnMenuButtonSubmit?.Invoke(subMenu, nowActiveButton);
         }
 
         /// Fires when any MenuButton is cancels out of its state

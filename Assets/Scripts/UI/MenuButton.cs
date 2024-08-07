@@ -16,6 +16,7 @@ namespace UI
 
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
+        [SerializeField] private GameObject _firstButton;
 
         private void Start()
         {
@@ -41,7 +42,8 @@ namespace UI
             }
         }
 
-        public void OnSubmit(BaseEventData eventData) => EventManager.Events.MenuButtonSubmit(_subMenu);
+        public void OnSubmit(BaseEventData eventData) => EventManager.Events
+        .MenuButtonSubmit(_subMenu, _firstButton);
 
         public void OnCancel(BaseEventData eventData) => EventManager.Events.MenuButtonCancel(_subMenu);
 

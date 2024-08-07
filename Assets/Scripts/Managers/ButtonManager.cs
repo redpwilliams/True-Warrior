@@ -1,6 +1,7 @@
 using System.Collections;
 using Characters;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Managers
 {
@@ -18,24 +19,29 @@ namespace Managers
             EventManager.Events.OnMenuButtonCancel += HandleCancel;
         }
 
-        private void HandleSubmit(GameObject subMenu)
+        private void HandleSubmit(GameObject subMenu, GameObject nowActiveButton)
         {
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
-            StartCoroutine(MoveMenu(true, subMenu));
+            StartCoroutine(MoveMenu(true, subMenu, nowActiveButton));
         }
 
         private void HandleCancel(GameObject subMenu)
         {
             if (!_buttonIsSelected) return;
-            StartCoroutine(MoveMenu(false, subMenu));
+            StartCoroutine(MoveMenu(false, subMenu, null));
             _buttonIsSelected = false;
         }
 
-        private IEnumerator MoveMenu(bool isSubmit, GameObject subMenu)
+        private IEnumerator MoveMenu(bool isSubmit, GameObject subMenu, 
+        GameObject nowActiveButton)
         {
             // Remove sub menu before animating main menu move in
-            if (!isSubmit) subMenu.SetActive(false);
+            if (!isSubmit)
+            {
+                subMenu.SetActive(false);
+                // TODO: reset active main menu button
+            }
             
             float start = isSubmit ?  0 : _moveOffset;
             float end = isSubmit  ? _moveOffset : 0;
@@ -61,7 +67,9 @@ namespace Managers
             _rt.localPosition = endPosition;
             
             // Show sub menu after animating main menu move out
-            if (isSubmit) subMenu.SetActive(true);
+            if (!isSubmit) yield break;
+            subMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(nowActiveButton);
         }
     }
 }
