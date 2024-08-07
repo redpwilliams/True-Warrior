@@ -51,17 +51,8 @@ namespace UI
             _jp.localPosition = jpEndPosition;
         }
 
-        protected delegate void RunOnCancel();
         /// Determines if it was a general deselect or a menu click-off
-        protected IEnumerator WaitAndCheck(RunOnCancel onCancelFunction)
-        {
-            // Wait one frame
-            // (to let EventSystem update currentSelectedGameObject
-            yield return null;
-
-            if (EventSystem.current.currentSelectedGameObject is null)
-                onCancelFunction();
-        }
+        protected abstract IEnumerator WaitAndCheck();
 
         /// Starts the MoveButton Coroutine, moving the button outwards
         public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));

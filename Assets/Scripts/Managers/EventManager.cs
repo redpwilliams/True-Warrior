@@ -1,6 +1,5 @@
 using System;
 using Characters;
-using UI;
 using UnityEngine;
 
 namespace Managers
@@ -66,7 +65,7 @@ namespace Managers
             OnMenuButtonSubmit?.Invoke(subMenu, nowActiveButton);
         }
 
-        /// Fires when any MenuButton is cancels out of its state
+        /// Fires when any MenuButton cancels out of its state
         public event Action<GameObject> OnMenuButtonCancel;
 
         public void MenuButtonCancel(GameObject subMenu)
@@ -74,10 +73,14 @@ namespace Managers
             OnMenuButtonCancel?.Invoke(subMenu);
         }
 
-        /// Fires when a menu button self-reports it gets deselected
-        public event Action OnMenuButtonDeselect;
-        public void MenuButtonDeselect() => OnMenuButtonDeselect?.Invoke();
+        /// Fires when any SubMenuButton cancels out of its state
+        public event Action<GameObject> OnSubMenuButtonCancel;
 
+        public void SubMenuButtonCancel(GameObject nowActiveButton)
+        {
+            OnSubMenuButtonCancel?.Invoke(nowActiveButton);
+        }
+        
         #endregion
 
         #region Input

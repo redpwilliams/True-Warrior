@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Characters;
 using UnityEngine;
@@ -17,7 +18,15 @@ namespace Managers
         {
             _rt = GetComponent<RectTransform>();
             EventManager.Events.OnMenuButtonSubmit += HandleSubmit;
-            EventManager.Events.OnMenuButtonCancel += HandleCancel;
+            EventManager.Events.OnMenuButtonCancel += HandleMenuCancel;
+            EventManager.Events.OnSubMenuButtonCancel += HandleSubMenuCancel;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Events.OnMenuButtonSubmit -= HandleSubmit;
+            EventManager.Events.OnMenuButtonCancel -= HandleMenuCancel;
+            EventManager.Events.OnSubMenuButtonCancel -= HandleSubMenuCancel;
         }
 
         private void HandleSubmit(GameObject subMenu, GameObject nowActiveButton)
@@ -27,20 +36,27 @@ namespace Managers
             StartCoroutine(MoveMenu(true, subMenu, nowActiveButton));
         }
 
-        private void HandleCancel(GameObject subMenu)
+        private void HandleMenuCancel(GameObject subMenu)
         {
+            // Prevent menu from jumping to active, then transition to inactive
             if (!_buttonIsSelected) return;
             StartCoroutine(MoveMenu(false, subMenu, null));
             _buttonIsSelected = false;
         }
 
+        private void HandleSubMenuCancel(GameObject nowActiveButton)
+        {
+            StartCoroutine(MoveMenu(false, _activeSubMenu, nowActiveButton));
+        }
+
         private IEnumerator MoveMenu(bool isSubmit, GameObject subMenu, 
-        GameObject nowActiveButton)
+            GameObject nowActiveButton)
         {
             // Remove sub menu before animating main menu move in
             if (!isSubmit)
-            {
-                subMenu.SetActive(false);
+            { 
+                _activeSubMenu.SetActive(false);
+                _activeSubMenu = null;
                 // TODO: reset active main menu button
             }
             
@@ -70,6 +86,7 @@ namespace Managers
             // Show sub menu after animating main menu move out
             if (!isSubmit) yield break;
             subMenu.SetActive(true);
+            _activeSubMenu = subMenu;
             EventSystem.current.SetSelectedGameObject(nowActiveButton);
         }
     }
