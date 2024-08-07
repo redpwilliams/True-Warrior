@@ -12,11 +12,14 @@ namespace UI
         public override void OnDeselect(BaseEventData eventData)
         {
             base.OnDeselect(eventData);
-            StartCoroutine(WaitAndCheck(() =>
+            StartCoroutine(WaitAndCheck(CheckAsync));
+            
+            IEnumerator CheckAsync()
             {
+                yield return MoveButton(false);
                 if (EventSystem.current.currentSelectedGameObject is null)
                     EventManager.Events.SubMenuButtonCancel(null); // Button was clicked off
-            }));
+            }
         }
         
         public override void OnSubmit(BaseEventData eventData)
