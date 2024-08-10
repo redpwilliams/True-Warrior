@@ -25,6 +25,10 @@ namespace UI
         public override void OnSubmit(BaseEventData eventData)
         {
             print("submitted this button");
+            // Turn off interactivity for all buttons
+            //EventManager.Events.SubMenuButtonSubmit(); // TODO - Re-enable at some point
+            // Start ui canvas fade out transition
+            // Start selected game mode
         }
 
         public override void OnCancel(BaseEventData eventData)

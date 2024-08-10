@@ -1,9 +1,11 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UI
 {
+    [RequireComponent(typeof(UnityEngine.UI.Button))]
     public abstract class Button : MonoBehaviour, ISelectHandler, 
         IDeselectHandler, ISubmitHandler, ICancelHandler
     {
@@ -13,12 +15,25 @@ namespace UI
         [SerializeField] private GameObject _jpChild;
         private RectTransform _en, _jp;
 
+        private UnityEngine.UI.Button _button;
+
         private void OnEnable()
         {
             _en = _enChild.GetComponent<RectTransform>();
             _jp = _jpChild.GetComponent<RectTransform>();
+            _button = GetComponent<UnityEngine.UI.Button>();
         }
-        
+
+        private void Start()
+        {
+            EventManager.Events.OnSubMenuButtonSubmit += DisableButton;
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Events.OnSubMenuButtonSubmit -= DisableButton;
+        }
+
         /// Moves this button both outward/inward by a predetermined offset
         protected IEnumerator MoveButton(bool outWards)
         {
@@ -68,6 +83,11 @@ namespace UI
         {
             yield return null;
             yield return checkFunction();
+        }
+
+        private void DisableButton()
+        {
+            _button.enabled = false;
         }
 
         /// Starts the MoveButton Coroutine, moving the button outwards

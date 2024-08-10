@@ -80,6 +80,14 @@ namespace Managers
         {
             OnSubMenuButtonCancel?.Invoke(nowActiveButton);
         }
+
+        /// Fires when any SubMenuButton gets submitted
+        public event Action OnSubMenuButtonSubmit;
+
+        public void SubMenuButtonSubmit()
+        {
+            OnSubMenuButtonSubmit?.Invoke();
+        }
         
         #endregion
 
