@@ -26,7 +26,7 @@ namespace UI
         {
             print("submitted this button");
             // Turn off interactivity for all buttons
-            //EventManager.Events.SubMenuButtonSubmit(); // TODO - Re-enable at some point
+            EventManager.Events.SubMenuButtonSubmit(); // TODO - Re-enable at some point
             // Start ui canvas fade out transition
             // Start selected game mode
         }
