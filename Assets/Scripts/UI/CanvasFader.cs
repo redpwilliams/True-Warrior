@@ -9,6 +9,9 @@ namespace UI
     public class CanvasFader : MonoBehaviour
     {
         private CanvasGroup _cg;
+        [SerializeField] private HaikuText _ht;
+        [SerializeField] private GameObject _gameCanvas;
+        
         private void OnEnable()
         {
             _cg = GetComponent<CanvasGroup>();
@@ -24,7 +27,7 @@ namespace UI
             EventManager.Events.OnSubMenuButtonSubmit -= FadeCanvas;
         }
 
-        private void FadeCanvas()
+        private void FadeCanvas(GameMode gm)
         {
             StartCoroutine(Fade());
 
@@ -43,8 +46,10 @@ namespace UI
 
                 _cg.alpha = 0;
                 this.gameObject.SetActive(false);
+                
+                _gameCanvas.SetActive(true);
+                _ht.StartGameMode(gm);
             }
         }
-
     }
 }

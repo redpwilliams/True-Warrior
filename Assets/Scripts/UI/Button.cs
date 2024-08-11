@@ -85,10 +85,7 @@ namespace UI
             yield return checkFunction();
         }
 
-        private void DisableButton()
-        {
-            _button.enabled = false;
-        }
+        private void DisableButton(GameMode gm) => _button.enabled = false;
 
         /// Starts the MoveButton Coroutine, moving the button outwards
         public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));

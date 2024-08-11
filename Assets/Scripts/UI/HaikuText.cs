@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // ReSharper disable InconsistentNaming
 
@@ -11,6 +13,7 @@ namespace UI
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class HaikuText : MonoBehaviour
     {
+        private List<JsonReader.Haiku> _haikus;
         private TextMeshProUGUI _tmp;
 
         [SerializeField] private float timeUntilStage1= 2.5f;
@@ -26,12 +29,23 @@ namespace UI
             _tmp = GetComponent<TextMeshProUGUI>();
             _tmp.text = "";
             _tmp.alpha = 0;
+            _haikus = new JsonReader().Haikus;
         }
 
-        private void Start()
+        public void StartGameMode(GameMode gm)
         {
-            var haikus = new JsonReader().Haikus;
-            // StartCoroutine(HaikuCountdown(haikus));
+            switch (gm)
+            {
+                case GameMode.Standoff: 
+                    StartCoroutine(HaikuCountdown(_haikus));
+                    break;
+                case GameMode.Survival:
+                    break;
+                case GameMode.Zen:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gm), gm, null);
+            }
         }
 
         private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus)
@@ -108,19 +122,19 @@ namespace UI
                 Haikus = JsonUtility.FromJson<JsonData>(jsonString).haikus;
             }
 
-            [System.Serializable]
+            [Serializable]
             internal struct JsonData
             {
                 public List<Haiku> haikus;
             }
 
-            [System.Serializable]
+            [Serializable]
             internal struct Haiku
             {
                 public List<LinePair> lines;
             }
 
-            [System.Serializable]
+            [Serializable]
             internal struct LinePair
             {
                 public string en;

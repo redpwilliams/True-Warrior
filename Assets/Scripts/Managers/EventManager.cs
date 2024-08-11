@@ -1,5 +1,6 @@
 using System;
 using Characters;
+using UI;
 using UnityEngine;
 
 namespace Managers
@@ -82,13 +83,25 @@ namespace Managers
         }
 
         /// Fires when any SubMenuButton gets submitted
-        public event Action OnSubMenuButtonSubmit;
+        public event Action<GameMode> OnSubMenuButtonSubmit;
 
-        public void SubMenuButtonSubmit()
+        public void SubMenuButtonSubmit(GameMode gm)
         {
-            OnSubMenuButtonSubmit?.Invoke();
+            OnSubMenuButtonSubmit?.Invoke(gm);
         }
         
+        #endregion
+
+        #region Game Start
+
+        /// Fires when the selected GameMode should start
+        public event Action<GameMode> OnGameModeStart;
+
+        public void GameModeStart(GameMode gm)
+        {
+            OnGameModeStart?.Invoke(gm);
+        }
+
         #endregion
 
         #region Input
