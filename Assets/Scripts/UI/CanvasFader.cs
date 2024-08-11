@@ -39,7 +39,7 @@ namespace UI
                 while (elapsedTime < animationDuration)
                 {
                     float t = elapsedTime / animationDuration;
-                    _cg.alpha = Mathf.Lerp(1, 0, Lerp2D.EaseInCubic(t));
+                    _cg.alpha = Mathf.Lerp(1, 0, t);
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
