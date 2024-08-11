@@ -10,12 +10,14 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
-    [RequireComponent(typeof(TextMeshProUGUI))]
     public class HaikuText : MonoBehaviour
     {
         private List<JsonReader.Haiku> _haikus;
-        private TextMeshProUGUI _tmp;
 
+        [Header("Child References")] [SerializeField]
+        private TextMeshProUGUI _en, _jp;
+
+        [Header("Standoff Parameters")]
         [SerializeField] private float timeUntilStage1= 2.5f;
         [SerializeField] private float timeUntilStage2 = 5f;
         [SerializeField] private float timeUntilStage3 = 5f;
@@ -26,9 +28,10 @@ namespace UI
 
         private void Awake()
         {
-            _tmp = GetComponent<TextMeshProUGUI>();
-            _tmp.text = "";
-            _tmp.alpha = 0;
+            _en.text = "";
+            _jp.text = "";
+            _en.alpha = 0;
+            _jp.alpha = 0;
             _haikus = new JsonReader().Haikus;
         }
 
@@ -59,7 +62,7 @@ namespace UI
             int stage = 0;
 
             // Line 1
-            _tmp.text = SetText(haiku.lines[stage]);
+            SetTexts(haiku.lines[stage]);
             yield return new WaitForSeconds(timeUntilStage1);
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
@@ -67,7 +70,7 @@ namespace UI
             yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
             // Line 2
-            _tmp.text = SetText(haiku.lines[stage]);
+            SetTexts(haiku.lines[stage]);
             yield return new WaitForSeconds(timeUntilStage2);
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
@@ -75,7 +78,7 @@ namespace UI
             yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
             // Line 3
-            _tmp.text = SetText(haiku.lines[stage]);
+            SetTexts(haiku.lines[stage]);
             yield return new WaitForSeconds(timeUntilStage3);
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
@@ -83,7 +86,7 @@ namespace UI
             yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
             // Battle Start
-            _tmp.text = "Strike!\n攻撃！";
+            SetTexts(new JsonReader.LinePair("Strike!","攻撃！"));
             yield return new WaitForSeconds(timeUntilBattleStart);
             EventManager.Events.StageX(stage);
             yield return StartCoroutine(FadeText(0.05f, true));
@@ -98,18 +101,22 @@ namespace UI
 
             while (elapsedTime < fadeDuration)
             {
-                _tmp.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / 
+                float alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / 
                     fadeDuration);
+                _en.alpha = alpha;
+                _jp.alpha = alpha;
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
-            _tmp.alpha = endAlpha;
+            _en.alpha = endAlpha;
+            _jp.alpha = endAlpha;
         }
 
-        private string SetText(JsonReader.LinePair lp)
+        private void SetTexts(JsonReader.LinePair lp)
         {
-            return $"{lp.en}\n{lp.jp}";
+            _en.text = lp.en;
+            _jp.text = lp.jp;
         }
 
         private class JsonReader
@@ -139,6 +146,12 @@ namespace UI
             {
                 public string en;
                 public string jp;
+
+                public LinePair(string en, string jp)
+                {
+                    this.en = en;
+                    this.jp = jp;
+                }
             }
         }
     }
