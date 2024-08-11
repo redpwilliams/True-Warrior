@@ -7,7 +7,7 @@ namespace UI
 {
     [RequireComponent(typeof(UnityEngine.UI.Button))]
     public abstract class Button : MonoBehaviour, ISelectHandler, 
-        IDeselectHandler, ISubmitHandler, ICancelHandler
+        IDeselectHandler, ISubmitHandler, ICancelHandler, IPointerClickHandler
     {
         private readonly float _moveOffset = 15f;
         [Header("Child references")]
@@ -98,5 +98,8 @@ namespace UI
 
         /// Fires when this button is active and EventSystem captures a "cancel" input
         public abstract void OnCancel(BaseEventData eventData);
+
+        /// Fires when this button gets clicked
+        public abstract void OnPointerClick(PointerEventData pointerEventData);
     }
 }

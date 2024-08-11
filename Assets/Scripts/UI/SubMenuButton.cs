@@ -42,5 +42,14 @@ namespace UI
                         : _parentButton);
             }
         }
+
+        public override void OnPointerClick(PointerEventData pointerEventData)
+            => OnSubmit(pointerEventData);
+        /*
+         * TODO - If this button is deselected then gets clicked on,
+         * it should set the button as selected instead of submitting it.
+         * If this button is selected then gets clicked on,
+         * it should submit it.
+         */
     }
 }
