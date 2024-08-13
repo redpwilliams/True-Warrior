@@ -65,7 +65,7 @@ public partial class @Menu: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Click"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""f5063450-c54d-4233-abc6-90319f1bb865"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

@@ -7,7 +7,7 @@ namespace UI
 {
     [RequireComponent(typeof(UnityEngine.UI.Button))]
     public abstract class Button : MonoBehaviour, ISelectHandler, 
-        IDeselectHandler, ISubmitHandler, ICancelHandler, IPointerClickHandler
+        IDeselectHandler, ISubmitHandler, ICancelHandler
     {
         private readonly float _moveOffset = 15f;
         [Header("Child references")]
@@ -88,7 +88,8 @@ namespace UI
         private void DisableButton(GameMode gm) => _button.enabled = false;
 
         /// Starts the MoveButton Coroutine, moving the button outwards
-        public void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(true));
+        public virtual void OnSelect(BaseEventData eventData) => StartCoroutine
+        (MoveButton(true));
 
         /// Starts the MoveButton Coroutine, returning the button inwards
         public virtual void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(false));

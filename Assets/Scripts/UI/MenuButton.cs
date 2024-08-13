@@ -31,13 +31,10 @@ namespace UI
         {
             if (_subMenu.activeInHierarchy)
             {
-                print("ran");
                 EventManager.Events.SubMenuButtonCancel(this.gameObject);
-                //OnDeselect(pointerEventData);
             }
             else
             {
-                OnSelect(pointerEventData);
                 OnSubmit(pointerEventData);
             }
         }

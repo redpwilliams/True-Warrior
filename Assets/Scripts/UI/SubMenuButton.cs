@@ -10,8 +10,15 @@ namespace UI
         [SerializeField] private GameObject _parentButton;
         [SerializeField] private GameMode _gameMode;
 
+        public override void OnSelect(BaseEventData baseEventData)
+        {
+            base.OnSelect(baseEventData);
+            print("ran select");
+        }
+
         public override void OnDeselect(BaseEventData eventData)
         {
+            print("ran deselect");
             base.OnDeselect(eventData);
             StartCoroutine(WaitAndCheck(CheckAsync));
             
@@ -45,7 +52,7 @@ namespace UI
 
         public override void OnPointerClick(PointerEventData pointerEventData)
         {
-            print("ran sub");
+            print("ran click");
         }
         /*
          * TODO - If this button is deselected then gets clicked on,
