@@ -43,7 +43,10 @@ namespace UI
             }
         }
 
-        public override void OnPointerClick(PointerEventData pointerEventData) { }
+        public override void OnPointerClick(PointerEventData pointerEventData)
+        {
+            print("ran sub");
+        }
         /*
          * TODO - If this button is deselected then gets clicked on,
          * it should set the button as selected instead of submitting it.

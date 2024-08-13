@@ -31,7 +31,9 @@ namespace UI
         {
             if (_subMenu.activeInHierarchy)
             {
-                OnDeselect(pointerEventData);
+                print("ran");
+                EventManager.Events.SubMenuButtonCancel(this.gameObject);
+                //OnDeselect(pointerEventData);
             }
             else
             {
