@@ -3,7 +3,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI
+namespace UI.Buttons
 {
     public class SubMenuButton : Button
     {

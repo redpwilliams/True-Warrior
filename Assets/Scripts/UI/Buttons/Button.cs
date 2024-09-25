@@ -3,7 +3,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI
+namespace UI.Buttons
 {
     [RequireComponent(typeof(UnityEngine.UI.Button))]
     public abstract class Button : MonoBehaviour, ISelectHandler, 
