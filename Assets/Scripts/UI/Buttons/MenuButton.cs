@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons
 {
-    public class MenuButton : Button
+    public class MenuButton : Button, IMoveHandler
     {
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
@@ -39,5 +39,9 @@ namespace UI.Buttons
         }
         // TODO: Do nothing?
 
+        public void OnMove(AxisEventData eventData)
+        {
+            print(eventData.moveDir);
+        }
     }
 }
