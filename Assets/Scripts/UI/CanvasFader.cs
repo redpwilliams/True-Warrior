@@ -1,10 +1,18 @@
 using System.Collections;
 using Managers;
-using Characters;
 using UnityEngine;
 
 namespace UI
 {
+    /*
+     * TODO: Rework game start sequence
+     * 1. At the same time, the screen should dim to black and *just*
+     * the menu should fade out. The title should remain. The
+     * lamps and maybe
+     * 2. After some time, the title fades out too.
+     * 3. Lights 
+     */
+    
     [RequireComponent(typeof(CanvasGroup))]
     public class CanvasFader : MonoBehaviour
     {

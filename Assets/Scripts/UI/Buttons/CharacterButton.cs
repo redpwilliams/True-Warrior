@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,15 +9,23 @@ namespace UI.Buttons
     IDeselectHandler, ICancelHandler
     {
         [SerializeField] private GameObject _parentButton;
-        
+        private CharacterSelectSprite _css;
+
+        private void OnEnable()
+        {
+            _css = GetComponent<CharacterSelectSprite>();
+        }
+
         public void OnSelect(BaseEventData eventData)
         {
             print(gameObject.name + " is selected");
+            _css.StartAnimation();
         }
 
         public void OnDeselect(BaseEventData eventData)
         {
             print(gameObject.name + " is deselected");
+            _css.StopAnimation();
         }
 
 
