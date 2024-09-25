@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons
 {
-    public class SubMenuButton : Button
+    public class SubMenuButton : Button, IMoveHandler
     {
         [SerializeField] private GameObject _parentButton;
         [SerializeField] private GameMode _gameMode;
@@ -39,7 +39,7 @@ namespace UI.Buttons
         public override void OnCancel(BaseEventData eventData)
         {
             StartCoroutine(WaitAndCheck(CheckAsync));
-
+        
             IEnumerator CheckAsync()
             {
                 yield return MoveButton(false);
@@ -60,5 +60,20 @@ namespace UI.Buttons
          * If this button is selected then gets clicked on,
          * it should submit it.
          */
+        public void OnMove(AxisEventData eventData)
+        {
+            switch (eventData.moveDir)
+            {
+                case MoveDirection.Left:
+                    OnCancel(eventData);
+                    break;
+                
+                case MoveDirection.Up:
+                case MoveDirection.Right:
+                case MoveDirection.Down:
+                case MoveDirection.None:
+                default: return;
+            }
+        }
     }
 }
