@@ -73,8 +73,11 @@ namespace UI.Buttons
                     OnCancel(eventData);
                     break;
                 
-                case MoveDirection.Up:
                 case MoveDirection.Right:
+                    OnSubmit(eventData);
+                    break;
+                
+                case MoveDirection.Up:
                 case MoveDirection.Down:
                 case MoveDirection.None:
                 default: return;
