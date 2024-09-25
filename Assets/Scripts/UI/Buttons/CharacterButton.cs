@@ -1,4 +1,3 @@
-using System.Collections;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,12 +11,12 @@ namespace UI.Buttons
         
         public void OnSelect(BaseEventData eventData)
         {
-            print("Ronin is selected");
+            print(gameObject.name + " is selected");
         }
 
         public void OnDeselect(BaseEventData eventData)
         {
-            print("Ronin is deselected");
+            print(gameObject.name + " is deselected");
         }
 
 

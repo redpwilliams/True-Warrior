@@ -14018,6 +14018,7 @@ GameObject:
   - component: {fileID: 8937670457012243551}
   - component: {fileID: 3218271931942936520}
   - component: {fileID: 8937670457012243552}
+  - component: {fileID: 8937670457012243553}
   m_Layer: 0
   m_Name: Shinobi
   m_TagString: Player
@@ -15197,6 +15198,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8937670457012243553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4004451287255405505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17764460845846589c2ec67145722563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentButton: {fileID: 1495731477}
 --- !u!1 &8959334001779049810
 GameObject:
   m_ObjectHideFlags: 0
@@ -15212,6 +15226,7 @@ GameObject:
   - component: {fileID: 5898575650983290120}
   - component: {fileID: 8961936408760125810}
   - component: {fileID: 8961936408760125811}
+  - component: {fileID: 8961936408760125812}
   m_Layer: 0
   m_Name: Shogun
   m_TagString: Player
@@ -15315,6 +15330,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8961936408760125812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959334001779049810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17764460845846589c2ec67145722563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentButton: {fileID: 1495731477}
 --- !u!61 &9107621118316938266
 BoxCollider2D:
   m_ObjectHideFlags: 0
