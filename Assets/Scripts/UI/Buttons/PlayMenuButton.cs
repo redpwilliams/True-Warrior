@@ -5,23 +5,31 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons
 {
-    public class SubMenuButton : Button, IMoveHandler
+    /// Abstract class PlayMenuButton holds the shared functionality of
+    /// the Standoff, Survival, and Zen buttons. Each button is then
+    /// responsible for starting the game in their assigned method.
+    /// TODO: Make abstract class
+    public class PlayMenuButton : BaseUIButton, IMoveHandler
     {
+        /// The Button game object to go to after cancelling out of this
+        /// button/the play submenu altogether
         [SerializeField] private GameObject _parentButton;
+        
+        /// The GameMode of this button
+        /// TODO: Discard after creating Standoff, Survival, and Zen button
         [SerializeField] private GameMode _gameMode;
 
-        public override void OnSelect(BaseEventData baseEventData)
-        {
-            base.OnSelect(baseEventData);
-            print("ran select");
-        }
-
+        
+        /// Deselects this button, going to the main menu if inputted. 
         public override void OnDeselect(BaseEventData eventData)
         {
             print("ran deselect");
             base.OnDeselect(eventData);
             StartCoroutine(WaitAndCheck(CheckAsync));
             
+            // Waits to see if the button was clicked off
+            // REVIEW: No longer necessary (temporarily) since pointer events
+            // were turned off
             IEnumerator CheckAsync()
             {
                 yield return MoveButton(false);
@@ -30,12 +38,16 @@ namespace UI.Buttons
             }
         }
         
+        /// Submits this button and begins its game mode
+        /// REVIEW: Make this abstract. The StandoffButton, etc., should
+        /// run a method to start the game mode. If I recall correctly, there
+        /// two events happening. This should cut down on one.
         public override void OnSubmit(BaseEventData eventData)
         {
             // Turn off interactivity for all buttons
             EventManager.Events.SubMenuButtonSubmit(_gameMode); 
         }
-
+        
         public override void OnCancel(BaseEventData eventData)
         {
             StartCoroutine(WaitAndCheck(CheckAsync));
@@ -50,16 +62,9 @@ namespace UI.Buttons
             }
         }
 
-        public void OnPointerClick(PointerEventData pointerEventData)
-        {
-            print("ran click");
-        }
-        /*
-         * TODO - If this button is deselected then gets clicked on,
-         * it should set the button as selected instead of submitting it.
-         * If this button is selected then gets clicked on,
-         * it should submit it.
-         */
+        /// Handles navigation input.
+        /// This button only needs to know how to cancel out of itself
+        /// and start the next game
         public void OnMove(AxisEventData eventData)
         {
             switch (eventData.moveDir)

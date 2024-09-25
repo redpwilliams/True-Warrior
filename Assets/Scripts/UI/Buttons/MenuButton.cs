@@ -1,39 +1,15 @@
-using System;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UI.Buttons
 {
-    public class MenuButton : Button, IMoveHandler
+    public class MenuButton : BaseUIButton, IMoveHandler
     {
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
         [SerializeField] private GameObject _firstButton;
 
-        private bool _isCurrentlySelected;
-
-        // public override void OnDeselect(BaseEventData eventData)
-        // {
-        //     base.OnDeselect(eventData);
-        //     // StartCoroutine(WaitAndCheck(() =>
-        //     // {
-        //     //     if (EventSystem.current.currentSelectedGameObject is null)
-        //     //         EventManager.Events.MenuButtonCancel(_subMenu);
-        //     // }));
-        // }
-
-        public override void OnSelect(BaseEventData eventData)
-        {
-            base.OnSelect(eventData);
-            _isCurrentlySelected = true;
-        }
-
-        public override void OnDeselect(BaseEventData eventData)
-        {
-            base.OnDeselect(eventData);
-            _isCurrentlySelected = false;
-        }
         
         public override void OnSubmit(BaseEventData eventData)
         => EventManager.Events.MenuButtonSubmit(_subMenu, _firstButton);
@@ -78,7 +54,6 @@ namespace UI.Buttons
                  because the quit button has no sub menu.
                  */
                 case MoveDirection.Right:
-                    _isCurrentlySelected = false;
                     OnSubmit(eventData);
                     break;
 

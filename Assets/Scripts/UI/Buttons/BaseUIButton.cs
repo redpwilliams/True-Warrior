@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace UI.Buttons
 {
     [RequireComponent(typeof(UnityEngine.UI.Button))]
-    public abstract class Button : MonoBehaviour, ISelectHandler, 
+    public abstract class BaseUIButton : MonoBehaviour, ISelectHandler, 
         IDeselectHandler, ISubmitHandler, ICancelHandler
     {
         private readonly float _moveOffset = 15f;
@@ -100,7 +100,7 @@ namespace UI.Buttons
         /// Fires when this button is active and EventSystem captures a "cancel" input
         public abstract void OnCancel(BaseEventData eventData);
 
-        /// Fires when this button gets clicked
+        // Fires when this button gets clicked
         // public abstract void OnPointerClick(PointerEventData pointerEventData);
     }
 }
