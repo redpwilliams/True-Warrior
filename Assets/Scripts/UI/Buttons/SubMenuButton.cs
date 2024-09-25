@@ -50,7 +50,7 @@ namespace UI.Buttons
             }
         }
 
-        public override void OnPointerClick(PointerEventData pointerEventData)
+        public void OnPointerClick(PointerEventData pointerEventData)
         {
             print("ran click");
         }

@@ -101,6 +101,6 @@ namespace UI.Buttons
         public abstract void OnCancel(BaseEventData eventData);
 
         /// Fires when this button gets clicked
-        public abstract void OnPointerClick(PointerEventData pointerEventData);
+        // public abstract void OnPointerClick(PointerEventData pointerEventData);
     }
 }
