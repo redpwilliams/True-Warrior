@@ -9,7 +9,7 @@ namespace UI.Buttons
     /// the Standoff, Survival, and Zen buttons. Each button is then
     /// responsible for starting the game in their assigned method.
     /// TODO: Make abstract class
-    public class PlayMenuButton : BaseUIButton, IMoveHandler
+    public abstract class PlayMenuButton : BaseUIButton, IMoveHandler
     {
         /// The Button game object to go to after cancelling out of this
         /// button/the play submenu altogether
@@ -45,7 +45,7 @@ namespace UI.Buttons
         public override void OnSubmit(BaseEventData eventData)
         {
             // Turn off interactivity for all buttons
-            EventManager.Events.SubMenuButtonSubmit(_gameMode); 
+            EventManager.Events.GameModeSelected(_gameMode); 
         }
         
         public override void OnCancel(BaseEventData eventData)

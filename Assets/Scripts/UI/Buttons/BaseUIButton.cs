@@ -26,12 +26,12 @@ namespace UI.Buttons
 
         private void Start()
         {
-            EventManager.Events.OnSubMenuButtonSubmit += DisableButton;
+            EventManager.Events.OnGameModeSelected += DisableButton;
         }
 
         private void OnDestroy()
         {
-            EventManager.Events.OnSubMenuButtonSubmit -= DisableButton;
+            EventManager.Events.OnGameModeSelected -= DisableButton;
         }
 
         /// Moves this button both outward/inward by a predetermined offset

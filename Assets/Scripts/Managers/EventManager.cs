@@ -83,11 +83,11 @@ namespace Managers
         }
 
         /// Fires when any SubMenuButton gets submitted
-        public event Action<GameMode> OnSubMenuButtonSubmit;
+        public event Action<GameMode> OnGameModeSelected;
 
-        public void SubMenuButtonSubmit(GameMode gm)
+        public void GameModeSelected(GameMode gm)
         {
-            OnSubMenuButtonSubmit?.Invoke(gm);
+            OnGameModeSelected?.Invoke(gm);
         }
         
         #endregion

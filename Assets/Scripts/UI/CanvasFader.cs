@@ -27,12 +27,12 @@ namespace UI
 
         private void Start()
         {
-            EventManager.Events.OnSubMenuButtonSubmit += FadeCanvas;
+            EventManager.Events.OnGameModeSelected += FadeCanvas;
         }
 
         private void OnDisable()
         {
-            EventManager.Events.OnSubMenuButtonSubmit -= FadeCanvas;
+            EventManager.Events.OnGameModeSelected -= FadeCanvas;
         }
 
         private void FadeCanvas(GameMode gm)
