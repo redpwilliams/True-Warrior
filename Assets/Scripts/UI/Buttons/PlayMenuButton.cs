@@ -10,7 +10,7 @@ namespace UI.Buttons
     /// the Standoff, Survival, and Zen buttons. Each button is then
     /// responsible for starting the game in their assigned method.
     /// TODO: Make abstract class
-    public abstract class PlayMenuButton : BaseUIButton, IMoveHandler
+    public class PlayMenuButton : BaseUIButton, IMoveHandler
     {
         /// The Button game object to go to after cancelling out of this
         /// button/the play submenu altogether
@@ -54,11 +54,11 @@ namespace UI.Buttons
                 yield return UICanvas.Canvas.FadeCanvas();
                 UICanvas.Canvas.SetUICanvasInactive();
                 UICanvas.Canvas.SetGameCanvasActive();
-                StartGameMode();
+                
+                // Start Button's corresponding GameMode
+                GameManager.Manager.StartGameMode(_gameMode);
             }
         }
-
-        protected abstract void StartGameMode();
         
         
         public override void OnCancel(BaseEventData eventData)
