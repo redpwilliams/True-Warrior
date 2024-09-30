@@ -83,11 +83,11 @@ namespace Managers
         }
 
         /// Fires when any SubMenuButton gets submitted
-        public event Action<GameMode> OnGameModeSelected;
+        public event Action<GameMode> OnDisableAllButtons;
 
-        public void GameModeSelected(GameMode gm)
+        public void DisableAllButtons(GameMode gm)
         {
-            OnGameModeSelected?.Invoke(gm);
+            OnDisableAllButtons?.Invoke(gm);
         }
         
         #endregion

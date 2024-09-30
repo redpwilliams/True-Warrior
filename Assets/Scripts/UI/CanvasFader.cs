@@ -1,5 +1,4 @@
 using System.Collections;
-using Managers;
 using UnityEngine;
 
 namespace UI
@@ -20,27 +19,28 @@ namespace UI
         [SerializeField] private HaikuText _ht;
         [SerializeField] private GameObject _gameCanvas;
         
+        public static CanvasFader Fader { get; private set;  }
+        
+        private void Awake()
+        {
+            if (Fader != null && Fader != this)
+            {
+                Destroy(Fader);
+                return;
+            }
+
+            Fader = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
         private void OnEnable()
         {
             _cg = GetComponent<CanvasGroup>();
         }
 
-        private void Start()
+        public IEnumerator FadeCanvas(GameMode gm)
         {
-            EventManager.Events.OnGameModeSelected += FadeCanvas;
-        }
 
-        private void OnDisable()
-        {
-            EventManager.Events.OnGameModeSelected -= FadeCanvas;
-        }
-
-        private void FadeCanvas(GameMode gm)
-        {
-            StartCoroutine(Fade());
-
-            IEnumerator Fade()
-            {
                 float animationDuration = 1.5f;
                 float elapsedTime = 0;
 
@@ -57,7 +57,6 @@ namespace UI
                 
                 _gameCanvas.SetActive(true);
                 _ht.StartGameMode(gm);
-            }
         }
     }
 }

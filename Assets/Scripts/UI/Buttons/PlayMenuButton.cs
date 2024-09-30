@@ -45,8 +45,10 @@ namespace UI.Buttons
         public override void OnSubmit(BaseEventData eventData)
         {
             // Turn off interactivity for all buttons
-            EventManager.Events.GameModeSelected(_gameMode); 
+            EventManager.Events.DisableAllButtons(_gameMode);
+            StartCoroutine(CanvasFader.Fader.FadeCanvas(GameMode.Standoff));
         }
+        
         
         public override void OnCancel(BaseEventData eventData)
         {
