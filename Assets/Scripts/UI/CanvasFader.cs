@@ -16,7 +16,6 @@ namespace UI
     public class CanvasFader : MonoBehaviour
     {
         private CanvasGroup _cg;
-        [SerializeField] private HaikuText _ht;
         [SerializeField] private GameObject _gameCanvas;
         
         public static CanvasFader Fader { get; private set;  }
@@ -38,7 +37,7 @@ namespace UI
             _cg = GetComponent<CanvasGroup>();
         }
 
-        public IEnumerator FadeCanvas(GameMode gm)
+        public IEnumerator FadeCanvas()
         {
 
                 float animationDuration = 1.5f;
@@ -53,10 +52,13 @@ namespace UI
                 }
 
                 _cg.alpha = 0;
-                this.gameObject.SetActive(false);
+                // this.gameObject.SetActive(false);
                 
-                _gameCanvas.SetActive(true);
-                _ht.StartGameMode(gm);
+                // _gameCanvas.SetActive(true);
         }
+
+        public void SetUICanvasInactive() => this.gameObject.SetActive(false);
+
+        public void SetGameCanvasActive() => _gameCanvas.SetActive(true);
     }
 }

@@ -46,8 +46,18 @@ namespace UI.Buttons
         {
             // Turn off interactivity for all buttons
             EventManager.Events.DisableAllButtons(_gameMode);
-            StartCoroutine(CanvasFader.Fader.FadeCanvas(GameMode.Standoff));
+            StartCoroutine(TransitionUIToGame());
+
+            IEnumerator TransitionUIToGame()
+            {
+                yield return CanvasFader.Fader.FadeCanvas();
+                CanvasFader.Fader.SetUICanvasInactive();
+                CanvasFader.Fader.SetGameCanvasActive();
+                StartGameMode();
+            }
         }
+
+        protected abstract void StartGameMode();
         
         
         public override void OnCancel(BaseEventData eventData)

@@ -1,13 +1,14 @@
-using UnityEngine.EventSystems;
+using UnityEngine;
 
 namespace UI.Buttons
 {
     public class StandoffButton : PlayMenuButton
     {
-        public override void OnSubmit(BaseEventData eventData)
+        [SerializeField] private HaikuText _ht;
+        
+        protected override void StartGameMode()
         {
-            base.OnSubmit(eventData);
-            
+          _ht.StartGameMode(GameMode.Standoff);  
         }
     }
 }
