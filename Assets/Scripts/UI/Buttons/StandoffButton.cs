@@ -1,3 +1,4 @@
+using GameMode = Managers.GameManager.GameMode;
 using UnityEngine;
 
 namespace UI.Buttons

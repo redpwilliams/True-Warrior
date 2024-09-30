@@ -1,7 +1,8 @@
 using System.Collections;
-using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Managers;
+using GameMode = Managers.GameManager.GameMode;
 
 namespace UI.Buttons
 {

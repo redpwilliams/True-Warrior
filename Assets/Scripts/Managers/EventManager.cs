@@ -1,7 +1,7 @@
 using System;
 using Characters;
-using UI;
 using UnityEngine;
+using GameMode = Managers.GameManager.GameMode;
 
 namespace Managers
 {

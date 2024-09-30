@@ -5,6 +5,7 @@ using Managers;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using GameMode = Managers.GameManager.GameMode;
 
 // ReSharper disable InconsistentNaming
 
