@@ -13,22 +13,22 @@ namespace UI
      */
     
     [RequireComponent(typeof(CanvasGroup))]
-    public class CanvasFader : MonoBehaviour
+    public class UICanvas : MonoBehaviour
     {
         private CanvasGroup _cg;
         [SerializeField] private GameObject _gameCanvas;
         
-        public static CanvasFader Fader { get; private set;  }
+        public static UICanvas Canvas { get; private set;  }
         
         private void Awake()
         {
-            if (Fader != null && Fader != this)
+            if (Canvas != null && Canvas != this)
             {
-                Destroy(Fader);
+                Destroy(Canvas);
                 return;
             }
 
-            Fader = this;
+            Canvas = this;
             DontDestroyOnLoad(gameObject);
         }
         
@@ -52,9 +52,6 @@ namespace UI
                 }
 
                 _cg.alpha = 0;
-                // this.gameObject.SetActive(false);
-                
-                // _gameCanvas.SetActive(true);
         }
 
         public void SetUICanvasInactive() => this.gameObject.SetActive(false);

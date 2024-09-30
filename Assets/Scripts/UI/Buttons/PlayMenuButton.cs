@@ -50,9 +50,9 @@ namespace UI.Buttons
 
             IEnumerator TransitionUIToGame()
             {
-                yield return CanvasFader.Fader.FadeCanvas();
-                CanvasFader.Fader.SetUICanvasInactive();
-                CanvasFader.Fader.SetGameCanvasActive();
+                yield return UICanvas.Canvas.FadeCanvas();
+                UICanvas.Canvas.SetUICanvasInactive();
+                UICanvas.Canvas.SetGameCanvasActive();
                 StartGameMode();
             }
         }
