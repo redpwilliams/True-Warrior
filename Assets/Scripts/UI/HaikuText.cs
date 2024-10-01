@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Characters;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace UI
 {
     public class HaikuText : MonoBehaviour
     {
-        private List<JsonReader.Haiku> _haikus;
+        private List<Haiku> _haikus;
 
         [Header("Child References")] [SerializeField]
         private TextMeshProUGUI _en, _jp;
@@ -33,37 +34,22 @@ namespace UI
             _jp.text = "";
             _en.alpha = 0;
             _jp.alpha = 0;
-            _haikus = new JsonReader().Haikus;
+            _haikus = new List<Haiku>();
         }
 
-        public void StartGameMode(GameMode gm)
-        {
-            switch (gm)
-            {
-                case GameMode.Standoff: 
-                    StartCoroutine(HaikuCountdown(_haikus));
-                    break;
-                case GameMode.Survival:
-                    break;
-                case GameMode.Zen:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gm), gm, null);
-            }
-        }
 
-        private IEnumerator HaikuCountdown(List<JsonReader.Haiku> haikus)
+        public IEnumerator HaikuCountdown(IReadOnlyList<Haiku> haikus)
         {
             // Initial startup buffer
             yield return new WaitForSeconds(2.5f);
         
             // Choose haiku
-            JsonReader.Haiku haiku = haikus[Random.Range(0, haikus.Count)];
+            Haiku haiku = haikus[Random.Range(0, haikus.Count)];
         
             int stage = 0;
 
             // Line 1
-            SetTexts(haiku.lines[stage]);
+            SetTexts(haiku.Lines[stage]);
             yield return new WaitForSeconds(timeUntilStage1);
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
@@ -71,7 +57,7 @@ namespace UI
             yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
             // Line 2
-            SetTexts(haiku.lines[stage]);
+            SetTexts(haiku.Lines[stage]);
             yield return new WaitForSeconds(timeUntilStage2);
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
@@ -79,7 +65,7 @@ namespace UI
             yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
             // Line 3
-            SetTexts(haiku.lines[stage]);
+            SetTexts(haiku.Lines[stage]);
             yield return new WaitForSeconds(timeUntilStage3);
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(FadeText(fadeInDuration, true));
@@ -87,7 +73,7 @@ namespace UI
             yield return StartCoroutine(FadeText(fadeOutDuration, false));
         
             // Battle Start
-            SetTexts(new JsonReader.LinePair("Strike!","攻撃！"));
+            SetTexts(new LinePair("Strike!","攻撃！"));
             yield return new WaitForSeconds(timeUntilBattleStart);
             EventManager.Events.StageX(stage);
             yield return StartCoroutine(FadeText(0.05f, true));
@@ -114,46 +100,11 @@ namespace UI
             _jp.alpha = endAlpha;
         }
 
-        private void SetTexts(JsonReader.LinePair lp)
+        private void SetTexts(LinePair lp)
         {
-            _en.text = lp.en;
-            _jp.text = lp.jp;
+            _en.text = lp.En;
+            _jp.text = lp.Jp;
         }
 
-        private class JsonReader
-        {
-            public List<Haiku> Haikus { get; }
-
-            public JsonReader()
-            {
-                string jsonString = Resources.Load<TextAsset>("haikus").ToString();
-                Haikus = JsonUtility.FromJson<JsonData>(jsonString).haikus;
-            }
-
-            [Serializable]
-            internal struct JsonData
-            {
-                public List<Haiku> haikus;
-            }
-
-            [Serializable]
-            internal struct Haiku
-            {
-                public List<LinePair> lines;
-            }
-
-            [Serializable]
-            internal struct LinePair
-            {
-                public string en;
-                public string jp;
-
-                public LinePair(string en, string jp)
-                {
-                    this.en = en;
-                    this.jp = jp;
-                }
-            }
-        }
     }
 }
