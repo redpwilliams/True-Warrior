@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Characters
+namespace Util
 {
     public static class JsonReader
     {
@@ -15,7 +14,7 @@ namespace Characters
         }
 
         [Serializable]
-        internal struct JsonData
+        public struct JsonData
         {
             public List<Haiku> haikus;
         }

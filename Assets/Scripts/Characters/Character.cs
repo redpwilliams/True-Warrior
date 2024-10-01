@@ -4,6 +4,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using Util;
 using Random = UnityEngine.Random;
 
 namespace Characters

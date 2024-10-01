@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-namespace Characters
+namespace Util
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class Lerp2D

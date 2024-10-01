@@ -1,14 +1,14 @@
 using System;
 
-namespace Characters
+namespace Util
 {
     /// A set of english and japanese translations that make up
     /// a single line in a haiku
     [Serializable]
     public struct LinePair
     {
-        public string en { get; }
-        public string jp { get; }
+        public string en;
+        public string jp;
 
         public LinePair(string en, string jp)
         {

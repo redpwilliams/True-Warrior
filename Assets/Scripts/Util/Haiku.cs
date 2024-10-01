@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
 
-namespace Characters
+namespace Util
 {
     [Serializable]
     public struct Haiku
