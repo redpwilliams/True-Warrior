@@ -1,20 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters
 {
-    public class JsonReader
+    public static class JsonReader
     {
 
         public static List<Haiku> LoadHaikus()
         {
             string jsonString = Resources.Load<TextAsset>("haikus").ToString();
-            return JsonUtility.FromJson<JsonData>(jsonString).Haikus;
+            return JsonUtility.FromJson<JsonData>(jsonString).haikus;
         }
 
-        private struct JsonData
+        [Serializable]
+        internal struct JsonData
         {
-            public List<Haiku> Haikus;
+            public List<Haiku> haikus;
         }
     }
 }
