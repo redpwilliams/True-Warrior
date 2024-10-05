@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons
 {
-    public class RoninButton : MonoBehaviour, ISelectHandler, 
+    /// A button that represents a character the player can choose to play as
+    public class CharacterButton : MonoBehaviour, ISelectHandler, 
     IDeselectHandler, ICancelHandler
     {
         [SerializeField] private GameObject _parentButton;
