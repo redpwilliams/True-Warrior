@@ -21,12 +21,14 @@ namespace UI.Buttons
         {
             print(gameObject.name + " is selected");
             _css.StartAnimation();
+            _css.BrightenSpriteLight();
         }
 
         public void OnDeselect(BaseEventData eventData)
         {
             print(gameObject.name + " is deselected");
             _css.StopAnimation();
+            _css.DimSpriteLight();
             
             // Trigger the cancel event when the player
             // exits the options menu via the left most
@@ -57,10 +59,9 @@ namespace UI.Buttons
             
             // TODO: Use coroutine to fade out menu
             EventManager.Events.SubMenuButtonCancel(
-                EventSystem.current.currentSelectedGameObject is null 
-                    ? null 
+                EventSystem.current.currentSelectedGameObject is null
+                    ? null
                     : _parentButton);
-            
         }
     }
 }
