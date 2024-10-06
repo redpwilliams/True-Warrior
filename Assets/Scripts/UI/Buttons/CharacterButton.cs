@@ -71,15 +71,14 @@ namespace UI.Buttons
 
         public void OnSubmit(BaseEventData eventData)
         {
-            // i.e. another c.t.o. is active
-            if (!_chosenTextObject.IsActive())
-            {
-                // Deselect the all/last one
-                EventManager.Events.DeselectAllChosenTOs();
+            // Do nothing if this one is already selected
+            if (_chosenTextObject.IsActive()) return;
+            
+            // Since it isn't selected, deselect the all/last one
+            EventManager.Events.DeselectAllChosenTOs();
                 
-                // Reselect this one
-                _chosenTextObject.gameObject.SetActive(true);
-            }
+            // Reselect this one
+            _chosenTextObject.gameObject.SetActive(true);
         }
 
         private void DeselectChosenTextObject() 
