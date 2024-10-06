@@ -1,3 +1,4 @@
+using System.Collections;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,6 +27,26 @@ namespace UI.Buttons
         {
             print(gameObject.name + " is deselected");
             _css.StopAnimation();
+            
+            // Trigger the cancel event when the player
+            // exits the options menu via the left most
+            // character select button
+            StartCoroutine(HandleCancelByDeselect());
+            
+            IEnumerator HandleCancelByDeselect()
+            {
+                // Wait for one frame
+                yield return null;
+                
+                // The options sub menu should be canceled if
+                // a deselect (on the leftmost CharacterSelectSprite)
+                // set it to the options menu
+                if (EventSystem.current.currentSelectedGameObject.Equals(
+                        _parentButton))
+                {
+                    EventManager.Events.SubMenuButtonCancel(_parentButton);
+                }
+            }
         }
 
 
@@ -40,16 +61,6 @@ namespace UI.Buttons
                     ? null 
                     : _parentButton);
             
-            // StartCoroutine(WaitAndCheck(CheckAsync));
-            //
-            // IEnumerator CheckAsync()
-            // {
-            //     yield return MoveButton(false);
-            //     EventManager.Events.SubMenuButtonCancel(
-            //         EventSystem.current.currentSelectedGameObject is null 
-            //             ? null 
-            //             : _parentButton);
-            // }
         }
     }
 }
