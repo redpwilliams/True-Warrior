@@ -13,13 +13,18 @@ namespace UI.Buttons
         [SerializeField] private GameObject _parentButton;
         [SerializeField] private TextMeshPro _chosenTextObject;
         private CharacterSelectSprite _css;
+        [SerializeField] private SamuraiType _samuraiType;
 
         private void OnEnable()
         {
             _css = GetComponent<CharacterSelectSprite>();
 
             EventManager.Events.OnDeselectAllChosenTOs +=
-                DeselectChosenTextObject;
+                HideChosenTextObject;
+            
+            if (SaveManager.LoadPlayerCharacter() == _samuraiType)
+                ShowChosenTextObject();
+                
         }
 
         public void OnSelect(BaseEventData eventData)
@@ -79,9 +84,15 @@ namespace UI.Buttons
                 
             // Reselect this one
             _chosenTextObject.gameObject.SetActive(true);
+            
+            // Save selection
+            SaveManager.SavePlayerCharacter(_samuraiType);
         }
 
-        private void DeselectChosenTextObject() 
+        private void ShowChosenTextObject() 
+            => _chosenTextObject.gameObject.SetActive(true);
+
+        private void HideChosenTextObject() 
             => _chosenTextObject.gameObject.SetActive(false);
     }
     
