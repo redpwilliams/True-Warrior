@@ -89,6 +89,15 @@ namespace Managers
         {
             OnDisableAllButtons?.Invoke(gm);
         }
+
+        /// Fires when a new SamuraiClass is chosen by submitting
+        /// a CharacterButton
+        public event Action OnDeselectAllChosenTOs;
+
+        public void DeselectAllChosenTOs()
+        {
+            OnDeselectAllChosenTOs?.Invoke();
+        }
         
         #endregion
 

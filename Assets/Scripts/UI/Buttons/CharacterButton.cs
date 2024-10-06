@@ -1,5 +1,6 @@
 using System.Collections;
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,14 +8,18 @@ namespace UI.Buttons
 {
     /// A button that represents a character the player can choose to play as
     public class CharacterButton : MonoBehaviour, ISelectHandler, 
-    IDeselectHandler, ICancelHandler
+    IDeselectHandler, ICancelHandler, ISubmitHandler
     {
         [SerializeField] private GameObject _parentButton;
+        [SerializeField] private TextMeshPro _chosenTextObject;
         private CharacterSelectSprite _css;
 
         private void OnEnable()
         {
             _css = GetComponent<CharacterSelectSprite>();
+
+            EventManager.Events.OnDeselectAllChosenTOs +=
+                DeselectChosenTextObject;
         }
 
         public void OnSelect(BaseEventData eventData)
@@ -63,5 +68,22 @@ namespace UI.Buttons
                     ? null
                     : _parentButton);
         }
+
+        public void OnSubmit(BaseEventData eventData)
+        {
+            // i.e. another c.t.o. is active
+            if (!_chosenTextObject.IsActive())
+            {
+                // Deselect the all/last one
+                EventManager.Events.DeselectAllChosenTOs();
+                
+                // Reselect this one
+                _chosenTextObject.gameObject.SetActive(true);
+            }
+        }
+
+        private void DeselectChosenTextObject() 
+            => _chosenTextObject.gameObject.SetActive(false);
     }
+    
 }
