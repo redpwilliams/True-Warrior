@@ -10,7 +10,7 @@ namespace UI.Buttons
         [SerializeField] private GameObject _subMenu;
         [SerializeField] private GameObject _firstButton;
 
-        
+
         public override void OnSubmit(BaseEventData eventData)
         => EventManager.Events.MenuButtonSubmit(_subMenu, _firstButton);
 
@@ -62,6 +62,11 @@ namespace UI.Buttons
                 case MoveDirection.None:
                 default: return;
             }
+        }
+
+        public void SetFirstButton(GameObject newFirstButton)
+        {
+            this._firstButton = newFirstButton;
         }
     }
 }

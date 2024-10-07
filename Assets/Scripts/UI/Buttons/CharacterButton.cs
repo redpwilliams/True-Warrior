@@ -14,10 +14,12 @@ namespace UI.Buttons
         [SerializeField] private TextMeshPro _chosenTextObject;
         private CharacterSelectSprite _css;
         [SerializeField] private SamuraiType _samuraiType;
+        private static MenuButton _optionsMenuButton;
 
         private void OnEnable()
         {
             _css = GetComponent<CharacterSelectSprite>();
+            _optionsMenuButton = _parentButton.GetComponent<MenuButton>();
 
             EventManager.Events.OnDeselectAllChosenTOs +=
                 HideChosenTextObject;
@@ -87,6 +89,9 @@ namespace UI.Buttons
             
             // Save selection
             SaveManager.SavePlayerCharacter(_samuraiType);
+            
+            // Update what Options button points to when selected
+            _optionsMenuButton.SetFirstButton(this.gameObject);
         }
 
         private void ShowChosenTextObject() 

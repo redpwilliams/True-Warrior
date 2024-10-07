@@ -18,7 +18,7 @@ namespace UI.Buttons
 
         private UnityEngine.UI.Button _button;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _en = _enChild.GetComponent<RectTransform>();
             _jp = _jpChild.GetComponent<RectTransform>();
