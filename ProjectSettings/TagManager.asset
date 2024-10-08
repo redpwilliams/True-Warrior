@@ -8,6 +8,9 @@ TagManager:
   - Options
   - Instructions
   - Quit
+  - Ronin Button
+  - Shinobi Button
+  - Shogun Button
   layers:
   - Default
   - TransparentFX
