@@ -2,14 +2,25 @@ using Managers;
 using UnityEditor;
 using Characters;
 using JetBrains.Annotations;
+using UI;
 using UnityEngine;
 
 public class MenuItems : Editor
 {
-    private const string EventsMenu = "Developer Actions/";
-    private const string BeginAttackPath = EventsMenu + "Trigger BeginAttack";
+    /// The title/overall custom menu
+    private const string DeveloperActionsMenu = "Developer Actions/";
+    
+    private const string BeginAttackPath = 
+        DeveloperActionsMenu + "Trigger BeginAttack";
+    
     private const string SetCharacterPositioning =
-        EventsMenu + "Set Character Positions";
+        DeveloperActionsMenu + "Set Character Positions";
+
+    private const string SaveActionsSubMenu =
+        DeveloperActionsMenu + "Save\\Load Actions/";
+
+    private const string PrintSavedSamuraiType =
+        SaveActionsSubMenu + "Print Saved Samurai Type";
 
     #region BeginAttack
 
@@ -31,6 +42,17 @@ public class MenuItems : Editor
         {
             character.SetCharacterStartPosition();
         }
+    }
+
+    #endregion
+
+    #region Save/Load
+
+    [MenuItem(PrintSavedSamuraiType)]
+    private static void PrintSavedSamurai()
+    {
+        SamuraiType st = SaveManager.LoadPlayerCharacter();
+        Debug.Log(st);
     }
 
     #endregion

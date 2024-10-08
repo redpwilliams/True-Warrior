@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Characters;
 using UI;
 using UnityEngine;
 using Util;
