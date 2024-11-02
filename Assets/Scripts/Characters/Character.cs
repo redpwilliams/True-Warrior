@@ -143,6 +143,21 @@ namespace Characters
                 InitParams.Standoff_PX_StartPositionZ);
         }
 
+        public void SetDirection()
+        {
+            // Sprites are all facing left by default
+            
+            Transform trans = transform;
+            if (_playerType == PlayerType.One) return;
+            
+            // Sprite direction
+            var localScale = trans.localScale;
+            localScale = new Vector2(
+                -1 * Mathf.Abs(localScale.x), localScale.y);
+            trans.localScale = localScale;
+
+        }
+        
         private void StartRunning(int stage)
         {
             if (stage != (_playerType == PlayerType.One ? 0 : 1)) return;

@@ -126,6 +126,7 @@ namespace Managers
         { 
             _roninScript.SetPlayerType(playerType);
             _roninScript.SetPosition();
+            _roninScript.SetDirection();
             Instantiate(_roninPrefab);   
         }
 
@@ -133,6 +134,7 @@ namespace Managers
         {
             _shogunScript.SetPlayerType(playerType);
             _shogunScript.SetPosition();
+            _shogunScript.SetDirection();
             Instantiate(_shogunPrefab);
         }
 
@@ -140,6 +142,7 @@ namespace Managers
         {
             _shinobiScript.SetPlayerType(playerType);
             _shinobiScript.SetPosition();
+            _shinobiScript.SetDirection();
             Instantiate(_shinobiPrefab);
         }
 

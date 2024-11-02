@@ -21,6 +21,9 @@ namespace Characters
         {
             _tmp = GetComponent<TextMeshPro>();
             _rt = GetComponent<RectTransform>();
+
+            _rt.localScale = new Vector3(Mathf.Sign(transform.parent
+                .localScale.x), 1, 1);
         }
 
         /// Sets text of TMP asset
