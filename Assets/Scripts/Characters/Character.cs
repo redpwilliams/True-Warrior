@@ -27,7 +27,7 @@ namespace Characters
     
         [Header("Player Designation")]
         [SerializeField] protected PlayerType _playerType;
-        protected enum PlayerType { One, Two, CPU }
+        public enum PlayerType { One, Two, CPU }
         
         // Animation parameters
         // TODO - Use Scriptable Objects
@@ -122,7 +122,27 @@ namespace Characters
         }
 
         #region Movement and Positioning
-    
+
+        public void SetPlayerType(PlayerType pt) => _playerType = pt;
+
+        public void SetPosition()
+        {
+            Transform trans = transform;
+            if (_playerType == PlayerType.One)
+            { 
+                trans.position = new Vector3(
+                    InitParams.Standoff_P1_StartPositionX, 
+                    InitParams.Standoff_P1_StartPositionY, 
+                    InitParams.Standoff_P1_StartPositionZ);
+                return;
+            }
+            
+            trans.position = new Vector3(
+                InitParams.Standoff_PX_StartPositionX, 
+                InitParams.Standoff_PX_StartPositionY, 
+                InitParams.Standoff_PX_StartPositionZ);
+        }
+
         private void StartRunning(int stage)
         {
             if (stage != (_playerType == PlayerType.One ? 0 : 1)) return;

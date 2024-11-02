@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Characters;
 using UI;
 using UnityEngine;
 using Util;
 using Random = UnityEngine.Random;
+using PlayerType = Characters.Character.PlayerType;
 
 namespace Managers
 {
@@ -24,16 +26,22 @@ namespace Managers
         /// Character Prefabs
         [Header("Character Prefabs")] 
         
-        [SerializeField] private GameObject _roninPrefab;
+        [SerializeField] 
+        private GameObject _roninPrefab;
+        private Ronin _roninScript;
         
-        [SerializeField] private GameObject _shogunPrefab;
+        [SerializeField] 
+        private GameObject _shogunPrefab;
+        private Shogun _shogunScript;
         
-        [SerializeField] private GameObject _shinobiPrefab;
-
+        [SerializeField] 
+        private GameObject _shinobiPrefab;
+        private Shinobi _shinobiScript;
+        
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
 
-        [Header("Standoff Parameters")] 
+        [Header("Standoff Parameters")]
         
         [SerializeField] private float _timeUntilStage1 = 2.5f;
 
@@ -57,6 +65,11 @@ namespace Managers
 
             Manager = this;
 
+            // Cache character scripts
+            _roninScript = _roninPrefab.GetComponent<Ronin>();
+            _shogunScript = _shogunPrefab.GetComponent<Shogun>();
+            _shinobiScript = _shinobiPrefab.GetComponent<Shinobi>();
+            
             // Load haiku data
             _haikus = JsonReader.LoadHaikus();
 
@@ -89,13 +102,13 @@ namespace Managers
             switch (SaveManager.LoadPlayerCharacter())
             {
                 case SamuraiType.Ronin:
-                    InstantiateRonin();
+                    InstantiateRonin(PlayerType.One);
                     break;
                 case SamuraiType.Shogun:
-                    InstantiateShogun();
+                    InstantiateShogun(PlayerType.One);
                     break;
                 case SamuraiType.Shinobi:
-                    InstantiateShinobi();
+                    InstantiateShinobi(PlayerType.One);
                     break;
                 case SamuraiType.Sensei:
                     break;
@@ -106,15 +119,30 @@ namespace Managers
             }
             
             // Opponent
-            InstantiateShogun();
+            InstantiateShinobi(PlayerType.CPU);
         }
 
-        private void InstantiateRonin() => Instantiate(_roninPrefab);
-        
-        private void InstantiateShogun() => Instantiate(_shogunPrefab);
-        
-        private void InstantiateShinobi() => Instantiate(_shinobiPrefab);
-        
+        private void InstantiateRonin(PlayerType playerType)
+        { 
+            _roninScript.SetPlayerType(playerType);
+            _roninScript.SetPosition();
+            Instantiate(_roninPrefab);   
+        }
+
+        private void InstantiateShogun(PlayerType playerType)
+        {
+            _shogunScript.SetPlayerType(playerType);
+            _shogunScript.SetPosition();
+            Instantiate(_shogunPrefab);
+        }
+
+        private void InstantiateShinobi(PlayerType playerType)
+        {
+            _shinobiScript.SetPlayerType(playerType);
+            _shinobiScript.SetPosition();
+            Instantiate(_shinobiPrefab);
+        }
+
         private IEnumerator HaikuCountdown(IReadOnlyList<Haiku> haikus)
         {
             // Initial startup buffer
