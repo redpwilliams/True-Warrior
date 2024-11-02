@@ -13,6 +13,7 @@ namespace Managers
         /// Singleton Instance
         public static GameManager Manager { get; private set; }
 
+        /// GameModes that True Warrior offers
         public enum GameMode
         {
             Standoff,
@@ -20,11 +21,21 @@ namespace Managers
             Zen
         }
 
+        /// Character Prefabs
+        [Header("Character Prefabs")] 
+        
+        [SerializeField] private GameObject _roninPrefab;
+        
+        [SerializeField] private GameObject _shogunPrefab;
+        
+        [SerializeField] private GameObject _shinobiPrefab;
+
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
 
-        [Header("Standoff Parameters")] [SerializeField]
-        private float _timeUntilStage1 = 2.5f;
+        [Header("Standoff Parameters")] 
+        
+        [SerializeField] private float _timeUntilStage1 = 2.5f;
 
         [SerializeField] private float _timeUntilStage2 = 5f;
 
@@ -58,6 +69,7 @@ namespace Managers
             switch (gm)
             {
                 case GameMode.Standoff:
+                    SpawnCharacters();
                     StartCoroutine(HaikuCountdown(_haikus));
                     break;
                 case GameMode.Survival:
@@ -71,6 +83,38 @@ namespace Managers
 
         #region Standoff
 
+        private void SpawnCharacters()
+        {
+            // Player character
+            switch (SaveManager.LoadPlayerCharacter())
+            {
+                case SamuraiType.Ronin:
+                    InstantiateRonin();
+                    break;
+                case SamuraiType.Shogun:
+                    InstantiateShogun();
+                    break;
+                case SamuraiType.Shinobi:
+                    InstantiateShinobi();
+                    break;
+                case SamuraiType.Sensei:
+                    break;
+                case SamuraiType.Onna:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            // Opponent
+            InstantiateShogun();
+        }
+
+        private void InstantiateRonin() => Instantiate(_roninPrefab);
+        
+        private void InstantiateShogun() => Instantiate(_shogunPrefab);
+        
+        private void InstantiateShinobi() => Instantiate(_shinobiPrefab);
+        
         private IEnumerator HaikuCountdown(IReadOnlyList<Haiku> haikus)
         {
             // Initial startup buffer
