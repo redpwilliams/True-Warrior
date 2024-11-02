@@ -84,17 +84,20 @@ namespace Managers
 
         private void SpawnCharacters()
         {
+            Character p1 = null;
+            Character px = null;
+            
             // Player character
             switch (SaveManager.LoadPlayerCharacter())
             {
                 case SamuraiType.Ronin:
-                    InstantiateRonin(PlayerType.One);
+                    p1 = InstantiateRonin(PlayerType.One);
                     break;
                 case SamuraiType.Shogun:
-                    InstantiateShogun(PlayerType.One);
+                    p1 = InstantiateShogun(PlayerType.One);
                     break;
                 case SamuraiType.Shinobi:
-                    InstantiateShinobi(PlayerType.One);
+                    p1 = InstantiateShinobi(PlayerType.One);
                     break;
                 case SamuraiType.Sensei:
                     break;
@@ -103,13 +106,19 @@ namespace Managers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             // Opponent
-            InstantiateShinobi(PlayerType.CPU);
+            px = InstantiateShinobi(PlayerType.CPU);
+
+            if (p1 is null || px is null) return;
+            
+            // Set as opponents
+            p1.Opponent = px;
+            px.Opponent = p1;
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
-        private void InstantiateRonin(PlayerType playerType)
+        private Character InstantiateRonin(PlayerType playerType)
         { 
             var instance = Instantiate(_roninPrefab);
             Ronin ronin = instance.GetComponent<Ronin>();
@@ -120,10 +129,12 @@ namespace Managers
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
             ronin.SetDirection();
+
+            return ronin;
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
-        private void InstantiateShogun(PlayerType playerType)
+        private Character InstantiateShogun(PlayerType playerType)
         {
             var instance = Instantiate(_shogunPrefab); 
             Shogun shogun = instance.GetComponent<Shogun>();
@@ -134,10 +145,12 @@ namespace Managers
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
             shogun.SetDirection();
+
+            return shogun;
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
-        private void InstantiateShinobi(PlayerType playerType)
+        private Character InstantiateShinobi(PlayerType playerType)
         {
             var instance = Instantiate(_shinobiPrefab);
             Shinobi shinobi = instance.GetComponent<Shinobi>();
@@ -148,6 +161,8 @@ namespace Managers
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
             shinobi.SetDirection();
+
+            return shinobi;
         }
 
         private IEnumerator HaikuCountdown(IReadOnlyList<Haiku> haikus)
