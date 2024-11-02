@@ -24,7 +24,6 @@ namespace Characters
         [SerializeField] private float _runSpeed = InitParams.RunSpeed;
         //private float _endPosition = InitParams.EndPositionX;
         public float EndPosition { get; set; }
-        private bool _isRunning;
     
         [Header("Player Designation")]
         [SerializeField] protected PlayerType _playerType;
@@ -70,7 +69,7 @@ namespace Characters
 
         protected virtual void Start()
         {
-            EventManager.Events.OnStageX += StartRunning;
+            EventManager.Events.OnStageX += RunToSet;
             EventManager.Events.OnStageX += AllowControls;
             EventManager.Events.OnStageX += GetSet;
             EventManager.Events.OnBeginAttack += Attack;
@@ -81,34 +80,34 @@ namespace Characters
             Opponent = (players[0] == this) ? players[1] : players[0];
         }
 
-        private void FixedUpdate()
-        {
-            // Disregard if not moving
-            if (!_isRunning) return;
-        
-            // Move the character towards the final position
-            Vector2 currentPosition = Rb2d.position;
-            Vector2 targetPosition = new Vector2(EndPosition, currentPosition.y);
-            Rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
-                _runSpeed * Time.fixedDeltaTime));
-
-            // Check if the character has reached or passed the final position
-            // TODO - Revisit
-            if ((_playerType == PlayerType.One && Rb2d.position.x < EndPosition) || 
-                _playerType != PlayerType.One && Rb2d.position.x > EndPosition) return;
-        
-            // Stop movement and animation
-            _isRunning = false;
-            Rb2d.velocity = Vector2.zero;
-            Rb2d.position = targetPosition;
-            Anim.SetBool(Running, _isRunning);
-            
-            // Set character title
-            string title = (_playerType == PlayerType.One)
-                ? "You"
-                : CharacterTitle();
-            _characterText.DisplayTitle(title);
-        }
+        // private void FixedUpdate()
+        // {
+        //     // Disregard if not moving
+        //     if (!_isRunning) return;
+        //
+        //     // Move the character towards the final position
+        //     Vector2 currentPosition = Rb2d.position;
+        //     Vector2 targetPosition = new Vector2(EndPosition, currentPosition.y);
+        //     Rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
+        //         _runSpeed * Time.fixedDeltaTime));
+        //
+        //     // Check if the character has reached or passed the final position
+        //     // TODO - Revisit
+        //     if ((_playerType == PlayerType.One && Rb2d.position.x < EndPosition) || 
+        //         _playerType != PlayerType.One && Rb2d.position.x > EndPosition) return;
+        //
+        //     // Stop movement and animation
+        //     _isRunning = false;
+        //     Rb2d.velocity = Vector2.zero;
+        //     Rb2d.position = targetPosition;
+        //     Anim.SetBool(Running, _isRunning);
+        //     
+        //     // Set character title
+        //     string title = (_playerType == PlayerType.One)
+        //         ? "You"
+        //         : CharacterTitle();
+        //     _characterText.DisplayTitle(title);
+        // }
 
         #region Movement and Positioning
 
@@ -147,14 +146,30 @@ namespace Characters
 
         }
         
-        private void StartRunning(int stage)
+        private void RunToSet(int stage)
         {
             if (stage != (_playerType == PlayerType.One ? 0 : 1)) return;
         
-            // Start Character movement
-            _isRunning = true;
-            Anim.SetBool(Running, _isRunning);
-            EventManager.Events.OnStageX -= StartRunning;
+            // Unsubscribe from triggering event
+            EventManager.Events.OnStageX -= RunToSet;
+
+            StartCoroutine(Run());
+
+            IEnumerator Run()
+            {
+                // Move the character towards the final position
+                Anim.SetBool(Running, true);
+                float runDistance = Mathf.Abs(Rb2d.position.x - EndPosition);
+                float moveDuration = 1.3f;
+                yield return QuickMove(runDistance, moveDuration, function: Lerp2D.NoEase);
+                Anim.SetBool(Running, false);
+                
+                // Set character title
+                string title = (_playerType == PlayerType.One)
+                    ? "You/君"
+                    : CharacterTitle();
+                _characterText.DisplayTitle(title);
+            }
         }
         
         private int GetDirection() => (int) Mathf.Sign(_transform.localScale.x);
@@ -269,6 +284,10 @@ namespace Characters
         }
 
         protected delegate float Lerp2DFunction(float t);
+        
+        /// Moves Character from one position to the other. Configurable
+        /// as knockback, and with lerping function (EaseOutQuart is default).
+        /// By default, the Character moves forward in the direction it's facing.
         protected IEnumerator QuickMove(float moveDistance, float moveDuration, 
             bool isKnockback = false, Lerp2DFunction function = null)
         {

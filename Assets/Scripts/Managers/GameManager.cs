@@ -43,6 +43,7 @@ namespace Managers
         [SerializeField] private float _timeUntilBattleStart = 5f;
         [SerializeField] private float _fadeInDuration = 1f;
         [SerializeField] private float _fadeOutDuration = 0.5f;
+        [SerializeField] private float _timeHoldText = 3.0f;
 
 
         private void Awake()
@@ -160,47 +161,48 @@ namespace Managers
             int stage = 0;
 
             // TODO - Create all WaitForSeconds objects here
-
+            WaitForSeconds awaitStage1 = new WaitForSeconds(_timeUntilStage1);
+            WaitForSeconds awaitStage2 = new WaitForSeconds(_timeUntilStage2);
+            WaitForSeconds awaitStage3 = new WaitForSeconds(_timeUntilStage3);
+            WaitForSeconds holdText = new WaitForSeconds(_timeHoldText);
+            WaitForSeconds awaitBattle = new WaitForSeconds(_timeUntilBattleStart);
+            
             // Line 1
             HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            yield return new WaitForSeconds(_timeUntilStage1);
+            yield return awaitStage1;
             EventManager.Events.StageX(stage++);
-            yield return StartCoroutine(HaikuText.Instance.FadeText
-            (_fadeInDuration,
-                true));
-            yield return new WaitForSeconds(3f); // TODO - Time to hold text
+            yield return StartCoroutine(
+                HaikuText.Instance.FadeText(_fadeInDuration, true));
+            yield return holdText;
             yield return StartCoroutine(
                 HaikuText.Instance.FadeText(_fadeOutDuration, false));
 
             // Line 2
             HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            yield return new WaitForSeconds(_timeUntilStage2);
-            EventManager.Events.StageX(stage++);
-            yield return StartCoroutine(HaikuText.Instance.FadeText
-            (_fadeInDuration,
-                true));
-            yield return new WaitForSeconds(3f); // TODO - Time to hold text
-            yield return StartCoroutine(HaikuText.Instance.FadeText
-            (_fadeOutDuration,
-                false));
-
-            // Line 3
-            HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            yield return new WaitForSeconds(_timeUntilStage3);
+            yield return awaitStage2;
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(
                 HaikuText.Instance.FadeText(_fadeInDuration, true));
-            yield return new WaitForSeconds(3f); // TODO - Time to hold text
+            yield return holdText;
+            yield return StartCoroutine(
+                HaikuText.Instance.FadeText(_fadeOutDuration, false));
+
+            // Line 3
+            HaikuText.Instance.SetTexts(haiku.lines[stage]);
+            yield return awaitStage3;
+            EventManager.Events.StageX(stage++);
+            yield return StartCoroutine(
+                HaikuText.Instance.FadeText(_fadeInDuration, true));
+            yield return holdText;
             yield return StartCoroutine(
                 HaikuText.Instance.FadeText(_fadeOutDuration, false));
 
             // Battle Start
             HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
-            yield return new WaitForSeconds(_timeUntilBattleStart);
+            yield return awaitBattle;
             EventManager.Events.StageX(stage);
             yield return StartCoroutine(
                 HaikuText.Instance.FadeText(0.05f, true));
-            // TODO - Change text to different formatted text object?
         }
 
         #endregion
