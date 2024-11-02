@@ -22,6 +22,7 @@ namespace Characters
             _tmp = GetComponent<TextMeshPro>();
             _rt = GetComponent<RectTransform>();
 
+            // Flip the text to match with a parent's change in direction
             _rt.localScale = new Vector3(Mathf.Sign(transform.parent
                 .localScale.x), 1, 1);
         }

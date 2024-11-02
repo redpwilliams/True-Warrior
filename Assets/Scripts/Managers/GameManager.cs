@@ -26,17 +26,9 @@ namespace Managers
         /// Character Prefabs
         [Header("Character Prefabs")] 
         
-        [SerializeField] 
-        private GameObject _roninPrefab;
-        private Ronin _roninScript;
-        
-        [SerializeField] 
-        private GameObject _shogunPrefab;
-        private Shogun _shogunScript;
-        
-        [SerializeField] 
-        private GameObject _shinobiPrefab;
-        private Shinobi _shinobiScript;
+        [SerializeField] private GameObject _roninPrefab;
+        [SerializeField] private GameObject _shogunPrefab;
+        [SerializeField] private GameObject _shinobiPrefab;
         
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
@@ -44,9 +36,7 @@ namespace Managers
         [Header("Standoff Parameters")]
         
         [SerializeField] private float _timeUntilStage1 = 2.5f;
-
         [SerializeField] private float _timeUntilStage2 = 5f;
-
         [SerializeField] private float _timeUntilStage3 = 5f;
 
         // TODO - Make range?
@@ -64,11 +54,6 @@ namespace Managers
             }
 
             Manager = this;
-
-            // Cache character scripts
-            _roninScript = _roninPrefab.GetComponent<Ronin>();
-            _shogunScript = _shogunPrefab.GetComponent<Shogun>();
-            _shinobiScript = _shinobiPrefab.GetComponent<Shinobi>();
             
             // Load haiku data
             _haikus = JsonReader.LoadHaikus();
@@ -122,28 +107,46 @@ namespace Managers
             InstantiateShinobi(PlayerType.CPU);
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void InstantiateRonin(PlayerType playerType)
         { 
-            _roninScript.SetPlayerType(playerType);
-            _roninScript.SetPosition();
-            _roninScript.SetDirection();
-            Instantiate(_roninPrefab);   
+            var instance = Instantiate(_roninPrefab);
+            Ronin ronin = instance.GetComponent<Ronin>();
+            
+            ronin.SetPlayerType(playerType);
+            ronin.SetPosition();
+            ronin.EndPosition = (playerType == PlayerType.One
+                ? InitParams.Standoff_P1_EndPositionX
+                : InitParams.Standoff_PX_EndPositionX);
+            ronin.SetDirection();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void InstantiateShogun(PlayerType playerType)
         {
-            _shogunScript.SetPlayerType(playerType);
-            _shogunScript.SetPosition();
-            _shogunScript.SetDirection();
-            Instantiate(_shogunPrefab);
+            var instance = Instantiate(_shogunPrefab); 
+            Shogun shogun = instance.GetComponent<Shogun>();
+            
+            shogun.SetPlayerType(playerType);
+            shogun.SetPosition();
+            shogun.EndPosition = (playerType == PlayerType.One
+                ? InitParams.Standoff_P1_EndPositionX
+                : InitParams.Standoff_PX_EndPositionX);
+            shogun.SetDirection();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void InstantiateShinobi(PlayerType playerType)
         {
-            _shinobiScript.SetPlayerType(playerType);
-            _shinobiScript.SetPosition();
-            _shinobiScript.SetDirection();
-            Instantiate(_shinobiPrefab);
+            var instance = Instantiate(_shinobiPrefab);
+            Shinobi shinobi = instance.GetComponent<Shinobi>();
+            
+            shinobi.SetPlayerType(playerType);
+            shinobi.SetPosition();
+            shinobi.EndPosition = (playerType == PlayerType.One
+                ? InitParams.Standoff_P1_EndPositionX
+                : InitParams.Standoff_PX_EndPositionX);
+            shinobi.SetDirection();
         }
 
         private IEnumerator HaikuCountdown(IReadOnlyList<Haiku> haikus)

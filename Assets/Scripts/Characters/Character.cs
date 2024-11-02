@@ -22,7 +22,8 @@ namespace Characters
 
         [Header("Game Start Running Parameters")]
         [SerializeField] private float _runSpeed = InitParams.RunSpeed;
-        private float _endPosition = InitParams.EndPositionX;
+        //private float _endPosition = InitParams.EndPositionX;
+        public float EndPosition { get; set; }
         private bool _isRunning;
     
         [Header("Player Designation")]
@@ -78,18 +79,6 @@ namespace Characters
             Character[] players =
                 FindObjectsByType<Character>(FindObjectsSortMode.None);
             Opponent = (players[0] == this) ? players[1] : players[0];
-        
-            // Set position and sprite direction
-            var localScale = _transform.localScale;
-            localScale.x = InitParams.StartPositionX;
-            if (_playerType == PlayerType.One)
-            {
-                _endPosition = -Mathf.Abs(InitParams.EndPositionX);
-            }
-            else
-            {
-                localScale.x = -Mathf.Abs(localScale.x);
-            }
         }
 
         private void FixedUpdate()
@@ -99,14 +88,14 @@ namespace Characters
         
             // Move the character towards the final position
             Vector2 currentPosition = Rb2d.position;
-            Vector2 targetPosition = new Vector2(_endPosition, currentPosition.y);
+            Vector2 targetPosition = new Vector2(EndPosition, currentPosition.y);
             Rb2d.MovePosition(Vector2.MoveTowards(currentPosition, targetPosition,
                 _runSpeed * Time.fixedDeltaTime));
 
             // Check if the character has reached or passed the final position
             // TODO - Revisit
-            if ((_playerType == PlayerType.One && Rb2d.position.x < _endPosition) || 
-                _playerType != PlayerType.One && Rb2d.position.x > _endPosition) return;
+            if ((_playerType == PlayerType.One && Rb2d.position.x < EndPosition) || 
+                _playerType != PlayerType.One && Rb2d.position.x > EndPosition) return;
         
             // Stop movement and animation
             _isRunning = false;
