@@ -30,6 +30,11 @@ namespace Managers
         [SerializeField] private GameObject _shogunPrefab;
         [SerializeField] private GameObject _shinobiPrefab;
         
+        /// Exposed Buttons
+        [Header("Button Sets")]
+        
+        [SerializeField] private  GameObject _finishedButtons;
+        
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
 
@@ -78,6 +83,11 @@ namespace Managers
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gm), gm, null);
             }
+        }
+
+        public void FinishGameMode()
+        {
+            _finishedButtons.SetActive(true);
         }
 
         #region Standoff
