@@ -252,7 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84ac5345567c3c4bb5ae11f5a6639be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runSpeed: 15
   _playerType: 0
   _risingGravityScale: 8
   _fallingGravityScale: 20
@@ -362,7 +361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6516822283162780297, guid: e1de575c8ec7393419479b33ad779c72, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.25
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6516822283162780297, guid: e1de575c8ec7393419479b33ad779c72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
