@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Characters;
 using UI;
+using UI.Buttons.Gameplay;
 using UnityEngine;
 using Util;
 using Random = UnityEngine.Random;
@@ -33,7 +34,7 @@ namespace Managers
         /// Exposed Buttons
         [Header("Button Sets")]
         
-        [SerializeField] private  GameObject _finishedButtons;
+        [SerializeField] private  GameplayButtonGroup _finishedButtons;
         
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
@@ -87,7 +88,7 @@ namespace Managers
 
         public void FinishGameMode()
         {
-            _finishedButtons.SetActive(true);
+            _finishedButtons.ShowButtons();
         }
 
         #region Standoff
