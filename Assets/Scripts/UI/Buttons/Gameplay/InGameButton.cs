@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-namespace UI.Buttons
+namespace UI.Buttons.Gameplay
 {
     public abstract class InGameButton : BaseUIButton
     {

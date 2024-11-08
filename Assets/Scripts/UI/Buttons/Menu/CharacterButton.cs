@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI.Buttons
+namespace UI.Buttons.Menu
 {
     /// A button that represents a character the player can choose to play as
     public class CharacterButton : MonoBehaviour, ISelectHandler, 

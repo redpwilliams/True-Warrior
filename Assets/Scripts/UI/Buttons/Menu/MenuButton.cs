@@ -2,7 +2,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI.Buttons
+namespace UI.Buttons.Menu
 {
     public class MenuButton : BaseUIButton, IMoveHandler
     {

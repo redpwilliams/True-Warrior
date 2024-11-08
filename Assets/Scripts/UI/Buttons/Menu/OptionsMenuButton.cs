@@ -3,7 +3,7 @@ using System.Linq;
 using Managers;
 using UnityEngine;
 
-namespace UI.Buttons
+namespace UI.Buttons.Menu
 {
     public class OptionsMenuButton : MenuButton
     {

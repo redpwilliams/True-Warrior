@@ -1,10 +1,10 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Managers;
 using GameMode = Managers.GameManager.GameMode;
 
-namespace UI.Buttons
+namespace UI.Buttons.Menu
 {
     /// Abstract class PlayMenuButton holds the shared functionality of
     /// the Standoff, Survival, and Zen buttons. Each button is then
