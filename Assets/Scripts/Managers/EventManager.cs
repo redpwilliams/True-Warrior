@@ -112,28 +112,5 @@ namespace Managers
         }
 
         #endregion
-
-        #region Input
-
-        // Relays who hit first?
-        // Log winner attack timestamp. If it's less than X seconds later, any incoming (?) inputs are marked as late
-        private Character _winner;
-        private bool _winnerDeclared;
-
-        public ReactionInfo CharacterInputsAttack(Character c, double time)
-        {
-            double reactionTime = time - _battleStartTime;
-            string formattedReactionTime = $"{reactionTime:F3}";
-
-            if (!_winnerDeclared)
-            {
-                _winnerDeclared = true;
-                _winner = c;
-            }
-
-            return new ReactionInfo(_winner, formattedReactionTime);
-        }
-
-        #endregion
     }
 }
