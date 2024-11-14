@@ -24,6 +24,8 @@ namespace Managers
             Zen
         }
 
+        private GameMode _currentGameMode;
+
         /// Character Prefabs
         [Header("Character Prefabs")] 
         
@@ -71,6 +73,8 @@ namespace Managers
 
         public void StartGameMode(GameMode gm)
         {
+            _currentGameMode = gm;
+            
             switch (gm)
             {
                 case GameMode.Standoff:
@@ -91,12 +95,19 @@ namespace Managers
             _finishedButtons.ShowButtons();
         }
 
+        public void ResetGameMode()
+        {
+            // Send Event to all characters to destroy themselves
+            EventManager.Events.DestroyCharacters();
+            // make a _finishedButtons.HideButtons(); method
+            _finishedButtons.HideButtons();
+        }
+
         #region Standoff
 
         private void SpawnCharacters()
         {
             Character p1 = null;
-            Character px = null;
             
             // Player character
             switch (SaveManager.LoadPlayerCharacter())
@@ -119,7 +130,7 @@ namespace Managers
             }
 
             // Opponent
-            px = InstantiateShinobi(PlayerType.CPU);
+            Character px = InstantiateShinobi(PlayerType.CPU);
 
             if (p1 is null || px is null) return;
             
@@ -176,7 +187,7 @@ namespace Managers
             return shinobi;
         }
 
-        private IEnumerator HaikuCountdown(IReadOnlyList<Haiku> haikus)
+        private IEnumerator HaikuCountdown(IReadOnlyCollection<Haiku> haikus)
         {
             // Initial startup buffer
             yield return new WaitForSeconds(2.5f);

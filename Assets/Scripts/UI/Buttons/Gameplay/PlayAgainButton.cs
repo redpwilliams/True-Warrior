@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine.EventSystems;
 
 namespace UI.Buttons.Gameplay
@@ -6,7 +7,7 @@ namespace UI.Buttons.Gameplay
     {
         public override void OnSubmit(BaseEventData eventData)
         {
-            print("Play again");
+            GameManager.Manager.ResetGameMode();
         }
     }
 }

@@ -101,14 +101,14 @@ namespace Managers
         
         #endregion
 
-        #region Game Start
+        #region Characters
 
         /// Fires when the selected GameMode should start
-        public event Action<GameMode> OnGameModeStart;
+        public event Action OnDestroyCharacters;
 
-        public void GameModeStart(GameMode gm)
+        public void DestroyCharacters()
         {
-            OnGameModeStart?.Invoke(gm);
+            OnDestroyCharacters?.Invoke();
         }
 
         #endregion

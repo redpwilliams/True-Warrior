@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using JetBrains.Annotations;
 using Managers;
@@ -69,6 +70,16 @@ namespace Characters
             EventManager.Events.OnStageX += AllowControls;
             EventManager.Events.OnStageX += GetSet;
             EventManager.Events.OnBeginAttack += Attack;
+            EventManager.Events.OnDestroyCharacters += DestroySelf;
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Events.OnStageX -= RunToSet;
+            EventManager.Events.OnStageX -= AllowControls;
+            EventManager.Events.OnStageX -= GetSet;
+            EventManager.Events.OnBeginAttack -= Attack;
+            EventManager.Events.OnDestroyCharacters -= DestroySelf;
         }
 
         #region Movement and Positioning
@@ -321,5 +332,10 @@ namespace Characters
         }
 
         #endregion
+
+        private void DestroySelf()
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
