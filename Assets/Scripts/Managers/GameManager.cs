@@ -98,9 +98,9 @@ namespace Managers
         public void ResetGameMode()
         {
             // Send Event to all characters to destroy themselves
-            EventManager.Events.DestroyCharacters();
-            // make a _finishedButtons.HideButtons(); method
+            EventManager.Events.RestartCurrentGameMode();
             _finishedButtons.HideButtons();
+            StartGameMode(_currentGameMode);
         }
 
         #region Standoff
@@ -189,7 +189,12 @@ namespace Managers
 
         private IEnumerator HaikuCountdown(IReadOnlyCollection<Haiku> haikus)
         {
-            // Initial startup buffer
+            if (!HaikuText.Instance.Hidden)
+            {
+                yield return HaikuText.Instance.FadeText(1f, false);
+            }
+
+                // Initial startup buffer
             yield return new WaitForSeconds(2.5f);
 
             // Choose haiku

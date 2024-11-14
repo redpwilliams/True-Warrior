@@ -104,11 +104,11 @@ namespace Managers
         #region Characters
 
         /// Fires when the selected GameMode should start
-        public event Action OnDestroyCharacters;
+        public event Action OnRestartCurrentGameMode;
 
-        public void DestroyCharacters()
+        public void RestartCurrentGameMode()
         {
-            OnDestroyCharacters?.Invoke();
+            OnRestartCurrentGameMode?.Invoke();
         }
 
         #endregion

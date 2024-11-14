@@ -14,8 +14,9 @@ namespace UI
 
         [Header("Child References")] [SerializeField]
         private TextMeshProUGUI _en, _jp;
-
-
+        
+        public bool Hidden { get; private set; }
+        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -26,6 +27,8 @@ namespace UI
 
             Instance = this;
 
+            Hidden = false;
+            
             _en.text = "";
             _jp.text = "";
             _en.alpha = 0;
@@ -50,6 +53,8 @@ namespace UI
 
             _en.alpha = endAlpha;
             _jp.alpha = endAlpha;
+
+            Hidden = !fadeIn;
         }
 
         public void SetTexts(LinePair lp)

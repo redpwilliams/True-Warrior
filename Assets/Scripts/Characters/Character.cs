@@ -70,7 +70,7 @@ namespace Characters
             EventManager.Events.OnStageX += AllowControls;
             EventManager.Events.OnStageX += GetSet;
             EventManager.Events.OnBeginAttack += Attack;
-            EventManager.Events.OnDestroyCharacters += DestroySelf;
+            EventManager.Events.OnRestartCurrentGameMode += DestroySelf;
         }
 
         private void OnDestroy()
@@ -79,7 +79,7 @@ namespace Characters
             EventManager.Events.OnStageX -= AllowControls;
             EventManager.Events.OnStageX -= GetSet;
             EventManager.Events.OnBeginAttack -= Attack;
-            EventManager.Events.OnDestroyCharacters -= DestroySelf;
+            EventManager.Events.OnRestartCurrentGameMode -= DestroySelf;
         }
 
         #region Movement and Positioning
