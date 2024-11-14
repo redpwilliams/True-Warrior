@@ -11,7 +11,7 @@ using PlayerType = Characters.Character.PlayerType;
 
 namespace Managers
 {
-    public class GameManager : MonoBehaviour
+    public partial class GameManager : MonoBehaviour
     {
         /// Singleton Instance
         public static GameManager Manager { get; private set; }
@@ -105,6 +105,9 @@ namespace Managers
 
         #region Standoff
 
+        private bool _standoffWinnerDeclared;
+        private float _battleStartTime;
+
         private void SpawnCharacters()
         {
             Character p1 = null;
@@ -189,12 +192,17 @@ namespace Managers
 
         private IEnumerator HaikuCountdown(IReadOnlyCollection<Haiku> haikus)
         {
+            
+            // Fade out Haiku Text before starting (if applicable)
             if (!HaikuText.Instance.Hidden)
             {
                 yield return HaikuText.Instance.FadeText(1f, false);
             }
+            
+            // Reset Standoff Winner info
+            _standoffWinnerDeclared = false;
 
-                // Initial startup buffer
+            // Initial startup buffer
             yield return new WaitForSeconds(2.5f);
 
             // Choose haiku
@@ -243,8 +251,25 @@ namespace Managers
             HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
             yield return awaitBattle;
             EventManager.Events.StageX(stage);
+            _battleStartTime = Time.time;
             yield return StartCoroutine(
                 HaikuText.Instance.FadeText(0.05f, true));
+        }
+
+        /// Returns information about the reaction time and winner status
+        /// after a Character inputs attack.
+        public ReactionInfo AttackInput(float inputTime)
+        {
+            float reactionTime = inputTime - _battleStartTime;
+            string formattedReactionTime = $"{reactionTime:F3}";
+
+            // Loser
+            if (_standoffWinnerDeclared)
+                return new ReactionInfo(false, formattedReactionTime);
+            
+            // Winner
+            _standoffWinnerDeclared = true;
+            return new ReactionInfo(true, formattedReactionTime);
         }
 
         #endregion

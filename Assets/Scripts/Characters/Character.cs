@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using JetBrains.Annotations;
 using Managers;
@@ -208,34 +207,33 @@ namespace Characters
             StartCoroutine(DelayCPUAttack());
         }
     
-        // this character has inputted the attack button
+        /// Fires from an input defined in the Controls InputAction map
+        /// when a Character - a player or CPU - attacks.
         private void OnControllerInput(InputAction.CallbackContext context)
         {
-            _battleData = EventManager.Events.CharacterInputsAttack(
-                this, context.time); 
+            _battleData = GameManager.Manager.AttackInput(Time.time); 
             _controls.Player1.Disable();
             
             _characterText.ShowReactionTime(_battleData.ReactionTime);
-            DetermineReactionAnimation(_battleData.Winner);
+            DetermineReactionAnimation(_battleData.IsWinner);
         }
 
         private IEnumerator DelayCPUAttack()
         {
             // CPU Attack Delay
             // TODO - Make 3 ranges for easy, medium, and hard
-            yield return new WaitForSecondsRealtime(0.5f); // TODO "speed tiers" ?
+            yield return new WaitForSeconds(0.5f); // TODO "speed tiers" ?
             
-            // Attack, and ask EventManager for results
-            _battleData  = EventManager.Events.CharacterInputsAttack(
-                this, Time.realtimeSinceStartupAsDouble); 
+            // Attack, and ask GameManager for results
+            _battleData  = GameManager.Manager.AttackInput(Time.time); 
             
             _characterText.ShowReactionTime(_battleData.ReactionTime);
-            DetermineReactionAnimation(_battleData.Winner);
+            DetermineReactionAnimation(_battleData.IsWinner);
         }
 
-        private void DetermineReactionAnimation(Character winner)
+        private void DetermineReactionAnimation(bool isWinner)
         {
-            if (this == winner) Attack();
+            if (isWinner) Attack();
         }
 
         #endregion
