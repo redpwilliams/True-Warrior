@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Util;
@@ -8,7 +7,7 @@ namespace UI.Buttons.Gameplay
 {
     /// A GameObject with multiple GameplayButtons
     [RequireComponent(typeof(CanvasGroup))]
-    public class GameplayButtonGroup : ButtonGroup
+    public class GameplayButtonGroup : ButtonGroup<GameplayButton>
     {
         /// CanvasGroup component used for alpha animation
         private CanvasGroup _cg;

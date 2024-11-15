@@ -6,9 +6,10 @@ using Util;
 
 namespace UI.Buttons.Menu
 {
-    public class MainMenuButtonGroup : ButtonGroup
+    /// Groups the Main Menu buttons; specifically, the Play,
+    /// Instructions, Options, and Quit Buttons
+    public class MainMenuButtonGroup : ButtonGroup<MenuButton>
     {
-
         private readonly float _moveOffset = -200f;
         private RectTransform _rt;
         private bool _buttonIsSelected;
