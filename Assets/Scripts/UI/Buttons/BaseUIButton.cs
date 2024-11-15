@@ -13,8 +13,6 @@ namespace UI.Buttons
         
         public enum ButtonState { Active, InActive }
 
-        private ButtonState _buttonState;
-        
         private readonly float _moveOffset = 15f;
         [Header("Child references")]
         [SerializeField] private GameObject _enChild;
@@ -43,13 +41,6 @@ namespace UI.Buttons
         /// Moves this button both outward/inward by a predetermined offset
         protected IEnumerator MoveButton(ButtonState state)
         {
-
-            // Don't do anything if the state to move to is the current state
-            if (state == _buttonState) yield break;
-            
-            // Set the current state
-            _buttonState = state;
-            
             float start = state == ButtonState.Active ? 0 : _moveOffset;
             float end = state == ButtonState.Active ? _moveOffset : 0;
             
@@ -89,9 +80,6 @@ namespace UI.Buttons
         /// Thus, it is done outside of a coroutine.
         public void SetButton(ButtonState state)
         {
-            // Do nothing if trying to set a button to the same state
-            if (state == _buttonState) return;
-
             // Get button end position
             float end = state == ButtonState.Active  ? _moveOffset : 0;
             

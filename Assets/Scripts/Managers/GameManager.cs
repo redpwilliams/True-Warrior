@@ -218,38 +218,12 @@ namespace Managers
             
             // Line 1
             yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage1, holdText);
-            // HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            // yield return awaitStage1;
-            // EventManager.Events.StageX(stage++);
-            // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
-            // yield return holdText;
-            // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
 
             // Line 2
             yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage2, holdText);
-            // HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            // yield return awaitStage2;
-            // EventManager.Events.StageX(stage++);
-            // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
-            // yield return holdText;
-            // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
-
+            
             // Line 3
             yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage3, holdText);
-            // HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            // yield return awaitStage3;
-            // EventManager.Events.StageX(stage++);
-            // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(_fadeInDuration, 
-            //     AnimationDirection.In));
-            // yield return holdText;
-            // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
-
 
             // Battle Start
             HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
