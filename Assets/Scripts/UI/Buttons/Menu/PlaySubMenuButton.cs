@@ -33,7 +33,7 @@ namespace UI.Buttons.Menu
             // were turned off
             IEnumerator CheckAsync()
             {
-                yield return MoveButton(false);
+                yield return MoveButton(ButtonState.InActive);
                 if (EventSystem.current.currentSelectedGameObject is null)
                     EventManager.Events.SubMenuButtonCancel(null); // Button was clicked off
             }
@@ -67,7 +67,7 @@ namespace UI.Buttons.Menu
         
             IEnumerator CheckAsync()
             {
-                yield return MoveButton(false);
+                yield return MoveButton(ButtonState.InActive);
                 EventManager.Events.SubMenuButtonCancel(
                     EventSystem.current.currentSelectedGameObject is null 
                         ? null 

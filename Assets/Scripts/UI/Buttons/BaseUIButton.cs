@@ -41,10 +41,10 @@ namespace UI.Buttons
         }
 
         /// Moves this button both outward/inward by a predetermined offset
-        protected IEnumerator MoveButton(bool outWards)
+        protected IEnumerator MoveButton(ButtonState state)
         {
-            float start = outWards ? 0 : _moveOffset;
-            float end = outWards ? _moveOffset : 0;
+            float start = state == ButtonState.Active ? 0 : _moveOffset;
+            float end = state == ButtonState.Active ? _moveOffset : 0;
             
             var enLocalPosition = _en.localPosition;
             var jpLocalPosition = _jp.localPosition;
@@ -117,11 +117,11 @@ namespace UI.Buttons
         private void DisableButton(GameMode gm) => _button.enabled = false;
 
         /// Starts the MoveButton Coroutine, moving the button outwards
-        public virtual void OnSelect(BaseEventData eventData) => StartCoroutine
-        (MoveButton(true));
+        public virtual void OnSelect(BaseEventData eventData) => StartCoroutine(MoveButton(ButtonState.Active));
 
         /// Starts the MoveButton Coroutine, returning the button inwards
-        public virtual void OnDeselect(BaseEventData eventData) => StartCoroutine(MoveButton(false));
+        public virtual void OnDeselect(BaseEventData eventData) => 
+        StartCoroutine(MoveButton(ButtonState.InActive));
 
         /// Fires when this button is active and EventSystem captures a "submit" input
         public abstract void OnSubmit(BaseEventData eventData);
