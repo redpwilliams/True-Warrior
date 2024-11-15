@@ -1,11 +1,12 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Util;
 
-namespace Managers
+namespace UI.Buttons.Menu
 {
-    public class ButtonManager : MonoBehaviour
+    public class MainMenuButtonGroup : ButtonGroup
     {
 
         private readonly float _moveOffset = -200f;
