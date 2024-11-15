@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Util;
@@ -10,6 +11,7 @@ namespace UI.Buttons.Gameplay
     {
         private CanvasGroup _cg;
         [SerializeField] private GameObject _firstButton;
+        [SerializeField] private List<GameplayButton> _buttons;
 
         private void Awake()
         {
@@ -38,6 +40,12 @@ namespace UI.Buttons.Gameplay
                 yield return AnimateButtonGroup(AnimationDirection.Out);
                 gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(null);
+                
+                // Deselect all buttons (visually from UI)
+                foreach (var button in _buttons)
+                {
+                    button.SetButton(BaseUIButton.ButtonState.InActive);
+                }
             }
         }
 
@@ -56,6 +64,8 @@ namespace UI.Buttons.Gameplay
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
+            _cg.alpha = endAlpha;
         }
 
     }

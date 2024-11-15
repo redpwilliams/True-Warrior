@@ -10,6 +10,11 @@ namespace UI.Buttons
     public abstract class BaseUIButton : MonoBehaviour, ISelectHandler, 
         IDeselectHandler, ISubmitHandler, ICancelHandler
     {
+        
+        public enum ButtonState { Active, InActive }
+
+        // protected ButtonState _buttonState;
+        
         private readonly float _moveOffset = 15f;
         [Header("Child references")]
         [SerializeField] private GameObject _enChild;
@@ -62,6 +67,29 @@ namespace UI.Buttons
                 yield return null;
             }
 
+            _en.localPosition = enEndPosition;
+            _jp.localPosition = jpEndPosition;
+        }
+
+        /// Unlike BaseUIButton.MoveButton, this method sets the Button
+        /// as active or inactive, without animating it.
+        /// Thus, it is done outside of a coroutine.
+        public void SetButton(ButtonState state)
+        {
+            // Do nothing if trying to set a button to the same state
+            // if (state == _buttonState) return;
+
+            // Get button end position
+            float end = state == ButtonState.Active  ? _moveOffset : 0;
+            
+            var enLocalPosition = _en.localPosition;
+            var jpLocalPosition = _jp.localPosition;
+            
+            // Express as Vector3
+            Vector3 enEndPosition = new Vector3(end, enLocalPosition.y, enLocalPosition.z);
+            Vector3 jpEndPosition = new Vector3(end, jpLocalPosition.y, jpLocalPosition.z);
+
+            // Set Button's position to new position
             _en.localPosition = enEndPosition;
             _jp.localPosition = jpEndPosition;
         }

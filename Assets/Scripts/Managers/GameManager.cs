@@ -210,7 +210,6 @@ namespace Managers
 
             int stage = 0;
 
-            // TODO - Create all WaitForSeconds objects here
             WaitForSeconds awaitStage1 = new WaitForSeconds(_timeUntilStage1);
             WaitForSeconds awaitStage2 = new WaitForSeconds(_timeUntilStage2);
             WaitForSeconds awaitStage3 = new WaitForSeconds(_timeUntilStage3);
