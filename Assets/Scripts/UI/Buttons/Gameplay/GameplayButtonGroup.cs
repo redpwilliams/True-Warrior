@@ -8,14 +8,11 @@ namespace UI.Buttons.Gameplay
 {
     /// A GameObject with multiple GameplayButtons
     [RequireComponent(typeof(CanvasGroup))]
-    public class GameplayButtonGroup : MonoBehaviour
+    public class GameplayButtonGroup : ButtonGroup
     {
         /// CanvasGroup component used for alpha animation
         private CanvasGroup _cg;
         
-        /// The GameplayButtons within this ButtonGroup
-        [SerializeField] private List<GameplayButton> _buttons;
-
         private void Awake()
         {
             _cg = GetComponent<CanvasGroup>();
