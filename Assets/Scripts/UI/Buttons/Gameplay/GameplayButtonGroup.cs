@@ -6,11 +6,14 @@ using Util;
 
 namespace UI.Buttons.Gameplay
 {
+    /// A GameObject with multiple GameplayButtons
     [RequireComponent(typeof(CanvasGroup))]
     public class GameplayButtonGroup : MonoBehaviour
     {
+        /// CanvasGroup component used for alpha animation
         private CanvasGroup _cg;
-        [SerializeField] private GameObject _firstButton;
+        
+        /// The GameplayButtons within this ButtonGroup
         [SerializeField] private List<GameplayButton> _buttons;
 
         private void Awake()
@@ -19,29 +22,41 @@ namespace UI.Buttons.Gameplay
             _cg.alpha = 0;
         }
 
+        /// Animates in the ButtonGroup
         public void ShowButtons()
         {
+            // Sets the ButtonGroup to active, before animating
             gameObject.SetActive(true);
             StartCoroutine(ButtonStateChange());
 
             IEnumerator ButtonStateChange()
             {
+                // Start the animation
                 yield return AnimateButtonGroup(AnimationDirection.In);
-                EventSystem.current.SetSelectedGameObject(_firstButton);
+                
+                // After the animation is finished, set EventSystem's current target
+                // to the first Button in the ButtonGroup
+                EventSystem.current.SetSelectedGameObject(_buttons[0].gameObject);
             }
         }
 
+        /// Animates out the ButtonGroup
         public void HideButtons()
         {
             StartCoroutine(ButtonStateChange());
 
             IEnumerator ButtonStateChange()
             {
+                // Start the animation
                 yield return AnimateButtonGroup(AnimationDirection.Out);
+                
+                // Sets the ButtonGroup to inactive, after animating
                 gameObject.SetActive(false);
+                
+                // After the menu is invisible, nullify EventSystem's current target
                 EventSystem.current.SetSelectedGameObject(null);
                 
-                // Deselect all buttons (visually from UI)
+                // Deselect all Buttons in this ButtonGroup
                 foreach (var button in _buttons)
                 {
                     button.SetButton(BaseUIButton.ButtonState.InActive);
@@ -49,6 +64,7 @@ namespace UI.Buttons.Gameplay
             }
         }
 
+        /// Animates the entire ButtonGroup/Menu in/out with a linear fade
         private IEnumerator AnimateButtonGroup(AnimationDirection direction)
         {
             float startAlpha = _cg.alpha;
