@@ -217,35 +217,39 @@ namespace Managers
             WaitForSeconds awaitBattle = new WaitForSeconds(_timeUntilBattleStart);
             
             // Line 1
-            HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            yield return awaitStage1;
-            EventManager.Events.StageX(stage++);
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
-            yield return holdText;
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
+            yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage1, holdText);
+            // HaikuText.Instance.SetTexts(haiku.lines[stage]);
+            // yield return awaitStage1;
+            // EventManager.Events.StageX(stage++);
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
+            // yield return holdText;
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
 
             // Line 2
-            HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            yield return awaitStage2;
-            EventManager.Events.StageX(stage++);
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
-            yield return holdText;
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
+            yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage2, holdText);
+            // HaikuText.Instance.SetTexts(haiku.lines[stage]);
+            // yield return awaitStage2;
+            // EventManager.Events.StageX(stage++);
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
+            // yield return holdText;
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
 
             // Line 3
-            HaikuText.Instance.SetTexts(haiku.lines[stage]);
-            yield return awaitStage3;
-            EventManager.Events.StageX(stage++);
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeInDuration, 
-                AnimationDirection.In));
-            yield return holdText;
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
+            yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage3, holdText);
+            // HaikuText.Instance.SetTexts(haiku.lines[stage]);
+            // yield return awaitStage3;
+            // EventManager.Events.StageX(stage++);
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(_fadeInDuration, 
+            //     AnimationDirection.In));
+            // yield return holdText;
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
+
 
             // Battle Start
             HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
@@ -254,6 +258,32 @@ namespace Managers
             _battleStartTime = Time.time;
             yield return StartCoroutine(
                 HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
+        }
+
+        private IEnumerator ExecuteStage(
+            LinePair text, int stage, WaitForSeconds awaitTime, WaitForSeconds holdTime)
+        {
+            // Set the HaikuText to the current line in the haiku
+            HaikuText.Instance.SetTexts(text);
+            
+            // Wait a bit before showing the lines and starting the stage
+            yield return awaitTime;
+            
+            // Broadcast to all observers that this stage is starting
+            EventManager.Events.StageX(stage);
+            
+            // Fade text in
+            yield return StartCoroutine(
+                HaikuText.Instance.FadeText(_fadeInDuration, 
+                AnimationDirection.In));
+            
+            // Hold the text for a bit
+            yield return holdTime;
+            
+            // Fade the text out
+            yield return StartCoroutine(
+                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
+            
         }
 
         /// Returns information about the reaction time and winner status
