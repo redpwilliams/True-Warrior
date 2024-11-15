@@ -35,10 +35,10 @@ namespace UI
             _jp.alpha = 0;
         }
 
-        public IEnumerator FadeText(float fadeDuration, bool fadeIn)
+        public IEnumerator FadeText(float fadeDuration, AnimationDirection animDirection)
         {
-            float startAlpha = fadeIn ? 0f : 1f;
-            float endAlpha = fadeIn ? 1f : 0f;
+            float startAlpha = animDirection == AnimationDirection.In ? 0f : 1f;
+            float endAlpha = animDirection == AnimationDirection.In ? 1f : 0f;
             float elapsedTime = 0f;
 
             while (elapsedTime < fadeDuration)
@@ -54,7 +54,7 @@ namespace UI
             _en.alpha = endAlpha;
             _jp.alpha = endAlpha;
 
-            Hidden = !fadeIn;
+            Hidden = animDirection == AnimationDirection.Out;
         }
 
         public void SetTexts(LinePair lp)

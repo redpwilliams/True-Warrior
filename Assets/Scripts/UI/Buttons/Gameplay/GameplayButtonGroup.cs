@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Util;
 
 namespace UI.Buttons.Gameplay
 {
@@ -10,12 +11,6 @@ namespace UI.Buttons.Gameplay
         private CanvasGroup _cg;
         [SerializeField] private GameObject _firstButton;
 
-        private enum Animate
-        {
-            In,
-            Out
-        }
-        
         private void Awake()
         {
             _cg = GetComponent<CanvasGroup>();
@@ -29,7 +24,7 @@ namespace UI.Buttons.Gameplay
 
             IEnumerator ButtonStateChange()
             {
-                yield return AnimateButtonGroup(Animate.In);
+                yield return AnimateButtonGroup(AnimationDirection.In);
                 EventSystem.current.SetSelectedGameObject(_firstButton);
             }
         }
@@ -40,16 +35,16 @@ namespace UI.Buttons.Gameplay
 
             IEnumerator ButtonStateChange()
             {
-                yield return AnimateButtonGroup(Animate.Out);
+                yield return AnimateButtonGroup(AnimationDirection.Out);
                 gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(null);
             }
         }
 
-        private IEnumerator AnimateButtonGroup(Animate direction)
+        private IEnumerator AnimateButtonGroup(AnimationDirection direction)
         {
             float startAlpha = _cg.alpha;
-            float endAlpha = (direction == Animate.In) ? 1 : 0;
+            float endAlpha = (direction == AnimationDirection.In) ? 1 : 0;
 
             float elapsedTime = 0;
             float animationDuration = 0.5f;

@@ -196,7 +196,7 @@ namespace Managers
             // Fade out Haiku Text before starting (if applicable)
             if (!HaikuText.Instance.Hidden)
             {
-                yield return HaikuText.Instance.FadeText(1f, false);
+                yield return HaikuText.Instance.FadeText(1f, AnimationDirection.Out);
             }
             
             // Reset Standoff Winner info
@@ -222,30 +222,31 @@ namespace Managers
             yield return awaitStage1;
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeInDuration, true));
+                HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
             yield return holdText;
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeOutDuration, false));
+                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
 
             // Line 2
             HaikuText.Instance.SetTexts(haiku.lines[stage]);
             yield return awaitStage2;
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeInDuration, true));
+                HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In));
             yield return holdText;
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeOutDuration, false));
+                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
 
             // Line 3
             HaikuText.Instance.SetTexts(haiku.lines[stage]);
             yield return awaitStage3;
             EventManager.Events.StageX(stage++);
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeInDuration, true));
+                HaikuText.Instance.FadeText(_fadeInDuration, 
+                AnimationDirection.In));
             yield return holdText;
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(_fadeOutDuration, false));
+                HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out));
 
             // Battle Start
             HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
@@ -253,7 +254,7 @@ namespace Managers
             EventManager.Events.StageX(stage);
             _battleStartTime = Time.time;
             yield return StartCoroutine(
-                HaikuText.Instance.FadeText(0.05f, true));
+                HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
         }
 
         /// Returns information about the reaction time and winner status
