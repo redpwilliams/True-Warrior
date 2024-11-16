@@ -33,7 +33,7 @@ namespace UI.Buttons.Menu
         {
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
-            StartCoroutine(MoveMenu(true, smbg.gameObject, smbg.Buttons[0].gameObject));
+            StartCoroutine(MoveMenu(true, smbg.gameObject, null));
         }
         
         private void OnDisable()

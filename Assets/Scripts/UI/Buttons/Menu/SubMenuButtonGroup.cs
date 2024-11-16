@@ -3,16 +3,7 @@ using System.Collections.Generic;
 
 namespace UI.Buttons.Menu
 {
-    public class SubMenuButtonGroup : ButtonGroup<BaseUIButton>
+    public class SubMenuButtonGroup : ButtonGroup<SubMenuButton>
     {
-        public List<BaseUIButton> Buttons;
-
-        private void Awake()
-        {
-            foreach (var button in _buttons)
-            {
-                Buttons.Add(button);
-            }
-        }
     }
 }
