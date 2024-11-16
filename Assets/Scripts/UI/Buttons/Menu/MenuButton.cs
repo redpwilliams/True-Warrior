@@ -20,7 +20,7 @@ namespace UI.Buttons.Menu
         public override void OnSubmit(BaseEventData eventData)
         {
             // EventManager.Events.MenuButtonSubmit(_subMenu, _firstButton);
-            _manager.ShowMenu(_subMenuBG); // TODO
+            _manager.ShowSubMenu(_subMenuBG); // TODO
         }
 
         public override void OnCancel(BaseEventData eventData) 

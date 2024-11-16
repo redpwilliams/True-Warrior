@@ -29,7 +29,7 @@ namespace UI.Buttons.Menu
             }
         }
 
-        public void ShowMenu(SubMenuButtonGroup smbg)
+        public void ShowSubMenu(SubMenuButtonGroup smbg)
         {
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
