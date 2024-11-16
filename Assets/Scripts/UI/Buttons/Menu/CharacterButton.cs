@@ -7,8 +7,7 @@ using UnityEngine.EventSystems;
 namespace UI.Buttons.Menu
 {
     /// A button that represents a character the player can choose to play as
-    public class CharacterButton : MonoBehaviour, ISelectHandler, 
-    IDeselectHandler, ICancelHandler, ISubmitHandler
+    public class CharacterButton : BaseUIButton, ICancelHandler, ISubmitHandler
     {
         [SerializeField] private GameObject _parentButton;
         [SerializeField] private TextMeshPro _chosenTextObject;
@@ -18,7 +17,7 @@ namespace UI.Buttons.Menu
         public SamuraiType SamuraiType => _samuraiType;
         private static OptionsMenuButton _optionsMb;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
             _css = GetComponent<CharacterSelectSprite>();
             _optionsMb = _parentButton.GetComponent<OptionsMenuButton>();
@@ -31,14 +30,14 @@ namespace UI.Buttons.Menu
                 
         }
 
-        public void OnSelect(BaseEventData eventData)
+        public override void OnSelect(BaseEventData eventData)
         {
             print(gameObject.name + " is selected");
             _css.StartAnimation();
             _css.BrightenSpriteLight();
         }
 
-        public void OnDeselect(BaseEventData eventData)
+        public override void OnDeselect(BaseEventData eventData)
         {
             print(gameObject.name + " is deselected");
             _css.StopAnimation();
@@ -67,7 +66,7 @@ namespace UI.Buttons.Menu
 
 
         // InputAction map programs this to escape key
-        public void OnCancel(BaseEventData eventData)
+        public override void OnCancel(BaseEventData eventData)
         {
             print("Ran cancel");
             
@@ -78,7 +77,7 @@ namespace UI.Buttons.Menu
                     : _parentButton);
         }
 
-        public void OnSubmit(BaseEventData eventData)
+        public override void OnSubmit(BaseEventData eventData)
         {
             // Do nothing if this one is already selected
             if (_chosenTextObject.IsActive()) return;

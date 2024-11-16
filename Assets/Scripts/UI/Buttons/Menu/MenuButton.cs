@@ -9,10 +9,19 @@ namespace UI.Buttons.Menu
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
         [SerializeField] private GameObject _firstButton;
-
+        [SerializeField] private SubMenuButtonGroup _subMenuBG;
+        
+        private MainMenuButtonGroup _manager;
+        public MainMenuButtonGroup Manager
+        {
+            set => _manager = value;
+        }
 
         public override void OnSubmit(BaseEventData eventData)
-        => EventManager.Events.MenuButtonSubmit(_subMenu, _firstButton);
+        {
+            // EventManager.Events.MenuButtonSubmit(_subMenu, _firstButton);
+            _manager.ShowMenu(_subMenuBG); // TODO
+        }
 
         public override void OnCancel(BaseEventData eventData) 
             => EventManager.Events.MenuButtonCancel(_subMenu);

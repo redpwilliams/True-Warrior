@@ -18,11 +18,24 @@ namespace UI.Buttons.Menu
         private void Start()
         {
             _rt = GetComponent<RectTransform>();
-            EventManager.Events.OnMenuButtonSubmit += HandleSubmit;
+            // EventManager.Events.OnMenuButtonSubmit += HandleSubmit;
             EventManager.Events.OnMenuButtonCancel += HandleMenuCancel;
             EventManager.Events.OnSubMenuButtonCancel += HandleSubMenuCancel;
+
+            // Handshake
+            foreach (var button in _buttons)
+            {
+                button.Manager = this;
+            }
         }
 
+        public void ShowMenu(SubMenuButtonGroup smbg)
+        {
+            if (_buttonIsSelected) return;
+            _buttonIsSelected = true;
+            StartCoroutine(MoveMenu(true, smbg.gameObject, smbg.Buttons[0].gameObject));
+        }
+        
         private void OnDisable()
         {
             EventManager.Events.OnMenuButtonSubmit -= HandleSubmit;
@@ -32,9 +45,9 @@ namespace UI.Buttons.Menu
 
         private void HandleSubmit(GameObject subMenu, GameObject nowActiveButton)
         {
-            if (_buttonIsSelected) return;
-            _buttonIsSelected = true;
-            StartCoroutine(MoveMenu(true, subMenu, nowActiveButton));
+            // if (_buttonIsSelected) return;
+            // _buttonIsSelected = true;
+            // StartCoroutine(MoveMenu(true, subMenu, nowActiveButton));
         }
 
         private void HandleMenuCancel(GameObject subMenu)
