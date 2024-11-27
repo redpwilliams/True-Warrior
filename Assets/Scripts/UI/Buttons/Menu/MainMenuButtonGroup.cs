@@ -15,25 +15,34 @@ namespace UI.Buttons.Menu
         private bool _buttonIsSelected;
         private GameObject _activeSubMenu;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             _rt = GetComponent<RectTransform>();
             // EventManager.Events.OnMenuButtonSubmit += HandleSubmit;
             EventManager.Events.OnMenuButtonCancel += HandleMenuCancel;
             EventManager.Events.OnSubMenuButtonCancel += HandleSubMenuCancel;
+        }
 
+        
+        protected override void ManagerHandshake()
+        {
             // Handshake
             foreach (var button in _buttons)
             {
                 button.Manager = this;
             }
         }
-
-        public void ShowSubMenu(SubMenuButtonGroup smbg)
+        
+        public override void ShowButtonGroup<T>(ButtonGroup<T> bg)
         {
+            SubMenuButtonGroup smbg = bg as SubMenuButtonGroup;
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
-            StartCoroutine(MoveMenu(true, smbg.gameObject, null));
+            
+            StartCoroutine(MoveMenu(true, smbg!.gameObject, smbg.DefaultButton
+            .gameObject));
         }
         
         private void OnDisable()

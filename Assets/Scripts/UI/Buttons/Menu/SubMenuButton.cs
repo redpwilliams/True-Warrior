@@ -43,6 +43,9 @@ namespace UI.Buttons.Menu
         {
             // Turn off interactivity for all buttons
             EventManager.Events.DisableAllButtons(_gameMode);
+            
+            // TODO: Tell PlayerPrefs to update the default button
+            
             StartCoroutine(TransitionUIToGame());
 
             IEnumerator TransitionUIToGame()

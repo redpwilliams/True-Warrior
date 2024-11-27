@@ -80,5 +80,9 @@ namespace UI.Buttons.Gameplay
             _cg.alpha = endAlpha;
         }
 
+        public override void ShowButtonGroup<TB>(ButtonGroup<TB> bg)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
