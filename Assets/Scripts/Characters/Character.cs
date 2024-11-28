@@ -115,6 +115,8 @@ namespace Characters
             localScale = new Vector2(
                 -1 * Mathf.Abs(localScale.x), localScale.y);
             trans.localScale = localScale;
+
+            _characterText.SetDirection();
         }
         
         private void RunToSet(int stage)

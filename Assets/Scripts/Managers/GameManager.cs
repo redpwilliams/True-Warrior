@@ -133,7 +133,7 @@ namespace Managers
             }
 
             // Opponent
-            Character px = InstantiateShinobi(PlayerType.CPU);
+            Character px = InstantiateRonin(PlayerType.CPU);
 
             if (p1 is null || px is null) return;
             

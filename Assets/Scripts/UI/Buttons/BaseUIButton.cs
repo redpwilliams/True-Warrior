@@ -23,8 +23,6 @@ namespace UI.Buttons
 
         private UnityEngine.UI.Button _button;
 
-        public ButtonGroup<BaseUIButton> Manager { get; set; }
-
         protected virtual void OnEnable()
         {
             _en = _enChild.GetComponent<RectTransform>();

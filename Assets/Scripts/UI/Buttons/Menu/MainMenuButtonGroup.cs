@@ -26,14 +26,14 @@ namespace UI.Buttons.Menu
         }
 
         
-        protected override void ManagerHandshake()
-        {
-            // Handshake
-            foreach (var button in _buttons)
-            {
-                button.Manager = this;
-            }
-        }
+        // protected override void ManagerHandshake()
+        // {
+        //     // Handshake
+        //     foreach (var button in _buttons)
+        //     {
+        //         button.Manager = this;
+        //     }
+        // }
         
         public override void ShowButtonGroup<T>(ButtonGroup<T> bg)
         {

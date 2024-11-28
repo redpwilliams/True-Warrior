@@ -11,16 +11,15 @@ namespace UI.Buttons.Menu
         [SerializeField] private GameObject _firstButton;
         [SerializeField] private SubMenuButtonGroup _subMenuButtonGroup;
 
-        public new MainMenuButtonGroup Manager { get; set; }
+        [Header("MainMenuManager Reference")]
+        [SerializeField] private MainMenuButtonGroup _manager;
 
         /// Fires when the EventSystem/InputAction captures a
         /// submit input. This method tells its ButtonGroup
         /// to open the Sub Menu (ButtonGroup) associated with it
         public override void OnSubmit(BaseEventData eventData)
         {
-            // TODO - Issue is ShowSubMenu is defined in MMBG, not ButtonGroup
-            // Use Interface?
-            Manager.ShowButtonGroup(_subMenuButtonGroup); // TODO
+            _manager.ShowButtonGroup(_subMenuButtonGroup); // TODO
         }
 
         public override void OnCancel(BaseEventData eventData) 

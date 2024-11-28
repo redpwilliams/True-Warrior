@@ -97,8 +97,8 @@ namespace Characters
                 cachedTransform.localScale = new Vector3(
                     localScale.x * -1, localScale.y, localScale.z);
 
-                // Flip child character text object
-                _ct.Flip();       
+                // SetDirection child character text object
+                _ct.SetDirection();       
                 
                 base.Attack(); // Init attack and slash animation
                 yield break;

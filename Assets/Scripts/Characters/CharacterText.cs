@@ -21,10 +21,6 @@ namespace Characters
         {
             _tmp = GetComponent<TextMeshPro>();
             _rt = GetComponent<RectTransform>();
-
-            // Flip the text to match with a parent's change in direction
-            _rt.localScale = new Vector3(Mathf.Sign(transform.parent
-                .localScale.x), 1, 1);
         }
 
         /// Sets text of TMP asset
@@ -91,10 +87,11 @@ namespace Characters
             _tmp.alpha = 0;
         }
 
-        public void Flip()
+        public void SetDirection()
         {
-            var cachedLocalScale = _rt.localScale;
-            _rt.localScale = new Vector3(cachedLocalScale.x * -1, cachedLocalScale.y, cachedLocalScale.z);
+            // SetDirection the text to match with a parent's change in direction
+            _rt.localScale = new Vector3(Mathf.Sign(transform.parent
+                .localScale.x), 1, 1);
         }
 
     }
