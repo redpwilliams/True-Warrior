@@ -186,6 +186,7 @@ namespace Managers
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
             shinobi.SetDirection();
+            shinobi.RegisterControls();
 
             return shinobi;
         }

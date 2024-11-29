@@ -192,6 +192,12 @@ namespace Characters
 
         #region Input
 
+        public void RegisterControls()
+        {
+            if (_playerType == PlayerType.CPU) return;
+            _controls.Player1.Attack.performed += OnControllerInput;
+        }
+
         // Disabling logic happens in EventManager, after a winner is determined
         private void AllowControls(int stage)
         {
