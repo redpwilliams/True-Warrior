@@ -115,27 +115,9 @@ namespace Managers
             // Player character
             var prefab = SelectSamuraiPrefab(SaveManager.LoadPlayerCharacter());
             p1 = InstantiateCharacter(prefab, PlayerType.One);
-            // switch (SaveManager.LoadPlayerCharacter())
-            // {
-            //     case SamuraiType.Ronin:
-            //         p1 = InstantiateRonin(PlayerType.One);
-            //         break;
-            //     case SamuraiType.Shogun:
-            //         p1 = InstantiateShogun(PlayerType.One);
-            //         break;
-            //     case SamuraiType.Shinobi:
-            //         p1 = InstantiateShinobi(PlayerType.One);
-            //         break;
-            //     case SamuraiType.Sensei:
-            //         break;
-            //     case SamuraiType.Onna:
-            //         break;
-            //     default:
-            //         throw new ArgumentOutOfRangeException();
-            // }
 
             // Opponent
-            Character px = InstantiateRonin(PlayerType.CPU);
+            Character px = InstantiateCharacter(_roninPrefab, PlayerType.CPU);
 
             if (p1 is null || px is null) return;
             
@@ -144,6 +126,7 @@ namespace Managers
             px.Opponent = p1;
         }
 
+        /// Returns a GameObject prefab of the passed SamuraiType
         private GameObject SelectSamuraiPrefab(SamuraiType type)
         {
             switch (type)
@@ -163,71 +146,23 @@ namespace Managers
         }
         
         // ReSharper disable Unity.PerformanceAnalysis
+        /// Instantiates a Character in the scene from the GameManager's prefab list.
         private static Character InstantiateCharacter(GameObject prefab, 
             PlayerType playerType)
         {
-            var instance = Instantiate(prefab);
-            Character ronin = instance.GetComponent<Character>();
+            Character instance = Instantiate(prefab).GetComponent<Character>();
             
-            ronin.SetPlayerType(playerType);
-            ronin.SetPosition();
-            ronin.EndPosition = (playerType == PlayerType.One
+            instance.SetPlayerType(playerType);
+            instance.SetPosition();
+            instance.EndPosition = (playerType == PlayerType.One
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
-            ronin.SetDirection();
-            ronin.RegisterControls();
+            instance.SetDirection();
+            instance.RegisterControls();
 
-            return ronin;
+            return instance;
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
-        private Character InstantiateRonin(PlayerType playerType)
-        { 
-            var instance = Instantiate(_roninPrefab);
-            Ronin ronin = instance.GetComponent<Ronin>();
-            
-            ronin.SetPlayerType(playerType);
-            ronin.SetPosition();
-            ronin.EndPosition = (playerType == PlayerType.One
-                ? InitParams.Standoff_P1_EndPositionX
-                : InitParams.Standoff_PX_EndPositionX);
-            ronin.SetDirection();
-
-            return ronin;
-        }
-
-        // ReSharper disable Unity.PerformanceAnalysis
-        private Character InstantiateShogun(PlayerType playerType)
-        {
-            var instance = Instantiate(_shogunPrefab); 
-            Shogun shogun = instance.GetComponent<Shogun>();
-            
-            shogun.SetPlayerType(playerType);
-            shogun.SetPosition();
-            shogun.EndPosition = (playerType == PlayerType.One
-                ? InitParams.Standoff_P1_EndPositionX
-                : InitParams.Standoff_PX_EndPositionX);
-            shogun.SetDirection();
-
-            return shogun;
-        }
-
-        // ReSharper disable Unity.PerformanceAnalysis
-        private Character InstantiateShinobi(PlayerType playerType)
-        {
-            var instance = Instantiate(_shinobiPrefab);
-            Shinobi shinobi = instance.GetComponent<Shinobi>();
-            
-            shinobi.SetPlayerType(playerType);
-            shinobi.SetPosition();
-            shinobi.EndPosition = (playerType == PlayerType.One
-                ? InitParams.Standoff_P1_EndPositionX
-                : InitParams.Standoff_PX_EndPositionX);
-            shinobi.SetDirection();
-            shinobi.RegisterControls();
-
-            return shinobi;
-        }
 
         private IEnumerator HaikuCountdown(IReadOnlyCollection<Haiku> haikus)
         {
