@@ -78,7 +78,6 @@ namespace Characters
             EventManager.Events.OnStageX += RunToSet;
             EventManager.Events.OnStageX += AllowControls;
             EventManager.Events.OnStageX += GetSet;
-            EventManager.Events.OnBeginAttack += Attack;
             EventManager.Events.OnRestartCurrentGameMode += DestroySelf;
         }
 
@@ -87,7 +86,6 @@ namespace Characters
             EventManager.Events.OnStageX -= RunToSet;
             EventManager.Events.OnStageX -= AllowControls;
             EventManager.Events.OnStageX -= GetSet;
-            EventManager.Events.OnBeginAttack -= Attack;
             EventManager.Events.OnRestartCurrentGameMode -= DestroySelf;
         }
 
@@ -316,32 +314,6 @@ namespace Characters
         }
 
         public void DoDeathAnimation() => Anim.SetTrigger(Death);
-
-        #endregion
-
-        #region Context Menu Actions
-
-        [ContextMenu("Set Character Starting Position")]
-        public void SetCharacterStartPosition()
-        {
-            // Positioning
-            int startPositionSign = _playerNumber == PlayerNumber.One ? -1 : 1;
-            Transform trans = transform;
-            trans.position = new Vector3(
-                startPositionSign * InitParams.StartPositionX,
-                InitParams.StartPositionY,
-                InitParams.StartPositionZ);
-
-            // Sprite direction
-            var localScale = trans.localScale;
-            localScale = new Vector2(-startPositionSign * Mathf.Abs(localScale.x), 
-            localScale.y);
-            trans.localScale = localScale;
-            
-            // Child CharacterText component direction
-            RectTransform rt = GetComponentInChildren<RectTransform>();
-            rt.localScale = new Vector3(Mathf.Sign(localScale.x), 1, 1);
-        }
 
         #endregion
 

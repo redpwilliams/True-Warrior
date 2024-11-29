@@ -47,16 +47,8 @@ namespace UI.Buttons.Menu
         
         private void OnDisable()
         {
-            EventManager.Events.OnMenuButtonSubmit -= HandleSubmit;
             EventManager.Events.OnMenuButtonCancel -= HandleMenuCancel;
             EventManager.Events.OnSubMenuButtonCancel -= HandleSubMenuCancel;
-        }
-
-        private void HandleSubmit(GameObject subMenu, GameObject nowActiveButton)
-        {
-            // if (_buttonIsSelected) return;
-            // _buttonIsSelected = true;
-            // StartCoroutine(MoveMenu(true, subMenu, nowActiveButton));
         }
 
         private void HandleMenuCancel(GameObject subMenu)

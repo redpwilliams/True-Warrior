@@ -36,13 +36,6 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        public event Action OnBeginAttack;
-
-        public void BeginAttack()
-        {
-            OnBeginAttack?.Invoke();
-        }
-
         #region Staging Logic
 
         private double _battleStartTime;
@@ -58,13 +51,6 @@ namespace Managers
 
         #region Menu
 
-        /// Fires when any MenuButton is logged as "submitted"
-        public event Action<GameObject, GameObject> OnMenuButtonSubmit;
-
-        public void MenuButtonSubmit(GameObject subMenu, GameObject nowActiveButton)
-        {
-            OnMenuButtonSubmit?.Invoke(subMenu, nowActiveButton);
-        }
 
         /// Fires when any MenuButton cancels out of its state
         public event Action<GameObject> OnMenuButtonCancel;
