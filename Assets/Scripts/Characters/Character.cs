@@ -60,12 +60,6 @@ namespace Characters
             _characterText = GetComponentInChildren<CharacterText>();
         }
 
-        private void OnEnable()
-        {
-            if (_playerNumber == PlayerNumber.CPU) return;
-            _controls.Player1.Attack.performed += OnControllerInput;
-        }
-
         private void OnDisable()
         {
             if (_playerNumber == PlayerNumber.CPU) return;
