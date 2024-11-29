@@ -109,11 +109,10 @@ namespace Managers
 
         private void SpawnCharacters()
         {
-            Character p1 = null;
-            
             // Player character
             var prefab = SelectSamuraiPrefab(SaveManager.LoadPlayerCharacter());
-            p1 = InstantiateCharacter(prefab, Character.PlayerNumber.One);
+            Character p1 = 
+                InstantiateCharacter(prefab, Character.PlayerNumber.One);
 
             // Opponent
             Character px = InstantiateCharacter(_roninPrefab, Character.PlayerNumber.CPU);

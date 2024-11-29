@@ -118,17 +118,20 @@ namespace Characters
         /// Assumes its PlayerNumber is updated and accurate.
         public void SetDirection()
         {
-            // Sprites are all facing left by default
-            
-            Transform trans = transform;
+            // Already facing the correct direction
+            // if PlayerNumber is One
             if (_playerNumber == PlayerNumber.One) return;
             
-            // Sprite direction
+            // Cache transform reference
+            Transform trans = transform;
+            
+            // Set sprite direction
             var localScale = trans.localScale;
-            localScale = new Vector2(
-                -1 * Mathf.Abs(localScale.x), localScale.y);
+            localScale = 
+                new Vector2(-1 * Mathf.Abs(localScale.x), localScale.y);
             trans.localScale = localScale;
 
+            // Set character text direction
             _characterText.SetDirection();
         }
         
@@ -205,6 +208,8 @@ namespace Characters
 
         #region Input
 
+        /// Subscribes this Character to the Attack.performed event.
+        /// Only applies if this Character is not a CPU.
         public void RegisterControls()
         {
             if (_playerNumber == PlayerNumber.CPU) return;
