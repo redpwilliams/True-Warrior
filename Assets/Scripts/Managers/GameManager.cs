@@ -113,24 +113,26 @@ namespace Managers
             Character p1 = null;
             
             // Player character
-            switch (SaveManager.LoadPlayerCharacter())
-            {
-                case SamuraiType.Ronin:
-                    p1 = InstantiateRonin(PlayerType.One);
-                    break;
-                case SamuraiType.Shogun:
-                    p1 = InstantiateShogun(PlayerType.One);
-                    break;
-                case SamuraiType.Shinobi:
-                    p1 = InstantiateShinobi(PlayerType.One);
-                    break;
-                case SamuraiType.Sensei:
-                    break;
-                case SamuraiType.Onna:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var prefab = SelectSamuraiPrefab(SaveManager.LoadPlayerCharacter());
+            p1 = InstantiateCharacter(prefab, PlayerType.One);
+            // switch (SaveManager.LoadPlayerCharacter())
+            // {
+            //     case SamuraiType.Ronin:
+            //         p1 = InstantiateRonin(PlayerType.One);
+            //         break;
+            //     case SamuraiType.Shogun:
+            //         p1 = InstantiateShogun(PlayerType.One);
+            //         break;
+            //     case SamuraiType.Shinobi:
+            //         p1 = InstantiateShinobi(PlayerType.One);
+            //         break;
+            //     case SamuraiType.Sensei:
+            //         break;
+            //     case SamuraiType.Onna:
+            //         break;
+            //     default:
+            //         throw new ArgumentOutOfRangeException();
+            // }
 
             // Opponent
             Character px = InstantiateRonin(PlayerType.CPU);
@@ -140,6 +142,42 @@ namespace Managers
             // Set as opponents
             p1.Opponent = px;
             px.Opponent = p1;
+        }
+
+        private GameObject SelectSamuraiPrefab(SamuraiType type)
+        {
+            switch (type)
+            {
+                case SamuraiType.Ronin: return _roninPrefab;
+                case SamuraiType.Shogun: return _shogunPrefab;
+                case SamuraiType.Shinobi: return _shinobiPrefab;
+                case SamuraiType.Sensei:
+                    break;
+                case SamuraiType.Onna:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+
+            return null;
+        }
+        
+        // ReSharper disable Unity.PerformanceAnalysis
+        private static Character InstantiateCharacter(GameObject prefab, 
+            PlayerType playerType)
+        {
+            var instance = Instantiate(prefab);
+            Character ronin = instance.GetComponent<Character>();
+            
+            ronin.SetPlayerType(playerType);
+            ronin.SetPosition();
+            ronin.EndPosition = (playerType == PlayerType.One
+                ? InitParams.Standoff_P1_EndPositionX
+                : InitParams.Standoff_PX_EndPositionX);
+            ronin.SetDirection();
+            ronin.RegisterControls();
+
+            return ronin;
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
