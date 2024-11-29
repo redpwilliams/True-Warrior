@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,17 +10,24 @@ namespace UI.Buttons.Menu
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
         [SerializeField] private GameObject _firstButton;
-        [SerializeField] private SubMenuButtonGroup _subMenuButtonGroup;
+        [SerializeField] protected GameObject _buttonGroupGameObject;
+        private SubMenuButtonGroup _smbg;
 
         [Header("MainMenuManager Reference")]
-        [SerializeField] private MainMenuButtonGroup _manager;
+        [SerializeField] protected MainMenuButtonGroup _manager;
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+                _smbg = _buttonGroupGameObject.GetComponent<SubMenuButtonGroup>();
+        }
+        
         /// Fires when the EventSystem/InputAction captures a
         /// submit input. This method tells its ButtonGroup
         /// to open the Sub Menu (ButtonGroup) associated with it
         public override void OnSubmit(BaseEventData eventData)
         {
-            _manager.ShowButtonGroup(_subMenuButtonGroup); // TODO
+            _manager.ShowButtonGroup(_smbg); // TODO
         }
 
         public override void OnCancel(BaseEventData eventData) 

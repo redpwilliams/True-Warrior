@@ -35,9 +35,9 @@ namespace UI.Buttons.Menu
         //     }
         // }
         
-        public override void ShowButtonGroup<T>(ButtonGroup<T> bg)
+        public override void ShowButtonGroup<T>(ButtonGroup<T> smbg)
         {
-            SubMenuButtonGroup smbg = bg as SubMenuButtonGroup;
+            //SubMenuButtonGroup smbg = bg as SubMenuButtonGroup;
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
             

@@ -15,12 +15,12 @@ namespace UI.Buttons.Menu
         [SerializeField] private SamuraiType _samuraiType;
 
         public SamuraiType SamuraiType => _samuraiType;
-        private static OptionsMenuButton _optionsMb;
+        private static OptionsButton _optionsMb;
 
         protected override void OnEnable()
         {
             _css = GetComponent<CharacterSelectSprite>();
-            _optionsMb = _parentButton.GetComponent<OptionsMenuButton>();
+            _optionsMb = _parentButton.GetComponent<OptionsButton>();
 
             EventManager.Events.OnDeselectAllChosenTOs +=
                 HideChosenTextObject;

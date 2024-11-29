@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UI.Buttons.Menu;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 namespace UI.Buttons
 {
     /// A GameObject that contains a collection of Buttons
+    [Serializable]
     public abstract class ButtonGroup<T> : MonoBehaviour, IButtonGroupManager where T : 
     BaseUIButton
     {
