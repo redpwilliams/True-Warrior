@@ -37,7 +37,7 @@ namespace Characters
         {
             Rb2d.velocity = Vector2.zero;
 
-            int direction = _playerType == PlayerType.One ? 1 : -1;
+            int direction = _playerNumber == PlayerNumber.One ? 1 : -1;
             Rb2d.AddForce(new Vector2(_jumpForwardForce * direction, 
             _jumpUpwardForce), ForceMode2D.Impulse);
         }

@@ -4,6 +4,7 @@ using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -22,9 +23,10 @@ namespace Characters
 
         public float EndPosition { get; set; }
     
+        [FormerlySerializedAs("_playerType")]
         [Header("Player Designation")]
-        [SerializeField] protected PlayerType _playerType;
-        public enum PlayerType { One, Two, CPU }
+        [SerializeField] protected PlayerNumber _playerNumber;
+        public enum PlayerNumber { One, Two, CPU }
         
         // Animation parameters
         private static readonly int Running = Animator.StringToHash("ShouldRun");
@@ -52,13 +54,13 @@ namespace Characters
 
         private void OnEnable()
         {
-            if (_playerType == PlayerType.CPU) return;
+            if (_playerNumber == PlayerNumber.CPU) return;
             _controls.Player1.Attack.performed += OnControllerInput;
         }
 
         private void OnDisable()
         {
-            if (_playerType == PlayerType.CPU) return;
+            if (_playerNumber == PlayerNumber.CPU) return;
             _controls.Disable(); // maybe redundant but maybe necessary
             _controls.Player1.Attack.performed -= OnControllerInput;
         }
@@ -83,12 +85,12 @@ namespace Characters
 
         #region Movement and Positioning
 
-        public void SetPlayerType(PlayerType pt) => _playerType = pt;
+        public void SetPlayerType(PlayerNumber pt) => _playerNumber = pt;
 
         public void SetPosition()
         {
             Transform trans = transform;
-            if (_playerType == PlayerType.One)
+            if (_playerNumber == PlayerNumber.One)
             { 
                 trans.position = new Vector3(
                     InitParams.Standoff_P1_StartPositionX, 
@@ -108,7 +110,7 @@ namespace Characters
             // Sprites are all facing left by default
             
             Transform trans = transform;
-            if (_playerType == PlayerType.One) return;
+            if (_playerNumber == PlayerNumber.One) return;
             
             // Sprite direction
             var localScale = trans.localScale;
@@ -121,7 +123,7 @@ namespace Characters
         
         private void RunToSet(int stage)
         {
-            if (stage != (_playerType == PlayerType.One ? 0 : 1)) return;
+            if (stage != (_playerNumber == PlayerNumber.One ? 0 : 1)) return;
         
             // Unsubscribe from triggering event
             EventManager.Events.OnStageX -= RunToSet;
@@ -138,7 +140,7 @@ namespace Characters
                 Anim.SetBool(Running, false);
                 
                 // Set character title
-                string title = (_playerType == PlayerType.One)
+                string title = (_playerNumber == PlayerNumber.One)
                     ? "You/君"
                     : CharacterTitle();
                 _characterText.DisplayTitle(title);
@@ -194,7 +196,7 @@ namespace Characters
 
         public void RegisterControls()
         {
-            if (_playerType == PlayerType.CPU) return;
+            if (_playerNumber == PlayerNumber.CPU) return;
             _controls.Player1.Attack.performed += OnControllerInput;
         }
 
@@ -206,7 +208,7 @@ namespace Characters
         
             // Enable controls
             Rb2d.bodyType = RigidbodyType2D.Dynamic;
-            if (_playerType != PlayerType.CPU)
+            if (_playerNumber != PlayerNumber.CPU)
             {
                 _controls.Player1.Enable();
                 return;
@@ -307,7 +309,7 @@ namespace Characters
         public void SetCharacterStartPosition()
         {
             // Positioning
-            int startPositionSign = _playerType == PlayerType.One ? -1 : 1;
+            int startPositionSign = _playerNumber == PlayerNumber.One ? -1 : 1;
             Transform trans = transform;
             trans.position = new Vector3(
                 startPositionSign * InitParams.StartPositionX,

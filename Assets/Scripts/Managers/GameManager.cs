@@ -7,7 +7,6 @@ using UI.Buttons.Gameplay;
 using UnityEngine;
 using Util;
 using Random = UnityEngine.Random;
-using PlayerType = Characters.Character.PlayerType;
 
 namespace Managers
 {
@@ -114,10 +113,10 @@ namespace Managers
             
             // Player character
             var prefab = SelectSamuraiPrefab(SaveManager.LoadPlayerCharacter());
-            p1 = InstantiateCharacter(prefab, PlayerType.One);
+            p1 = InstantiateCharacter(prefab, Character.PlayerNumber.One);
 
             // Opponent
-            Character px = InstantiateCharacter(_roninPrefab, PlayerType.CPU);
+            Character px = InstantiateCharacter(_roninPrefab, Character.PlayerNumber.CPU);
 
             if (p1 is null || px is null) return;
             
@@ -148,13 +147,13 @@ namespace Managers
         // ReSharper disable Unity.PerformanceAnalysis
         /// Instantiates a Character in the scene from the GameManager's prefab list.
         private static Character InstantiateCharacter(GameObject prefab, 
-            PlayerType playerType)
+            Character.PlayerNumber playerNumber)
         {
             Character instance = Instantiate(prefab).GetComponent<Character>();
             
-            instance.SetPlayerType(playerType);
+            instance.SetPlayerType(playerNumber);
             instance.SetPosition();
-            instance.EndPosition = (playerType == PlayerType.One
+            instance.EndPosition = (playerNumber == Character.PlayerNumber.One
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
             instance.SetDirection();
