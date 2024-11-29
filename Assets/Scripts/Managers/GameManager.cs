@@ -149,9 +149,11 @@ namespace Managers
         private static Character InstantiateCharacter(GameObject prefab, 
             Character.PlayerNumber playerNumber)
         {
+            // Create instance
             Character instance = Instantiate(prefab).GetComponent<Character>();
+            instance.Player = playerNumber;
             
-            instance.SetPlayerType(playerNumber);
+            // Positioning, directions, and controls
             instance.SetPosition();
             instance.EndPosition = (playerNumber == Character.PlayerNumber.One
                 ? InitParams.Standoff_P1_EndPositionX

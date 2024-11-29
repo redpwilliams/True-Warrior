@@ -23,10 +23,18 @@ namespace Characters
 
         public float EndPosition { get; set; }
     
+        public enum PlayerNumber { One, Two, CPU }
+        
         [FormerlySerializedAs("_playerType")]
         [Header("Player Designation")]
-        [SerializeField] protected PlayerNumber _playerNumber;
-        public enum PlayerNumber { One, Two, CPU }
+        [SerializeField] private PlayerNumber _playerNumber;
+        
+        /// The PlayerNumber of this character
+        public PlayerNumber Player
+        {
+            get => _playerNumber;
+            set => _playerNumber = value;
+        }
         
         // Animation parameters
         private static readonly int Running = Animator.StringToHash("ShouldRun");
@@ -85,8 +93,8 @@ namespace Characters
 
         #region Movement and Positioning
 
-        public void SetPlayerType(PlayerNumber pt) => _playerNumber = pt;
-
+        /// Sets this Character's position in the scene.
+        /// Assumes its PlayerNumber is updated and accurate.
         public void SetPosition()
         {
             Transform trans = transform;
@@ -105,6 +113,9 @@ namespace Characters
                 InitParams.Standoff_PX_StartPositionZ);
         }
 
+        /// Sets this Character's orientation in the scene.
+        /// All sprites, by default, face towards the right.
+        /// Assumes its PlayerNumber is updated and accurate.
         public void SetDirection()
         {
             // Sprites are all facing left by default
