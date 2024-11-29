@@ -8,7 +8,7 @@ namespace UI.Buttons.Menu
 {
     /// Groups the Main Menu buttons; specifically, the Play,
     /// Instructions, Options, and Quit Buttons
-    public class MainMenuButtonGroup : ButtonGroup<MenuButton>
+    public class MainMenuButtonGroup : ButtonGroup<MainMenuButton>
     {
         private readonly float _moveOffset = -200f;
         private RectTransform _rt;

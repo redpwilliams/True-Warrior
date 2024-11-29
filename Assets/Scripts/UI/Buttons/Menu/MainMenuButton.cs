@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons.Menu
 {
-    public class MenuButton : BaseUIButton, IMoveHandler
+    public class MainMenuButton : BaseUIButton, IMoveHandler
     {
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;

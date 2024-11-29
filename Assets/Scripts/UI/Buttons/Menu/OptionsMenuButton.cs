@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UI.Buttons.Menu
 {
-    public class OptionsMenuButton : MenuButton
+    public class OptionsMenuButton : MainMenuButton
     {
         [SerializeField] private List<CharacterButton> _characterChoices;
 
