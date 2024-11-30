@@ -9,7 +9,7 @@ namespace Util
 
         public static List<Haiku> LoadHaikus()
         {
-            string jsonString = Resources.Load<TextAsset>("haikus").ToString();
+            string jsonString = Resources.Load<TextAsset>("test").ToString();
             return JsonUtility.FromJson<JsonData>(jsonString).haikus;
         }
 

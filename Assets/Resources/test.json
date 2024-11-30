@@ -1,0 +1,48 @@
+{
+  "haikus": [
+    {
+      "one": [
+        {
+          "en": "Calm seas reflect sky",
+          "jp": "穏やかな海が空を映し出す"
+        },
+        {
+          "en": "Soft breeze whispers low",
+          "jp": "穏やかな海が空を映し出す"
+        },
+        {
+          "en": "Silent night descends",
+          "jp": "穏やかな海が空を映し出す"
+        }
+      ],
+      "two": [
+        {
+          "en": "Tranquility fills the soul",
+          "jp": "平穏が魂を満たす"
+        },
+        {
+          "en": "Peaceful mind takes hold",
+          "jp": "平穏が魂を満たす"
+        },
+        {
+          "en": "Serene heart finds peace",
+          "jp": "平穏が魂を満たす"
+        }
+      ],
+      "three": [
+        {
+          "en": "Quiet strength endures.",
+          "jp": "静かな強さが耐える。"
+        },
+        {
+          "en": "Gentle power resides",
+          "jp": "静かな強さが耐える。"
+        },
+        {
+          "en": "Hidden depths unfold",
+          "jp": "静かな強さが耐える。"
+        }
+      ]      
+    }
+  ]
+}
