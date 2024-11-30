@@ -14,7 +14,7 @@ namespace UI.Buttons.Menu
         private SubMenuButtonGroup _smbg;
 
         [Header("MainMenuManager Reference")]
-        [SerializeField] protected MainMenuButtonGroup _manager;
+        [SerializeField] protected MainMenu _manager;
 
         protected override void OnEnable()
         {
