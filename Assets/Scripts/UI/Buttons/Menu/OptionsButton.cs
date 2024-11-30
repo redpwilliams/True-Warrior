@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons.Menu
 {
-    public class OptionsButton : DefaultButton
+    public class OptionsButton : DefaultMenuButton
     {
         [SerializeField] private List<CharacterButton> _characterChoices;
         private OptionsButtonGroup _optionsButtonGroup;
@@ -34,7 +34,7 @@ namespace UI.Buttons.Menu
         /// to open the Sub Menu (ButtonGroup) associated with it
         public override void OnSubmit(BaseEventData eventData)
         {
-            _manager.ShowButtonGroup(_optionsButtonGroup); // TODO
+            _mainMenu.ShowButtonGroup(_optionsButtonGroup); // TODO
         }
 
     }

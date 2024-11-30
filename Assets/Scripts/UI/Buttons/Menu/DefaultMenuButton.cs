@@ -4,21 +4,27 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons.Menu
 {
-    public class DefaultButton : BaseUIButton, IMoveHandler
+    /// The base class for the main menu buttons like Play, Options, 
+    /// Instructions, and Quit. Leaves room for further inheritance.
+    public class DefaultMenuButton : BaseUIButton, IMoveHandler
     {
-        [Header("Sub menu reference")] 
-        [SerializeField] private GameObject _subMenu;
         [SerializeField] private GameObject _firstButton;
+        
+        [Tooltip("This GameObject is the ButtonGroup this DefaultMenuButton will open.")]
         [SerializeField] protected GameObject _buttonGroupGameObject;
-        private DefaultSubMenu _smbg;
+        
+        /// The _buttonGroupGameObject's DefaultSubMenu component
+        private DefaultSubMenu _subMenu;
 
-        [Header("MainMenuManager Reference")]
-        [SerializeField] protected MainMenu _manager;
+        [Tooltip("The Main Menu reference.")]
+        [SerializeField] protected MainMenu _mainMenu;
 
+        /// Calls BaseUIButton.OnEnable and stores a reference to this
+        /// button's corresponding Sub Menu.
         protected override void OnEnable()
         {
             base.OnEnable();
-                _smbg = _buttonGroupGameObject.GetComponent<DefaultSubMenu>();
+            _subMenu = _buttonGroupGameObject.GetComponent<DefaultSubMenu>();
         }
         
         /// Fires when the EventSystem/InputAction captures a
@@ -26,11 +32,11 @@ namespace UI.Buttons.Menu
         /// to open the Sub Menu (ButtonGroup) associated with it
         public override void OnSubmit(BaseEventData eventData)
         {
-            _manager.ShowButtonGroup(_smbg); // TODO
+            _mainMenu.ShowButtonGroup(_subMenu);
         }
 
         public override void OnCancel(BaseEventData eventData) 
-            => EventManager.Events.MenuButtonCancel(_subMenu);
+            => EventManager.Events.MenuButtonCancel(_buttonGroupGameObject);
 
 
         // public override void OnPointerClick(PointerEventData pointerEventData)
