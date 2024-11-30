@@ -7,7 +7,7 @@ using GameMode = Managers.GameManager.GameMode;
 namespace UI.Buttons.Menu
 {
     [System.Serializable]
-    public class SubMenuButton : BaseUIButton, IMoveHandler
+    public class DefaultSubMenuButton : BaseUIButton, IMoveHandler
     {
         /// The Button game object to go to after cancelling out of this
         /// button/the play submenu altogether

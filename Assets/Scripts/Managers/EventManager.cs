@@ -60,7 +60,7 @@ namespace Managers
             OnMenuButtonCancel?.Invoke(subMenu);
         }
 
-        /// Fires when any SubMenuButton cancels out of its state
+        /// Fires when any DefaultSubMenuButton cancels out of its state
         public event Action<GameObject> OnSubMenuButtonCancel;
 
         public void SubMenuButtonCancel(GameObject nowActiveButton)
@@ -68,7 +68,7 @@ namespace Managers
             OnSubMenuButtonCancel?.Invoke(nowActiveButton);
         }
 
-        /// Fires when any SubMenuButton gets submitted
+        /// Fires when any DefaultSubMenuButton gets submitted
         public event Action<GameMode> OnDisableAllButtons;
 
         public void DisableAllButtons(GameMode gm)

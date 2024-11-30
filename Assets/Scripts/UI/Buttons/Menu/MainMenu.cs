@@ -8,7 +8,7 @@ namespace UI.Buttons.Menu
 {
     /// Groups the Main Menu buttons; specifically, the Play,
     /// Instructions, Options, and Quit Buttons
-    public class MainMenuButtonGroup : ButtonGroup<MainMenuButton>
+    public class MainMenu : ButtonGroup<DefaultButton>
     {
         private readonly float _moveOffset = -200f;
         private RectTransform _rt;
@@ -20,24 +20,13 @@ namespace UI.Buttons.Menu
             base.Start();
             
             _rt = GetComponent<RectTransform>();
-            // EventManager.Events.OnMenuButtonSubmit += HandleSubmit;
             EventManager.Events.OnMenuButtonCancel += HandleMenuCancel;
             EventManager.Events.OnSubMenuButtonCancel += HandleSubMenuCancel;
         }
 
         
-        // protected override void ManagerHandshake()
-        // {
-        //     // Handshake
-        //     foreach (var button in _buttons)
-        //     {
-        //         button.Manager = this;
-        //     }
-        // }
-        
         public override void ShowButtonGroup<T>(ButtonGroup<T> smbg)
         {
-            //SubMenuButtonGroup smbg = bg as SubMenuButtonGroup;
             if (_buttonIsSelected) return;
             _buttonIsSelected = true;
             

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Buttons.Menu
 {
-    public class OptionsButton : MainMenuButton
+    public class OptionsButton : DefaultButton
     {
         [SerializeField] private List<CharacterButton> _characterChoices;
         private OptionsButtonGroup _optionsButtonGroup;

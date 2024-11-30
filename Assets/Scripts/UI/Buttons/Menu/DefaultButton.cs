@@ -1,17 +1,16 @@
-using JetBrains.Annotations;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UI.Buttons.Menu
 {
-    public class MainMenuButton : BaseUIButton, IMoveHandler
+    public class DefaultButton : BaseUIButton, IMoveHandler
     {
         [Header("Sub menu reference")] 
         [SerializeField] private GameObject _subMenu;
         [SerializeField] private GameObject _firstButton;
         [SerializeField] protected GameObject _buttonGroupGameObject;
-        private SubMenuButtonGroup _smbg;
+        private DefaultSubMenu _smbg;
 
         [Header("MainMenuManager Reference")]
         [SerializeField] protected MainMenu _manager;
@@ -19,7 +18,7 @@ namespace UI.Buttons.Menu
         protected override void OnEnable()
         {
             base.OnEnable();
-                _smbg = _buttonGroupGameObject.GetComponent<SubMenuButtonGroup>();
+                _smbg = _buttonGroupGameObject.GetComponent<DefaultSubMenu>();
         }
         
         /// Fires when the EventSystem/InputAction captures a
