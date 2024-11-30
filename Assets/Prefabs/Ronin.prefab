@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84ac5345567c3c4bb5ae11f5a6639be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerType: 0
+  _playerNumber: 2
   _risingGravityScale: 8
   _fallingGravityScale: 20
   _jumpUpwardForce: 400
