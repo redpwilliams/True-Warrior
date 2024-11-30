@@ -30,14 +30,10 @@ namespace UI.Buttons
             _jp = _jpChild.GetComponent<RectTransform>();
             _button = GetComponent<UnityEngine.UI.Button>();
             _buttonState = ButtonState.InActive;
-        }
-
-        private void Start()
-        {
             EventManager.Events.OnDisableAllButtons += DisableButton;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             EventManager.Events.OnDisableAllButtons -= DisableButton;
         }
