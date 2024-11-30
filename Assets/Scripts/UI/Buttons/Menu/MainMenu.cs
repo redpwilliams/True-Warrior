@@ -9,10 +9,22 @@ namespace UI.Buttons.Menu
     /// The Game's Main Menu
     public class MainMenu : ButtonGroup<DefaultMenuButton>
     {
+        public static MainMenu Menu { get; private set; }
         private readonly float _moveOffset = -200f;
         private RectTransform _rt;
         private bool _buttonIsSelected;
         private GameObject _activeSubMenu;
+
+        private void Awake()
+        {
+            if (Menu != null && Menu != this)
+            {
+                Destroy(Menu);
+                return;
+            }
+
+            Menu = this;
+        }
 
         protected override void Start()
         {
