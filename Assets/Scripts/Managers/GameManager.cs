@@ -191,13 +191,16 @@ namespace Managers
             WaitForSeconds awaitBattle = new WaitForSeconds(_timeUntilBattleStart);
             
             // Line 1
-            // yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage1, holdText);
-            //
-            // // Line 2
-            // yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage2, holdText);
-            //
-            // // Line 3
-            // yield return ExecuteStage(haiku.lines[stage], stage++, awaitStage3, holdText);
+            yield return ExecuteStage(haiku.one[stage], stage++, 
+            awaitStage1, holdText);
+            
+            // Line 2
+            yield return ExecuteStage(haiku.two[stage], stage++, awaitStage2, 
+            holdText);
+            
+            // Line 3
+            yield return ExecuteStage(haiku.three[stage], stage++, awaitStage3, 
+            holdText);
 
             // Battle Start
             HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
