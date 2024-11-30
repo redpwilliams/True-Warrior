@@ -34,7 +34,7 @@ namespace UI.Buttons.Menu
         /// to open the Sub Menu (ButtonGroup) associated with it
         public override void OnSubmit(BaseEventData eventData)
         {
-            _mainMenu.ShowButtonGroup(_optionsButtonGroup); // TODO
+            MainMenu.Menu.ShowButtonGroup(_optionsButtonGroup); // TODO
         }
 
     }

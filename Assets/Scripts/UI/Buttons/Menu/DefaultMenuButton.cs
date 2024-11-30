@@ -16,9 +16,6 @@ namespace UI.Buttons.Menu
         /// The _buttonGroupGameObject's DefaultSubMenu component
         private DefaultSubMenu _subMenu;
 
-        [Tooltip("The Main Menu reference.")]
-        [SerializeField] protected MainMenu _mainMenu;
-
         /// Calls BaseUIButton.OnEnable and stores a reference to this
         /// button's corresponding Sub Menu.
         protected override void OnEnable()
@@ -32,7 +29,7 @@ namespace UI.Buttons.Menu
         /// to open the Sub Menu (ButtonGroup) associated with it
         public override void OnSubmit(BaseEventData eventData)
         {
-            _mainMenu.ShowButtonGroup(_subMenu);
+            MainMenu.Menu.ShowButtonGroup(_subMenu);
         }
 
         public override void OnCancel(BaseEventData eventData) 
