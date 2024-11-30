@@ -29,9 +29,9 @@ public partial class @HaikuControls: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Scroll"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""db31418f-609d-4938-bf54-8a0c411d86fa"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false

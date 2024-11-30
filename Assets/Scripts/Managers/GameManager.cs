@@ -54,6 +54,7 @@ namespace Managers
         [SerializeField] private float _timeHoldText = 3.0f;
 
         private HaikuControls _haikuControls;
+        private int i = 0;
 
         private void Awake()
         {
@@ -68,16 +69,10 @@ namespace Managers
             // Load haiku data
             _haikus = JsonReader.LoadHaikus();
             _haikuControls = new HaikuControls();
-            _haikuControls.Player.Scroll.performed += OnScroll;
-            _haikuControls.Enable();
+            _haikuControls.Player.Scroll.performed += OnHaikuScroll;
 
             // Set up Standoff game mode parameters
             DontDestroyOnLoad(gameObject);
-        }
-
-        private void OnScroll(InputAction.CallbackContext obj)
-        {
-            print("Scrolled");
         }
 
         public void StartGameMode(GameMode gm)
@@ -200,6 +195,12 @@ namespace Managers
             WaitForSeconds holdText = new WaitForSeconds(_timeHoldText);
             WaitForSeconds awaitBattle = new WaitForSeconds(_timeUntilBattleStart);
             
+            yield return StartCoroutine(
+                HaikuText.Instance.FadeText(_fadeInDuration, 
+                AnimationDirection.In));
+            // Enable Haiku Selection
+            _haikuControls.Enable();
+            
             // // Line 1
             // yield return ExecuteStage(haiku.one[stage], stage++, 
             // awaitStage1, holdText);
@@ -262,6 +263,27 @@ namespace Managers
             _standoffWinnerDeclared = true;
             return new ReactionInfo(true, formattedReactionTime);
         }
+        
+        /// Fires when the Player scrolls left or right while the
+        /// HaikuControls action map is enabled
+        private void OnHaikuScroll(InputAction.CallbackContext obj)
+        {
+            // +1 for right, -1 for left
+            int direction = (int) obj.action.ReadValue<Vector2>().x;
+
+            switch (direction)
+            {
+                // Handle right
+                case 1:
+                    HaikuText.Instance.SetTexts(_haikus[0].one[(i++) % 3]);
+                    break;
+                // Handle left
+                case -1:
+                    HaikuText.Instance.SetTexts(_haikus[0].one[(i--) % 3]);
+                    break;
+            }
+        }
+
 
         #endregion
     }
