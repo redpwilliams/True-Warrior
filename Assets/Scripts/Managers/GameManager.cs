@@ -5,6 +5,7 @@ using Characters;
 using UI;
 using UI.Buttons.Gameplay;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -52,6 +53,7 @@ namespace Managers
         [SerializeField] private float _fadeOutDuration = 0.5f;
         [SerializeField] private float _timeHoldText = 3.0f;
 
+        private HaikuControls _haikuControls;
 
         private void Awake()
         {
@@ -65,9 +67,17 @@ namespace Managers
             
             // Load haiku data
             _haikus = JsonReader.LoadHaikus();
+            _haikuControls = new HaikuControls();
+            _haikuControls.Player.Scroll.performed += OnScroll;
+            _haikuControls.Enable();
 
             // Set up Standoff game mode parameters
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnScroll(InputAction.CallbackContext obj)
+        {
+            print("Scrolled");
         }
 
         public void StartGameMode(GameMode gm)
@@ -190,25 +200,25 @@ namespace Managers
             WaitForSeconds holdText = new WaitForSeconds(_timeHoldText);
             WaitForSeconds awaitBattle = new WaitForSeconds(_timeUntilBattleStart);
             
-            // Line 1
-            yield return ExecuteStage(haiku.one[stage], stage++, 
-            awaitStage1, holdText);
-            
-            // Line 2
-            yield return ExecuteStage(haiku.two[stage], stage++, awaitStage2, 
-            holdText);
-            
-            // Line 3
-            yield return ExecuteStage(haiku.three[stage], stage++, awaitStage3, 
-            holdText);
-
-            // Battle Start
-            HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
-            yield return awaitBattle;
-            EventManager.Events.StageX(stage);
-            _battleStartTime = Time.time;
-            yield return StartCoroutine(
-                HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
+            // // Line 1
+            // yield return ExecuteStage(haiku.one[stage], stage++, 
+            // awaitStage1, holdText);
+            //
+            // // Line 2
+            // yield return ExecuteStage(haiku.two[stage], stage++, awaitStage2, 
+            // holdText);
+            //
+            // // Line 3
+            // yield return ExecuteStage(haiku.three[stage], stage++, awaitStage3, 
+            // holdText);
+            //
+            // // Battle Start
+            // HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
+            // yield return awaitBattle;
+            // EventManager.Events.StageX(stage);
+            // _battleStartTime = Time.time;
+            // yield return StartCoroutine(
+            //     HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
         }
 
         private IEnumerator ExecuteStage(
