@@ -71,7 +71,13 @@ namespace Characters
         {
             EventManager.Events.OnStageX += RunToSet;
             EventManager.Events.OnStageX += AllowControls;
-            EventManager.Events.OnStageX += GetSet;
+            
+            // CPU can get set right away
+            // Player 1 will wait for final haiku selection
+            if (_playerNumber == PlayerNumber.CPU)
+                EventManager.Events.OnStageX += GetSetCPU;
+            else
+                GameManager.OnStandoffStageX += GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode += DestroySelf;
         }
 
@@ -79,7 +85,8 @@ namespace Characters
         {
             EventManager.Events.OnStageX -= RunToSet;
             EventManager.Events.OnStageX -= AllowControls;
-            EventManager.Events.OnStageX -= GetSet;
+            EventManager.Events.OnStageX -= GetSetCPU;
+            GameManager.OnStandoffStageX -= GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode -= DestroySelf;
         }
 
@@ -159,16 +166,22 @@ namespace Characters
 
         #region Battle
 
-        private void GetSet(int stage)
+        private void GetSetCPU(int stage)
         {
             if (stage != 2) return;
-            StartCoroutine(DelayIdleToSet());
-            EventManager.Events.OnStageX -= GetSet;
+            StartCoroutine(AnimateIdleToSet(true));
+            EventManager.Events.OnStageX -= GetSetCPU;
         }
 
-        private IEnumerator DelayIdleToSet()
+        private void GetSetPlayer()
         {
-            yield return new WaitForSeconds(Random.Range(0f, 0.25f));
+            StartCoroutine(AnimateIdleToSet(false));
+            GameManager.OnStandoffStageX -= GetSetPlayer;
+        }
+
+        private IEnumerator AnimateIdleToSet(bool delay)
+        {
+            if (delay) yield return new WaitForSeconds(Random.Range(0f, 0.25f));
             Anim.SetTrigger(Set);
         }
 

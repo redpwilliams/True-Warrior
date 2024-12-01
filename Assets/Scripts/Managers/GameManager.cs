@@ -120,9 +120,10 @@ namespace Managers
 
         private bool _standoffWinnerDeclared;
         private float _battleStartTime;
-        private bool _haikuSelected;
+        private bool _haikuLineSelected;
         private List<LinePair> _haikuLineOptions;
         private int _currentLineChoice;
+        private bool _haikuPoemFinished;
 
         private void SpawnCharacters()
         {
@@ -240,8 +241,11 @@ namespace Managers
             
             // Await until user selects haiku
             _haikuControls.Enable();
-            yield return new WaitUntil(() => _haikuSelected);
-            _haikuSelected = false; // Set up for next method call
+            yield return new WaitUntil(() => _haikuLineSelected);
+            _haikuLineSelected = false; // Set up for next method call
+            
+            // Tells the Player's sprite to do the GetSet animation
+            if (stage == 2) StandoffStageX();
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -292,7 +296,7 @@ namespace Managers
         private void OnHaikuSelect(InputAction.CallbackContext obj)
         {
             _haikuControls.Disable();
-            _haikuSelected = true;
+            _haikuLineSelected = true;
         }
 
 
