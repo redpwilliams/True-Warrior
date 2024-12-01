@@ -3,16 +3,60 @@
     {
       "one": [
         {
+          "en": "Sunlight paints the land",
+          "jp": "太陽の光が大地を彩る"
+        },
+        {
+          "en": "Golden rays embrace",
+          "jp": ""
+        },
+        {
+          "en": "Morning light unfolds",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Children dance in joyful steps",
+          "jp": "子供たちは楽しそうにステップを踏んで踊る"
+        },
+        {
+          "en": "Laughter echoes through the fields",
+          "jp": ""
+        },
+        {
+          "en": "Youthful feet skip through the grass",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Harmony prevails.",
+          "jp": "和が勝つ。"
+        },
+        {
+          "en": "Peace blooms in the air.",
+          "jp": ""
+        },
+        {
+          "en": "Balance finds its way.",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Calm seas reflect sky",
           "jp": "穏やかな海が空を映し出す"
         },
         {
           "en": "Soft breeze whispers low",
-          "jp": "穏やかな海が空を映し出す"
+          "jp": ""
         },
         {
           "en": "Silent night descends",
-          "jp": "穏やかな海が空を映し出す"
+          "jp": ""
         }
       ],
       "two": [
@@ -22,11 +66,11 @@
         },
         {
           "en": "Peaceful waves embrace the soul",
-          "jp": "平穏が魂を満たす"
+          "jp": ""
         },
         {
           "en": "A serene heart finds its peace",
-          "jp": "平穏が魂を満たす"
+          "jp": ""
         }
       ],
       "three": [
@@ -36,11 +80,11 @@
         },
         {
           "en": "Gentle power resides.",
-          "jp": "静かな強さが耐える。"
+          "jp": ""
         },
         {
           "en": "Hidden depths unfold.",
-          "jp": "静かな強さが耐える。"
+          "jp": ""
         }
       ]      
     }
