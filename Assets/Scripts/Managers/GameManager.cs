@@ -44,22 +44,13 @@ namespace Managers
         [Header("Standoff Parameters")]
         
         [SerializeField] private float _timeUntilStage1 = 2.5f;
-        [SerializeField] private float _timeUntilStage2 = 5f;
-        [SerializeField] private float _timeUntilStage3 = 5f;
 
         // TODO - Make range?
         [SerializeField] private float _timeUntilBattleStart = 5f;
         [SerializeField] private float _fadeInDuration = 1f;
         [SerializeField] private float _fadeOutDuration = 0.5f;
-        [SerializeField] private float _timeHoldText = 3.0f;
 
         private HaikuControls _haikuControls;
-
-        private enum CycleDirection
-        {
-            Left = -1,
-            Right = 1
-        }
 
         private void Awake()
         {
@@ -276,17 +267,21 @@ namespace Managers
         /// HaikuControls action map is enabled
         private void OnHaikuScroll(InputAction.CallbackContext obj)
         {
-            _haikuControls.Disable();
             
             // +1 for right, -1 for left
             _currentLineChoice = (int)obj.action.ReadValue<Vector2>().x == 1
-                ? (_currentLineChoice + 1) % _haikuLineOptions.Count            // Next line
-                : Math.Abs(_currentLineChoice - 1) % _haikuLineOptions.Count;   // Previous line
+                // Next line
+                ? (_currentLineChoice + 1) % _haikuLineOptions.Count
+                // Previous line
+                : Math.Abs(_currentLineChoice - 1 + _haikuLineOptions.Count) 
+                  % _haikuLineOptions.Count;
 
+            
             StartCoroutine(CycleHaikuLine());
 
             IEnumerator CycleHaikuLine()
             { 
+                _haikuControls.Disable();
                 yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
                 HaikuText.Instance.SetTexts(_haikuLineOptions[_currentLineChoice]);
                 yield return HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In);
