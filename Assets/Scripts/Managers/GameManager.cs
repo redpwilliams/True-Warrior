@@ -6,6 +6,7 @@ using UI;
 using UI.Buttons.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -25,6 +26,7 @@ namespace Managers
         }
 
         private GameMode _currentGameMode;
+        private float _gameModeStartupBuffer;
 
         /// Character Prefabs
         [Header("Character Prefabs")] 
@@ -41,15 +43,7 @@ namespace Managers
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
 
-        [Header("Standoff Parameters")]
-        
-        [SerializeField] private float _timeUntilStage1 = 2.5f;
-
-        // TODO - Make range?
-        [SerializeField] private float _timeUntilBattleStart = 5f;
-        [SerializeField] private float _fadeInDuration = 1f;
-        [SerializeField] private float _fadeOutDuration = 0.5f;
-
+        // Controls for selecting haiku
         private HaikuControls _haikuControls;
 
         private void Awake()
@@ -64,6 +58,8 @@ namespace Managers
             
             // Load haiku data
             _haikus = JsonReader.LoadHaikus();
+
+            _gameModeStartupBuffer = 2.5f;
             
             // Subscribe to haiku selection controls
             _haikuControls = new HaikuControls();
@@ -118,6 +114,12 @@ namespace Managers
 
         #region Standoff
 
+        [Header("Standoff Parameters")]
+        [SerializeField] private float _timeBeforeStage = 2.5f;
+        [SerializeField] private float _timeUntilBattleStart = 5f;
+        [SerializeField] private float _fadeInDuration = 1f;
+        [SerializeField] private float _fadeOutDuration = 0.5f;
+        [SerializeField] private float _cycleDuration = 0.25f;
         private bool _standoffWinnerDeclared;
         private float _battleStartTime;
         private bool _haikuLineSelected;
@@ -195,7 +197,7 @@ namespace Managers
             _standoffWinnerDeclared = false;
 
             // Initial startup buffer
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(_gameModeStartupBuffer);
 
             // Choose haiku
             Haiku haiku = _haikus[Random.Range(0, haikus.Count)];
@@ -228,7 +230,7 @@ namespace Managers
             _currentLineChoice = 0;
 
             // Initial start up buffer for stage
-            yield return new WaitForSeconds(_timeUntilStage1);
+            yield return new WaitForSeconds(_timeBeforeStage);
             
             // Set first option as current haiku text
             HaikuText.Instance.SetTexts(lineOptions[_currentLineChoice]);
@@ -286,9 +288,9 @@ namespace Managers
             IEnumerator CycleHaikuLine()
             { 
                 _haikuControls.Disable();
-                yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
+                yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.Out);
                 HaikuText.Instance.SetTexts(_haikuLineOptions[_currentLineChoice]);
-                yield return HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In);
+                yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.In);
                 _haikuControls.Enable();
             }
         }
