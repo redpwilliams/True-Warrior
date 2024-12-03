@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Dove flies on the wind",
+          "jp": "鳩は風に乗って飛ぶ"
+        },
+        {
+          "en": "Cranes glide through the mist",
+          "jp": ""
+        },
+        {
+          "en": "Sparrows greet the breeze",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Peaceful words weave a new song",
+          "jp": "平和な言葉が新しい歌を紡ぐ"
+        },
+        {
+          "en": "Gentle whispers calm the air",
+          "jp": ""
+        },
+        {
+          "en": "Soft voices carry their hope",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Unity takes root.",
+          "jp": "団結が根付く。"
+        },
+        {
+          "en": "Harmony is born.",
+          "jp": ""
+        },
+        {
+          "en": "Unity will bloom.",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Sunlight paints the land",
           "jp": "太陽の光が大地を彩る"
         },

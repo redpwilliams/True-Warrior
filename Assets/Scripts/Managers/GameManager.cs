@@ -216,12 +216,12 @@ namespace Managers
             yield return ExecuteStage(haiku.three, stage); // TODO - Add ++ when battle start is included
             
             // // Battle Start
-            // HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
-            // yield return awaitBattle;
+             //HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
+            //yield return awaitBattle;
             // EventManager.Events.StageX(stage);
             // _battleStartTime = Time.time;
             // yield return StartCoroutine(
-            //     HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
+              //   HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
         }
 
         private IEnumerator ExecuteStage(List<LinePair> lineOptions, int stage)
