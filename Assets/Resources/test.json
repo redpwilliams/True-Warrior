@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Steel birds swarm the sky",
+          "jp": "鋼鉄の鳥が空に群がる"
+        },
+        {
+          "en": "Iron wings descend",
+          "jp": ""
+        },
+        {
+          "en": "Metal shadows the glide",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Scorching breath paints earth to ash",
+          "jp": "灼熱の息が大地を灰にする"
+        },
+        {
+          "en": "Flames consume the fragile ground",
+          "jp": ""
+        },
+        {
+          "en": "Burning trails scorch all below",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Silence follows screams.",
+          "jp": "叫び声の後に沈黙が続く。"
+        },
+        {
+          "en": "Echoes haunt the air.",
+          "jp": ""
+        },
+        {
+          "en": "Stillness claims the land.",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Brother raised against brother",
           "jp": "兄弟が兄弟に反旗を翻す"
         },

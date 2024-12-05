@@ -1,6 +1,117 @@
 Haiku Set:
 __________
 
+Steel birds swarm the sky
+Scorching breath paints earth to ash
+Silence follows screams.
+
+Steel birds swarm the sky
+Scorching breath paints earth to ash
+Echoes haunt the air.
+
+Steel birds swarm the sky
+Scorching breath paints earth to ash
+Stillness claims the land.
+
+Steel birds swarm the sky
+Flames consume the fragile ground
+Silence follows screams.
+
+Steel birds swarm the sky
+Flames consume the fragile ground
+Echoes haunt the air.
+
+Steel birds swarm the sky
+Flames consume the fragile ground
+Stillness claims the land.
+
+Steel birds swarm the sky
+Burning trails scorch all below
+Silence follows screams.
+
+Steel birds swarm the sky
+Burning trails scorch all below
+Echoes haunt the air.
+
+Steel birds swarm the sky
+Burning trails scorch all below
+Stillness claims the land.
+
+Iron wings descend
+Scorching breath paints earth to ash
+Silence follows screams.
+
+Iron wings descend
+Scorching breath paints earth to ash
+Echoes haunt the air.
+
+Iron wings descend
+Scorching breath paints earth to ash
+Stillness claims the land.
+
+Iron wings descend
+Flames consume the fragile ground
+Silence follows screams.
+
+Iron wings descend
+Flames consume the fragile ground
+Echoes haunt the air.
+
+Iron wings descend
+Flames consume the fragile ground
+Stillness claims the land.
+
+Iron wings descend
+Burning trails scorch all below
+Silence follows screams.
+
+Iron wings descend
+Burning trails scorch all below
+Echoes haunt the air.
+
+Iron wings descend
+Burning trails scorch all below
+Stillness claims the land.
+
+Metal shadows the glide
+Scorching breath paints earth to ash
+Silence follows screams.
+
+Metal shadows the glide
+Scorching breath paints earth to ash
+Echoes haunt the air.
+
+Metal shadows the glide
+Scorching breath paints earth to ash
+Stillness claims the land.
+
+Metal shadows the glide
+Flames consume the fragile ground
+Silence follows screams.
+
+Metal shadows the glide
+Flames consume the fragile ground
+Echoes haunt the air.
+
+Metal shadows the glide
+Flames consume the fragile ground
+Stillness claims the land.
+
+Metal shadows the glide
+Burning trails scorch all below
+Silence follows screams.
+
+Metal shadows the glide
+Burning trails scorch all below
+Echoes haunt the air.
+
+Metal shadows the glide
+Burning trails scorch all below
+Stillness claims the land.
+
+Haiku Set:
+__________
+
 Brother raised against brother
 Crimson stains the fields of green
 Lost dreams in the dust.
@@ -887,6 +998,6 @@ A serene heart finds its peace
 Hidden depths unfold.
 
 
-Total haikus: 216
+Total haikus: 243
 
 All lines are good.
