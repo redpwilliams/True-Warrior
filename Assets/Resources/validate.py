@@ -31,7 +31,7 @@ def get_json():
     print(" python validate.py <input file> <output file>")
 
 def validate_line3(line, bad_lines):
-  if line[len(line) - 1] != "." and line not in bad_lines:
+  if not line.endswith(".") and not line.endswith("?") and line not in bad_lines:
     bad_lines.append(line)
 
 
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         f.write("\nBad Lines:\n")
         f.write("______________\n\n")
         for line in bad_lines:
-          f.write(line)
+          f.write(f"{line}\n\n")
 
   except FileNotFoundError:
     print("Output file not found")
