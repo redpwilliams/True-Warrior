@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Cities crumble fast",
+          "jp": "都市は急速に崩壊する"
+        },
+        {
+          "en": "Towers turn to dust",
+          "jp": ""
+        },
+        {
+          "en": "Structures fall to ash",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Innocent lives lost in rage",
+          "jp": "怒りで失われた無垢な命"
+        },
+        {
+          "en": "Anguish echoes through the streets",
+          "jp": ""
+        },
+        {
+          "en": "Dreams are shattered in the storm",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Hollow hearts remain.",
+          "jp": "空洞のハートが残る。"
+        },
+        {
+          "en": "Shadows claim the land.",
+          "jp": ""
+        },
+        {
+          "en": "Empty souls linger.",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Shattered homes and lives",
           "jp": "打ち砕かれた家と生活"
         },
