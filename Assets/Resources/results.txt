@@ -1,6 +1,117 @@
 Haiku Set:
 __________
 
+Gentle breeze whispers
+Flowers bloom in fertile soil
+Laughter fills the air.
+
+Gentle breeze whispers
+Flowers bloom in fertile soil
+Joy spreads through the field.
+
+Gentle breeze whispers
+Flowers bloom in fertile soil
+Smiles light up the day
+
+Gentle breeze whispers
+Petals dance on quite streams
+Laughter fills the air.
+
+Gentle breeze whispers
+Petals dance on quite streams
+Joy spreads through the field.
+
+Gentle breeze whispers
+Petals dance on quite streams
+Smiles light up the day
+
+Gentle breeze whispers
+Blossoms wake to greet the sun
+Laughter fills the air.
+
+Gentle breeze whispers
+Blossoms wake to greet the sun
+Joy spreads through the field.
+
+Gentle breeze whispers
+Blossoms wake to greet the sun
+Smiles light up the day
+
+Soft winds hum through trees
+Flowers bloom in fertile soil
+Laughter fills the air.
+
+Soft winds hum through trees
+Flowers bloom in fertile soil
+Joy spreads through the field.
+
+Soft winds hum through trees
+Flowers bloom in fertile soil
+Smiles light up the day
+
+Soft winds hum through trees
+Petals dance on quite streams
+Laughter fills the air.
+
+Soft winds hum through trees
+Petals dance on quite streams
+Joy spreads through the field.
+
+Soft winds hum through trees
+Petals dance on quite streams
+Smiles light up the day
+
+Soft winds hum through trees
+Blossoms wake to greet the sun
+Laughter fills the air.
+
+Soft winds hum through trees
+Blossoms wake to greet the sun
+Joy spreads through the field.
+
+Soft winds hum through trees
+Blossoms wake to greet the sun
+Smiles light up the day
+
+Calm air carries songs
+Flowers bloom in fertile soil
+Laughter fills the air.
+
+Calm air carries songs
+Flowers bloom in fertile soil
+Joy spreads through the field.
+
+Calm air carries songs
+Flowers bloom in fertile soil
+Smiles light up the day
+
+Calm air carries songs
+Petals dance on quite streams
+Laughter fills the air.
+
+Calm air carries songs
+Petals dance on quite streams
+Joy spreads through the field.
+
+Calm air carries songs
+Petals dance on quite streams
+Smiles light up the day
+
+Calm air carries songs
+Blossoms wake to greet the sun
+Laughter fills the air.
+
+Calm air carries songs
+Blossoms wake to greet the sun
+Joy spreads through the field.
+
+Calm air carries songs
+Blossoms wake to greet the sun
+Smiles light up the day
+
+Haiku Set:
+__________
+
 Open hand outstretched
 Forgiveness bridges the gap
 Two hearts beat as one.
@@ -443,6 +554,9 @@ A serene heart finds its peace
 Hidden depths unfold.
 
 
-Total haikus: 108
+Total haikus: 135
 
-All lines are good.
+Bad Lines:
+______________
+
+Smiles light up the day

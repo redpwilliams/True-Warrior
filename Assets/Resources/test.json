@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Gentle breeze whispers",
+          "jp": "そよ風がささやく"
+        },
+        {
+          "en": "Soft winds hum through trees",
+          "jp": ""
+        },
+        {
+          "en": "Calm air carries songs",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Flowers bloom in fertile soil",
+          "jp": "花は肥沃な土壌で咲く"
+        },
+        {
+          "en": "Petals dance on quite streams",
+          "jp": ""
+        },
+        {
+          "en": "Blossoms wake to greet the sun",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Laughter fills the air.",
+          "jp": "笑いが空気に満ちている。"
+        },
+        {
+          "en": "Joy spreads through the field.",
+          "jp": ""
+        },
+        {
+          "en": "Smiles light up the day.",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Open hand outstretched",
           "jp": "広げたオープンハンド"
         },
