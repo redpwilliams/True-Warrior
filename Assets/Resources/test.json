@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Shattered homes and lives",
+          "jp": "打ち砕かれた家と生活"
+        },
+        {
+          "en": "Broken dreams remain",
+          "jp": ""
+        },
+        {
+          "en": "Ruins mark the land",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Hope flickers in the darkness",
+          "jp": "暗闇の中で希望が明滅する"
+        },
+        {
+          "en": "Light struggles against the night",
+          "jp": ""
+        },
+        {
+          "en": "Embers grow in silent grief",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Will peace ever bloom?",
+          "jp": "平和の花は咲くのだろうか？"
+        },
+        {
+          "en": "Can peace find its way?",
+          "jp": ""
+        },
+        {
+          "en": "Is there still a chance?",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Gentle breeze whispers",
           "jp": "そよ風がささやく"
         },

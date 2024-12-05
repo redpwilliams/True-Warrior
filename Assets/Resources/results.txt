@@ -1,6 +1,117 @@
 Haiku Set:
 __________
 
+Shattered homes and lives
+Hope flickers in the darkness
+Will peace ever bloom?
+
+Shattered homes and lives
+Hope flickers in the darkness
+Can peace find its way?
+
+Shattered homes and lives
+Hope flickers in the darkness
+Is there still a chance
+
+Shattered homes and lives
+Light struggles against the night
+Will peace ever bloom?
+
+Shattered homes and lives
+Light struggles against the night
+Can peace find its way?
+
+Shattered homes and lives
+Light struggles against the night
+Is there still a chance
+
+Shattered homes and lives
+Embers grow in silent grief
+Will peace ever bloom?
+
+Shattered homes and lives
+Embers grow in silent grief
+Can peace find its way?
+
+Shattered homes and lives
+Embers grow in silent grief
+Is there still a chance
+
+Broken dreams remain
+Hope flickers in the darkness
+Will peace ever bloom?
+
+Broken dreams remain
+Hope flickers in the darkness
+Can peace find its way?
+
+Broken dreams remain
+Hope flickers in the darkness
+Is there still a chance
+
+Broken dreams remain
+Light struggles against the night
+Will peace ever bloom?
+
+Broken dreams remain
+Light struggles against the night
+Can peace find its way?
+
+Broken dreams remain
+Light struggles against the night
+Is there still a chance
+
+Broken dreams remain
+Embers grow in silent grief
+Will peace ever bloom?
+
+Broken dreams remain
+Embers grow in silent grief
+Can peace find its way?
+
+Broken dreams remain
+Embers grow in silent grief
+Is there still a chance
+
+Ruins mark the land
+Hope flickers in the darkness
+Will peace ever bloom?
+
+Ruins mark the land
+Hope flickers in the darkness
+Can peace find its way?
+
+Ruins mark the land
+Hope flickers in the darkness
+Is there still a chance
+
+Ruins mark the land
+Light struggles against the night
+Will peace ever bloom?
+
+Ruins mark the land
+Light struggles against the night
+Can peace find its way?
+
+Ruins mark the land
+Light struggles against the night
+Is there still a chance
+
+Ruins mark the land
+Embers grow in silent grief
+Will peace ever bloom?
+
+Ruins mark the land
+Embers grow in silent grief
+Can peace find its way?
+
+Ruins mark the land
+Embers grow in silent grief
+Is there still a chance
+
+Haiku Set:
+__________
+
 Gentle breeze whispers
 Flowers bloom in fertile soil
 Laughter fills the air.
@@ -11,7 +122,7 @@ Joy spreads through the field.
 
 Gentle breeze whispers
 Flowers bloom in fertile soil
-Smiles light up the day
+Smiles light up the day.
 
 Gentle breeze whispers
 Petals dance on quite streams
@@ -23,7 +134,7 @@ Joy spreads through the field.
 
 Gentle breeze whispers
 Petals dance on quite streams
-Smiles light up the day
+Smiles light up the day.
 
 Gentle breeze whispers
 Blossoms wake to greet the sun
@@ -35,7 +146,7 @@ Joy spreads through the field.
 
 Gentle breeze whispers
 Blossoms wake to greet the sun
-Smiles light up the day
+Smiles light up the day.
 
 Soft winds hum through trees
 Flowers bloom in fertile soil
@@ -47,7 +158,7 @@ Joy spreads through the field.
 
 Soft winds hum through trees
 Flowers bloom in fertile soil
-Smiles light up the day
+Smiles light up the day.
 
 Soft winds hum through trees
 Petals dance on quite streams
@@ -59,7 +170,7 @@ Joy spreads through the field.
 
 Soft winds hum through trees
 Petals dance on quite streams
-Smiles light up the day
+Smiles light up the day.
 
 Soft winds hum through trees
 Blossoms wake to greet the sun
@@ -71,7 +182,7 @@ Joy spreads through the field.
 
 Soft winds hum through trees
 Blossoms wake to greet the sun
-Smiles light up the day
+Smiles light up the day.
 
 Calm air carries songs
 Flowers bloom in fertile soil
@@ -83,7 +194,7 @@ Joy spreads through the field.
 
 Calm air carries songs
 Flowers bloom in fertile soil
-Smiles light up the day
+Smiles light up the day.
 
 Calm air carries songs
 Petals dance on quite streams
@@ -95,7 +206,7 @@ Joy spreads through the field.
 
 Calm air carries songs
 Petals dance on quite streams
-Smiles light up the day
+Smiles light up the day.
 
 Calm air carries songs
 Blossoms wake to greet the sun
@@ -107,7 +218,7 @@ Joy spreads through the field.
 
 Calm air carries songs
 Blossoms wake to greet the sun
-Smiles light up the day
+Smiles light up the day.
 
 Haiku Set:
 __________
@@ -554,9 +665,10 @@ A serene heart finds its peace
 Hidden depths unfold.
 
 
-Total haikus: 135
+Total haikus: 162
 
 Bad Lines:
 ______________
 
-Smiles light up the day
+Is there still a chance
+
