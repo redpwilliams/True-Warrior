@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Brother raised against brother",
+          "jp": "兄弟が兄弟に反旗を翻す"
+        },
+        {
+          "en": "Kin turns blade to kin",
+          "two": ""
+        },
+        {
+          "en": "Siblings clash in strife",
+          "two": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Crimson stains the fields of green",
+          "jp": "深紅が緑の野を染める"
+        },
+        {
+          "en": "Scarlet rivers carve the earth",
+          "two": ""
+        },
+        {
+          "en": "Blood soaks into tender ground",
+          "two": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Lost dreams in the dust.",
+          "jp": "埃にまみれて失われた夢。"
+        },
+        {
+          "en": "Hopes scatter like ash.",
+          "two": ""
+        },
+        {
+          "en": "Futures fade away.",
+          "two": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Cities crumble fast",
           "jp": "都市は急速に崩壊する"
         },

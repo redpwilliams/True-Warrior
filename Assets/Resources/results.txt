@@ -1,6 +1,117 @@
 Haiku Set:
 __________
 
+Brother raised against brother
+Crimson stains the fields of green
+Lost dreams in the dust.
+
+Brother raised against brother
+Crimson stains the fields of green
+Hopes scatter like ash.
+
+Brother raised against brother
+Crimson stains the fields of green
+Futures fade away.
+
+Brother raised against brother
+Scarlet rivers carve the earth
+Lost dreams in the dust.
+
+Brother raised against brother
+Scarlet rivers carve the earth
+Hopes scatter like ash.
+
+Brother raised against brother
+Scarlet rivers carve the earth
+Futures fade away.
+
+Brother raised against brother
+Blood soaks into tender ground
+Lost dreams in the dust.
+
+Brother raised against brother
+Blood soaks into tender ground
+Hopes scatter like ash.
+
+Brother raised against brother
+Blood soaks into tender ground
+Futures fade away.
+
+Kin turns blade to kin
+Crimson stains the fields of green
+Lost dreams in the dust.
+
+Kin turns blade to kin
+Crimson stains the fields of green
+Hopes scatter like ash.
+
+Kin turns blade to kin
+Crimson stains the fields of green
+Futures fade away.
+
+Kin turns blade to kin
+Scarlet rivers carve the earth
+Lost dreams in the dust.
+
+Kin turns blade to kin
+Scarlet rivers carve the earth
+Hopes scatter like ash.
+
+Kin turns blade to kin
+Scarlet rivers carve the earth
+Futures fade away.
+
+Kin turns blade to kin
+Blood soaks into tender ground
+Lost dreams in the dust.
+
+Kin turns blade to kin
+Blood soaks into tender ground
+Hopes scatter like ash.
+
+Kin turns blade to kin
+Blood soaks into tender ground
+Futures fade away.
+
+Siblings clash in strife
+Crimson stains the fields of green
+Lost dreams in the dust.
+
+Siblings clash in strife
+Crimson stains the fields of green
+Hopes scatter like ash.
+
+Siblings clash in strife
+Crimson stains the fields of green
+Futures fade away.
+
+Siblings clash in strife
+Scarlet rivers carve the earth
+Lost dreams in the dust.
+
+Siblings clash in strife
+Scarlet rivers carve the earth
+Hopes scatter like ash.
+
+Siblings clash in strife
+Scarlet rivers carve the earth
+Futures fade away.
+
+Siblings clash in strife
+Blood soaks into tender ground
+Lost dreams in the dust.
+
+Siblings clash in strife
+Blood soaks into tender ground
+Hopes scatter like ash.
+
+Siblings clash in strife
+Blood soaks into tender ground
+Futures fade away.
+
+Haiku Set:
+__________
+
 Cities crumble fast
 Innocent lives lost in rage
 Hollow hearts remain.
@@ -776,6 +887,6 @@ A serene heart finds its peace
 Hidden depths unfold.
 
 
-Total haikus: 189
+Total haikus: 216
 
 All lines are good.
