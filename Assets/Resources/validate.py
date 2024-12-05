@@ -46,7 +46,11 @@ if __name__ == "__main__":
       # Bad lines without periods
       bad_lines = []
 
+      # Lines with missing jp translations
+      missing_translations = []
+
       for haiku in haikus:
+        # Begin logging haiku combinations
         f.write("Haiku Set:\n")
         f.write("__________\n\n")
 
@@ -60,14 +64,31 @@ if __name__ == "__main__":
               validate_line3(c["en"], bad_lines)
               total_haikus += 1
         
+        # Note any missing translations
+        missing_translations.extend(option["en"] for option in haiku["one"] if option["jp"] == "")
+        missing_translations.extend(option["en"] for option in haiku["two"] if option["jp"] == "")
+        missing_translations.extend(option["en"] for option in haiku["three"] if option["jp"] == "")
+        
+      # Log number of haiku commbinatons
       f.write(f"\nTotal haikus: {total_haikus}\n")
+      
+      # Log bad lines, if applicable
       if len(bad_lines) == 0:
-        f.write("\nAll lines are good.")
+        f.write("\nAll lines are good.\n")
       else:
         f.write("\nBad Lines:\n")
         f.write("______________\n\n")
         for line in bad_lines:
           f.write(f"{line}\n\n")
+
+      # Log lines with missing translations, if applicable
+      if len(missing_translations) == 0:
+        f.write("\nNo missing translations.\n")
+      else:
+        f.write(f"\n{len(missing_translations)} lines are missing translations:\n")
+        f.write("----------------------------------\n\n")
+        for line in missing_translations:
+          f.write(f"{line}\n")
 
   except FileNotFoundError:
     print("Output file not found")
