@@ -1,6 +1,117 @@
 Haiku Set:
 __________
 
+Blade reflects the sun
+Duty binds the steadfast soul
+Virtue lights the path.
+
+Blade reflects the sun
+Duty binds the steadfast soul
+Courage never sways.
+
+Blade reflects the sun
+Duty binds the steadfast soul
+Honor never fades.
+
+Blade reflects the sun
+Pledged to walk the noble road
+Virtue lights the path.
+
+Blade reflects the sun
+Pledged to walk the noble road
+Courage never sways.
+
+Blade reflects the sun
+Pledged to walk the noble road
+Honor never fades.
+
+Blade reflects the sun
+Loyal hearts endure the storm
+Virtue lights the path.
+
+Blade reflects the sun
+Loyal hearts endure the storm
+Courage never sways.
+
+Blade reflects the sun
+Loyal hearts endure the storm
+Honor never fades.
+
+Steel meets morning dew
+Duty binds the steadfast soul
+Virtue lights the path.
+
+Steel meets morning dew
+Duty binds the steadfast soul
+Courage never sways.
+
+Steel meets morning dew
+Duty binds the steadfast soul
+Honor never fades.
+
+Steel meets morning dew
+Pledged to walk the noble road
+Virtue lights the path.
+
+Steel meets morning dew
+Pledged to walk the noble road
+Courage never sways.
+
+Steel meets morning dew
+Pledged to walk the noble road
+Honor never fades.
+
+Steel meets morning dew
+Loyal hearts endure the storm
+Virtue lights the path.
+
+Steel meets morning dew
+Loyal hearts endure the storm
+Courage never sways.
+
+Steel meets morning dew
+Loyal hearts endure the storm
+Honor never fades.
+
+Armor shines with pride
+Duty binds the steadfast soul
+Virtue lights the path.
+
+Armor shines with pride
+Duty binds the steadfast soul
+Courage never sways.
+
+Armor shines with pride
+Duty binds the steadfast soul
+Honor never fades.
+
+Armor shines with pride
+Pledged to walk the noble road
+Virtue lights the path.
+
+Armor shines with pride
+Pledged to walk the noble road
+Courage never sways.
+
+Armor shines with pride
+Pledged to walk the noble road
+Honor never fades.
+
+Armor shines with pride
+Loyal hearts endure the storm
+Virtue lights the path.
+
+Armor shines with pride
+Loyal hearts endure the storm
+Courage never sways.
+
+Armor shines with pride
+Loyal hearts endure the storm
+Honor never fades.
+
+Haiku Set:
+__________
+
 Steel birds swarm the sky
 Scorching breath paints earth to ash
 Silence follows screams.
@@ -998,6 +1109,6 @@ A serene heart finds its peace
 Hidden depths unfold.
 
 
-Total haikus: 243
+Total haikus: 270
 
 All lines are good.

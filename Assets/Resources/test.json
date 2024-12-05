@@ -3,6 +3,50 @@
     {
       "one": [
         {
+          "en": "Blade reflects the sun",
+          "jp": ""
+        },
+        {
+          "en": "Steel meets morning dew",
+          "jp": ""
+        },
+        {
+          "en": "Armor shines with pride",
+          "jp": ""
+        }
+      ],
+      "two": [
+        {
+          "en": "Duty binds the steadfast soul",
+          "jp": ""
+        },
+        {
+          "en": "Pledged to walk the noble road",
+          "jp": ""
+        },
+        {
+          "en": "Loyal hearts endure the storm",
+          "jp": ""
+        }
+      ],
+      "three": [
+        {
+          "en": "Virtue lights the path.",
+          "jp": ""
+        },
+        {
+          "en": "Courage never sways.",
+          "jp": ""
+        },
+        {
+          "en": "Honor never fades.",
+          "jp": ""
+        }
+      ]
+    },
+    {
+      "one": [
+        {
           "en": "Steel birds swarm the sky",
           "jp": "鋼鉄の鳥が空に群がる"
         },
