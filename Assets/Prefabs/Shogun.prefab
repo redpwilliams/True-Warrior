@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNumber: 2
+  _test: {fileID: 7400000, guid: 97c0a0cb7aecb7a40a3b47b853aec0d2, type: 2}
   _dashDistance: 15
   _dashDuration: 0.5
 --- !u!114 &1690438229803157989

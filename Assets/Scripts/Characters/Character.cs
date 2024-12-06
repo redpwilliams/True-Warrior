@@ -4,7 +4,6 @@ using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -25,7 +24,6 @@ namespace Characters
     
         public enum PlayerNumber { One, Two, CPU }
         
-        [FormerlySerializedAs("_playerType")]
         [Header("Player Designation")]
         [SerializeField] private PlayerNumber _playerNumber;
         
@@ -39,6 +37,7 @@ namespace Characters
         // Animation parameters
         private static readonly int Running = Animator.StringToHash("ShouldRun");
         private static readonly int Set = Animator.StringToHash("ShouldSet");
+        private static readonly int SetWithDelay = Animator.StringToHash("ShouldSet_Delay");
         private static readonly int Attacking = Animator.StringToHash("ShouldAttack");
         private static readonly int Hurt = Animator.StringToHash("ShouldHurt");
         private static readonly int Death = Animator.StringToHash("ShouldDie");
@@ -169,19 +168,27 @@ namespace Characters
         private void GetSetCPU(int stage)
         {
             if (stage != 2) return;
-            StartCoroutine(AnimateIdleToSet(true));
+            StartCoroutine(AnimateIdleToSet());
             EventManager.Events.OnStageX -= GetSetCPU;
         }
 
         private void GetSetPlayer()
         {
-            StartCoroutine(AnimateIdleToSet(false));
+            StartCoroutine(AnimateIdleToSet());
             GameManager.OnStandoffStageX -= GetSetPlayer;
         }
 
-        private IEnumerator AnimateIdleToSet(bool delay)
+        private IEnumerator AnimateIdleToSet()
         {
-            if (delay) yield return new WaitForSeconds(Random.Range(0f, 0.25f));
+            // If CPU, wait a bit before getting set
+            if (_playerNumber == PlayerNumber.CPU)
+            { 
+                yield return new WaitForSeconds(Random.Range(0f, 0.25f)); 
+                Anim.SetTrigger(SetWithDelay);
+                yield break; 
+            }
+            
+            // If Player, start animation right away without exit time
             Anim.SetTrigger(Set);
         }
 
