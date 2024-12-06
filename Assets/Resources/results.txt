@@ -569,15 +569,15 @@ Flowers bloom in fertile soil
 Smiles light up the day.
 
 Gentle breeze whispers
-Petals dance on quite streams
+Petals dance on quiet streams
 Laughter fills the air.
 
 Gentle breeze whispers
-Petals dance on quite streams
+Petals dance on quiet streams
 Joy spreads through the field.
 
 Gentle breeze whispers
-Petals dance on quite streams
+Petals dance on quiet streams
 Smiles light up the day.
 
 Gentle breeze whispers
@@ -605,15 +605,15 @@ Flowers bloom in fertile soil
 Smiles light up the day.
 
 Soft winds hum through trees
-Petals dance on quite streams
+Petals dance on quiet streams
 Laughter fills the air.
 
 Soft winds hum through trees
-Petals dance on quite streams
+Petals dance on quiet streams
 Joy spreads through the field.
 
 Soft winds hum through trees
-Petals dance on quite streams
+Petals dance on quiet streams
 Smiles light up the day.
 
 Soft winds hum through trees
@@ -641,15 +641,15 @@ Flowers bloom in fertile soil
 Smiles light up the day.
 
 Calm air carries songs
-Petals dance on quite streams
+Petals dance on quiet streams
 Laughter fills the air.
 
 Calm air carries songs
-Petals dance on quite streams
+Petals dance on quiet streams
 Joy spreads through the field.
 
 Calm air carries songs
-Petals dance on quite streams
+Petals dance on quiet streams
 Smiles light up the day.
 
 Calm air carries songs
@@ -1113,60 +1113,9 @@ Total haikus: 270
 
 All lines are good.
 
-63 lines are missing translations:
---------------------------------
+12 lines are missing translations:
+----------------------------------
 
-Blade reflects the sun
-Steel meets morning dew
-Armor shines with pride
-Duty binds the steadfast soul
-Pledged to walk the noble road
-Loyal hearts endure the storm
-Virtue lights the path.
-Courage never sways.
-Honor never fades.
-Iron wings descend
-Metal shadows the glide
-Flames consume the fragile ground
-Burning trails scorch all below
-Echoes haunt the air.
-Stillness claims the land.
-Kin turns blade to kin
-Siblings clash in strife
-Scarlet rivers carve the earth
-Blood soaks into tender ground
-Hopes scatter like ash.
-Futures fade away.
-Towers turn to dust
-Structures fall to ash
-Anguish echoes through the streets
-Dreams are shattered in the storm
-Shadows claim the land.
-Empty souls linger.
-Broken dreams remain
-Ruins mark the land
-Light struggles against the night
-Embers grow in silent grief
-Can peace find its way?
-Is there still a chance?
-Soft winds hum through trees
-Calm air carries songs
-Petals dance on quite streams
-Blossoms wake to greet the sun
-Joy spreads through the field.
-Smiles light up the day.
-Reaching through the void
-Gentle palms extend
-Kindness mends what was once torn
-Compassion heals broken ties
-Souls unite as one.
-Harmony is found.
-Cranes glide through the mist
-Sparrows greet the breeze
-Gentle whispers calm the air
-Soft voices carry their hope
-Harmony is born.
-Unity will bloom.
 Golden rays embrace
 Morning light unfolds
 Laughter echoes through the fields

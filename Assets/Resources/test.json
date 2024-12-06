@@ -4,43 +4,43 @@
       "one": [
         {
           "en": "Blade reflects the sun",
-          "jp": ""
+          "jp": "ブレードが太陽を反射"
         },
         {
           "en": "Steel meets morning dew",
-          "jp": ""
+          "jp": "鋼鉄と朝露の出会い"
         },
         {
           "en": "Armor shines with pride",
-          "jp": ""
+          "jp": "鎧は誇りをもって輝く"
         }
       ],
       "two": [
         {
           "en": "Duty binds the steadfast soul",
-          "jp": ""
+          "jp": "義務は不動の魂を縛る"
         },
         {
           "en": "Pledged to walk the noble road",
-          "jp": ""
+          "jp": "高貴な道を歩むことを誓った"
         },
         {
           "en": "Loyal hearts endure the storm",
-          "jp": ""
+          "jp": "忠実な心は嵐に耐える"
         }
       ],
       "three": [
         {
           "en": "Virtue lights the path.",
-          "jp": ""
+          "jp": "徳が道を照らす。"
         },
         {
           "en": "Courage never sways.",
-          "jp": ""
+          "jp": "勇気は決して揺るがない。"
         },
         {
           "en": "Honor never fades.",
-          "jp": ""
+          "jp": "栄誉は決して色あせない。"
         }
       ]
     },
@@ -52,11 +52,11 @@
         },
         {
           "en": "Iron wings descend",
-          "jp": ""
+          "jp": "鉄の翼が舞い降りる"
         },
         {
           "en": "Metal shadows the glide",
-          "jp": ""
+          "jp": "金属が滑空に影を落とす"
         }
       ],
       "two": [
@@ -66,11 +66,11 @@
         },
         {
           "en": "Flames consume the fragile ground",
-          "jp": ""
+          "jp": "炎がもろい大地を焼き尽くす"
         },
         {
           "en": "Burning trails scorch all below",
-          "jp": ""
+          "jp": "灼熱の軌跡が眼下を焦がす"
         }
       ],
       "three": [
@@ -80,11 +80,11 @@
         },
         {
           "en": "Echoes haunt the air.",
-          "jp": ""
+          "jp": "反響が空気を呪う。"
         },
         {
           "en": "Stillness claims the land.",
-          "jp": ""
+          "jp": "静けさが大地を支配する。"
         }
       ]
     },
@@ -96,11 +96,11 @@
         },
         {
           "en": "Kin turns blade to kin",
-          "jp": ""
+          "jp": "親族は親族に刃を向ける"
         },
         {
           "en": "Siblings clash in strife",
-          "jp": ""
+          "jp": "兄弟げんかの衝突"
         }
       ],
       "two": [
@@ -110,11 +110,11 @@
         },
         {
           "en": "Scarlet rivers carve the earth",
-          "jp": ""
+          "jp": "緋色の川が大地を刻む"
         },
         {
           "en": "Blood soaks into tender ground",
-          "jp": ""
+          "jp": "血は柔らかい地面に染み込む"
         }
       ],
       "three": [
@@ -124,11 +124,11 @@
         },
         {
           "en": "Hopes scatter like ash.",
-          "jp": ""
+          "jp": "希望は灰のように散る。"
         },
         {
           "en": "Futures fade away.",
-          "jp": ""
+          "jp": "未来は消えていく。"
         }
       ]
     },
@@ -140,11 +140,11 @@
         },
         {
           "en": "Towers turn to dust",
-          "jp": ""
+          "jp": "塔は塵と化す"
         },
         {
           "en": "Structures fall to ash",
-          "jp": ""
+          "jp": "建造物が灰燼に帰す"
         }
       ],
       "two": [
@@ -154,11 +154,11 @@
         },
         {
           "en": "Anguish echoes through the streets",
-          "jp": ""
+          "jp": "苦悩が通りに響き渡る"
         },
         {
           "en": "Dreams are shattered in the storm",
-          "jp": ""
+          "jp": "夢は嵐の中で砕け散る"
         }
       ],
       "three": [
@@ -168,11 +168,11 @@
         },
         {
           "en": "Shadows claim the land.",
-          "jp": ""
+          "jp": "影が土地を占領する。"
         },
         {
           "en": "Empty souls linger.",
-          "jp": ""
+          "jp": "空虚な魂が残る。"
         }
       ]
     },
@@ -184,11 +184,11 @@
         },
         {
           "en": "Broken dreams remain",
-          "jp": ""
+          "jp": "壊れた夢は残る"
         },
         {
           "en": "Ruins mark the land",
-          "jp": ""
+          "jp": "廃墟が目印だ"
         }
       ],
       "two": [
@@ -198,11 +198,11 @@
         },
         {
           "en": "Light struggles against the night",
-          "jp": ""
+          "jp": "光は夜と格闘する"
         },
         {
           "en": "Embers grow in silent grief",
-          "jp": ""
+          "jp": "静かな悲しみの中で燃えさかる炎"
         }
       ],
       "three": [
@@ -212,11 +212,11 @@
         },
         {
           "en": "Can peace find its way?",
-          "jp": ""
+          "jp": "平和の道は開けるのか？"
         },
         {
           "en": "Is there still a chance?",
-          "jp": ""
+          "jp": "まだチャンスはありますか？"
         }
       ]
     },
@@ -228,11 +228,11 @@
         },
         {
           "en": "Soft winds hum through trees",
-          "jp": ""
+          "jp": "柔らかな風が木々の間を通り抜ける"
         },
         {
           "en": "Calm air carries songs",
-          "jp": ""
+          "jp": "穏やかな空気が歌を運ぶ"
         }
       ],
       "two": [
@@ -241,12 +241,12 @@
           "jp": "花は肥沃な土壌で咲く"
         },
         {
-          "en": "Petals dance on quite streams",
-          "jp": ""
+          "en": "Petals dance on quiet streams",
+          "jp": "静かな小川に花びらが舞う"
         },
         {
           "en": "Blossoms wake to greet the sun",
-          "jp": ""
+          "jp": "花は太陽を迎えるために目覚める"
         }
       ],
       "three": [
@@ -256,11 +256,11 @@
         },
         {
           "en": "Joy spreads through the field.",
-          "jp": ""
+          "jp": "喜びがフィールド中に広がった。"
         },
         {
           "en": "Smiles light up the day.",
-          "jp": ""
+          "jp": "笑顔は一日を明るくします。"
         }
       ]
     },
@@ -272,11 +272,11 @@
         },
         {
           "en": "Reaching through the void",
-          "jp": ""
+          "jp": "空虚な空間から手を伸ばす"
         },
         {
           "en": "Gentle palms extend",
-          "jp": ""
+          "jp": "優しい手のひらが伸びる"
         }
       ],
       "two": [
@@ -286,11 +286,11 @@
         },
         {
           "en": "Kindness mends what was once torn",
-          "jp": ""
+          "jp": "優しさは一度引き裂かれたものを修復する"
         },
         {
           "en": "Compassion heals broken ties",
-          "jp": ""
+          "jp": "慈愛が壊れた絆を癒す"
         }
       ],
       "three": [
@@ -300,11 +300,11 @@
         },
         {
           "en": "Souls unite as one.",
-          "jp": ""
+          "jp": "魂は一つに結ばれる"
         },
         {
           "en": "Harmony is found.",
-          "jp": ""
+          "jp": "ハーモニーを見つける"
         }
       ]
     },
@@ -316,11 +316,11 @@
         },
         {
           "en": "Cranes glide through the mist",
-          "jp": ""
+          "jp": "霧の中を滑空する鶴"
         },
         {
           "en": "Sparrows greet the breeze",
-          "jp": ""
+          "jp": "スズメがそよ風に挨拶"
         }
       ],
       "two": [
@@ -330,11 +330,11 @@
         },
         {
           "en": "Gentle whispers calm the air",
-          "jp": ""
+          "jp": "優しいささやきが空気を静める"
         },
         {
           "en": "Soft voices carry their hope",
-          "jp": ""
+          "jp": "優しい声が希望を運ぶ"
         }
       ],
       "three": [
@@ -344,11 +344,11 @@
         },
         {
           "en": "Harmony is born.",
-          "jp": ""
+          "jp": "ハーモニーが生まれる。"
         },
         {
           "en": "Unity will bloom.",
-          "jp": ""
+          "jp": "団結が花開きます。"
         }
       ]
     },
@@ -360,11 +360,11 @@
         },
         {
           "en": "Golden rays embrace",
-          "jp": ""
+          "jp": "黄金の光線が抱擁する"
         },
         {
           "en": "Morning light unfolds",
-          "jp": ""
+          "jp": "朝の光が広がる"
         }
       ],
       "two": [
@@ -374,7 +374,7 @@
         },
         {
           "en": "Laughter echoes through the fields",
-          "jp": ""
+          "jp": "笑い声が野原にこだまする"
         },
         {
           "en": "Youthful feet skip through the grass",
