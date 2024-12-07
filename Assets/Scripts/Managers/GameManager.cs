@@ -246,8 +246,12 @@ namespace Managers
             yield return new WaitUntil(() => _haikuLineSelected);
             _haikuLineSelected = false; // Set up for next method call
             
+            // Disable controls until next line is revealed, unless its the final stage
+            if (stage < 2) _haikuControls.Disable();
+            
             // Tells the Player's sprite to do the GetSet animation
-            if (stage == 2) StandoffStageX();
+            // Broadcast to all observers that this stage is finishing
+            StandoffStageX(stage);
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -297,7 +301,7 @@ namespace Managers
 
         private void OnHaikuSelect(InputAction.CallbackContext obj)
         {
-            _haikuControls.Disable();
+            print("Ran select");
             _haikuLineSelected = true;
         }
 

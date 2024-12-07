@@ -42,7 +42,7 @@ public partial class @HaikuControls: IInputActionCollection2, IDisposable
                     ""id"": ""a8152ac0-0d21-4526-aba0-b74b80b8a5ee"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(pressPoint=1.401298E-45,behavior=2)"",
                     ""initialStateCheck"": false
                 }
             ],

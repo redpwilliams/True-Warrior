@@ -12,11 +12,11 @@ namespace Managers
      */
     public partial class GameManager
     {
-            public static event Action OnStandoffStageX;
+            public static event Action<int> OnStandoffStageX;
 
-            private void StandoffStageX()
+            private static void StandoffStageX(int stage)
             {
-                OnStandoffStageX?.Invoke();
+                OnStandoffStageX?.Invoke(stage);
             }
     }
 }

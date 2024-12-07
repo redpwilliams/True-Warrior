@@ -171,9 +171,16 @@ namespace Characters
             StartCoroutine(AnimateIdleToSet());
             EventManager.Events.OnStageX -= GetSetCPU;
         }
+        
+        /*
+         * Right now, GetSetCPU uses EventManager's OnStage event,
+         * and GetSetPlayer uses that of GameManager.
+         * Most likely need to create a Started and Finished event method
+         */
 
-        private void GetSetPlayer()
+        private void GetSetPlayer(int stage)
         {
+            if (stage != 2) return;
             StartCoroutine(AnimateIdleToSet());
             GameManager.OnStandoffStageX -= GetSetPlayer;
         }
