@@ -6,9 +6,9 @@ using UI;
 using UI.Buttons.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
+using PlayerNumber = Characters.PlayerNumber;
 
 namespace Managers
 {
@@ -43,9 +43,6 @@ namespace Managers
         /// List of all haikus defined in "haiku.json"
         private List<Haiku> _haikus;
 
-        // Controls for selecting haiku
-        private HaikuControls _haikuControls;
-
         private void Awake()
         {
             if (Manager != null && Manager != this)
@@ -60,19 +57,8 @@ namespace Managers
             _haikus = JsonReader.LoadHaikus();
 
             _gameModeStartupBuffer = 2.5f;
-            
-            // Subscribe to haiku selection controls
-            _haikuControls = new HaikuControls();
-            _haikuControls.Player.Scroll.performed += OnHaikuScroll;
-            _haikuControls.Player.Select.performed += OnHaikuSelect;
 
             DontDestroyOnLoad(gameObject);
-        }
-
-        private void OnDisable()
-        {
-            _haikuControls.Player.Scroll.performed -= OnHaikuScroll;
-            _haikuControls.Player.Select.performed -= OnHaikuSelect;
         }
 
         /// Starts the passed GameMode. The then GameManager handles everything
@@ -116,7 +102,6 @@ namespace Managers
 
         [Header("Standoff Parameters")]
         [SerializeField] private float _timeBeforeStage = 2.5f;
-        [SerializeField] private float _timeUntilBattleStart = 5f;
         [SerializeField] private float _fadeInDuration = 1f;
         [SerializeField] private float _fadeOutDuration = 0.5f;
         [SerializeField] private float _cycleDuration = 0.25f;
@@ -125,17 +110,17 @@ namespace Managers
         private bool _haikuLineSelected;
         private List<LinePair> _haikuLineOptions;
         private int _currentLineChoice;
-        private bool _haikuPoemFinished;
+        private bool _haikuLastLine; // TODO - Remember to reset
 
         private void SpawnCharacters()
         {
             // Player character
             var prefab = SelectSamuraiPrefab(SaveManager.LoadPlayerCharacter());
             Character p1 = 
-                InstantiateCharacter(prefab, Character.PlayerNumber.One);
+                InstantiateCharacter(prefab, PlayerNumber.One);
 
             // Opponent
-            Character px = InstantiateCharacter(_roninPrefab, Character.PlayerNumber.CPU);
+            Character px = InstantiateCharacter(_roninPrefab, PlayerNumber.CPU);
 
             if (p1 is null || px is null) return;
             
@@ -166,7 +151,7 @@ namespace Managers
         // ReSharper disable Unity.PerformanceAnalysis
         /// Instantiates a Character in the scene from the GameManager's prefab list.
         private static Character InstantiateCharacter(GameObject prefab, 
-            Character.PlayerNumber playerNumber)
+            PlayerNumber playerNumber)
         {
             // Create instance
             Character instance = Instantiate(prefab).GetComponent<Character>();
@@ -174,7 +159,7 @@ namespace Managers
             
             // Positioning, directions, and controls
             instance.SetPosition();
-            instance.EndPosition = (playerNumber == Character.PlayerNumber.One
+            instance.EndPosition = (playerNumber == PlayerNumber.One
                 ? InitParams.Standoff_P1_EndPositionX
                 : InitParams.Standoff_PX_EndPositionX);
             instance.SetDirection();
@@ -203,8 +188,6 @@ namespace Managers
             Haiku haiku = _haikus[Random.Range(0, haikus.Count)];
 
             int stage = 0;
-
-            WaitForSeconds awaitBattle = new WaitForSeconds(_timeUntilBattleStart);
             
             // Line 1
             yield return ExecuteStage(haiku.one, stage++);
@@ -229,6 +212,8 @@ namespace Managers
             _haikuLineOptions = lineOptions;
             _currentLineChoice = 0;
 
+            if (stage == 2) _haikuLastLine = true;
+
             // Initial start up buffer for stage
             yield return new WaitForSeconds(_timeBeforeStage);
             
@@ -236,22 +221,18 @@ namespace Managers
             HaikuText.Instance.SetTexts(lineOptions[_currentLineChoice]);
             
             // Broadcast to all observers that this stage is starting
-            EventManager.Events.StageX(stage);
+            // EventManager.Events.StageX(stage);
+            Standoff_StageStarted(stage);
             
             // Fade in first Haiku Text
             yield return HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In);
             
             // Await until user selects haiku
-            _haikuControls.Enable();
-            yield return new WaitUntil(() => _haikuLineSelected);
             _haikuLineSelected = false; // Set up for next method call
+            yield return new WaitUntil(() => _haikuLineSelected);
             
-            // Disable controls until next line is revealed, unless its the final stage
-            if (stage < 2) _haikuControls.Disable();
-            
-            // Tells the Player's sprite to do the GetSet animation
             // Broadcast to all observers that this stage is finishing
-            StandoffStageX(stage);
+            Standoff_StageFinished(stage);
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -275,9 +256,8 @@ namespace Managers
         
         /// Fires when the Player scrolls left or right while the
         /// HaikuControls action map is enabled
-        private void OnHaikuScroll(InputAction.CallbackContext obj)
+        public void OnHaikuScroll(InputAction.CallbackContext obj)
         {
-            
             // +1 for right, -1 for left
             _currentLineChoice = (int)obj.action.ReadValue<Vector2>().x == 1
                 // Next line
@@ -286,23 +266,33 @@ namespace Managers
                 : Math.Abs(_currentLineChoice - 1 + _haikuLineOptions.Count) 
                   % _haikuLineOptions.Count;
 
-            
             StartCoroutine(CycleHaikuLine());
 
             IEnumerator CycleHaikuLine()
-            { 
-                _haikuControls.Disable();
+            {
+                PlayerInputFlags haikuBuilderControls =
+                    PlayerInputFlags.Scroll | PlayerInputFlags.Select;
+                
+                // _haikuControls.Disable();
+                DisablePlayerControls(PlayerNumber.One, haikuBuilderControls);
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.Out);
                 HaikuText.Instance.SetTexts(_haikuLineOptions[_currentLineChoice]);
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.In);
-                _haikuControls.Enable();
+                EnablePlayerControls(PlayerNumber.One, haikuBuilderControls);
+                // _haikuControls.Enable();
+                
             }
         }
 
-        private void OnHaikuSelect(InputAction.CallbackContext obj)
+        public void OnHaikuSelect(InputAction.CallbackContext obj)
         {
-            print("Ran select");
             _haikuLineSelected = true;
+            
+            // Haiku is at the last line, Player should be holding 
+            if (_haikuLastLine && obj.action.WasReleasedThisFrame())
+            {
+                
+            }
         }
 
 

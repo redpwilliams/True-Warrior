@@ -12,18 +12,17 @@ namespace Characters
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Light2D))]
-    public abstract class Character : MonoBehaviour
+    public abstract class Character : MonoBehaviour, IControllable
     {
         // Components
         protected Rigidbody2D Rb2d;
         protected Animator Anim;
         private Transform _transform;
         private Controls _controls;
+        private PlayerInputFlags _playerInputFlags;
 
         public float EndPosition { get; set; }
     
-        public enum PlayerNumber { One, Two, CPU }
-        
         [Header("Player Designation")]
         [SerializeField] private PlayerNumber _playerNumber;
         
@@ -54,7 +53,12 @@ namespace Characters
             Anim = GetComponent<Animator>();
 
             _transform = transform;
+            
+            // Create and enable all controls by default
             _controls = new Controls();
+            _controls.Player1.Enable(); // Enable the entire control map
+            _playerInputFlags = PlayerInputFlags.None; // Ensure specific controls are disabled
+            // Individual controls initially disabled in Start()
 
             _characterText = GetComponentInChildren<CharacterText>();
         }
@@ -68,24 +72,48 @@ namespace Characters
 
         protected virtual void Start()
         {
-            EventManager.Events.OnStageX += RunToSet;
-            EventManager.Events.OnStageX += AllowControls;
+            // TODO - Use GameManager's Event system
+            // EventManager.Events.OnStageX += RunToSet;
+            // EventManager.Events.OnStageX += AllowControls;
+            GameManager.Standoff_OnStageStarted += RunToSet;
+            GameManager.Standoff_OnStageStarted += AllowControls;
             
-            // CPU can get set right away
-            // Player 1 will wait for final haiku selection
-            if (_playerNumber == PlayerNumber.CPU)
-                EventManager.Events.OnStageX += GetSetCPU;
-            else
-                GameManager.OnStandoffStageX += GetSetPlayer;
+            if (_playerNumber == PlayerNumber.CPU) 
+                // CPU can get set right away
+                GameManager.Standoff_OnStageStarted += GetSetCPU;
+            else 
+                // Player 1 will wait for after haiku selection
+                GameManager.Standoff_OnStageFinished += GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode += DestroySelf;
+            
+            // TODO - Subscribe to GameManager's events
+            GameManager.OnEnablePlayerControls += (number, flags) =>
+            {
+                // Disregard if this event wasn't meant for this Player
+                if (number != _playerNumber) return;
+                EnableInput(flags);
+            };
+
+            GameManager.OnDisablePlayerControls += (number, flags) =>
+            {
+                // Disregard if this event wasn't meant for this Player
+                if (number != _playerNumber) return;
+                DisableInput(flags);
+            };
+            
+            // Start with all individual controls disabled
+            DisableInput((PlayerInputFlags) 0b111);
+            // _controls.Player1.Attack.Disable();
+            // _controls.Player1.Scroll.Disable();
+            // _controls.Player1.Select.Disable();
         }
 
         private void OnDestroy()
         {
             EventManager.Events.OnStageX -= RunToSet;
             EventManager.Events.OnStageX -= AllowControls;
-            EventManager.Events.OnStageX -= GetSetCPU;
-            GameManager.OnStandoffStageX -= GetSetPlayer;
+            GameManager.Standoff_OnStageStarted -= GetSetCPU;
+            GameManager.Standoff_OnStageFinished -= GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode -= DestroySelf;
         }
 
@@ -156,6 +184,9 @@ namespace Characters
                     ? "You/君"
                     : CharacterTitle();
                 _characterText.DisplayTitle(title);
+                
+                // Turn on controls
+                EnableInput(PlayerInputFlags.Scroll, PlayerInputFlags.Select);
             }
         }
         
@@ -169,7 +200,7 @@ namespace Characters
         {
             if (stage != 2) return;
             StartCoroutine(AnimateIdleToSet());
-            EventManager.Events.OnStageX -= GetSetCPU;
+            GameManager.Standoff_OnStageStarted -= GetSetCPU;
         }
         
         /*
@@ -182,7 +213,7 @@ namespace Characters
         {
             if (stage != 2) return;
             StartCoroutine(AnimateIdleToSet());
-            GameManager.OnStandoffStageX -= GetSetPlayer;
+            GameManager.Standoff_OnStageFinished -= GetSetPlayer;
         }
 
         private IEnumerator AnimateIdleToSet()
@@ -227,12 +258,83 @@ namespace Characters
 
         #region Input
 
+        /// Does nothing if input is PlayerInputFlags.None.
+        public void EnableInput(PlayerInputFlags input)
+        {
+            if (input == PlayerInputFlags.None) return;
+            
+            if (input.HasFlag(PlayerInputFlags.Scroll))
+            {
+                _controls.Player1.Scroll.Enable();
+            }
+            
+            if (input.HasFlag(PlayerInputFlags.Select))
+            {
+                _controls.Player1.Select.Enable();
+            }
+            
+            if (input.HasFlag(PlayerInputFlags.Attack))
+            {
+                _controls.Player1.Attack.Enable();
+            }
+
+            _playerInputFlags |= input;
+        }
+
+        /// Accepts an optional number of parameters to disable Player controls.
+        /// Does nothing if input is PlayerInputFlags.None.
+        public void EnableInput(params PlayerInputFlags[] inputs)
+        {
+            if (inputs.Length == 0) return;
+
+            foreach (var input in inputs)
+                EnableInput(input);
+        }
+
+        /// Does nothing if input is PlayerInputFlags.None.
+        public void DisableInput(PlayerInputFlags input)
+        {
+            if (input == PlayerInputFlags.None)
+                return;
+            
+            if (input.HasFlag(PlayerInputFlags.Scroll))
+            {
+                _controls.Player1.Scroll.Disable();
+                _playerInputFlags &= ~PlayerInputFlags.Scroll;
+            }
+
+            if (input.HasFlag(PlayerInputFlags.Select))
+            {
+                _controls.Player1.Select.Disable();
+                _playerInputFlags &= ~PlayerInputFlags.Select;
+            }
+            
+            // ReSharper disable once InvertIf
+            if (input.HasFlag(PlayerInputFlags.Attack))
+            {
+                _controls.Player1.Attack.Disable();
+                _playerInputFlags &= ~PlayerInputFlags.Attack;
+            }
+        }
+
+        /// Accepts an optional number of parameters to enable Player controls.
+        /// Any input of PlayerInputFlags.None does nothing.
+        public void DisableInput(params PlayerInputFlags[] inputs)
+        {
+            if (inputs.Length == 0) return;
+
+            foreach (var input in inputs)
+                DisableInput(input);
+        }
+
         /// Subscribes this Character to the Attack.performed event.
         /// Only applies if this Character is not a CPU.
         public void RegisterControls()
         {
             if (_playerNumber == PlayerNumber.CPU) return;
             _controls.Player1.Attack.performed += OnControllerInput;
+            _controls.Player1.Scroll.performed += GameManager.Manager.OnHaikuScroll;
+            _controls.Player1.Select.performed += GameManager.Manager.OnHaikuSelect;
         }
 
         // Disabling logic happens in EventManager, after a winner is determined
@@ -245,7 +347,8 @@ namespace Characters
             Rb2d.bodyType = RigidbodyType2D.Dynamic;
             if (_playerNumber != PlayerNumber.CPU)
             {
-                _controls.Player1.Enable();
+                // REVIEW - Only allows attack controls
+                _controls.Player1.Attack.Enable();
                 return;
             }
         
