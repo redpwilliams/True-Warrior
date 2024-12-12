@@ -51,7 +51,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""id"": ""b0b0f299-3066-4ce7-8cb9-93ad53d98a50"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=1.401298E-45,behavior=2)"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -60,7 +60,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""e85cee55-f26a-4e9f-8f28-c771b5f155ba"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",

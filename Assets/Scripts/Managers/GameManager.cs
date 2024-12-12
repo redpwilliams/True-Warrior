@@ -282,22 +282,27 @@ namespace Managers
             }
         }
 
+        /// Called when the Submit action is performed on both button-up and button-down.
+        /// Awaits the button-up for when the Player needs to release the button in order to
+        /// attack.
         public void OnHaikuSelect(InputAction.CallbackContext obj)
         {
             _haikuLineSelected = true;
+
+            if (!_haikuLastLine) return;
             
-            // Haiku is at the last line, Player should be holding 
-            if (_haikuLastLine)
+            // Player should be holding at this point
+            if (obj.action.WasPressedThisFrame())
             {
                 StartCoroutine(StandoffHold());
             }
+            
+            IEnumerator StandoffHold()
+            {
+                if (!obj.action.WasReleasedThisFrame()) yield return null;
+                
+            }
         }
-
-        private IEnumerator StandoffHold()
-        {
-            yield break;
-        }
-
 
         #endregion
     }

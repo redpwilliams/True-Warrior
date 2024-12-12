@@ -76,7 +76,7 @@ namespace Characters
             // EventManager.Events.OnStageX += RunToSet;
             // EventManager.Events.OnStageX += EnableBattleControls;
             GameManager.Standoff_OnStageStarted += RunToSet;
-            GameManager.Standoff_OnStageStarted += EnableBattleControls;
+            // GameManager.Standoff_OnStageStarted += EnableBattleControls;
             
             if (_playerNumber == PlayerNumber.CPU) 
                 // CPU can get set right away
@@ -203,16 +203,14 @@ namespace Characters
             GameManager.Standoff_OnStageStarted -= GetSetCPU;
         }
         
-        /*
-         * Right now, GetSetCPU uses EventManager's OnStage event,
-         * and GetSetPlayer uses that of GameManager.
-         * Most likely need to create a Started and Finished event method
-         */
-
         private void GetSetPlayer(int stage)
         {
             if (stage != 2) return;
             StartCoroutine(AnimateIdleToSet());
+            
+            // Player must hold down attack trigger now
+            EnableBattleControls(stage);
+            
             GameManager.Standoff_OnStageFinished -= GetSetPlayer;
         }
 
@@ -337,11 +335,13 @@ namespace Characters
             _controls.Player1.Select.performed += GameManager.Manager.OnHaikuSelect;
         }
 
-        // Disabling logic happens in EventManager, after a winner is determined
+        /// Enables controls strictly relating to attacking. Not only does this
+        /// enable the Attack control, but it also alters the RigidBody2D to
+        /// enable physics as a result of such attacks.
         private void EnableBattleControls(int stage)
         {
             // Disregard if battle start hasn't been called
-            if (stage != 3) return; 
+            if (stage != 2) return; 
         
             // Enable controls
             Rb2d.bodyType = RigidbodyType2D.Dynamic;
