@@ -212,8 +212,6 @@ namespace Managers
             _haikuLineOptions = lineOptions;
             _currentLineChoice = 0;
 
-            if (stage == 2) _haikuLastLine = true;
-
             // Initial start up buffer for stage
             yield return new WaitForSeconds(_timeBeforeStage);
             
@@ -221,14 +219,16 @@ namespace Managers
             HaikuText.Instance.SetTexts(lineOptions[_currentLineChoice]);
             
             // Broadcast to all observers that this stage is starting
-            // EventManager.Events.StageX(stage);
             Standoff_StageStarted(stage);
             
             // Fade in first Haiku Text
             yield return HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In);
             
+            // Necessary to listen to key-up to attack in battle
+            if (stage == 2) _haikuLastLine = true;
+
             // Await until user selects haiku
-            _haikuLineSelected = false; // Set up for next method call
+            _haikuLineSelected = false;
             yield return new WaitUntil(() => _haikuLineSelected);
             
             // Broadcast to all observers that this stage is finishing
@@ -273,13 +273,11 @@ namespace Managers
                 PlayerInputFlags haikuBuilderControls =
                     PlayerInputFlags.Scroll | PlayerInputFlags.Select;
                 
-                // _haikuControls.Disable();
                 DisablePlayerControls(PlayerNumber.One, haikuBuilderControls);
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.Out);
                 HaikuText.Instance.SetTexts(_haikuLineOptions[_currentLineChoice]);
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.In);
                 EnablePlayerControls(PlayerNumber.One, haikuBuilderControls);
-                // _haikuControls.Enable();
                 
             }
         }
@@ -289,10 +287,15 @@ namespace Managers
             _haikuLineSelected = true;
             
             // Haiku is at the last line, Player should be holding 
-            if (_haikuLastLine && obj.action.WasReleasedThisFrame())
+            if (_haikuLastLine)
             {
-                
+                StartCoroutine(StandoffHold());
             }
+        }
+
+        private IEnumerator StandoffHold()
+        {
+            yield break;
         }
 
 
