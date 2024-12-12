@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Characters;
+using ScriptableObjects;
 using UI;
 using UI.Buttons.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
 using PlayerNumber = Characters.PlayerNumber;
@@ -111,6 +113,13 @@ namespace Managers
         private List<LinePair> _haikuLineOptions;
         private int _currentLineChoice;
         private bool _haikuLastLine; // TODO - Remember to reset
+
+        [Header("Events")] 
+        [SerializeField] private GameEvent _onStandoffLineChanged;
+        [SerializeField] private GameEvent _onPlayerInputSet;
+        
+        [Header("Haiku Line Object")]
+        [SerializeField] private HaikuLine _haikuLine;
 
         private void SpawnCharacters()
         {
@@ -219,7 +228,8 @@ namespace Managers
             HaikuText.Instance.SetTexts(lineOptions[_currentLineChoice]);
             
             // Broadcast to all observers that this stage is starting
-            Standoff_StageStarted(stage);
+            _onStandoffLineChanged.TriggerEvent();
+            _haikuLine.value++;
             
             // Fade in first Haiku Text
             yield return HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In);
@@ -232,7 +242,6 @@ namespace Managers
             yield return new WaitUntil(() => _haikuLineSelected);
             
             // Broadcast to all observers that this stage is finishing
-            Standoff_StageFinished(stage);
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -290,18 +299,8 @@ namespace Managers
             _haikuLineSelected = true;
 
             if (!_haikuLastLine) return;
-            
-            // Player should be holding at this point
-            if (obj.action.WasPressedThisFrame())
-            {
-                StartCoroutine(StandoffHold());
-            }
-            
-            IEnumerator StandoffHold()
-            {
-                if (!obj.action.WasReleasedThisFrame()) yield return null;
-                
-            }
+
+            _onPlayerInputSet.TriggerEvent();
         }
 
         #endregion

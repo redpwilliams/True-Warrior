@@ -9,12 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7418285710742370135}
+  - component: {fileID: 2231330016289482126}
+  - component: {fileID: -7475092712182046405}
+  - component: {fileID: -5964844939565340848}
   - component: {fileID: 1158855114092230511}
   - component: {fileID: 7191527578849181210}
   - component: {fileID: 3545434753923286169}
   - component: {fileID: 4695276628832195878}
   - component: {fileID: 3562901307042887079}
-  - component: {fileID: 2231330016289482126}
   - component: {fileID: 765906983546320919}
   m_Layer: 0
   m_Name: Ronin
@@ -39,6 +41,91 @@ Transform:
   - {fileID: 8709850243937120433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2231330016289482126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004007393714685262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84ac5345567c3c4bb5ae11f5a6639be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerNumber: 2
+  _risingGravityScale: 8
+  _fallingGravityScale: 20
+  _jumpUpwardForce: 400
+  _jumpForwardForce: 100
+--- !u!114 &-7475092712182046405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004007393714685262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e743270440cc45e69a9e605bc0f1b40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 726994dcb09a7024eb075d2f44624ec7, type: 2}
+  _onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2231330016289482126}
+        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_MethodName: RunToSet
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuLine, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2231330016289482126}
+        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_MethodName: GetSetCPU
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuLine, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-5964844939565340848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004007393714685262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e743270440cc45e69a9e605bc0f1b40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 28ab168af0a40df4b9d3062b9bdc3f43, type: 2}
+  _onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2231330016289482126}
+        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_MethodName: GetSetPlayer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuLine, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &1158855114092230511
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -240,23 +327,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &2231330016289482126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6004007393714685262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84ac5345567c3c4bb5ae11f5a6639be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerNumber: 2
-  _risingGravityScale: 8
-  _fallingGravityScale: 20
-  _jumpUpwardForce: 400
-  _jumpForwardForce: 100
 --- !u!114 &765906983546320919
 MonoBehaviour:
   m_ObjectHideFlags: 0

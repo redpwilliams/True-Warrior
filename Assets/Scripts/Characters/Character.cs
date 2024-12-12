@@ -1,11 +1,13 @@
 using System.Collections;
 using JetBrains.Annotations;
 using Managers;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using Util;
 using Random = UnityEngine.Random;
+using PlayerNumberSO = ScriptableObjects.PlayerNumber;
 
 namespace Characters
 {
@@ -72,18 +74,6 @@ namespace Characters
 
         protected virtual void Start()
         {
-            // TODO - Use GameManager's Event system
-            // EventManager.Events.OnStageX += RunToSet;
-            // EventManager.Events.OnStageX += EnableBattleControls;
-            GameManager.Standoff_OnStageStarted += RunToSet;
-            // GameManager.Standoff_OnStageStarted += EnableBattleControls;
-            
-            if (_playerNumber == PlayerNumber.CPU) 
-                // CPU can get set right away
-                GameManager.Standoff_OnStageStarted += GetSetCPU;
-            else 
-                // Player 1 will wait for after haiku selection
-                GameManager.Standoff_OnStageFinished += GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode += DestroySelf;
             
             // TODO - Subscribe to GameManager's events
@@ -103,17 +93,10 @@ namespace Characters
             
             // Start with all individual controls disabled
             DisableInput((PlayerInputFlags) 0b111);
-            // _controls.Player1.Attack.Disable();
-            // _controls.Player1.Scroll.Disable();
-            // _controls.Player1.Select.Disable();
         }
 
         private void OnDestroy()
         {
-            EventManager.Events.OnStageX -= RunToSet;
-            EventManager.Events.OnStageX -= EnableBattleControls;
-            GameManager.Standoff_OnStageStarted -= GetSetCPU;
-            GameManager.Standoff_OnStageFinished -= GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode -= DestroySelf;
         }
 
@@ -160,14 +143,11 @@ namespace Characters
             // Set character text direction
             _characterText.SetDirection();
         }
-        
-        private void RunToSet(int stage)
-        {
-            if (stage != (_playerNumber == PlayerNumber.One ? 0 : 1)) return;
-        
-            // Unsubscribe from triggering event
-            EventManager.Events.OnStageX -= RunToSet;
 
+        public void RunToSet(HaikuLine line)
+        {
+            if (line.value != (_playerNumber == PlayerNumber.One ? 0 : 1)) return;
+        
             StartCoroutine(Run());
 
             IEnumerator Run()
@@ -189,31 +169,33 @@ namespace Characters
                 EnableInput(PlayerInputFlags.Scroll, PlayerInputFlags.Select);
             }
         }
-        
         private int GetDirection() => (int) Mathf.Sign(_transform.localScale.x);
 
         #endregion
 
         #region Battle
 
-        private void GetSetCPU(int stage)
+        /// Puts the CPU in the "Set" position after the
+        /// third line choices of the Haiku is revealed. 
+        public void GetSetCPU(HaikuLine line)
         {
-            if (stage != 2) return;
+            if (_playerNumber != PlayerNumber.CPU) return;
+            if (line.value != 2) return;
             StartCoroutine(AnimateIdleToSet());
-            GameManager.Standoff_OnStageStarted -= GetSetCPU;
         }
-        
-        private void GetSetPlayer(int stage)
+
+        /// Puts the player in the "Set" position after
+        /// selecting the third line of the Haiku
+        public void GetSetPlayer(HaikuLine line)
         {
-            if (stage != 2) return;
+            if (_playerNumber == PlayerNumber.CPU) return;
+            if (line.value != 3) return;
             StartCoroutine(AnimateIdleToSet());
             
             // Player must hold down attack trigger now
-            EnableBattleControls(stage);
-            
-            GameManager.Standoff_OnStageFinished -= GetSetPlayer;
+            EnableBattleControls();
         }
-
+        
         private IEnumerator AnimateIdleToSet()
         {
             // If CPU, wait a bit before getting set
@@ -338,11 +320,8 @@ namespace Characters
         /// Enables controls strictly relating to attacking. Not only does this
         /// enable the Attack control, but it also alters the RigidBody2D to
         /// enable physics as a result of such attacks.
-        private void EnableBattleControls(int stage)
+        private void EnableBattleControls()
         {
-            // Disregard if battle start hasn't been called
-            if (stage != 2) return; 
-        
             // Enable controls
             Rb2d.bodyType = RigidbodyType2D.Dynamic;
             if (_playerNumber != PlayerNumber.CPU)

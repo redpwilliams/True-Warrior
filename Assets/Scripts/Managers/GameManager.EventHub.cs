@@ -16,20 +16,20 @@ namespace Managers
      */
     public partial class GameManager
     {
-        public static event Action<int> Standoff_OnStageStarted;
-        public static event Action<int> Standoff_OnStageFinished;
+        // public static event Action<int> Standoff_OnStageStarted;
+        // public static event Action<int> Standoff_OnStageFinished;
         public static event Action<PlayerNumber, PlayerInputFlags> OnEnablePlayerControls;
         public static event Action<PlayerNumber, PlayerInputFlags> OnDisablePlayerControls;
 
-        private static void Standoff_StageStarted(int stage)
-        {
-            Standoff_OnStageStarted?.Invoke(stage);
-        }
-
-        private static void Standoff_StageFinished(int stage)
-        {
-            Standoff_OnStageFinished?.Invoke(stage);
-        }
+        // private static void Standoff_StageStarted(int stage)
+        // {
+        //     Standoff_OnStageStarted?.Invoke(stage);
+        // }
+        //
+        // private static void Standoff_StageFinished(int stage)
+        // {
+        //     Standoff_OnStageFinished?.Invoke(stage);
+        // }
 
         private static void EnablePlayerControls(PlayerNumber playerNumber,
             PlayerInputFlags flags)

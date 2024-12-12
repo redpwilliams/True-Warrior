@@ -9,12 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2961181595520105372}
+  - component: {fileID: 8709580654110221182}
+  - component: {fileID: 1748359827498592247}
+  - component: {fileID: -7802258810432760842}
   - component: {fileID: 4291545116422370112}
   - component: {fileID: 5894597833886595649}
   - component: {fileID: 8094260319625022297}
   - component: {fileID: 2428398794388331347}
   - component: {fileID: 880353900348700457}
-  - component: {fileID: 8709580654110221182}
   - component: {fileID: 1690438229803157989}
   m_Layer: 0
   m_Name: Shogun
@@ -39,6 +41,89 @@ Transform:
   - {fileID: 3209725577736063041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8709580654110221182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881973619259800329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1923f672724b9b9152e38313c8170a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerNumber: 2
+  _dashDistance: 15
+  _dashDuration: 0.5
+--- !u!114 &1748359827498592247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881973619259800329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e743270440cc45e69a9e605bc0f1b40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 726994dcb09a7024eb075d2f44624ec7, type: 2}
+  _onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8709580654110221182}
+        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_MethodName: RunToSet
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuLine, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8709580654110221182}
+        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_MethodName: GetSetCPU
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuLine, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-7802258810432760842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881973619259800329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e743270440cc45e69a9e605bc0f1b40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 28ab168af0a40df4b9d3062b9bdc3f43, type: 2}
+  _onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8709580654110221182}
+        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_MethodName: GetSetPlayer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuLine, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &4291545116422370112
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -240,22 +325,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &8709580654110221182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881973619259800329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1923f672724b9b9152e38313c8170a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerNumber: 2
-  _test: {fileID: 7400000, guid: 97c0a0cb7aecb7a40a3b47b853aec0d2, type: 2}
-  _dashDistance: 15
-  _dashDuration: 0.5
 --- !u!114 &1690438229803157989
 MonoBehaviour:
   m_ObjectHideFlags: 0
