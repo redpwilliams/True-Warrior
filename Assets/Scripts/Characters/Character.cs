@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using Util;
 using Random = UnityEngine.Random;
-using PlayerNumberSO = ScriptableObjects.PlayerNumber;
 
 namespace Characters
 {

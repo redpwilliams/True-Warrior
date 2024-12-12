@@ -1,7 +1,9 @@
 using System.Collections;
 using Managers;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using GameMode = Managers.GameManager.GameMode;
 
 namespace UI.Buttons.Menu
@@ -16,6 +18,8 @@ namespace UI.Buttons.Menu
         /// The GameMode of this button
         /// TODO: Discard after creating Standoff, Survival, and Zen button
         [SerializeField] private GameMode _gameMode;
+
+        [SerializeField] private GameEvent _onSetupGameMode;
 
         
         /// Deselects this button, going to the main menu if inputted. 
@@ -56,7 +60,8 @@ namespace UI.Buttons.Menu
                 UICanvas.Canvas.SetGameCanvasActive();
                 
                 // Start Button's corresponding GameMode
-                GameManager.Manager.StartGameMode(_gameMode);
+                _onSetupGameMode.TriggerEvent();
+                // GameManager.Manager.StartGameMode(_gameMode);
             }
         }
         

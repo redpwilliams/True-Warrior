@@ -65,6 +65,7 @@ namespace Managers
 
         /// Starts the passed GameMode. The then GameManager handles everything
         /// like scene and prop management and Character spawning.
+        /// TODO - Remove. As of right now, this is still used by Reset game mode
         public void StartGameMode(GameMode gm)
         {
             _currentGameMode = gm;
@@ -72,6 +73,7 @@ namespace Managers
             switch (gm)
             {
                 case GameMode.Standoff:
+                    // SpawnSystem.SpawnCharacters();
                     SpawnCharacters();
                     StartCoroutine(HaikuCountdown(_haikus));
                     break;
@@ -179,6 +181,7 @@ namespace Managers
             return instance;
         }
 
+        public void StartStandoff() => StartCoroutine(HaikuCountdown(_haikus));
 
         private IEnumerator HaikuCountdown(IReadOnlyCollection<Haiku> haikus)
         {
