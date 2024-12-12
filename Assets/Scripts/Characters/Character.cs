@@ -74,9 +74,9 @@ namespace Characters
         {
             // TODO - Use GameManager's Event system
             // EventManager.Events.OnStageX += RunToSet;
-            // EventManager.Events.OnStageX += AllowControls;
+            // EventManager.Events.OnStageX += EnableBattleControls;
             GameManager.Standoff_OnStageStarted += RunToSet;
-            GameManager.Standoff_OnStageStarted += AllowControls;
+            GameManager.Standoff_OnStageStarted += EnableBattleControls;
             
             if (_playerNumber == PlayerNumber.CPU) 
                 // CPU can get set right away
@@ -111,7 +111,7 @@ namespace Characters
         private void OnDestroy()
         {
             EventManager.Events.OnStageX -= RunToSet;
-            EventManager.Events.OnStageX -= AllowControls;
+            EventManager.Events.OnStageX -= EnableBattleControls;
             GameManager.Standoff_OnStageStarted -= GetSetCPU;
             GameManager.Standoff_OnStageFinished -= GetSetPlayer;
             EventManager.Events.OnRestartCurrentGameMode -= DestroySelf;
@@ -338,7 +338,7 @@ namespace Characters
         }
 
         // Disabling logic happens in EventManager, after a winner is determined
-        private void AllowControls(int stage)
+        private void EnableBattleControls(int stage)
         {
             // Disregard if battle start hasn't been called
             if (stage != 3) return; 
@@ -348,7 +348,7 @@ namespace Characters
             if (_playerNumber != PlayerNumber.CPU)
             {
                 // REVIEW - Only allows attack controls
-                _controls.Player1.Attack.Enable();
+                EnableInput(PlayerInputFlags.Attack);
                 return;
             }
         
