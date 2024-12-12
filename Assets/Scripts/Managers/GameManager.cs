@@ -198,16 +198,15 @@ namespace Managers
             // Choose haiku
             Haiku haiku = _haikus[Random.Range(0, haikus.Count)];
 
-            int stage = 0;
             
             // Line 1
-            yield return ExecuteStage(haiku.one, stage++);
+            yield return ExecuteStage(haiku.one);
             
             // Line 2
-            yield return ExecuteStage(haiku.two, stage++);
+            yield return ExecuteStage(haiku.two);
             
             // Line 3
-            yield return ExecuteStage(haiku.three, stage); // TODO - Add ++ when battle start is included
+            yield return ExecuteStage(haiku.three); // TODO - Add ++ when battle start is included
             
             // // Battle Start
              //HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
@@ -218,7 +217,7 @@ namespace Managers
               //   HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
         }
 
-        private IEnumerator ExecuteStage(List<LinePair> lineOptions, int stage)
+        private IEnumerator ExecuteStage(List<LinePair> lineOptions)
         {
             _haikuLineOptions = lineOptions;
             _currentLineChoice = 0;
@@ -238,10 +237,10 @@ namespace Managers
             
             // While we have the HaikuStage reference, update it
             // ahead of time, after the CPU gets set, if it applies
-            if (stage == 2)
+            if (_haikuStage.state == StandoffState.Ready_CPU)
             {
                 _haikuLastLine = true;
-                _haikuStage.state++;
+                _haikuStage.state = StandoffState.Ready_Player;
             }
 
             // Await until user selects haiku
