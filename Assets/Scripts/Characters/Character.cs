@@ -144,9 +144,13 @@ namespace Characters
             _characterText.SetDirection();
         }
 
-        public void RunToSet(HaikuLine line)
+        public void RunToSet(HaikuStage haikuStage)
         {
-            if (line.value != (_playerNumber == PlayerNumber.One ? 0 : 1)) return;
+            // Bail out if its not this Character's turn to run to set
+            StandoffState expectedStage = _playerNumber == PlayerNumber.One
+                ? StandoffState.Line1
+                : StandoffState.Line2;
+            if (haikuStage.state != expectedStage) return;
         
             StartCoroutine(Run());
 
@@ -176,20 +180,20 @@ namespace Characters
         #region Battle
 
         /// Puts the CPU in the "Set" position after the
-        /// third line choices of the Haiku is revealed. 
-        public void GetSetCPU(HaikuLine line)
+        /// third hs choices of the Haiku is revealed. 
+        public void GetSetCPU(HaikuStage haikuStage)
         {
             if (_playerNumber != PlayerNumber.CPU) return;
-            if (line.value != 2) return;
+            if (haikuStage.state != StandoffState.Ready_CPU) return;
             StartCoroutine(AnimateIdleToSet());
         }
 
         /// Puts the player in the "Set" position after
-        /// selecting the third line of the Haiku
-        public void GetSetPlayer(HaikuLine line)
+        /// selecting the third hs of the Haiku
+        public void GetSetPlayer(HaikuStage hs)
         {
             if (_playerNumber == PlayerNumber.CPU) return;
-            if (line.value != 3) return;
+            if (hs.state != StandoffState.Ready_Player) return;
             StartCoroutine(AnimateIdleToSet());
             
             // Player must hold down attack trigger now

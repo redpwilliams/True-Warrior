@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
 namespace ScriptableObjects
 {
+    [Serializable]
     [CreateAssetMenu(menuName ="Game Event")]
     public class GameEvent : ScriptableObject
     {

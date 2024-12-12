@@ -118,8 +118,10 @@ namespace Managers
         [SerializeField] private GameEvent _onStandoffLineChanged;
         [SerializeField] private GameEvent _onPlayerInputSet;
         
+        [FormerlySerializedAs("_haikuState")]
+        [FormerlySerializedAs("_haikuLine")]
         [Header("Haiku Line Object")]
-        [SerializeField] private HaikuLine _haikuLine;
+        [SerializeField] private HaikuStage _haikuStage;
 
         private void SpawnCharacters()
         {
@@ -228,20 +230,23 @@ namespace Managers
             HaikuText.Instance.SetTexts(lineOptions[_currentLineChoice]);
             
             // Broadcast to all observers that this stage is starting
+            _haikuStage.state++; // Increase HaikuStage's StandoffState
             _onStandoffLineChanged.TriggerEvent();
-            _haikuLine.value++;
             
             // Fade in first Haiku Text
             yield return HaikuText.Instance.FadeText(_fadeInDuration, AnimationDirection.In);
             
-            // Necessary to listen to key-up to attack in battle
-            if (stage == 2) _haikuLastLine = true;
+            // While we have the HaikuStage reference, update it
+            // ahead of time, after the CPU gets set, if it applies
+            if (stage == 2)
+            {
+                _haikuLastLine = true;
+                _haikuStage.state++;
+            }
 
             // Await until user selects haiku
             _haikuLineSelected = false;
             yield return new WaitUntil(() => _haikuLineSelected);
-            
-            // Broadcast to all observers that this stage is finishing
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -269,9 +274,9 @@ namespace Managers
         {
             // +1 for right, -1 for left
             _currentLineChoice = (int)obj.action.ReadValue<Vector2>().x == 1
-                // Next line
+                // Next stage
                 ? (_currentLineChoice + 1) % _haikuLineOptions.Count
-                // Previous line
+                // Previous stage
                 : Math.Abs(_currentLineChoice - 1 + _haikuLineOptions.Count) 
                   % _haikuLineOptions.Count;
 
@@ -300,6 +305,7 @@ namespace Managers
 
             if (!_haikuLastLine) return;
 
+            
             _onPlayerInputSet.TriggerEvent();
         }
 
