@@ -73,24 +73,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8709580654110221182}
-        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_TargetAssemblyTypeName: Characters.Character, Scripts
         m_MethodName: RunToSet
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuStage, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuStage, Scripts
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8709580654110221182}
-        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_TargetAssemblyTypeName: Characters.Character, Scripts
         m_MethodName: GetSetCPU
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuStage, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuStage, Scripts
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -113,12 +113,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8709580654110221182}
-        m_TargetAssemblyTypeName: Characters.Character, Assembly-CSharp
+        m_TargetAssemblyTypeName: Characters.Character, Scripts
         m_MethodName: GetSetPlayer
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: c32831ee1dbf60145923674991359dab, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuStage, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ScriptableObjects.HaikuStage, Scripts
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
