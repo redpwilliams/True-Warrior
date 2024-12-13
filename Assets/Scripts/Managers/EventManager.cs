@@ -1,5 +1,4 @@
 using System;
-using Characters;
 using UnityEngine;
 using GameMode = Managers.GameManager.GameMode;
 
@@ -36,22 +35,6 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        #region Staging Logic
-
-        private double _battleStartTime;
-        public event Action<int> OnStageX;
-
-        public void StageX(int stage)
-        {
-            if (stage == 3) _battleStartTime = Time.realtimeSinceStartupAsDouble;
-            OnStageX?.Invoke(stage);
-        }
-
-        #endregion
-
-        #region Menu
-
-
         /// Fires when any MenuButton cancels out of its state
         public event Action<GameObject> OnMenuButtonCancel;
 
@@ -85,8 +68,6 @@ namespace Managers
             OnDeselectAllChosenTOs?.Invoke();
         }
         
-        #endregion
-
         #region Characters
 
         /// Fires when the selected GameMode should start

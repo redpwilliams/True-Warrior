@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
-using PlayerNumber = Characters.PlayerNumber;
 
 namespace Managers
 {
@@ -73,6 +72,12 @@ namespace Managers
         [Header("Events")] 
         [SerializeField] private GameEvent _onStandoffLineChanged;
         [SerializeField] private GameEvent _onPlayerInputSet;
+        [SerializeField] private GameEvent _onEnableScrollControls;
+        [SerializeField] private GameEvent _onDisableScrollControls;
+        [SerializeField] private GameEvent _onEnableSelectControls;
+        [SerializeField] private GameEvent _onDisableSelectControls;
+        [SerializeField] private GameEvent _onEnableAttackControls;
+        [SerializeField] private GameEvent _onDisableAttackControls;
         
         [FormerlySerializedAs("_haikuState")]
         [FormerlySerializedAs("_haikuLine")]
@@ -145,8 +150,14 @@ namespace Managers
             }
 
             // Await until user selects haiku
+            _onEnableScrollControls.TriggerEvent();
+            _onEnableSelectControls.TriggerEvent();
             _haikuLineSelected = false;
             yield return new WaitUntil(() => _haikuLineSelected);
+            
+            // Disable controls after selection
+            _onDisableScrollControls.TriggerEvent();
+            _onDisableSelectControls.TriggerEvent();
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -184,15 +195,18 @@ namespace Managers
 
             IEnumerator CycleHaikuLine()
             {
-                PlayerInputFlags haikuBuilderControls =
-                    PlayerInputFlags.Scroll | PlayerInputFlags.Select;
+                // Disable haiku builder controls
+                _onDisableScrollControls.TriggerEvent();
+                _onDisableSelectControls.TriggerEvent();
                 
-                DisablePlayerControls(PlayerNumber.One, haikuBuilderControls);
+                // Cycle text
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.Out);
                 HaikuText.Instance.SetTexts(_haikuLineOptions[_currentLineChoice]);
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.In);
-                EnablePlayerControls(PlayerNumber.One, haikuBuilderControls);
                 
+                // Enable haiku builder controls
+                _onEnableScrollControls.TriggerEvent();
+                _onEnableSelectControls.TriggerEvent();
             }
         }
 
@@ -202,9 +216,7 @@ namespace Managers
         public void OnHaikuSelect(InputAction.CallbackContext obj)
         {
             _haikuLineSelected = true;
-
             if (!_haikuLastLine) return;
-
             
             _onPlayerInputSet.TriggerEvent();
         }

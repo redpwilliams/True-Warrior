@@ -2,20 +2,23 @@ namespace Util
 {
     public interface IControllable
     {
-        /// Enables controls for this entity.
-        /// This method applies this/these controls.
-        public void EnableInput(PlayerInputFlags input);
+        /// Enables the Scroll control for this entity.
+        public void EnableScrollInput();
+        
+        /// Disables the Scroll control for this entity.
+        public void DisableScrollInput();
 
-        /// Enables controls for this entity.
-        /// This method applies this/these controls.
-        public void EnableInput(params PlayerInputFlags[] inputs);
+        /// Enables the Select control for this entity.
+        public void EnableSelectInput();
         
-        /// Disables controls for this entity.
-        /// This method applies this/these controls.
-        public void DisableInput(PlayerInputFlags input);
+        /// Disables the Select control for this entity.
+        public void DisableSelectInput();
+
+        /// Enables the Attack control for this entity.
+        public void EnableAttackInput();
         
-        /// Disables controls for this entity.
-        /// This method applies this/these controls.
-        public void DisableInput(params PlayerInputFlags[] inputs);
+        /// Disables the Attack control for this entity.
+        public void DisableAttackInput();
+
     }
 }

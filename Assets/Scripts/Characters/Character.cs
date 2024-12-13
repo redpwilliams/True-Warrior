@@ -19,8 +19,7 @@ namespace Characters
         protected Rigidbody2D Rb2d;
         protected Animator Anim;
         private Transform _transform;
-        private Controls _controls;
-        private PlayerInputFlags _playerInputFlags;
+        private Controls.Player1Actions _controls;
 
         public float EndPosition { get; set; }
     
@@ -56,9 +55,8 @@ namespace Characters
             _transform = transform;
             
             // Create and enable all controls by default
-            _controls = new Controls();
-            _controls.Player1.Enable(); // Enable the entire control map
-            _playerInputFlags = PlayerInputFlags.None; // Ensure specific controls are disabled
+            _controls = new Controls().Player1;
+            _controls.Enable(); // Enable the entire control map
             // Individual controls initially disabled in Start()
 
             _characterText = GetComponentInChildren<CharacterText>();
@@ -68,30 +66,17 @@ namespace Characters
         {
             if (_playerNumber == PlayerNumber.CPU) return;
             _controls.Disable(); // maybe redundant but maybe necessary
-            _controls.Player1.Attack.performed -= OnControllerInput;
+            _controls.Attack.performed -= OnControllerInput;
         }
 
         protected virtual void Start()
         {
             EventManager.Events.OnRestartCurrentGameMode += DestroySelf;
             
-            // TODO - Subscribe to GameManager's events
-            GameManager.OnEnablePlayerControls += (number, flags) =>
-            {
-                // Disregard if this event wasn't meant for this Player
-                if (number != _playerNumber) return;
-                EnableInput(flags);
-            };
-
-            GameManager.OnDisablePlayerControls += (number, flags) =>
-            {
-                // Disregard if this event wasn't meant for this Player
-                if (number != _playerNumber) return;
-                DisableInput(flags);
-            };
-            
             // Start with all individual controls disabled
-            DisableInput((PlayerInputFlags) 0b111);
+            DisableScrollInput();
+            DisableSelectInput();
+            DisableAttackInput();
         }
 
         private void OnDestroy()
@@ -167,9 +152,6 @@ namespace Characters
                     ? "You/君"
                     : CharacterTitle();
                 _characterText.DisplayTitle(title);
-                
-                // Turn on controls
-                EnableInput(PlayerInputFlags.Scroll, PlayerInputFlags.Select);
             }
         }
         private int GetDirection() => (int) Mathf.Sign(_transform.localScale.x);
@@ -196,7 +178,8 @@ namespace Characters
             StartCoroutine(AnimateIdleToSet());
             
             // Player must hold down attack trigger now
-            EnableBattleControls();
+            Rb2d.bodyType = RigidbodyType2D.Dynamic;
+            EnableAttackInput();
         }
         
         private IEnumerator AnimateIdleToSet()
@@ -241,108 +224,29 @@ namespace Characters
 
         #region Input
 
-        /// Does nothing if input is PlayerInputFlags.None.
-        public void EnableInput(PlayerInputFlags input)
-        {
-            if (input == PlayerInputFlags.None) return;
-            
-            if (input.HasFlag(PlayerInputFlags.Scroll))
-            {
-                _controls.Player1.Scroll.Enable();
-            }
-            
-            if (input.HasFlag(PlayerInputFlags.Select))
-            {
-                _controls.Player1.Select.Enable();
-            }
-            
-            if (input.HasFlag(PlayerInputFlags.Attack))
-            {
-                _controls.Player1.Attack.Enable();
-            }
-
-            _playerInputFlags |= input;
-        }
-
-        /// Accepts an optional number of parameters to disable Player controls.
-        /// Does nothing if input is PlayerInputFlags.None.
-        public void EnableInput(params PlayerInputFlags[] inputs)
-        {
-            if (inputs.Length == 0) return;
-
-            foreach (var input in inputs)
-                EnableInput(input);
-        }
-
-        /// Does nothing if input is PlayerInputFlags.None.
-        public void DisableInput(PlayerInputFlags input)
-        {
-            if (input == PlayerInputFlags.None)
-                return;
-            
-            if (input.HasFlag(PlayerInputFlags.Scroll))
-            {
-                _controls.Player1.Scroll.Disable();
-                _playerInputFlags &= ~PlayerInputFlags.Scroll;
-            }
-
-            if (input.HasFlag(PlayerInputFlags.Select))
-            {
-                _controls.Player1.Select.Disable();
-                _playerInputFlags &= ~PlayerInputFlags.Select;
-            }
-            
-            // ReSharper disable once InvertIf
-            if (input.HasFlag(PlayerInputFlags.Attack))
-            {
-                _controls.Player1.Attack.Disable();
-                _playerInputFlags &= ~PlayerInputFlags.Attack;
-            }
-        }
-
-        /// Accepts an optional number of parameters to enable Player controls.
-        /// Any input of PlayerInputFlags.None does nothing.
-        public void DisableInput(params PlayerInputFlags[] inputs)
-        {
-            if (inputs.Length == 0) return;
-
-            foreach (var input in inputs)
-                DisableInput(input);
-        }
-
+        public void EnableScrollInput() => _controls.Scroll.Enable();
+        public void DisableScrollInput() => _controls.Scroll.Disable();
+        public void EnableSelectInput() => _controls.Select.Enable();
+        public void DisableSelectInput() => _controls.Select.Disable();
+        public void EnableAttackInput() => _controls.Attack.Enable();
+        public void DisableAttackInput() => _controls.Attack.Disable();
+        
         /// Subscribes this Character to the Attack.performed event.
         /// Only applies if this Character is not a CPU.
         public void RegisterControls()
         {
             if (_playerNumber == PlayerNumber.CPU) return;
-            _controls.Player1.Attack.performed += OnControllerInput;
-            _controls.Player1.Scroll.performed += GameManager.Manager.OnHaikuScroll;
-            _controls.Player1.Select.performed += GameManager.Manager.OnHaikuSelect;
+            _controls.Attack.performed += OnControllerInput;
+            _controls.Scroll.performed += GameManager.Manager.OnHaikuScroll;
+            _controls.Select.performed += GameManager.Manager.OnHaikuSelect;
         }
 
-        /// Enables controls strictly relating to attacking. Not only does this
-        /// enable the Attack control, but it also alters the RigidBody2D to
-        /// enable physics as a result of such attacks.
-        private void EnableBattleControls()
-        {
-            // Enable controls
-            Rb2d.bodyType = RigidbodyType2D.Dynamic;
-            if (_playerNumber != PlayerNumber.CPU)
-            {
-                // REVIEW - Only allows attack controls
-                EnableInput(PlayerInputFlags.Attack);
-                return;
-            }
-        
-            StartCoroutine(DelayCPUAttack());
-        }
-    
-        /// Fires from an input defined in the Controls InputAction map
+        /// Fires from an input defined in the _controls InputAction map
         /// when a Character - a player or CPU - attacks.
         private void OnControllerInput(InputAction.CallbackContext context)
         {
             _battleData = GameManager.Manager.AttackInput(Time.time); 
-            _controls.Player1.Disable();
+            _controls.Disable();
             
             _characterText.ShowReactionTime(_battleData.ReactionTime);
             DetermineReactionAnimation(_battleData.IsWinner);
