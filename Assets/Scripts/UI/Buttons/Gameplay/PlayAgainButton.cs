@@ -7,7 +7,7 @@ namespace UI.Buttons.Gameplay
     {
         public override void OnSubmit(BaseEventData eventData)
         {
-            GameManager.Manager.ResetGameMode();
+            // GameManager.Manager.ResetGameMode();
         }
     }
 }

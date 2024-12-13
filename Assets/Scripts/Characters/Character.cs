@@ -234,7 +234,7 @@ namespace Characters
         {
             yield return new WaitForSeconds(time);
             Anim.SetTrigger(Return);
-            GameManager.Manager.FinishGameMode();
+            // GameManager.Manager.FinishGameMode();
         }
 
         #endregion

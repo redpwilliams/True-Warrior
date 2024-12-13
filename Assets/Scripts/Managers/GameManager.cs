@@ -30,13 +30,6 @@ namespace Managers
         private GameMode _currentGameMode;
         private float _gameModeStartupBuffer;
 
-        /// Character Prefabs
-        [Header("Character Prefabs")] 
-        
-        [SerializeField] private GameObject _roninPrefab;
-        [SerializeField] private GameObject _shogunPrefab;
-        [SerializeField] private GameObject _shinobiPrefab;
-        
         /// Exposed Buttons
         [Header("Button Sets")]
         
@@ -63,45 +56,6 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        /// Starts the passed GameMode. The then GameManager handles everything
-        /// like scene and prop management and Character spawning.
-        /// TODO - Remove. As of right now, this is still used by Reset game mode
-        public void StartGameMode(GameMode gm)
-        {
-            _currentGameMode = gm;
-            
-            switch (gm)
-            {
-                case GameMode.Standoff:
-                    // SpawnSystem.SpawnCharacters();
-                    SpawnCharacters();
-                    StartCoroutine(HaikuCountdown(_haikus));
-                    break;
-                case GameMode.Survival:
-                    break;
-                case GameMode.Zen:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gm), gm, null);
-            }
-        }
-
-        /// Marks the end of the current Game Mode finishing and shows the
-        /// buttons for playing again or quitting.
-        public void FinishGameMode()
-        {
-            _finishedButtons.ShowButtons();
-        }
-
-        /// Resets the scene and plays the current Game Mode again.
-        public void ResetGameMode()
-        {
-            // Send Event to all characters to destroy themselves
-            EventManager.Events.RestartCurrentGameMode();
-            _finishedButtons.HideButtons();
-            StartGameMode(_currentGameMode);
-        }
-
         #region Standoff
 
         [Header("Standoff Parameters")]
@@ -124,62 +78,6 @@ namespace Managers
         [FormerlySerializedAs("_haikuLine")]
         [Header("Haiku Line Object")]
         [SerializeField] private HaikuStage _haikuStage;
-
-        private void SpawnCharacters()
-        {
-            // Player character
-            var prefab = SelectSamuraiPrefab(SaveManager.LoadPlayerCharacter());
-            Character p1 = 
-                InstantiateCharacter(prefab, PlayerNumber.One);
-
-            // Opponent
-            Character px = InstantiateCharacter(_roninPrefab, PlayerNumber.CPU);
-
-            if (p1 is null || px is null) return;
-            
-            // Set as opponents
-            p1.Opponent = px;
-            px.Opponent = p1;
-        }
-
-        /// Returns a GameObject prefab of the passed SamuraiType
-        private GameObject SelectSamuraiPrefab(SamuraiType type)
-        {
-            switch (type)
-            {
-                case SamuraiType.Ronin: return _roninPrefab;
-                case SamuraiType.Shogun: return _shogunPrefab;
-                case SamuraiType.Shinobi: return _shinobiPrefab;
-                case SamuraiType.Sensei:
-                    break;
-                case SamuraiType.Onna:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
-
-            return null;
-        }
-        
-        // ReSharper disable Unity.PerformanceAnalysis
-        /// Instantiates a Character in the scene from the GameManager's prefab list.
-        private static Character InstantiateCharacter(GameObject prefab, 
-            PlayerNumber playerNumber)
-        {
-            // Create instance
-            Character instance = Instantiate(prefab).GetComponent<Character>();
-            instance.Player = playerNumber;
-            
-            // Positioning, directions, and controls
-            instance.SetPosition();
-            instance.EndPosition = (playerNumber == PlayerNumber.One
-                ? InitParams.Standoff_P1_EndPositionX
-                : InitParams.Standoff_PX_EndPositionX);
-            instance.SetDirection();
-            instance.RegisterControls();
-
-            return instance;
-        }
 
         public void StartStandoff() => StartCoroutine(HaikuCountdown(_haikus));
 
