@@ -66,7 +66,7 @@ namespace Characters
         {
             if (_playerNumber == PlayerNumber.CPU) return;
             _controls.Disable(); // maybe redundant but maybe necessary
-            _controls.Attack.performed -= OnControllerInput;
+            _controls.Intent.performed -= OnControllerInput;
         }
 
         protected virtual void Start()
@@ -75,8 +75,7 @@ namespace Characters
             
             // Start with all individual controls disabled
             DisableScrollInput();
-            DisableSelectInput();
-            DisableAttackInput();
+            DisableIntentInput();
         }
 
         private void OnDestroy()
@@ -179,7 +178,6 @@ namespace Characters
             
             // Player must hold down attack trigger now
             Rb2d.bodyType = RigidbodyType2D.Dynamic;
-            EnableAttackInput();
         }
         
         private IEnumerator AnimateIdleToSet()
@@ -217,6 +215,8 @@ namespace Characters
         {
             yield return new WaitForSeconds(time);
             Anim.SetTrigger(Return);
+            Anim.ResetTrigger(Set);
+            Anim.ResetTrigger(SetWithDelay);
             // GameManager.Manager.FinishGameMode();
         }
 
@@ -226,25 +226,26 @@ namespace Characters
 
         public void EnableScrollInput() => _controls.Scroll.Enable();
         public void DisableScrollInput() => _controls.Scroll.Disable();
-        public void EnableSelectInput() => _controls.Select.Enable();
-        public void DisableSelectInput() => _controls.Select.Disable();
-        public void EnableAttackInput() => _controls.Attack.Enable();
-        public void DisableAttackInput() => _controls.Attack.Disable();
+        public void EnableIntentInput() => _controls.Intent.Enable();
+        public void DisableIntentInput() => _controls.Intent.Disable();
         
         /// Subscribes this Character to the Attack.performed event.
         /// Only applies if this Character is not a CPU.
         public void RegisterControls()
         {
             if (_playerNumber == PlayerNumber.CPU) return;
-            _controls.Attack.performed += OnControllerInput;
             _controls.Scroll.performed += GameManager.Manager.OnHaikuScroll;
-            _controls.Select.performed += GameManager.Manager.OnHaikuSelect;
+            _controls.Intent.performed += OnControllerInput;
+            _controls.Intent.performed += GameManager.Manager.OnHaikuSelect;
         }
 
         /// Fires from an input defined in the _controls InputAction map
         /// when a Character - a player or CPU - attacks.
         private void OnControllerInput(InputAction.CallbackContext context)
         {
+            // Ensure this is a button-up
+            if (context.action.WasPressedThisFrame()) return;
+            
             _battleData = GameManager.Manager.AttackInput(Time.time); 
             _controls.Disable();
             

@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace Managers
 {
-    public partial class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         /// Singleton Instance
         public static GameManager Manager { get; private set; }
@@ -50,7 +50,7 @@ namespace Managers
             // Load haiku data
             _haikus = JsonReader.LoadHaikus();
 
-            _gameModeStartupBuffer = 2.5f;
+            _gameModeStartupBuffer = 1f;
 
             DontDestroyOnLoad(gameObject);
         }
@@ -74,13 +74,9 @@ namespace Managers
         [SerializeField] private GameEvent _onPlayerInputSet;
         [SerializeField] private GameEvent _onEnableScrollControls;
         [SerializeField] private GameEvent _onDisableScrollControls;
-        [SerializeField] private GameEvent _onEnableSelectControls;
-        [SerializeField] private GameEvent _onDisableSelectControls;
-        [SerializeField] private GameEvent _onEnableAttackControls;
-        [SerializeField] private GameEvent _onDisableAttackControls;
+        [SerializeField] private GameEvent _onEnableIntentControls;
+        [SerializeField] private GameEvent _onDisableIntentControls;
         
-        [FormerlySerializedAs("_haikuState")]
-        [FormerlySerializedAs("_haikuLine")]
         [Header("Haiku Line Object")]
         [SerializeField] private HaikuStage _haikuStage;
 
@@ -151,13 +147,15 @@ namespace Managers
 
             // Await until user selects haiku
             _onEnableScrollControls.TriggerEvent();
-            _onEnableSelectControls.TriggerEvent();
+            _onEnableIntentControls.TriggerEvent();
             _haikuLineSelected = false;
             yield return new WaitUntil(() => _haikuLineSelected);
             
             // Disable controls after selection
             _onDisableScrollControls.TriggerEvent();
-            _onDisableSelectControls.TriggerEvent();
+            if (!_haikuLastLine) 
+                _onDisableIntentControls.TriggerEvent();
+            // Only disable if not last line
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
@@ -183,6 +181,9 @@ namespace Managers
         /// HaikuControls action map is enabled
         public void OnHaikuScroll(InputAction.CallbackContext obj)
         {
+            // Ensure this was a button down
+            if (obj.action.WasReleasedThisFrame()) return;
+            
             // +1 for right, -1 for left
             _currentLineChoice = (int)obj.action.ReadValue<Vector2>().x == 1
                 // Next stage
@@ -197,7 +198,7 @@ namespace Managers
             {
                 // Disable haiku builder controls
                 _onDisableScrollControls.TriggerEvent();
-                _onDisableSelectControls.TriggerEvent();
+                _onDisableIntentControls.TriggerEvent();
                 
                 // Cycle text
                 yield return HaikuText.Instance.FadeText(_cycleDuration, AnimationDirection.Out);
@@ -206,7 +207,7 @@ namespace Managers
                 
                 // Enable haiku builder controls
                 _onEnableScrollControls.TriggerEvent();
-                _onEnableSelectControls.TriggerEvent();
+                _onEnableIntentControls.TriggerEvent();
             }
         }
 

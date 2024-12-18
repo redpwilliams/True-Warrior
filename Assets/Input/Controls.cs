@@ -28,15 +28,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""id"": ""c2eb5813-3be9-4dc5-9f34-18d115313d4a"",
             ""actions"": [
                 {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""3c7dc95d-fa0a-43de-8c50-e7a7780e1a2e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Scroll"",
                     ""type"": ""Button"",
                     ""id"": ""1a226edf-562d-414d-bf23-d97803f8c72a"",
@@ -46,7 +37,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Select"",
+                    ""name"": ""Intent"",
                     ""type"": ""Button"",
                     ""id"": ""b0b0f299-3066-4ce7-8cb9-93ad53d98a50"",
                     ""expectedControlType"": ""Button"",
@@ -56,39 +47,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""e85cee55-f26a-4e9f-8f28-c771b5f155ba"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fc82e215-ae9c-42fd-8110-9459f770eab1"",
-                    ""path"": ""<Mouse>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c351662c-5e91-429e-8f5c-718d296f551a"",
-                    ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""Keyboard"",
                     ""id"": ""409ab492-1e77-4d68-8fbf-09d2e2fad66f"",
@@ -236,10 +194,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""6a775256-1075-43a5-be02-9ba83b1a01dd"",
                     ""path"": ""*/{Submit}"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Select"",
+                    ""action"": ""Intent"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -247,10 +205,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""ae5c9770-7f96-4cb1-a2c9-644409c05642"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Select"",
+                    ""action"": ""Intent"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -261,9 +219,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
 }");
         // Player 1
         m_Player1 = asset.FindActionMap("Player 1", throwIfNotFound: true);
-        m_Player1_Attack = m_Player1.FindAction("Attack", throwIfNotFound: true);
         m_Player1_Scroll = m_Player1.FindAction("Scroll", throwIfNotFound: true);
-        m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
+        m_Player1_Intent = m_Player1.FindAction("Intent", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -325,16 +282,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     // Player 1
     private readonly InputActionMap m_Player1;
     private List<IPlayer1Actions> m_Player1ActionsCallbackInterfaces = new List<IPlayer1Actions>();
-    private readonly InputAction m_Player1_Attack;
     private readonly InputAction m_Player1_Scroll;
-    private readonly InputAction m_Player1_Select;
+    private readonly InputAction m_Player1_Intent;
     public struct Player1Actions
     {
         private @Controls m_Wrapper;
         public Player1Actions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Attack => m_Wrapper.m_Player1_Attack;
         public InputAction @Scroll => m_Wrapper.m_Player1_Scroll;
-        public InputAction @Select => m_Wrapper.m_Player1_Select;
+        public InputAction @Intent => m_Wrapper.m_Player1_Intent;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -344,28 +299,22 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_Player1ActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_Player1ActionsCallbackInterfaces.Add(instance);
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
             @Scroll.started += instance.OnScroll;
             @Scroll.performed += instance.OnScroll;
             @Scroll.canceled += instance.OnScroll;
-            @Select.started += instance.OnSelect;
-            @Select.performed += instance.OnSelect;
-            @Select.canceled += instance.OnSelect;
+            @Intent.started += instance.OnIntent;
+            @Intent.performed += instance.OnIntent;
+            @Intent.canceled += instance.OnIntent;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
         {
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
             @Scroll.started -= instance.OnScroll;
             @Scroll.performed -= instance.OnScroll;
             @Scroll.canceled -= instance.OnScroll;
-            @Select.started -= instance.OnSelect;
-            @Select.performed -= instance.OnSelect;
-            @Select.canceled -= instance.OnSelect;
+            @Intent.started -= instance.OnIntent;
+            @Intent.performed -= instance.OnIntent;
+            @Intent.canceled -= instance.OnIntent;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -385,8 +334,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public Player1Actions @Player1 => new Player1Actions(this);
     public interface IPlayer1Actions
     {
-        void OnAttack(InputAction.CallbackContext context);
         void OnScroll(InputAction.CallbackContext context);
-        void OnSelect(InputAction.CallbackContext context);
+        void OnIntent(InputAction.CallbackContext context);
     }
 }

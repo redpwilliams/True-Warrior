@@ -6,15 +6,6 @@
             "id": "c2eb5813-3be9-4dc5-9f34-18d115313d4a",
             "actions": [
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "3c7dc95d-fa0a-43de-8c50-e7a7780e1a2e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Scroll",
                     "type": "Button",
                     "id": "1a226edf-562d-414d-bf23-d97803f8c72a",
@@ -24,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Select",
+                    "name": "Intent",
                     "type": "Button",
                     "id": "b0b0f299-3066-4ce7-8cb9-93ad53d98a50",
                     "expectedControlType": "Button",
@@ -34,39 +25,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "e85cee55-f26a-4e9f-8f28-c771b5f155ba",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Press(behavior=1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fc82e215-ae9c-42fd-8110-9459f770eab1",
-                    "path": "<Mouse>/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c351662c-5e91-429e-8f5c-718d296f551a",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "Keyboard",
                     "id": "409ab492-1e77-4d68-8fbf-09d2e2fad66f",
@@ -214,10 +172,10 @@
                     "name": "",
                     "id": "6a775256-1075-43a5-be02-9ba83b1a01dd",
                     "path": "*/{Submit}",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
-                    "action": "Select",
+                    "action": "Intent",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -225,10 +183,10 @@
                     "name": "",
                     "id": "ae5c9770-7f96-4cb1-a2c9-644409c05642",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
-                    "action": "Select",
+                    "action": "Intent",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -9,16 +9,9 @@ namespace Util
         public void DisableScrollInput();
 
         /// Enables the Select control for this entity.
-        public void EnableSelectInput();
+        public void EnableIntentInput();
         
         /// Disables the Select control for this entity.
-        public void DisableSelectInput();
-
-        /// Enables the Attack control for this entity.
-        public void EnableAttackInput();
-        
-        /// Disables the Attack control for this entity.
-        public void DisableAttackInput();
-
+        public void DisableIntentInput();
     }
 }
