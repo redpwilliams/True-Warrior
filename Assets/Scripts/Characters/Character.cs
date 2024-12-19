@@ -253,17 +253,24 @@ namespace Characters
             DetermineReactionAnimation(_battleData.IsWinner);
         }
 
-        private IEnumerator DelayCPUAttack()
+        public void DelayCPUAttack()
         {
-            // CPU Attack Delay
-            // TODO - Make 3 ranges for easy, medium, and hard
-            yield return new WaitForSeconds(0.5f); // TODO "speed tiers" ?
-            
-            // Attack, and ask GameManager for results
-            _battleData  = GameManager.Manager.AttackInput(Time.time); 
-            
-            _characterText.ShowReactionTime(_battleData.ReactionTime);
-            DetermineReactionAnimation(_battleData.IsWinner);
+            if (_playerNumber != PlayerNumber.CPU) return;
+
+            StartCoroutine(DelayAttack());
+
+            IEnumerator DelayAttack()
+            {
+                // CPU Attack Delay
+                // TODO - Make 3 ranges for easy, medium, and hard
+                yield return new WaitForSeconds(0.5f); // TODO "speed tiers" ?
+                
+                // Attack, and ask GameManager for results
+                _battleData  = GameManager.Manager.AttackInput(Time.time); 
+                
+                _characterText.ShowReactionTime(_battleData.ReactionTime);
+                DetermineReactionAnimation(_battleData.IsWinner);
+            }
         }
 
         private void DetermineReactionAnimation(bool isWinner)

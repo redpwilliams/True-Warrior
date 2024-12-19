@@ -7,7 +7,6 @@ using UI;
 using UI.Buttons.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -76,6 +75,7 @@ namespace Managers
         [SerializeField] private GameEvent _onDisableScrollControls;
         [SerializeField] private GameEvent _onEnableIntentControls;
         [SerializeField] private GameEvent _onDisableIntentControls;
+        [SerializeField] private GameEvent _onStandoffStrike;
         
         [Header("Haiku Line Object")]
         [SerializeField] private HaikuStage _haikuStage;
@@ -110,13 +110,8 @@ namespace Managers
             // Line 3
             yield return ExecuteStage(haiku.three); // TODO - Add ++ when battle start is included
             
-            // // Battle Start
-             //HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
-            //yield return awaitBattle;
-            // EventManager.Events.StageX(stage);
-            // _battleStartTime = Time.time;
-            // yield return StartCoroutine(
-              //   HaikuText.Instance.FadeText(0.05f, AnimationDirection.In));
+            // Battle Start
+            yield return ExecuteStandoff();
         }
 
         private IEnumerator ExecuteStage(List<LinePair> lineOptions)
@@ -159,6 +154,17 @@ namespace Managers
             
             // Fade out HaikuText
             yield return HaikuText.Instance.FadeText(_fadeOutDuration, AnimationDirection.Out);
+        }
+
+        private IEnumerator ExecuteStandoff()
+        {
+            
+            HaikuText.Instance.SetTexts(new LinePair("Strike!", "攻撃！"));
+            yield return new WaitForSeconds(3); // Battle timer
+             _battleStartTime = Time.time;
+             yield return StartCoroutine(
+               HaikuText.Instance.FadeText(0.1f, AnimationDirection.In));
+             _onStandoffStrike.TriggerEvent();
         }
 
         /// Returns information about the reaction time and winner status

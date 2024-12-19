@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -6064812419137757615}
   - component: {fileID: 3027995536942228817}
   - component: {fileID: 5728020360849949686}
+  - component: {fileID: 398589889263260517}
   - component: {fileID: 4291545116422370112}
   - component: {fileID: 5894597833886595649}
   - component: {fileID: 8094260319625022297}
@@ -231,6 +232,34 @@ MonoBehaviour:
       - m_Target: {fileID: 8709580654110221182}
         m_TargetAssemblyTypeName: Characters.Character, Scripts
         m_MethodName: DisableIntentInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &398589889263260517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881973619259800329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e743270440cc45e69a9e605bc0f1b40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 9f24824bb25b58d4cbd56902e92e79ef, type: 2}
+  _onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8709580654110221182}
+        m_TargetAssemblyTypeName: Characters.Character, Scripts
+        m_MethodName: DelayCPUAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
