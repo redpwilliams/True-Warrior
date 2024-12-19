@@ -47,6 +47,10 @@ namespace Characters
         private ReactionInfo _battleData;
         private bool _firstContact = true;
 
+        [Header("Input Events")]
+        [SerializeField] private InputEvent _onHaikuScroll;
+        [SerializeField] private InputEvent _onHaikuSelect;
+
         private void Awake()
         {
             Rb2d = GetComponent<Rigidbody2D>();
@@ -231,9 +235,11 @@ namespace Characters
         public void RegisterControls()
         {
             if (_playerNumber == PlayerNumber.CPU) return;
-            _controls.Scroll.performed += GameManager.Manager.OnHaikuScroll;
+            // _controls.Scroll.performed += GameManager.Manager.OnHaikuScroll;
+            _controls.Scroll.performed += ctx => _onHaikuScroll.TriggerEvent(ctx);
+            _controls.Intent.performed += ctx => _onHaikuSelect.TriggerEvent(ctx);
             _controls.Intent.performed += OnControllerInput;
-            _controls.Intent.performed += GameManager.Manager.OnHaikuSelect;
+            // _controls.Intent.performed += GameManager.Manager.OnHaikuSelect;
         }
 
         /// Fires from an input defined in the _controls InputAction map

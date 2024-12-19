@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNumber: 2
+  _onHaikuScroll: {fileID: 11400000, guid: cf63efa9a84a80e4bad562d2aed152fe, type: 2}
+  _onHaikuSelect: {fileID: 11400000, guid: c0474b69db9ad3f439d1d6c896a47910, type: 2}
   _dashDistance: 15
   _dashDuration: 0.5
 --- !u!114 &1748359827498592247

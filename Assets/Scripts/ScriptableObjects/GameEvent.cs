@@ -6,7 +6,7 @@ using Util;
 namespace ScriptableObjects
 {
     [Serializable]
-    [CreateAssetMenu(menuName ="Game Event")]
+    [CreateAssetMenu(menuName ="Events/Game Event")]
     public class GameEvent : ScriptableObject
     {
         private readonly List<GameEventListener> _listeners = new();
