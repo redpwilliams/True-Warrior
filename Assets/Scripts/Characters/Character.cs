@@ -175,9 +175,6 @@ namespace Characters
             if (_playerNumber == PlayerNumber.CPU) return;
             if (hs.state != StandoffState.Ready_Player) return;
             StartCoroutine(AnimateIdleToSet());
-            
-            // Player must hold down attack trigger now
-            Rb2d.bodyType = RigidbodyType2D.Dynamic;
         }
         
         private IEnumerator AnimateIdleToSet()

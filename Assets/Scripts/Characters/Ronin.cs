@@ -35,6 +35,8 @@ namespace Characters
         [UsedImplicitly]
         public void OnStrongAttackJumpUp()
         {
+            // Allow physics engine to handle jump
+            Rb2d.bodyType = RigidbodyType2D.Dynamic;
             Rb2d.velocity = Vector2.zero;
 
             int direction = Player == PlayerNumber.One ? 1 : -1;
